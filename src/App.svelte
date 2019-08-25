@@ -1,11 +1,9 @@
 <script>
-	export let name;
+	import Swipe from './components/Swipe.svelte'
 </script>
 
 <style>
-	h1 {
-		color: purple;
-	}
+
 </style>
 
-<h1>Hello {name}!</h1>
+<Swipe />
