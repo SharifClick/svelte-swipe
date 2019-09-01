@@ -35,6 +35,7 @@
   function init(){
     elems = swipeWrapper.querySelectorAll('.swipeable-item');
     items = elems.length;
+    update();
     console.dir(availableWidth)
   }
 
