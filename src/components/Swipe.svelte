@@ -24,6 +24,13 @@
 
   // $: maxWidth = swipeWrapper.querySelector('.swipeable-items');
 
+   function update(){
+    swipeHandler.style.top = topClearence + 'px';
+    for (let i = 0; i < items; i++) {
+      elems[i].style.transform = 'translate3d(' + (availableWidth * i) + 'px, 0, 0)';
+    }
+    diff = 0;
+  }
   
   function init(){
     elems = swipeWrapper.querySelectorAll('.swipeable-item');
