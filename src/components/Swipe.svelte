@@ -1,5 +1,10 @@
 <script>
 
+  let activeIndicator = 0;
+  let items = 0;
+  let availableWidth = 0;
+  let topClearence = 43;
+
 </script>
 
 <style>
