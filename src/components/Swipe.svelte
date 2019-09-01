@@ -1,9 +1,17 @@
 <script>
 
+  import { onMount } from 'svelte';
+
   let activeIndicator = 0;
   let items = 0;
   let availableWidth = 0;
   let topClearence = 43;
+
+  let swipeWrapper;
+
+  onMount(() => {
+		
+	});
 
 </script>
 
@@ -46,7 +54,7 @@
 </style>
 
 <div class="swipe-panel">
-  <div class="swipe-item-wrapper">
+  <div class="swipe-item-wrapper" bind:this={swipeWrapper}>
     <div class="swipeable-items">
       <div class="swipeable-slot-wrapper">
         <slot />
