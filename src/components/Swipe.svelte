@@ -7,12 +7,19 @@
   let availableWidth = 0;
   let topClearence = 43;
 
+  let elems;
+
   let swipeWrapper;
+  
+  function init(){
+    elems = swipeWrapper.querySelectorAll('.swipeable-item');
+    items = elems.length;
+  }
 
   onMount(() => {
-		
-	});
-
+		init();
+  });
+  
 </script>
 
 <style>
