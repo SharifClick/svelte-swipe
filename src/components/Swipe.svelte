@@ -10,6 +10,7 @@
   let elems;
 
   let swipeWrapper;
+  let swipeHandler;
 
   let min = 0;
   let touchingTpl = '-webkit-transition-duration: 0s;transition-duration: 0s;' + '-webkit-transform: translate3d(-{{val}}px, 0, 0);';
@@ -83,6 +84,6 @@
       </div>
     </div>
   </div>
-  <div class="swipe-handler"></div>
+  <div class="swipe-handler" bind:this={swipeHandler}></div>
 
 </div>
