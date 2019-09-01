@@ -54,6 +54,8 @@
       let max = availableWidth;
 
       let _x = e.touches ? e.touches[0].pageX : e.pageX;
+      let _diff = (x - _x) + posX;
+      
      
     }
   }
