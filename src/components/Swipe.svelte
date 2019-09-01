@@ -8,6 +8,7 @@
   let topClearence = 43;
 
   let elems;
+  let diff = 0;
 
   let swipeWrapper;
   let swipeHandler;
