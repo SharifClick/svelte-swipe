@@ -32,7 +32,7 @@
     }
     diff = 0;
   }
-  
+
   function init(){
     elems = swipeWrapper.querySelectorAll('.swipeable-item');
     items = elems.length;
@@ -44,6 +44,13 @@
     availableWidth = swipeWrapper.querySelector('.swipeable-items').offsetWidth;
 		init();
   });
+
+  function moveHandler(e){
+    if (touching) {
+      e.stopImmediatePropagation();
+      e.stopPropagation();
+    }
+  }
 
 </script>
 
