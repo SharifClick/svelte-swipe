@@ -21,13 +21,17 @@
   let dir = 0;
   let x;
 
+  // $: maxWidth = swipeWrapper.querySelector('.swipeable-items');
+
   
   function init(){
     elems = swipeWrapper.querySelectorAll('.swipeable-item');
     items = elems.length;
+    console.dir(availableWidth)
   }
 
   onMount(() => {
+    availableWidth = swipeWrapper.querySelector('.swipeable-items').offsetWidth;
 		init();
   });
 
