@@ -57,7 +57,10 @@
       let _diff = (x - _x) + posX;
       let dir = _x > x ? 0 : 1;
       if (!dir) { _diff = posX - (_x - x) }
-      
+      if (_diff <= (max * (items - 1)) && _diff >= min) {
+
+       
+      }
      
     }
   }
