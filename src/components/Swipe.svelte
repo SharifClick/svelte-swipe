@@ -10,6 +10,15 @@
   let elems;
 
   let swipeWrapper;
+
+  let min = 0;
+  let touchingTpl = '-webkit-transition-duration: 0s;transition-duration: 0s;' + '-webkit-transform: translate3d(-{{val}}px, 0, 0);';
+  let non_touchingTpl = '-webkit-transition-duration: 0.1s;transition-duration: 0.2s;' + '-webkit-transform: translate3d(-{{val}}px, 0, 0);';
+  let touching = false;
+  let posX = 0;
+  let dir = 0;
+  let x;
+
   
   function init(){
     elems = swipeWrapper.querySelectorAll('.swipeable-item');
@@ -19,7 +28,7 @@
   onMount(() => {
 		init();
   });
-  
+
 </script>
 
 <style>
