@@ -59,7 +59,13 @@
       if (!dir) { _diff = posX - (_x - x) }
       if (_diff <= (max * (items - 1)) && _diff >= min) {
 
-       
+        for (let i = 0; i < items; i++) {
+          let template = i < 0 ? '{{val}}' : '-{{val}}';
+          elems[i].style.cssText = touchingTpl.replace(template, (max * i) - _diff);
+          elems[i].style.cssText += touchingTplMS.replace(template, (max * i) - _diff);
+        }
+
+        diff = _diff;
       }
      
     }
