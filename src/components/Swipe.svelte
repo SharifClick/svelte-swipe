@@ -14,9 +14,9 @@
   let swipeHandler;
 
   let min = 0;
-  let touchingTpl = '-webkit-transition-duration: 0s;transition-duration: 0s;' + '-webkit-transform: translate3d(-{{val}}px, 0, 0);';
+  let touchingTpl = '-webkit-transition-duration: 0s;transition-duration: 0s; -webkit-transform: translate3d(-{{val}}px, 0, 0);';
   let touchingTplMS = '-ms-transform: translate3d(-{{val}}px, 0, 0);';
-  let non_touchingTpl = '-webkit-transition-duration: 0.1s;transition-duration: 0.2s;' + '-webkit-transform: translate3d(-{{val}}px, 0, 0);';
+  let non_touchingTpl = '-webkit-transition-duration: 0.1s;transition-duration: 0.2s; -webkit-transform: translate3d(-{{val}}px, 0, 0);';
   let non_touchingTplMS = ' -ms-transform: translate3d(-{{val}}px, 0, 0);';
   let touching = false;
   let posX = 0;
@@ -104,7 +104,8 @@
     window.removeEventListener('mouseup', endHandler);
   }
 
-  function touchStart(e){
+  function moveStart(e){
+    console.log(e);
     e.stopImmediatePropagation();
     e.stopPropagation();
     e.preventDefault();
@@ -165,6 +166,6 @@
       </div>
     </div>
   </div>
-  <div class="swipe-handler" bind:this={swipeHandler} on:mousedown={touchStart}></div>
+  <div class="swipe-handler" bind:this={swipeHandler} on:touchstart={moveStart} on:mousedown={moveStart}></div>
 
 </div>
