@@ -73,8 +73,14 @@
      
     }
   }
-  
-  function test(e){
+
+  function endHandler(e) {
+    
+
+    window.removeEventListener('mousemove', moveHandler);
+  }
+
+  function touchStart(e){
     e.stopImmediatePropagation();
     e.stopPropagation();
     e.preventDefault();
