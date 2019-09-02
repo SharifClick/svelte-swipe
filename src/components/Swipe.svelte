@@ -195,5 +195,14 @@
     </div>
   </div>
   <div class="swipe-handler" bind:this={swipeHandler} on:touchstart={moveStart} on:mousedown={moveStart}></div>
+   <div class="swipe-indicator">
+    <div class="">
+      <div class="">
+          {#each indicators as x, i }
+            <span class="dot {activeIndicator == i ? 'is-active' : ''}" ></span>
+          {/each}
+      </div>
+    </div>
+  </div>
 
 </div>
