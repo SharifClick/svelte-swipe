@@ -1,6 +1,8 @@
 <script>
 
-  import { onMount } from 'svelte';
+  import { onMount, createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
 
   let activeIndicator = 0;
   let items = 0;
@@ -46,6 +48,7 @@
   });
 
   function moveHandler(e){
+    console.log(e)
     if (touching) {
       e.stopImmediatePropagation();
       e.stopPropagation();
@@ -69,6 +72,18 @@
       }
      
     }
+  }
+
+  function test(e){
+    e.stopImmediatePropagation();
+    e.stopPropagation();
+    e.preventDefault();
+
+    let max = availableWidth;
+
+    touching = true;
+    x = e.touches ? e.touches[0].pageX : e.pageX;
+    window.addEventListener('mousemove', moveHandler);
   }
 
 </script>
@@ -119,6 +134,6 @@
       </div>
     </div>
   </div>
-  <div class="swipe-handler" bind:this={swipeHandler}></div>
+  <div class="swipe-handler" bind:this={swipeHandler} on:mousedown={test}></div>
 
 </div>
