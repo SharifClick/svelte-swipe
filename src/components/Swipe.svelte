@@ -5,7 +5,7 @@
   let activeIndicator = 0;
   let items = 0;
   let availableWidth = 0;
-  let topClearence = 43;
+  let topClearence = 0;
 
   let elems;
   let diff = 0;
@@ -102,6 +102,8 @@
 
     window.removeEventListener('mousemove', moveHandler);
     window.removeEventListener('mouseup', endHandler);
+    window.removeEventListener('touchmove', moveHandler);
+    window.removeEventListener('touchend', endHandler);
   }
 
   function moveStart(e){
@@ -116,6 +118,8 @@
     x = e.touches ? e.touches[0].pageX : e.pageX;
     window.addEventListener('mousemove', moveHandler);
     window.addEventListener('mouseup', endHandler);
+    window.addEventListener('touchmove', moveHandler);
+    window.addEventListener('touchend', endHandler);
   }
 
 </script>
