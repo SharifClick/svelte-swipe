@@ -95,13 +95,13 @@
     }else{
       diff = (dir ? (_target - 1) : (_target + 1)) * max;
     }
-    
+
     posX = diff;
 
-
-    
-    
-
+    for (let i = 0; i < items; i++) {
+      let template = i < 0 ? '{{val}}' : '-{{val}}';
+      elems[i].style.cssText = non_touchingTpl.replace(template, (max * i) - posX);
+    }
 
     window.removeEventListener('mousemove', moveHandler);
   }
