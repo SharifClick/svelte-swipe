@@ -78,7 +78,12 @@
     e && e.stopImmediatePropagation();
     e && e.stopPropagation();
     e && e.preventDefault();
-    
+
+    let max = availableWidth;
+
+    touching = false;
+    x = null;
+
 
     window.removeEventListener('mousemove', moveHandler);
   }
