@@ -1,8 +1,6 @@
 <script>
 
-  import { onMount, createEventDispatcher } from 'svelte';
-
-	const dispatch = createEventDispatcher();
+  import { onMount } from 'svelte';
 
   let activeIndicator = 0;
   let items = 0;
@@ -39,7 +37,6 @@
     elems = swipeWrapper.querySelectorAll('.swipeable-item');
     items = elems.length;
     update();
-    console.dir(availableWidth)
   }
 
   onMount(() => {
@@ -48,7 +45,6 @@
   });
 
   function moveHandler(e){
-    console.log(e)
     if (touching) {
       e.stopImmediatePropagation();
       e.stopPropagation();
