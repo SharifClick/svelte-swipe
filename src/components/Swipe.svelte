@@ -95,6 +95,9 @@
     }else{
       diff = (dir ? (_target - 1) : (_target + 1)) * max;
     }
+    
+    posX = diff;
+
 
     
     
