@@ -92,6 +92,8 @@
     
     if(Math.abs(_target - d_max) < swipe_threshold ){
       diff = _target * max;
+    }else{
+      diff = (dir ? (_target - 1) : (_target + 1)) * max;
     }
 
     
