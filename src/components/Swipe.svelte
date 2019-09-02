@@ -73,7 +73,7 @@
      
     }
   }
-
+  
   function test(e){
     e.stopImmediatePropagation();
     e.stopPropagation();
@@ -134,6 +134,6 @@
       </div>
     </div>
   </div>
-  <div class="swipe-handler" bind:this={swipeHandler} on:mousedown={test}></div>
+  <div class="swipe-handler" bind:this={swipeHandler} on:mousedown={touchStart}></div>
 
 </div>
