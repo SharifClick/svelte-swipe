@@ -105,6 +105,7 @@
     }
 
     window.removeEventListener('mousemove', moveHandler);
+    window.removeEventListener('mouseup', endHandler);
   }
 
   function touchStart(e){
@@ -117,6 +118,7 @@
     touching = true;
     x = e.touches ? e.touches[0].pageX : e.pageX;
     window.addEventListener('mousemove', moveHandler);
+    window.addEventListener('mouseup', endHandler);
   }
 
 </script>
