@@ -165,6 +165,18 @@
 .swipe-indicator {
   height: 40px;
 }
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: transparent;
+  border: 1px solid grey;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0px 2px;
+  cursor: pointer;
+}
+ 
   
 </style>
 
