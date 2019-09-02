@@ -22,15 +22,17 @@
   let posX = 0;
   let dir = 0;
   let x;
+  
+  let indicators;
+  
 
-  // $: maxWidth = swipeWrapper.querySelector('.swipeable-items');
-
-   function update(){
+  function update(){
     swipeHandler.style.top = topClearence + 'px';
     for (let i = 0; i < items; i++) {
       elems[i].style.transform = 'translate3d(' + (availableWidth * i) + 'px, 0, 0)';
     }
     diff = 0;
+    indicators = Array(items);
   }
 
   function init(){
