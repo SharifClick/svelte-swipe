@@ -176,6 +176,9 @@
   margin: 0px 2px;
   cursor: pointer;
 }
+.swipe-indicator .is-active {
+  background-color: white;
+}
  
   
 </style>
