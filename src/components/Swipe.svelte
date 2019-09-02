@@ -46,6 +46,10 @@
 		init();
   });
 
+  beforeUpdate(() => {
+    indicators = Array(items);
+	});
+
   function moveHandler(e){
     if (touching) {
       e.stopImmediatePropagation();
@@ -179,7 +183,6 @@
 .swipe-indicator .is-active {
   background-color: white;
 }
- 
   
 </style>
 
