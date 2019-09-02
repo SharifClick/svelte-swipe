@@ -162,6 +162,10 @@
     right: 0;
     background: rgba(0,0,0,0);
   }
+  .swipe-indicator {
+    height: 40px;
+  }
+  
 </style>
 
 <div class="swipe-panel">
