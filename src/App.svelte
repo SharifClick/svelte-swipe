@@ -10,7 +10,7 @@
   }
 </style>
 
-<Swipe>
+<Swipe showIndicators={true}>
   <div class="swipeable-item is-center">
     <h1>Boo yeaah</h1>
   </div>
