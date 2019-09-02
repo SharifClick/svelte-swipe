@@ -85,6 +85,11 @@
     x = null;
 
 
+    
+    let swipe_threshold = 0.85;
+    
+
+
     window.removeEventListener('mousemove', moveHandler);
   }
 
