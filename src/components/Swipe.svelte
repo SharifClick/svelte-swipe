@@ -75,6 +75,9 @@
   }
 
   function endHandler(e) {
+    e && e.stopImmediatePropagation();
+    e && e.stopPropagation();
+    e && e.preventDefault();
     
 
     window.removeEventListener('mousemove', moveHandler);
