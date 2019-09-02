@@ -1,6 +1,6 @@
 <script>
 
-  import { onMount } from 'svelte';
+  import { onMount, beforeUpdate } from 'svelte';
 
   let activeIndicator = 0;
   let items = 0;
