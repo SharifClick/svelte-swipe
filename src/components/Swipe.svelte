@@ -87,6 +87,8 @@
 
     
     let swipe_threshold = 0.85;
+    let d_max = (diff / max);
+    
     
 
 
