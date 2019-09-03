@@ -1,6 +1,6 @@
 <script>
 
-  import { onMount, beforeUpdate, tick } from 'svelte';
+  import { onMount, beforeUpdate, onDestroy, tick } from 'svelte';
 
   let activeIndicator = 0;
   let items = 0;
@@ -66,7 +66,11 @@
       run_interval = false;
     }
 
-	});
+  });
+  
+  onDestroy(()=>{
+    window.removeEventListener('resize', update);
+  })
 
   function moveHandler(e){
     if (touching) {
