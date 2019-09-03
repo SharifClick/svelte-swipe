@@ -128,6 +128,7 @@
   }
 
   function changeItem(item) {
+    console.log(item)
     let max = availableWidth;
     diff = max * item;
     activeIndicator = item;
@@ -205,7 +206,7 @@
    {#if showIndicators}
      <div class="swipe-indicator">
         {#each indicators as x, i }
-          <span class="dot {activeIndicator == i ? 'is-active' : ''}" ></span>
+          <span class="dot {activeIndicator == i ? 'is-active' : ''}" on:click={() => {changeItem(i)}}></span>
         {/each}
     </div>
    {/if}
