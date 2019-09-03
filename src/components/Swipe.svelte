@@ -35,6 +35,7 @@
 
   function update(){
     swipeHandler.style.top = topClearence + 'px';
+    availableWidth = swipeWrapper.querySelector('.swipeable-items').offsetWidth;
     for (let i = 0; i < items; i++) {
       elems[i].style.transform = 'translate3d(' + (availableWidth * i) + 'px, 0, 0)';
     }
