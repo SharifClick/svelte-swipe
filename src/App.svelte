@@ -1,5 +1,12 @@
 <script>
   import Swipe from "./components/Swipe.svelte";
+  let play_slider = false;
+  let play_delay = 1000;
+  
+  function toggle(){
+    play_slider = !play_slider;
+  }
+
 </script>
 
 <style>
@@ -16,7 +23,7 @@
   }
 </style>
 
-<Swipe showIndicators={true}>
+<Swipe showIndicators={true} autoplay={play_slider} delay={play_delay}>
   <div class="swipeable-item is-center">
     <h1>Boo yeaah</h1>
   </div>
@@ -33,3 +40,8 @@
     <h1>Ouch!!!</h1>
   </div>
 </Swipe>
+
+<div style="margin-top: 100px">
+  <button on:click={toggle} >{play_slider ? 'Stop': 'Play'}</button>
+  <input type="text" bind:value={play_delay} />
+</div>
