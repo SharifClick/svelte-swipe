@@ -56,6 +56,10 @@
     indicators = Array(items);
     await tick();
 
+    if(autoplay && !run_interval){
+      run_interval = setInterval(changeView , delay);
+    }
+
 	});
 
   function moveHandler(e){
