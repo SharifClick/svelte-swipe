@@ -27,10 +27,10 @@
   export let showIndicators = false;
 
 
-  export let autoplay = true;
+  export let autoplay = false;
   export let delay = 1000;
   let played = 0;
-  let autoplay_ponter;
+  let autoplay_interval;
   
 
   function update(){
@@ -140,14 +140,15 @@
     endHandler();
   }
 
-  function changeAuto() {
+  function changeView() {
     changeItem(played);
-    played = played < items ? ++played : 0;
-    console.log(played)
+    played = played < (items - 1) ? ++played : 0;
   }
 
   if(autoplay){
-    setInterval(() => { changeAuto() }, delay);
+    autoplay_interval = setInterval(changeView , delay);
+  }else{
+    clearInterval(autoplay_interval)
   }
 
 </script>
