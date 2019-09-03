@@ -134,11 +134,20 @@
   }
 
   function changeItem(item) {
-    console.log(item)
     let max = availableWidth;
     diff = max * item;
     activeIndicator = item;
     endHandler();
+  }
+
+  function changeAuto() {
+    changeItem(played);
+    played = played < items ? ++played : 0;
+    console.log(played)
+  }
+
+  if(autoplay){
+    setInterval(() => { changeAuto() }, delay);
   }
 
 </script>
