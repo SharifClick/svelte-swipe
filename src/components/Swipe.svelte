@@ -30,7 +30,7 @@
   export let autoplay = false;
   export let delay = 1000;
   let played = 0;
-  let autoplay_interval;
+  let run_interval = false;
   
 
   function update(){
