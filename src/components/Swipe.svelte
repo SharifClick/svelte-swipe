@@ -90,7 +90,7 @@
     
     let swipe_threshold = 0.85;
     let d_max = (diff / max);
-    let _target = dir ? Math.ceil(d_max) : Math.floor(d_max);
+    let _target = Math.round(d_max);
     
     if(Math.abs(_target - d_max) < swipe_threshold ){
       diff = _target * max;
@@ -113,7 +113,6 @@
   }
 
   function moveStart(e){
-    console.log(e);
     e.stopImmediatePropagation();
     e.stopPropagation();
     e.preventDefault();
