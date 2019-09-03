@@ -27,8 +27,10 @@
   export let showIndicators = false;
 
 
-  export let autoplay = false;
+  export let autoplay = true;
   export let delay = 1000;
+  let played = 0;
+  let autoplay_ponter;
   
 
   function update(){
