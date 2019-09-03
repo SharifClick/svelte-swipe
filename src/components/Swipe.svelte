@@ -25,6 +25,10 @@
   
   let indicators;
   export let showIndicators = false;
+
+
+  export let autoplay = false;
+  export let delay = 1000;
   
 
   function update(){
