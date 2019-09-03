@@ -1,6 +1,6 @@
 <script>
 
-  import { onMount, beforeUpdate } from 'svelte';
+  import { onMount, beforeUpdate, tick } from 'svelte';
 
   let activeIndicator = 0;
   let items = 0;
@@ -52,8 +52,10 @@
 		init();
   });
 
-  beforeUpdate(() => {
+  beforeUpdate(async () => {
     indicators = Array(items);
+    await tick();
+
 	});
 
   function moveHandler(e){
@@ -143,12 +145,6 @@
   function changeView() {
     changeItem(played);
     played = played < (items - 1) ? ++played : 0;
-  }
-
-  if(autoplay){
-    autoplay_interval = setInterval(changeView , delay);
-  }else{
-    clearInterval(autoplay_interval)
   }
 
 </script>
