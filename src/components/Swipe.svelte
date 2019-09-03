@@ -48,8 +48,8 @@
   }
 
   onMount(() => {
-    availableWidth = swipeWrapper.querySelector('.swipeable-items').offsetWidth;
-		init();
+    init();
+    window.addEventListener('resize', update);
   });
 
   beforeUpdate(async () => {
