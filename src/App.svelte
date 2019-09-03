@@ -3,6 +3,10 @@
 </script>
 
 <style>
+  :root{
+    --sv-swipe-panel-height: 100px;
+    /* --sv-swipe-indicator-active-color:grey; */
+  }
   .is-center{
     display: flex;
     justify-content: center;
