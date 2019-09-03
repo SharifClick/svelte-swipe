@@ -60,6 +60,11 @@
       run_interval = setInterval(changeView , delay);
     }
 
+    if(!autoplay && run_interval){
+      clearInterval(run_interval)
+      run_interval = false;
+    }
+
 	});
 
   function moveHandler(e){
