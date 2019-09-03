@@ -166,7 +166,8 @@
   background: rgba(0,0,0,0);
 }
 .swipe-indicator {
-  height: 40px;
+  display: flex;
+  justify-content: center;
 }
 
 .dot {
@@ -196,13 +197,9 @@
   <div class="swipe-handler" bind:this={swipeHandler} on:touchstart={moveStart} on:mousedown={moveStart}></div>
    {#if showIndicators}
      <div class="swipe-indicator">
-      <div class="">
-        <div class="">
-          {#each indicators as x, i }
-            <span class="dot {activeIndicator == i ? 'is-active' : ''}" ></span>
-          {/each}
-        </div>
-      </div>
+        {#each indicators as x, i }
+          <span class="dot {activeIndicator == i ? 'is-active' : ''}" ></span>
+        {/each}
     </div>
    {/if}
 
