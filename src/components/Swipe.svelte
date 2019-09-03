@@ -127,6 +127,13 @@
     window.addEventListener('touchend', endHandler);
   }
 
+  function changeItem(item) {
+    let max = availableWidth;
+    diff = max * item;
+    activeIndicator = item;
+    endHandler();
+  }
+
 </script>
 
 <style>
