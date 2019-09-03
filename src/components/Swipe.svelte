@@ -138,16 +138,15 @@
 </script>
 
 <style>
-:root{
-  --header-height: 50px;
-}
+
 .swipe-panel {
   position: relative;
+  height: var(--sv-swipe-panel-height, 80%);
 }
 .swipe-item-wrapper{
   overflow: hidden;
   position: relative;
-  height: calc(45vh - var(--header-height));
+  height: inherit;
 }
 .swipeable-item {
   position: absolute;
@@ -189,7 +188,7 @@
   cursor: pointer;
 }
 .swipe-indicator .is-active {
-  background-color: white;
+  background-color: var(--sv-swipe-indicator-active-color, grey);
 }
   
 </style>
