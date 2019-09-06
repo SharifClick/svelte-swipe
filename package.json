@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "autobuild": "rollup -c -w",
+    "autobuild": "rollup -c rollup.dev.config.js -w",
     "dev": "run-p start:dev autobuild",
     "start": "sirv public --single",
     "start:dev": "sirv public --single --dev"
