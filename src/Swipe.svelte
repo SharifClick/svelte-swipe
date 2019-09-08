@@ -200,6 +200,8 @@
   background: rgba(0,0,0,0);
 }
 .swipe-indicator {
+  position: absolute;
+  bottom: 2rem;
   display: flex;
   justify-content: center;
 }
