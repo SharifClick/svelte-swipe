@@ -1,10 +1,12 @@
 <script>
   import Swipe from "../src/Swipe.svelte";
-  let play_slider = false;
-  let play_delay = 1000;
+  let autoplay = false;
+  let delay = 1000;
+  let showIndicators = true;
+  let transitionDuration = '200';
   
   function toggle(){
-    play_slider = !play_slider;
+    autoplay = !autoplay;
   }
 
 </script>
@@ -34,7 +36,7 @@
 </style>
 
 <div class="container" >
-  <Swipe showIndicators={true} autoplay={play_slider} delay={play_delay}>
+  <Swipe {showIndicators} {autoplay} {delay} {transitionDuration}>
     <div class="swipeable-item is-center">
       <img src="./images/1.jpg" alt="">
     </div>
@@ -52,8 +54,9 @@
     </div>
   </Swipe>
   <div style="margin-top: 100px">
-    <button on:click={toggle} >{play_slider ? 'Stop': 'Play'}</button>
-    <input type="text" bind:value={play_delay} />
+    <button on:click={toggle} >{autoplay ? 'Stop': 'Play'}</button>
+    Delay: <input type="text" bind:value={delay} />
+    Transition Duration: <input type="text" bind:value={transitionDuration} /> ms
   </div>
 </div>
 
