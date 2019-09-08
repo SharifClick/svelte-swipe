@@ -6,6 +6,7 @@
   let items = 0;
   let availableWidth = 0;
   let topClearence = 0;
+  export let transitionDuration = 200;
 
   let elems;
   let diff = 0;
@@ -16,7 +17,10 @@
   let min = 0;
   let touchingTpl = '-webkit-transition-duration: 0s;transition-duration: 0s; -webkit-transform: translate3d(-{{val}}px, 0, 0);';
   let touchingTplMS = '-ms-transform: translate3d(-{{val}}px, 0, 0);';
-  let non_touchingTpl = '-webkit-transition-duration: 0.1s;transition-duration: 0.2s; -webkit-transform: translate3d(-{{val}}px, 0, 0);';
+  let non_touchingTpl = `
+    -webkit-transition-duration: ${transitionDuration}ms;
+    transition-duration: ${transitionDuration}ms; 
+    -webkit-transform: translate3d(-{{val}}px, 0, 0);`;
   let non_touchingTplMS = ' -ms-transform: translate3d(-{{val}}px, 0, 0);';
   let touching = false;
   let posX = 0;
