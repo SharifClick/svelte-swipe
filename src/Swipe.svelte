@@ -23,13 +23,16 @@
   let swipeHandler;
 
   let min = 0;
-  let touchingTpl = '-webkit-transition-duration: 0s;transition-duration: 0s; -webkit-transform: translate3d(-{{val}}px, 0, 0);';
-  let touchingTplMS = '-ms-transform: translate3d(-{{val}}px, 0, 0);';
+  let touchingTpl = `
+  -webkit-transition-duration: 0s;
+  transition-duration: 0s; 
+  -webkit-transform: translate3d(-{{val}}px, 0, 0);
+  -ms-transform: translate3d(-{{val}}px, 0, 0);`;
   let non_touchingTpl = `
     -webkit-transition-duration: ${transitionDuration}ms;
     transition-duration: ${transitionDuration}ms; 
-    -webkit-transform: translate3d(-{{val}}px, 0, 0);`;
-  let non_touchingTplMS = ' -ms-transform: translate3d(-{{val}}px, 0, 0);';
+    -webkit-transform: translate3d(-{{val}}px, 0, 0);
+    -ms-transform: translate3d(-{{val}}px, 0, 0);`;
   let touching = false;
   let posX = 0;
   let dir = 0;
@@ -96,8 +99,8 @@
 
         for (let i = 0; i < items; i++) {
           let template = i < 0 ? '{{val}}' : '-{{val}}';
-          elems[i].style.cssText = touchingTpl.replace(template, (max * i) - _diff);
-          elems[i].style.cssText += touchingTplMS.replace(template, (max * i) - _diff);
+          let _value = (max * i) - _diff;
+          elems[i].style.cssText = touchingTpl.replace(template, _value).replace(template, _value);
         }
 
         diff = _diff;
@@ -132,8 +135,8 @@
     activeIndicator = (diff / max);
     for (let i = 0; i < items; i++) {
       let template = i < 0 ? '{{val}}' : '-{{val}}';
-      elems[i].style.cssText = non_touchingTpl.replace(template, (max * i) - posX);
-      elems[i].style.cssText += non_touchingTplMS.replace(template, (max * i) - posX);
+      let _value = (max * i) - posX;
+      elems[i].style.cssText = non_touchingTpl.replace(template, _value).replace(template, _value);
     }
 
     window.removeEventListener('mousemove', moveHandler);
