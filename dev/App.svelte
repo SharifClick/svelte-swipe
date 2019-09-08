@@ -33,8 +33,8 @@
   }
 </style>
 
-<div class="container">
-  <Swipe showIndicators={true}>
+<div class="container" >
+  <Swipe showIndicators={true} autoplay={play_slider} delay={play_delay}>
     <div class="swipeable-item is-center">
       <img src="./images/1.jpg" alt="">
     </div>
