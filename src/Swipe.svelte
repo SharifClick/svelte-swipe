@@ -2,11 +2,19 @@
 
   import { onMount, onDestroy } from 'svelte';
 
+  
+  export let transitionDuration = 200;
+  export let showIndicators = false;
+  export let autoplay = false;
+  export let delay = 1000;
+
+
+
   let activeIndicator = 0;
+  let indicators;
   let items = 0;
   let availableWidth = 0;
   let topClearence = 0;
-  export let transitionDuration = 200;
 
   let elems;
   let diff = 0;
@@ -27,12 +35,8 @@
   let dir = 0;
   let x;
   
-  let indicators;
-  export let showIndicators = false;
-
-
-  export let autoplay = false;
-  export let delay = 1000;
+  
+ 
   let played = 0;
   let run_interval = false;
 
