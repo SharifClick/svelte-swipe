@@ -167,7 +167,8 @@
 
 .swipe-panel {
   position: relative;
-  height: var(--sv-swipe-panel-height, 80%);
+  height: var(--sv-swipe-panel-height, 100%);
+  width: var(--sv-swipe-panel-width, 100%);
 }
 .swipe-item-wrapper{
   overflow: hidden;
