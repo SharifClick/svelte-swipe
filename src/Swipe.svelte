@@ -1,6 +1,6 @@
 <script>
 
-  import { onMount, beforeUpdate, onDestroy, tick } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
 
   let activeIndicator = 0;
   let items = 0;
@@ -31,6 +31,19 @@
   export let delay = 1000;
   let played = 0;
   let run_interval = false;
+
+  $: indicators = Array(items);
+
+  $: {
+    if(autoplay && !run_interval){
+      run_interval = setInterval(changeView , delay);
+    }
+
+    if(!autoplay && run_interval){
+      clearInterval(run_interval)
+      run_interval = false;
+    }
+  }
   
 
   function update(){
@@ -53,20 +66,7 @@
     window.addEventListener('resize', update);
   });
 
-  beforeUpdate(async () => {
-    indicators = Array(items);
-    await tick();
-
-    if(autoplay && !run_interval){
-      run_interval = setInterval(changeView , delay);
-    }
-
-    if(!autoplay && run_interval){
-      clearInterval(run_interval)
-      run_interval = false;
-    }
-
-  });
+  
   
   onDestroy(()=>{
     window.removeEventListener('resize', update);
