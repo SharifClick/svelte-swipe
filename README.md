@@ -25,7 +25,7 @@ npm i svelte-swipe
   }
 </style>
 
-<Swipe>
+<Swipe {showIndicators} {autoplay} {delay} {transitionDuration}>
   <div class="swipeable-item is-center">
     <h1>Boo yeaah</h1>
   </div>
