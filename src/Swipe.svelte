@@ -200,7 +200,7 @@
   background: rgba(0,0,0,0);
 }
 .swipe-indicator {
-  position: absolute;
+  position: relative;
   bottom: 2rem;
   display: flex;
   justify-content: center;
@@ -218,10 +218,6 @@
 }
 .swipe-indicator .is-active {
   background-color: var(--sv-swipe-indicator-active-color, grey);
-}
-.swipe-indicator-inside{
-  position: relative;
-  background-origin: calc(var(--sv-swipe-panel-height) - 80%);
 }
   
 </style>
