@@ -1,5 +1,5 @@
 <script>
-  import Swipe from "../src/Swipe.svelte";
+  import { Swipe, SwipeItem } from "../src/index.js";
   let autoplay = false;
   let delay = 1000;
   let showIndicators = true;
@@ -37,21 +37,21 @@
 
 <div class="container" >
   <Swipe {showIndicators} {autoplay} {delay} {transitionDuration}>
-    <div class="swipeable-item is-center">
+    <SwipeItem classes="is-center">
       <img src="./images/1.jpg" alt="">
-    </div>
+    </SwipeItem>
 
-    <div class="swipeable-item is-center">
+    <SwipeItem classes="is-center">
       <img src="./images/2.jpg" alt="">
-    </div>
+    </SwipeItem>
 
-    <div class="swipeable-item is-center">
+    <SwipeItem classes="is-center">
       <img src="./images/3.jpg" alt="">
-    </div>
+    </SwipeItem>
 
-    <div class="swipeable-item is-center">
+    <SwipeItem classes="is-center">
       <img src="./images/4.jpg" alt="">
-    </div>
+    </SwipeItem>
   </Swipe>
   <div style="margin-top: 100px">
     <button on:click={toggle} >{autoplay ? 'Stop': 'Play'}</button>
