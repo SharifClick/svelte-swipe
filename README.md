@@ -11,7 +11,13 @@ npm i svelte-swipe
 
 ```html
 <script>
-  import Swipe from "svelte-swipe";
+
+  import { Swipe, SwipeItem } from "svelte-swipe";
+
+  let autoplay = false;
+  let delay = 1000; //ms
+  let showIndicators = true;
+  let transitionDuration = 200; //ms
 
 </script>
 
@@ -26,21 +32,21 @@ npm i svelte-swipe
 </style>
 
 <Swipe {showIndicators} {autoplay} {delay} {transitionDuration}>
-  <div class="swipeable-item is-center">
-    <h1>Boo yeaah</h1>
-  </div>
+  <SwipeItem classes="is-center">
+    <img src="./images/1.jpg" alt="">
+  </SwipeItem>
 
-  <div class="swipeable-item is-center">
-    <h1>Nope :(</h1>
-  </div>
+  <SwipeItem classes="is-center">
+    <img src="./images/2.jpg" alt="">
+  </SwipeItem>
 
-  <div class="swipeable-item is-center">
-    <h1>Oops!</h1>
-  </div>
+  <SwipeItem classes="is-center">
+    <img src="./images/3.jpg" alt="">
+  </SwipeItem>
 
-  <div class="swipeable-item is-center">
-    <h1>Ouch!!!</h1>
-  </div>
+  <SwipeItem classes="is-center">
+    <img src="./images/4.jpg" alt="">
+  </SwipeItem>
 </Swipe>
 
 ```

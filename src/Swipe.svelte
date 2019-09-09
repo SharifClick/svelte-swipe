@@ -186,14 +186,7 @@
   position: relative;
   height: inherit;
 }
-.swipeable-item {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transition-timing-function: ease-out;
-}
+
 .swipeable-items,
 .swipeable-slot-wrapper {
   position: relative;
