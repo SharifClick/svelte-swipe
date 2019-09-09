@@ -1,7 +1,7 @@
 {
   "name": "svelte-swipe",
-  "version": "1.1.1",
-  "svelte": "src/Swipe.svelte",
+  "version": "1.2.0",
+  "svelte": "src/index.js",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "description": "A Svelte component to swipe elements just like a snap",
