@@ -11,3 +11,7 @@
 * Fix indicators position
 * Fix transition duration
 * Fix autoplay
+
+## 1.2.0
+
+* Swipe item wrapper
