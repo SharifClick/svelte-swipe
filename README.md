@@ -14,7 +14,7 @@ npm i svelte-swipe
 ```html
 <script>
 
-  import { Swipe, SwipeItem } from "svelte-swipe";
+  import { Swipe, SwipeItem } from "svelte-swipe"; // gzipped 3.37 KB
 
   let autoplay = false;
   let delay = 2000; //ms
