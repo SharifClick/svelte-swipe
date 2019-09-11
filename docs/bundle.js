@@ -890,7 +890,7 @@ var app = (function () {
 
     const file$2 = "dev\\App.svelte";
 
-    // (43:6) <SwipeItem classes="is-center">
+    // (39:6) <SwipeItem classes="is-center">
     function create_default_slot_4(ctx) {
     	var img;
 
@@ -899,8 +899,33 @@ var app = (function () {
     			img = element("img");
     			attr(img, "src", "./images/1.jpg");
     			attr(img, "alt", "");
-    			attr(img, "class", "svelte-1mcchtk");
-    			add_location(img, file$2, 43, 8, 793);
+    			attr(img, "class", "svelte-dj6k0h");
+    			add_location(img, file$2, 39, 8, 706);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, img, anchor);
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(img);
+    			}
+    		}
+    	};
+    }
+
+    // (43:6) <SwipeItem classes="is-center">
+    function create_default_slot_3(ctx) {
+    	var img;
+
+    	return {
+    		c: function create() {
+    			img = element("img");
+    			attr(img, "src", "./images/2.jpg");
+    			attr(img, "alt", "");
+    			attr(img, "class", "svelte-dj6k0h");
+    			add_location(img, file$2, 43, 8, 806);
     		},
 
     		m: function mount(target, anchor) {
@@ -916,16 +941,16 @@ var app = (function () {
     }
 
     // (47:6) <SwipeItem classes="is-center">
-    function create_default_slot_3(ctx) {
+    function create_default_slot_2(ctx) {
     	var img;
 
     	return {
     		c: function create() {
     			img = element("img");
-    			attr(img, "src", "./images/2.jpg");
+    			attr(img, "src", "./images/3.jpg");
     			attr(img, "alt", "");
-    			attr(img, "class", "svelte-1mcchtk");
-    			add_location(img, file$2, 47, 8, 893);
+    			attr(img, "class", "svelte-dj6k0h");
+    			add_location(img, file$2, 47, 8, 906);
     		},
 
     		m: function mount(target, anchor) {
@@ -941,31 +966,6 @@ var app = (function () {
     }
 
     // (51:6) <SwipeItem classes="is-center">
-    function create_default_slot_2(ctx) {
-    	var img;
-
-    	return {
-    		c: function create() {
-    			img = element("img");
-    			attr(img, "src", "./images/3.jpg");
-    			attr(img, "alt", "");
-    			attr(img, "class", "svelte-1mcchtk");
-    			add_location(img, file$2, 51, 8, 993);
-    		},
-
-    		m: function mount(target, anchor) {
-    			insert(target, img, anchor);
-    		},
-
-    		d: function destroy(detaching) {
-    			if (detaching) {
-    				detach(img);
-    			}
-    		}
-    	};
-    }
-
-    // (55:6) <SwipeItem classes="is-center">
     function create_default_slot_1(ctx) {
     	var img;
 
@@ -974,8 +974,8 @@ var app = (function () {
     			img = element("img");
     			attr(img, "src", "./images/4.jpg");
     			attr(img, "alt", "");
-    			attr(img, "class", "svelte-1mcchtk");
-    			add_location(img, file$2, 55, 8, 1093);
+    			attr(img, "class", "svelte-dj6k0h");
+    			add_location(img, file$2, 51, 8, 1006);
     		},
 
     		m: function mount(target, anchor) {
@@ -990,7 +990,7 @@ var app = (function () {
     	};
     }
 
-    // (42:4) <Swipe {showIndicators} {autoplay} {delay} {transitionDuration}>
+    // (38:4) <Swipe {showIndicators} {autoplay} {delay} {transitionDuration}>
     function create_default_slot(ctx) {
     	var t0, t1, t2, current;
 
@@ -1144,21 +1144,21 @@ var app = (function () {
     			t3 = text("\n    Transition Duration: ");
     			input1 = element("input");
     			t4 = text(" ms");
-    			attr(div0, "class", "swipe-holder svelte-1mcchtk");
-    			add_location(div0, file$2, 40, 2, 651);
-    			attr(button, "class", "svelte-1mcchtk");
-    			add_location(button, file$2, 60, 4, 1206);
+    			attr(div0, "class", "swipe-holder svelte-dj6k0h");
+    			add_location(div0, file$2, 36, 2, 564);
+    			attr(button, "class", "svelte-dj6k0h");
+    			add_location(button, file$2, 56, 4, 1119);
     			attr(input0, "type", "text");
-    			attr(input0, "class", "svelte-1mcchtk");
-    			add_location(input0, file$2, 61, 11, 1281);
+    			attr(input0, "class", "svelte-dj6k0h");
+    			add_location(input0, file$2, 57, 11, 1194);
     			attr(input1, "type", "text");
-    			attr(input1, "class", "svelte-1mcchtk");
-    			add_location(input1, file$2, 62, 25, 1347);
+    			attr(input1, "class", "svelte-dj6k0h");
+    			add_location(input1, file$2, 58, 25, 1260);
     			set_style(div1, "margin-top", "100px");
-    			attr(div1, "class", "svelte-1mcchtk");
-    			add_location(div1, file$2, 59, 2, 1170);
-    			attr(div2, "class", "container svelte-1mcchtk");
-    			add_location(div2, file$2, 39, 0, 624);
+    			attr(div1, "class", "svelte-dj6k0h");
+    			add_location(div1, file$2, 55, 2, 1083);
+    			attr(div2, "class", "container svelte-dj6k0h");
+    			add_location(div2, file$2, 35, 0, 537);
 
     			dispose = [
     				listen(button, "click", ctx.toggle),
