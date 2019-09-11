@@ -24,10 +24,10 @@
 
   let min = 0;
   let touchingTpl = `
-  -webkit-transition-duration: 0s;
-  transition-duration: 0s; 
-  -webkit-transform: translate3d(-{{val}}px, 0, 0);
-  -ms-transform: translate3d(-{{val}}px, 0, 0);`;
+    -webkit-transition-duration: 0s;
+    transition-duration: 0s; 
+    -webkit-transform: translate3d(-{{val}}px, 0, 0);
+    -ms-transform: translate3d(-{{val}}px, 0, 0);`;
   let non_touchingTpl = `
     -webkit-transition-duration: ${transitionDuration}ms;
     transition-duration: ${transitionDuration}ms; 
