@@ -1,6 +1,8 @@
 # svelte-swipe
 Svelte V3 Swipe 
 
+[View the demo.](https://sharifclick.github.io/svelte-swipe/)
+
 ## Installation
 
 ```bash
