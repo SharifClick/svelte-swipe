@@ -29,10 +29,6 @@ npm i svelte-swipe
   .is-center{
     display: flex;
     justify-content: center;
-    border: 1px solid green;
-    position: absolute;
-    width: 99%;
-    height: 100%;
   }
   img{
     max-width: 100%;
