@@ -900,7 +900,7 @@ var app = (function () {
     			attr(img, "src", "./images/1.jpg");
     			attr(img, "alt", "");
     			attr(img, "class", "svelte-dj6k0h");
-    			add_location(img, file$2, 39, 8, 706);
+    			add_location(img, file$2, 39, 8, 705);
     		},
 
     		m: function mount(target, anchor) {
@@ -925,7 +925,7 @@ var app = (function () {
     			attr(img, "src", "./images/2.jpg");
     			attr(img, "alt", "");
     			attr(img, "class", "svelte-dj6k0h");
-    			add_location(img, file$2, 43, 8, 806);
+    			add_location(img, file$2, 43, 8, 805);
     		},
 
     		m: function mount(target, anchor) {
@@ -950,7 +950,7 @@ var app = (function () {
     			attr(img, "src", "./images/3.jpg");
     			attr(img, "alt", "");
     			attr(img, "class", "svelte-dj6k0h");
-    			add_location(img, file$2, 47, 8, 906);
+    			add_location(img, file$2, 47, 8, 905);
     		},
 
     		m: function mount(target, anchor) {
@@ -975,7 +975,7 @@ var app = (function () {
     			attr(img, "src", "./images/4.jpg");
     			attr(img, "alt", "");
     			attr(img, "class", "svelte-dj6k0h");
-    			add_location(img, file$2, 51, 8, 1006);
+    			add_location(img, file$2, 51, 8, 1005);
     		},
 
     		m: function mount(target, anchor) {
@@ -1116,7 +1116,7 @@ var app = (function () {
     }
 
     function create_fragment$2(ctx) {
-    	var div2, div0, t0, div1, button, t1_value = ctx.autoplay ? 'Stop': 'Play' + "", t1, t2, input0, t3, input1, t4, current, dispose;
+    	var div2, div0, t0, div1, button, t1_value = ctx.autoplay ? 'Stop': 'Play' + "", t1, br0, t2, label0, t4, input0, t5, br1, t6, label1, t8, input1, t9, current, dispose;
 
     	var swipe = new Swipe({
     		props: {
@@ -1139,26 +1139,43 @@ var app = (function () {
     			div1 = element("div");
     			button = element("button");
     			t1 = text(t1_value);
-    			t2 = text("\n    Delay: ");
+    			br0 = element("br");
+    			t2 = space();
+    			label0 = element("label");
+    			label0.textContent = "Delay:";
+    			t4 = space();
     			input0 = element("input");
-    			t3 = text("\n    Transition Duration: ");
+    			t5 = text(" ms ");
+    			br1 = element("br");
+    			t6 = space();
+    			label1 = element("label");
+    			label1.textContent = "Transition Duration:";
+    			t8 = space();
     			input1 = element("input");
-    			t4 = text(" ms");
+    			t9 = text(" ms");
     			attr(div0, "class", "swipe-holder svelte-dj6k0h");
-    			add_location(div0, file$2, 36, 2, 564);
+    			add_location(div0, file$2, 36, 2, 563);
     			attr(button, "class", "svelte-dj6k0h");
-    			add_location(button, file$2, 56, 4, 1119);
+    			add_location(button, file$2, 56, 4, 1118);
+    			attr(br0, "class", "svelte-dj6k0h");
+    			add_location(br0, file$2, 56, 67, 1181);
+    			attr(label0, "class", "svelte-dj6k0h");
+    			add_location(label0, file$2, 57, 4, 1190);
     			attr(input0, "type", "text");
     			attr(input0, "class", "svelte-dj6k0h");
-    			add_location(input0, file$2, 57, 11, 1194);
+    			add_location(input0, file$2, 58, 4, 1217);
+    			attr(br1, "class", "svelte-dj6k0h");
+    			add_location(br1, file$2, 58, 48, 1261);
+    			attr(label1, "class", "svelte-dj6k0h");
+    			add_location(label1, file$2, 59, 4, 1270);
     			attr(input1, "type", "text");
     			attr(input1, "class", "svelte-dj6k0h");
-    			add_location(input1, file$2, 58, 25, 1260);
+    			add_location(input1, file$2, 60, 4, 1311);
     			set_style(div1, "margin-top", "100px");
     			attr(div1, "class", "svelte-dj6k0h");
-    			add_location(div1, file$2, 55, 2, 1083);
+    			add_location(div1, file$2, 55, 2, 1082);
     			attr(div2, "class", "container svelte-dj6k0h");
-    			add_location(div2, file$2, 35, 0, 537);
+    			add_location(div2, file$2, 35, 0, 536);
 
     			dispose = [
     				listen(button, "click", ctx.toggle),
@@ -1179,17 +1196,24 @@ var app = (function () {
     			append(div2, div1);
     			append(div1, button);
     			append(button, t1);
+    			append(div1, br0);
     			append(div1, t2);
+    			append(div1, label0);
+    			append(div1, t4);
     			append(div1, input0);
 
     			set_input_value(input0, ctx.delay);
 
-    			append(div1, t3);
+    			append(div1, t5);
+    			append(div1, br1);
+    			append(div1, t6);
+    			append(div1, label1);
+    			append(div1, t8);
     			append(div1, input1);
 
     			set_input_value(input1, ctx.transitionDuration);
 
-    			append(div1, t4);
+    			append(div1, t9);
     			current = true;
     		},
 
@@ -1238,8 +1262,8 @@ var app = (function () {
 
     function instance$2($$self, $$props, $$invalidate) {
     	let autoplay = false;
-      let delay = 1000;
-      let transitionDuration = '200';
+      let delay = 2000;
+      let transitionDuration = 1000;
       
       function toggle(){
         $$invalidate('autoplay', autoplay = !autoplay);
