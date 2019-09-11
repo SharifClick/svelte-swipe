@@ -1,9 +1,9 @@
 <script>
   import { Swipe, SwipeItem } from "../src/index.js";
   let autoplay = false;
-  let delay = 1000;
+  let delay = 2000;
   let showIndicators = true;
-  let transitionDuration = '200';
+  let transitionDuration = 1000;
   
   function toggle(){
     autoplay = !autoplay;
@@ -54,9 +54,11 @@
     </Swipe>
   </div>
   <div style="margin-top: 100px">
-    <button on:click={toggle} >{autoplay ? 'Stop': 'Play'}</button>
-    Delay: <input type="text" bind:value={delay} />
-    Transition Duration: <input type="text" bind:value={transitionDuration} /> ms
+    <button on:click={toggle} >{autoplay ? 'Stop': 'Play'}</button><br>
+    <label>Delay: </label>
+    <input type="text" bind:value={delay} /> ms <br>
+    <label>Transition Duration:</label> 
+    <input type="text" bind:value={transitionDuration} /> ms
   </div>
 </div>
 
