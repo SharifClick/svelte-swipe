@@ -13,8 +13,6 @@
 
 <style>
   :root{
-    --sv-swipe-panel-height: 600px;
-    --sv-swipe-panel-width: 100vw;
     --sv-swipe-indicator-active-color:white;
   }
   .container{
@@ -34,8 +32,8 @@
     height: 100%;
   }
   img{
-    height: 100%;
-    width: 100%;
+    max-width: 100%;
+    height: auto;
   }
 </style>
 
