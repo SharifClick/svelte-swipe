@@ -15,3 +15,7 @@
 ## 1.2.0
 
 * Swipe item wrapper
+
+## 1.2.1
+
+* bug fixes
