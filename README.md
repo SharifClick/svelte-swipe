@@ -17,9 +17,9 @@ npm i svelte-swipe
   import { Swipe, SwipeItem } from "svelte-swipe";
 
   let autoplay = false;
-  let delay = 1000; //ms
+  let delay = 2000; //ms
   let showIndicators = true;
-  let transitionDuration = 200; //ms
+  let transitionDuration = 1000; //ms
 
 </script>
 
