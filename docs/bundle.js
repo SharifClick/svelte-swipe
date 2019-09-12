@@ -89,11 +89,6 @@ var app = (function () {
         if (text.data !== data)
             text.data = data;
     }
-    function set_input_value(input, value) {
-        if (value != null || input.value) {
-            input.value = value;
-        }
-    }
     function set_style(node, key, value, important) {
         node.style.setProperty(key, value, important ? 'important' : '');
     }
@@ -344,8 +339,8 @@ var app = (function () {
     			for (var i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
-    			attr(div, "class", "swipe-indicator swipe-indicator-inside svelte-1ono82b");
-    			add_location(div, file, 238, 5, 5593);
+    			attr(div, "class", "swipe-indicator swipe-indicator-inside svelte-hhqe7f");
+    			add_location(div, file, 238, 5, 5595);
     		},
 
     		m: function mount(target, anchor) {
@@ -400,8 +395,8 @@ var app = (function () {
     	return {
     		c: function create() {
     			span = element("span");
-    			attr(span, "class", span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-1ono82b");
-    			add_location(span, file, 240, 10, 5694);
+    			attr(span, "class", span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-hhqe7f");
+    			add_location(span, file, 240, 10, 5696);
     			dispose = listen(span, "click", click_handler);
     		},
 
@@ -411,7 +406,7 @@ var app = (function () {
 
     		p: function update_1(changed, new_ctx) {
     			ctx = new_ctx;
-    			if ((changed.activeIndicator) && span_class_value !== (span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-1ono82b")) {
+    			if ((changed.activeIndicator) && span_class_value !== (span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-hhqe7f")) {
     				attr(span, "class", span_class_value);
     			}
     		},
@@ -447,16 +442,16 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
 
-    			attr(div0, "class", "swipeable-slot-wrapper svelte-1ono82b");
-    			add_location(div0, file, 231, 6, 5358);
-    			attr(div1, "class", "swipeable-items svelte-1ono82b");
-    			add_location(div1, file, 230, 4, 5321);
-    			attr(div2, "class", "swipe-item-wrapper svelte-1ono82b");
-    			add_location(div2, file, 229, 2, 5258);
-    			attr(div3, "class", "swipe-handler svelte-1ono82b");
-    			add_location(div3, file, 236, 2, 5452);
-    			attr(div4, "class", "swipe-panel svelte-1ono82b");
-    			add_location(div4, file, 228, 0, 5229);
+    			attr(div0, "class", "swipeable-slot-wrapper svelte-hhqe7f");
+    			add_location(div0, file, 231, 6, 5360);
+    			attr(div1, "class", "swipeable-items svelte-hhqe7f");
+    			add_location(div1, file, 230, 4, 5323);
+    			attr(div2, "class", "swipe-item-wrapper svelte-hhqe7f");
+    			add_location(div2, file, 229, 2, 5260);
+    			attr(div3, "class", "swipe-handler svelte-hhqe7f");
+    			add_location(div3, file, 236, 2, 5454);
+    			attr(div4, "class", "swipe-panel svelte-hhqe7f");
+    			add_location(div4, file, 228, 0, 5231);
 
     			dispose = [
     				listen(div3, "touchstart", ctx.moveStart),
@@ -1116,14 +1111,14 @@ var app = (function () {
     }
 
     function create_fragment$2(ctx) {
-    	var div2, div0, t0, div1, button, t1_value = ctx.autoplay ? 'Stop': 'Play' + "", t1, br0, t2, label0, t4, input0, t5, br1, t6, label1, t8, input1, t9, current, dispose;
+    	var div2, div0, t0, div1, button, t1_value = ctx.autoplay ? 'Stop': 'Play' + "", t1, br, t2, input, current, dispose;
 
     	var swipe = new Swipe({
     		props: {
-    		showIndicators: showIndicators,
+    		showIndicators: ctx.showIndicators,
     		autoplay: ctx.autoplay,
-    		delay: ctx.delay,
-    		transitionDuration: ctx.transitionDuration,
+    		delay: delay,
+    		transitionDuration: transitionDuration,
     		$$slots: { default: [create_default_slot] },
     		$$scope: { ctx }
     	},
@@ -1139,39 +1134,19 @@ var app = (function () {
     			div1 = element("div");
     			button = element("button");
     			t1 = text(t1_value);
-    			br0 = element("br");
-    			t2 = space();
-    			label0 = element("label");
-    			label0.textContent = "Delay:";
-    			t4 = space();
-    			input0 = element("input");
-    			t5 = text(" ms ");
-    			br1 = element("br");
-    			t6 = space();
-    			label1 = element("label");
-    			label1.textContent = "Transition Duration:";
-    			t8 = space();
-    			input1 = element("input");
-    			t9 = text(" ms");
+    			br = element("br");
+    			t2 = text("\n    Show Indicators : ");
+    			input = element("input");
     			attr(div0, "class", "swipe-holder svelte-dj6k0h");
     			add_location(div0, file$2, 36, 2, 563);
     			attr(button, "class", "svelte-dj6k0h");
-    			add_location(button, file$2, 56, 4, 1118);
-    			attr(br0, "class", "svelte-dj6k0h");
-    			add_location(br0, file$2, 56, 67, 1181);
-    			attr(label0, "class", "svelte-dj6k0h");
-    			add_location(label0, file$2, 57, 4, 1190);
-    			attr(input0, "type", "text");
-    			attr(input0, "class", "svelte-dj6k0h");
-    			add_location(input0, file$2, 58, 4, 1217);
-    			attr(br1, "class", "svelte-dj6k0h");
-    			add_location(br1, file$2, 58, 48, 1261);
-    			attr(label1, "class", "svelte-dj6k0h");
-    			add_location(label1, file$2, 59, 4, 1270);
-    			attr(input1, "type", "text");
-    			attr(input1, "class", "svelte-dj6k0h");
-    			add_location(input1, file$2, 60, 4, 1311);
-    			set_style(div1, "margin-top", "100px");
+    			add_location(button, file$2, 56, 4, 1119);
+    			attr(br, "class", "svelte-dj6k0h");
+    			add_location(br, file$2, 56, 67, 1182);
+    			attr(input, "type", "checkbox");
+    			attr(input, "class", "svelte-dj6k0h");
+    			add_location(input, file$2, 57, 22, 1209);
+    			set_style(div1, "margin", "100px 20px");
     			attr(div1, "class", "svelte-dj6k0h");
     			add_location(div1, file$2, 55, 2, 1082);
     			attr(div2, "class", "container svelte-dj6k0h");
@@ -1179,8 +1154,7 @@ var app = (function () {
 
     			dispose = [
     				listen(button, "click", ctx.toggle),
-    				listen(input0, "input", ctx.input0_input_handler),
-    				listen(input1, "input", ctx.input1_input_handler)
+    				listen(input, "change", ctx.input_change_handler)
     			];
     		},
 
@@ -1196,33 +1170,21 @@ var app = (function () {
     			append(div2, div1);
     			append(div1, button);
     			append(button, t1);
-    			append(div1, br0);
+    			append(div1, br);
     			append(div1, t2);
-    			append(div1, label0);
-    			append(div1, t4);
-    			append(div1, input0);
+    			append(div1, input);
 
-    			set_input_value(input0, ctx.delay);
+    			input.checked = ctx.showIndicators;
 
-    			append(div1, t5);
-    			append(div1, br1);
-    			append(div1, t6);
-    			append(div1, label1);
-    			append(div1, t8);
-    			append(div1, input1);
-
-    			set_input_value(input1, ctx.transitionDuration);
-
-    			append(div1, t9);
     			current = true;
     		},
 
     		p: function update(changed, ctx) {
     			var swipe_changes = {};
-    			if (changed.showIndicators) swipe_changes.showIndicators = showIndicators;
+    			if (changed.showIndicators) swipe_changes.showIndicators = ctx.showIndicators;
     			if (changed.autoplay) swipe_changes.autoplay = ctx.autoplay;
-    			if (changed.delay) swipe_changes.delay = ctx.delay;
-    			if (changed.transitionDuration) swipe_changes.transitionDuration = ctx.transitionDuration;
+    			if (changed.delay) swipe_changes.delay = delay;
+    			if (changed.transitionDuration) swipe_changes.transitionDuration = transitionDuration;
     			if (changed.$$scope) swipe_changes.$$scope = { changed, ctx };
     			swipe.$set(swipe_changes);
 
@@ -1230,8 +1192,7 @@ var app = (function () {
     				set_data(t1, t1_value);
     			}
 
-    			if (changed.delay && (input0.value !== ctx.delay)) set_input_value(input0, ctx.delay);
-    			if (changed.transitionDuration && (input1.value !== ctx.transitionDuration)) set_input_value(input1, ctx.transitionDuration);
+    			if (changed.showIndicators) input.checked = ctx.showIndicators;
     		},
 
     		i: function intro(local) {
@@ -1258,34 +1219,28 @@ var app = (function () {
     	};
     }
 
-    let showIndicators = true;
+    let delay = 2000;
+
+    let transitionDuration = 200;
 
     function instance$2($$self, $$props, $$invalidate) {
     	let autoplay = false;
-      let delay = 2000;
-      let transitionDuration = 1000;
+      let showIndicators = false;
       
       function toggle(){
         $$invalidate('autoplay', autoplay = !autoplay);
       }
 
-    	function input0_input_handler() {
-    		delay = this.value;
-    		$$invalidate('delay', delay);
-    	}
-
-    	function input1_input_handler() {
-    		transitionDuration = this.value;
-    		$$invalidate('transitionDuration', transitionDuration);
+    	function input_change_handler() {
+    		showIndicators = this.checked;
+    		$$invalidate('showIndicators', showIndicators);
     	}
 
     	return {
     		autoplay,
-    		delay,
-    		transitionDuration,
+    		showIndicators,
     		toggle,
-    		input0_input_handler,
-    		input1_input_handler
+    		input_change_handler
     	};
     }
 
