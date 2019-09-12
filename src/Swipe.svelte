@@ -205,7 +205,7 @@
 }
 .swipe-indicator {
   position: relative;
-  bottom: 2rem;
+  bottom: 1.5rem;
   display: flex;
   justify-content: center;
 }
