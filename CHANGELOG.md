@@ -19,3 +19,9 @@
 ## 1.2.1
 
 * bug fixes
+
+## 1.2.2
+
+* style bug fixes
+* doc fixes
+* license is MIT
