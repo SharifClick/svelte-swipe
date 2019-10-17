@@ -80,7 +80,8 @@
   
   
   onDestroy(()=>{
-    window.removeEventListener('resize', update);
+    if (process.browser)
+      window.removeEventListener('resize', update);
   })
 
   function moveHandler(e){
@@ -139,10 +140,12 @@
       elems[i].style.cssText = non_touchingTpl.replace(template, _value).replace(template, _value);
     }
 
-    window.removeEventListener('mousemove', moveHandler);
-    window.removeEventListener('mouseup', endHandler);
-    window.removeEventListener('touchmove', moveHandler);
-    window.removeEventListener('touchend', endHandler);
+    if (process.browser) {
+      window.removeEventListener('mousemove', moveHandler);
+      window.removeEventListener('mouseup', endHandler);
+      window.removeEventListener('touchmove', moveHandler);
+      window.removeEventListener('touchend', endHandler);
+    }
   }
 
   function moveStart(e){
