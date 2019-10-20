@@ -1,5 +1,5 @@
 # svelte-swipe
-Svelte V3 Swipe 
+Swipable items wrapper component for Svelte :fire: :boom: (zero dependencies - gzipped 3.37 KB)
 
 [View the demo.](https://sharifclick.github.io/svelte-swipe/)
 
