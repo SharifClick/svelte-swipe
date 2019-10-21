@@ -1,4 +1,5 @@
 # svelte-swipe
+
 Swipable items wrapper component for Svelte :fire: :boom: (zero dependencies - 3.37 KB gzipped)
 
 [View the demo.](https://sharifclick.github.io/svelte-swipe/)
@@ -24,13 +25,9 @@ npm i svelte-swipe
 </script>
 
 <style>
-   .swipe-holder{
+  .swipe-holder{
     height: 30vh;
     width: 100%;
-  }
-  .is-center{
-    display: flex;
-    justify-content: center;
   }
   img{
     max-width: 100%;
@@ -40,22 +37,59 @@ npm i svelte-swipe
 
 <div class="swipe-holder">
   <Swipe {showIndicators} {autoplay} {delay} {transitionDuration}>
-    <SwipeItem classes="is-center">
+    <SwipeItem>
       <img src="./images/1.jpg" alt="">
     </SwipeItem>
 
-    <SwipeItem classes="is-center">
+    <SwipeItem>
       <img src="./images/2.jpg" alt="">
     </SwipeItem>
 
-    <SwipeItem classes="is-center">
+    <SwipeItem>
       <img src="./images/3.jpg" alt="">
     </SwipeItem>
 
-    <SwipeItem classes="is-center">
+    <SwipeItem>
       <img src="./images/4.jpg" alt="">
     </SwipeItem>
   </Swipe>
 </div>
+
+```
+
+### Pointer event inside Swipe Item
+
+```html
+<style>
+   ...
+
+  .has-pointer-event{
+    pointer-events:fill;
+  }
+</style>
+
+<div class="swipe-holder">
+  <Swipe>
+    <SwipeItem>
+      <div>
+        <button class="has-pointer-event" on:click={sayHi}>Say Hi</button>
+      </div>
+    </SwipeItem>
+    ...
+  </Swipe>
+</div>
+
+```
+
+## Default css custom properties
+
+```css
+
+  :root{
+    --sv-swipe-panel-height: inherit;
+    --sv-swipe-panel-width: inherit;
+    --sv-swipe-panel-wrapper-index: 2;
+    --sv-swipe-indicator-active-color: grey;
+  }
 
 ```
