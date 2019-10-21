@@ -54,7 +54,7 @@
     max-width: 100%;
     height: auto;
   }
-  .has-event{
+  .has-pointer-event{
     pointer-events:fill;
   }
 </style>
@@ -93,25 +93,25 @@
     <Swipe>
       <SwipeItem>
         <div class="is-stack is-center" style="background:teal">
-          <button class="has-event " on:click={sayHi}>Say Hi</button>
+          <button class="has-pointer-event" on:click={sayHi}>Say Hi</button>
         </div>
       </SwipeItem>
 
       <SwipeItem>
         <div class="is-stack is-center" style="background:yellowgreen">
-          <button class="has-event " on:click={sayHi}>Say Hi</button>
+          <button class="has-pointer-event" on:click={sayHi}>Say Hi</button>
         </div>
       </SwipeItem>
 
       <SwipeItem>
         <div class="is-stack is-center" style="background:aqua">
-          <button class="has-event " on:click={sayHi}>Say Hi</button>
+          <button class="has-pointer-event" on:click={sayHi}>Say Hi</button>
         </div>
       </SwipeItem>
 
       <SwipeItem>
         <div class="is-stack is-center" style="background:lightcoral">
-          <button class="has-event " on:click={sayHi}>Say Hi</button>
+          <button class="has-pointer-event" on:click={sayHi}>Say Hi</button>
         </div>
       </SwipeItem>
     </Swipe>
