@@ -31,3 +31,7 @@
 * fix issue #2
 * bug fixes #2
 * doc fixes
+
+## 1.3.1
+
+* fix issue #4

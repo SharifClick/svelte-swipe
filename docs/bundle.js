@@ -320,7 +320,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (241:3) {#if showIndicators}
+    // (243:3) {#if showIndicators}
     function create_if_block(ctx) {
     	var div;
 
@@ -339,8 +339,8 @@ var app = (function () {
     			for (var i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
-    			attr(div, "class", "swipe-indicator swipe-indicator-inside svelte-nvwgyi");
-    			add_location(div, file, 241, 5, 5724);
+    			attr(div, "class", "swipe-indicator swipe-indicator-inside svelte-mkioyx");
+    			add_location(div, file, 243, 5, 5737);
     		},
 
     		m: function mount(target, anchor) {
@@ -384,7 +384,7 @@ var app = (function () {
     	};
     }
 
-    // (243:8) {#each indicators as x, i }
+    // (245:8) {#each indicators as x, i }
     function create_each_block(ctx) {
     	var span, span_class_value, dispose;
 
@@ -395,8 +395,8 @@ var app = (function () {
     	return {
     		c: function create() {
     			span = element("span");
-    			attr(span, "class", span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-nvwgyi");
-    			add_location(span, file, 243, 10, 5825);
+    			attr(span, "class", span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-mkioyx");
+    			add_location(span, file, 245, 10, 5838);
     			dispose = listen(span, "click", click_handler);
     		},
 
@@ -406,7 +406,7 @@ var app = (function () {
 
     		p: function update_1(changed, new_ctx) {
     			ctx = new_ctx;
-    			if ((changed.activeIndicator) && span_class_value !== (span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-nvwgyi")) {
+    			if ((changed.activeIndicator) && span_class_value !== (span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-mkioyx")) {
     				attr(span, "class", span_class_value);
     			}
     		},
@@ -442,16 +442,16 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
 
-    			attr(div0, "class", "swipeable-slot-wrapper svelte-nvwgyi");
-    			add_location(div0, file, 234, 6, 5489);
-    			attr(div1, "class", "swipeable-items svelte-nvwgyi");
-    			add_location(div1, file, 233, 4, 5452);
-    			attr(div2, "class", "swipe-item-wrapper svelte-nvwgyi");
-    			add_location(div2, file, 232, 2, 5389);
-    			attr(div3, "class", "swipe-handler svelte-nvwgyi");
-    			add_location(div3, file, 239, 2, 5583);
-    			attr(div4, "class", "swipe-panel svelte-nvwgyi");
-    			add_location(div4, file, 231, 0, 5360);
+    			attr(div0, "class", "swipeable-slot-wrapper svelte-mkioyx");
+    			add_location(div0, file, 236, 6, 5502);
+    			attr(div1, "class", "swipeable-items svelte-mkioyx");
+    			add_location(div1, file, 235, 4, 5465);
+    			attr(div2, "class", "swipe-item-wrapper svelte-mkioyx");
+    			add_location(div2, file, 234, 2, 5402);
+    			attr(div3, "class", "swipe-handler svelte-mkioyx");
+    			add_location(div3, file, 241, 2, 5596);
+    			attr(div4, "class", "swipe-panel svelte-mkioyx");
+    			add_location(div4, file, 233, 0, 5373);
 
     			dispose = [
     				listen(div3, "touchstart", ctx.moveStart),
@@ -551,23 +551,23 @@ var app = (function () {
       let swipeHandler;
       let touchingTpl = `
     -webkit-transition-duration: 0s;
-    transition-duration: 0s; 
+    transition-duration: 0s;
     -webkit-transform: translate3d(-{{val}}px, 0, 0);
     -ms-transform: translate3d(-{{val}}px, 0, 0);`;
       let non_touchingTpl = `
     -webkit-transition-duration: ${transitionDuration}ms;
-    transition-duration: ${transitionDuration}ms; 
+    transition-duration: ${transitionDuration}ms;
     -webkit-transform: translate3d(-{{val}}px, 0, 0);
     -ms-transform: translate3d(-{{val}}px, 0, 0);`;
       let touching = false;
       let posX = 0;
       let x;
-      
-      
-     
+
+
+
       let played = 0;
       let run_interval = false;
-      
+
 
       function update(){
         swipeHandler.style.top = topClearence + 'px'; $$invalidate('swipeHandler', swipeHandler);
@@ -588,8 +588,8 @@ var app = (function () {
         window.addEventListener('resize', update);
       });
 
-      
-      
+
+
       onDestroy(()=>{
         window.removeEventListener('resize', update);
       });
@@ -599,7 +599,7 @@ var app = (function () {
           e.stopImmediatePropagation();
           e.stopPropagation();
 
-          
+
           let max = availableWidth;
 
           let _x = e.touches ? e.touches[0].pageX : e.pageX;
@@ -615,7 +615,7 @@ var app = (function () {
 
             diff = _diff;
           }
-         
+
         }
       }
 
@@ -630,11 +630,11 @@ var app = (function () {
         x = null;
 
 
-        
+
         let swipe_threshold = 0.85;
         let d_max = (diff / max);
         let _target = Math.round(d_max);
-        
+
         if(Math.abs(_target - d_max) < swipe_threshold ){
           diff = _target * max;
         }else{
@@ -894,8 +894,8 @@ var app = (function () {
     			img = element("img");
     			attr(img, "src", "./images/1.jpg");
     			attr(img, "alt", "");
-    			attr(img, "class", "svelte-birwfn");
-    			add_location(img, file$2, 68, 8, 1200);
+    			attr(img, "class", "svelte-19of5q9");
+    			add_location(img, file$2, 68, 8, 1268);
     		},
 
     		m: function mount(target, anchor) {
@@ -919,8 +919,8 @@ var app = (function () {
     			img = element("img");
     			attr(img, "src", "./images/2.jpg");
     			attr(img, "alt", "");
-    			attr(img, "class", "svelte-birwfn");
-    			add_location(img, file$2, 72, 8, 1280);
+    			attr(img, "class", "svelte-19of5q9");
+    			add_location(img, file$2, 72, 8, 1352);
     		},
 
     		m: function mount(target, anchor) {
@@ -944,8 +944,8 @@ var app = (function () {
     			img = element("img");
     			attr(img, "src", "./images/3.jpg");
     			attr(img, "alt", "");
-    			attr(img, "class", "svelte-birwfn");
-    			add_location(img, file$2, 76, 8, 1360);
+    			attr(img, "class", "svelte-19of5q9");
+    			add_location(img, file$2, 76, 8, 1436);
     		},
 
     		m: function mount(target, anchor) {
@@ -969,8 +969,8 @@ var app = (function () {
     			img = element("img");
     			attr(img, "src", "./images/4.jpg");
     			attr(img, "alt", "");
-    			attr(img, "class", "svelte-birwfn");
-    			add_location(img, file$2, 80, 8, 1440);
+    			attr(img, "class", "svelte-19of5q9");
+    			add_location(img, file$2, 80, 8, 1520);
     		},
 
     		m: function mount(target, anchor) {
@@ -1115,11 +1115,11 @@ var app = (function () {
     			div = element("div");
     			button = element("button");
     			button.textContent = "Say Hi";
-    			attr(button, "class", "has-pointer-event svelte-birwfn");
-    			add_location(button, file$2, 95, 10, 1843);
-    			attr(div, "class", "is-stack is-center svelte-birwfn");
+    			attr(button, "class", "has-pointer-event svelte-19of5q9");
+    			add_location(button, file$2, 95, 10, 1938);
+    			attr(div, "class", "is-stack is-center svelte-19of5q9");
     			set_style(div, "background", "teal");
-    			add_location(div, file$2, 94, 8, 1776);
+    			add_location(div, file$2, 94, 8, 1870);
     			dispose = listen(button, "click", sayHi);
     		},
 
@@ -1149,11 +1149,11 @@ var app = (function () {
     			div = element("div");
     			button = element("button");
     			button.textContent = "Say Hi";
-    			attr(button, "class", "has-pointer-event svelte-birwfn");
-    			add_location(button, file$2, 101, 10, 2045);
-    			attr(div, "class", "is-stack is-center svelte-birwfn");
+    			attr(button, "class", "has-pointer-event svelte-19of5q9");
+    			add_location(button, file$2, 101, 10, 2146);
+    			attr(div, "class", "is-stack is-center svelte-19of5q9");
     			set_style(div, "background", "yellowgreen");
-    			add_location(div, file$2, 100, 8, 1971);
+    			add_location(div, file$2, 100, 8, 2071);
     			dispose = listen(button, "click", sayHi);
     		},
 
@@ -1183,11 +1183,11 @@ var app = (function () {
     			div = element("div");
     			button = element("button");
     			button.textContent = "Say Hi";
-    			attr(button, "class", "has-pointer-event svelte-birwfn");
-    			add_location(button, file$2, 107, 10, 2240);
-    			attr(div, "class", "is-stack is-center svelte-birwfn");
+    			attr(button, "class", "has-pointer-event svelte-19of5q9");
+    			add_location(button, file$2, 107, 10, 2347);
+    			attr(div, "class", "is-stack is-center svelte-19of5q9");
     			set_style(div, "background", "aqua");
-    			add_location(div, file$2, 106, 8, 2173);
+    			add_location(div, file$2, 106, 8, 2279);
     			dispose = listen(button, "click", sayHi);
     		},
 
@@ -1217,11 +1217,11 @@ var app = (function () {
     			div = element("div");
     			button = element("button");
     			button.textContent = "Say Hi";
-    			attr(button, "class", "has-pointer-event svelte-birwfn");
-    			add_location(button, file$2, 113, 10, 2441);
-    			attr(div, "class", "is-stack is-center svelte-birwfn");
+    			attr(button, "class", "has-pointer-event svelte-19of5q9");
+    			add_location(button, file$2, 113, 10, 2554);
+    			attr(div, "class", "is-stack is-center svelte-19of5q9");
     			set_style(div, "background", "lightcoral");
-    			add_location(div, file$2, 112, 8, 2368);
+    			add_location(div, file$2, 112, 8, 2480);
     			dispose = listen(button, "click", sayHi);
     		},
 
@@ -1400,34 +1400,34 @@ var app = (function () {
     			button = element("button");
     			t3 = text(t3_value);
     			br = element("br");
-    			t4 = text("\n    Show Indicators : ");
+    			t4 = text("\r\n    Show Indicators : ");
     			input = element("input");
     			t5 = space();
     			hr = element("hr");
     			t6 = space();
     			div3 = element("div");
     			swipe1.$$.fragment.c();
-    			attr(h1, "class", "svelte-birwfn");
-    			add_location(h1, file$2, 63, 4, 1014);
-    			attr(div0, "class", "desc-holder svelte-birwfn");
-    			add_location(div0, file$2, 62, 2, 984);
-    			attr(div1, "class", "swipe-holder svelte-birwfn");
-    			add_location(div1, file$2, 65, 2, 1078);
-    			attr(button, "class", "svelte-birwfn");
-    			add_location(button, file$2, 85, 4, 1547);
-    			attr(br, "class", "svelte-birwfn");
-    			add_location(br, file$2, 85, 67, 1610);
+    			attr(h1, "class", "svelte-19of5q9");
+    			add_location(h1, file$2, 63, 4, 1077);
+    			attr(div0, "class", "desc-holder svelte-19of5q9");
+    			add_location(div0, file$2, 62, 2, 1046);
+    			attr(div1, "class", "swipe-holder svelte-19of5q9");
+    			add_location(div1, file$2, 65, 2, 1143);
+    			attr(button, "class", "svelte-19of5q9");
+    			add_location(button, file$2, 85, 4, 1632);
+    			attr(br, "class", "svelte-19of5q9");
+    			add_location(br, file$2, 85, 67, 1695);
     			attr(input, "type", "checkbox");
-    			attr(input, "class", "svelte-birwfn");
-    			add_location(input, file$2, 86, 22, 1637);
-    			attr(div2, "class", "desc-holder svelte-birwfn");
-    			add_location(div2, file$2, 84, 2, 1517);
-    			attr(hr, "class", "svelte-birwfn");
-    			add_location(hr, file$2, 89, 2, 1703);
-    			attr(div3, "class", "swipe-holder svelte-birwfn");
-    			add_location(div3, file$2, 91, 2, 1711);
-    			attr(div4, "class", "container svelte-birwfn");
-    			add_location(div4, file$2, 61, 0, 957);
+    			attr(input, "class", "svelte-19of5q9");
+    			add_location(input, file$2, 86, 22, 1723);
+    			attr(div2, "class", "desc-holder svelte-19of5q9");
+    			add_location(div2, file$2, 84, 2, 1601);
+    			attr(hr, "class", "svelte-19of5q9");
+    			add_location(hr, file$2, 89, 2, 1792);
+    			attr(div3, "class", "swipe-holder svelte-19of5q9");
+    			add_location(div3, file$2, 91, 2, 1802);
+    			attr(div4, "class", "container svelte-19of5q9");
+    			add_location(div4, file$2, 61, 0, 1018);
 
     			dispose = [
     				listen(button, "click", ctx.toggle),
