@@ -40,21 +40,45 @@ npm i svelte-swipe
 
 <div class="swipe-holder">
   <Swipe {showIndicators} {autoplay} {delay} {transitionDuration}>
-    <SwipeItem classes="is-center">
+    <SwipeItem>
       <img src="./images/1.jpg" alt="">
     </SwipeItem>
 
-    <SwipeItem classes="is-center">
+    <SwipeItem>
       <img src="./images/2.jpg" alt="">
     </SwipeItem>
 
-    <SwipeItem classes="is-center">
+    <SwipeItem>
       <img src="./images/3.jpg" alt="">
     </SwipeItem>
 
-    <SwipeItem classes="is-center">
+    <SwipeItem>
       <img src="./images/4.jpg" alt="">
     </SwipeItem>
+  </Swipe>
+</div>
+
+```
+
+### Pointer event inside Swipe Item
+
+```
+<style>
+   ...
+
+  .has-pointer-event{
+    pointer-events:fill;
+  }
+</style>
+
+<div class="swipe-holder">
+  <Swipe>
+    <SwipeItem>
+      <div>
+        <button class="has-pointer-event" on:click={sayHi}>Say Hi</button>
+      </div>
+    </SwipeItem>
+    ...
   </Swipe>
 </div>
 
