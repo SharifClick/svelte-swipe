@@ -9,6 +9,10 @@
     autoplay = !autoplay;
   }
 
+  function testing(){
+    console.log('hi')
+  }
+
 </script>
 
 <style>
@@ -31,9 +35,13 @@
     max-width: 100%;
     height: auto;
   }
+  .has-event{
+    pointer-events:fill;
+  }
 </style>
 
 <div class="container" >
+  <h1>Swipable items wrapper component for Svelte</h1>
   <div class="swipe-holder">
     <Swipe {showIndicators} {autoplay} {delay} {transitionDuration}>
       <SwipeItem classes="is-center">
@@ -56,6 +64,28 @@
   <div style="margin: 100px 20px">
     <button on:click={toggle} >{autoplay ? 'Stop': 'Play'}</button><br>
     Show Indicators : <input type="checkbox" bind:checked={showIndicators}>
+  </div>
+
+  <hr>
+
+  <div class="swipe-holder">
+    <Swipe>
+      <SwipeItem classes="is-center">
+        <img src="./images/1.jpg" alt="">
+      </SwipeItem>
+
+      <SwipeItem classes="is-center">
+        <img src="./images/2.jpg" alt="">
+      </SwipeItem>
+
+      <SwipeItem classes="is-center">
+        <img src="./images/3.jpg" alt="">
+      </SwipeItem>
+
+      <SwipeItem classes="is-center">
+        <img src="./images/4.jpg" alt="">
+      </SwipeItem>
+    </Swipe>
   </div>
 </div>
 
