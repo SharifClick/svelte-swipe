@@ -93,3 +93,7 @@ npm i svelte-swipe
   }
 
 ```
+
+### Scan and load in mobile
+
+![demo-url](https://github.com/SharifClick/svelte-swipe/docs/images/url-code.png)
