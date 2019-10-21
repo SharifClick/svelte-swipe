@@ -62,7 +62,7 @@ npm i svelte-swipe
 
 ### Pointer event inside Swipe Item
 
-```
+```html
 <style>
    ...
 
@@ -81,5 +81,18 @@ npm i svelte-swipe
     ...
   </Swipe>
 </div>
+
+```
+
+## Default css custom properties
+
+```css
+
+  :root{
+    --sv-swipe-panel-height: inherit;
+    --sv-swipe-panel-width: inherit;
+    --sv-swipe-panel-wrapper-index: 2;
+    --sv-swipe-indicator-active-color: grey;
+  }
 
 ```
