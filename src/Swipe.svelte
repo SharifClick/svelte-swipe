@@ -2,7 +2,7 @@
 
   import { onMount, onDestroy } from 'svelte';
 
-  
+
   export let transitionDuration = 200;
   export let showIndicators = false;
   export let autoplay = false;
@@ -25,21 +25,21 @@
   let min = 0;
   let touchingTpl = `
     -webkit-transition-duration: 0s;
-    transition-duration: 0s; 
+    transition-duration: 0s;
     -webkit-transform: translate3d(-{{val}}px, 0, 0);
     -ms-transform: translate3d(-{{val}}px, 0, 0);`;
   let non_touchingTpl = `
     -webkit-transition-duration: ${transitionDuration}ms;
-    transition-duration: ${transitionDuration}ms; 
+    transition-duration: ${transitionDuration}ms;
     -webkit-transform: translate3d(-{{val}}px, 0, 0);
     -ms-transform: translate3d(-{{val}}px, 0, 0);`;
   let touching = false;
   let posX = 0;
   let dir = 0;
   let x;
-  
-  
- 
+
+
+
   let played = 0;
   let run_interval = false;
 
@@ -55,7 +55,7 @@
       run_interval = false;
     }
   }
-  
+
 
   function update(){
     swipeHandler.style.top = topClearence + 'px';
@@ -77,8 +77,8 @@
     window.addEventListener('resize', update);
   });
 
-  
-  
+
+
   onDestroy(()=>{
     window.removeEventListener('resize', update);
   })
@@ -88,7 +88,7 @@
       e.stopImmediatePropagation();
       e.stopPropagation();
 
-      
+
       let max = availableWidth;
 
       let _x = e.touches ? e.touches[0].pageX : e.pageX;
@@ -105,7 +105,7 @@
 
         diff = _diff;
       }
-     
+
     }
   }
 
@@ -120,11 +120,11 @@
     x = null;
 
 
-    
+
     let swipe_threshold = 0.85;
     let d_max = (diff / max);
     let _target = Math.round(d_max);
-    
+
     if(Math.abs(_target - d_max) < swipe_threshold ){
       diff = _target * max;
     }else{
@@ -200,7 +200,7 @@
   width: 100%;
   position: absolute;
   top: 40px;
-  bottom: 40px;
+  bottom: 0px;
   left: 0;
   right: 0;
   background: rgba(0,0,0,0);
@@ -211,6 +211,7 @@
   display: flex;
   justify-content: center;
   z-index: var(--sv-swipe-panel-wrapper-index, 2);
+  pointer-events: none;
 }
 
 .dot {
@@ -222,11 +223,12 @@
   display: inline-block;
   margin: 0px 2px;
   cursor: pointer;
+  pointer-events: fill;
 }
 .swipe-indicator .is-active {
   background-color: var(--sv-swipe-indicator-active-color, grey);
 }
-  
+
 </style>
 
 <div class="swipe-panel">
