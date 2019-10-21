@@ -94,6 +94,6 @@ npm i svelte-swipe
 
 ```
 
-### Scan and load in mobile
+### Scan qr code to see url in your device
 
-![demo-url](https://github.com/SharifClick/svelte-swipe/docs/images/url-code.png)
+![demo-url](https://github.com/SharifClick/svelte-swipe/blob/master/docs/images/url-code.png)
