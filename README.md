@@ -24,13 +24,9 @@ npm i svelte-swipe
 </script>
 
 <style>
-   .swipe-holder{
+  .swipe-holder{
     height: 30vh;
     width: 100%;
-  }
-  .is-center{
-    display: flex;
-    justify-content: center;
   }
   img{
     max-width: 100%;
