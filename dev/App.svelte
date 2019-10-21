@@ -9,8 +9,8 @@
     autoplay = !autoplay;
   }
 
-  function testing(){
-    console.log('hi')
+  function sayHi(){
+    alert('Hi')
   }
 
 </script>
@@ -34,9 +34,21 @@
   .desc-holder h1{
     font-size: 3vh;
   }
+
+  button{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
   .is-center{
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   img{
     max-width: 100%;
@@ -53,19 +65,19 @@
   </div>
   <div class="swipe-holder">
     <Swipe {showIndicators} {autoplay} {delay} {transitionDuration}>
-      <SwipeItem classes="is-center">
+      <SwipeItem>
         <img src="./images/1.jpg" alt="">
       </SwipeItem>
 
-      <SwipeItem classes="is-center">
+      <SwipeItem>
         <img src="./images/2.jpg" alt="">
       </SwipeItem>
 
-      <SwipeItem classes="is-center">
+      <SwipeItem>
         <img src="./images/3.jpg" alt="">
       </SwipeItem>
 
-      <SwipeItem classes="is-center">
+      <SwipeItem>
         <img src="./images/4.jpg" alt="">
       </SwipeItem>
     </Swipe>
@@ -79,20 +91,28 @@
 
   <div class="swipe-holder">
     <Swipe>
-      <SwipeItem classes="is-center">
-        <div class="is-stack" style="background:teal"></div>
+      <SwipeItem>
+        <div class="is-stack is-center" style="background:teal">
+          <button class="has-event " on:click={sayHi}>Say Hi</button>
+        </div>
       </SwipeItem>
 
-      <SwipeItem classes="is-center">
-        <div class="is-stack" style="background:yellowgreen"></div>
+      <SwipeItem>
+        <div class="is-stack is-center" style="background:yellowgreen">
+          <button class="has-event " on:click={sayHi}>Say Hi</button>
+        </div>
       </SwipeItem>
 
-      <SwipeItem classes="is-center">
-        <div class="is-stack" style="background:aqua"></div>
+      <SwipeItem>
+        <div class="is-stack is-center" style="background:aqua">
+          <button class="has-event " on:click={sayHi}>Say Hi</button>
+        </div>
       </SwipeItem>
 
-      <SwipeItem classes="is-center">
-        <div class="is-stack" style="background:lightcoral"></div>
+      <SwipeItem>
+        <div class="is-stack is-center" style="background:lightcoral">
+          <button class="has-event " on:click={sayHi}>Say Hi</button>
+        </div>
       </SwipeItem>
     </Swipe>
   </div>
