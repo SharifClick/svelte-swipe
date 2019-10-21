@@ -185,6 +185,8 @@
   overflow: hidden;
   position: relative;
   height: inherit;
+  z-index: var(--sv-swipe-panel-wrapper-index, 2);
+  pointer-events: none;
 }
 
 .swipeable-items,
