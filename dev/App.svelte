@@ -19,13 +19,20 @@
   :root{
     --sv-swipe-indicator-active-color:white;
   }
-  .container{
+  .container, .is-stack{
     height: 100%;
     width: 100%;
   }
   .swipe-holder{
     height: 30vh;
     width: 100%;
+  }
+  .desc-holder{
+    padding: 20px 20px;
+  }
+
+  .desc-holder h1{
+    font-size: 3vh;
   }
   .is-center{
     display: flex;
@@ -41,7 +48,9 @@
 </style>
 
 <div class="container" >
-  <h1>Swipable items wrapper component for Svelte</h1>
+  <div class="desc-holder">
+    <h1>Swipable items wrapper component for Svelte</h1>
+  </div>
   <div class="swipe-holder">
     <Swipe {showIndicators} {autoplay} {delay} {transitionDuration}>
       <SwipeItem classes="is-center">
@@ -61,7 +70,7 @@
       </SwipeItem>
     </Swipe>
   </div>
-  <div style="margin: 100px 20px">
+  <div class="desc-holder">
     <button on:click={toggle} >{autoplay ? 'Stop': 'Play'}</button><br>
     Show Indicators : <input type="checkbox" bind:checked={showIndicators}>
   </div>
@@ -71,19 +80,19 @@
   <div class="swipe-holder">
     <Swipe>
       <SwipeItem classes="is-center">
-        <img src="./images/1.jpg" alt="">
+        <div class="is-stack" style="background:teal"></div>
       </SwipeItem>
 
       <SwipeItem classes="is-center">
-        <img src="./images/2.jpg" alt="">
+        <div class="is-stack" style="background:yellowgreen"></div>
       </SwipeItem>
 
       <SwipeItem classes="is-center">
-        <img src="./images/3.jpg" alt="">
+        <div class="is-stack" style="background:aqua"></div>
       </SwipeItem>
 
       <SwipeItem classes="is-center">
-        <img src="./images/4.jpg" alt="">
+        <div class="is-stack" style="background:lightcoral"></div>
       </SwipeItem>
     </Swipe>
   </div>
