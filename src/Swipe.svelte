@@ -210,6 +210,7 @@
   bottom: 1.5rem;
   display: flex;
   justify-content: center;
+  z-index: var(--sv-swipe-panel-wrapper-index, 2);
 }
 
 .dot {
