@@ -48,6 +48,8 @@
     "svelte-swipe",
     "svelte-slider",
     "swipe",
-    "slider"
+    "slider",
+    "carousel",
+    "svelte-carousel"
   ]
 }
