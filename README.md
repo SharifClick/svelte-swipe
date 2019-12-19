@@ -97,6 +97,15 @@ npm i svelte-swipe
 
 ```
 
+## Props
+
+| Name | Type | Description | Required | Default |
+| --- | --- | --- | --- | --- |
+| `autoplay` | `Boolean` | Play items as slide | No | `false` |
+| `showIndicators` | `Boolean` | appears clickable circle indicators bottom center of item | No | `false` |
+| `transitionDuration` | `Number` | staying duration of per slide/swipe item | No | `200` *ms |
+| `delay` | `Number` | transition delay | No | `1000` *ms |
+
 ### Scan qr code to see url in your device
 
 ![demo-url](https://github.com/SharifClick/svelte-swipe/blob/master/docs/images/url-code.png)
