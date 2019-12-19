@@ -1,6 +1,9 @@
-# svelte-swipe
+# Svelte Swipe
+
+[![NPM version](https://img.shields.io/npm/v/svelte-swipe.svg?style=flat)](https://www.npmjs.com/package/svelte-swipe) [![NPM downloads](https://img.shields.io/npm/dm/svelte-swipe.svg?style=flat)](https://www.npmjs.com/package/svelte-swipe)
 
 Swipable items wrapper component for Svelte :fire: :boom: (zero dependencies - 3.37 KB gzipped)
+
 
 [View the demo.](https://sharifclick.github.io/svelte-swipe/)
 
