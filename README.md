@@ -106,6 +106,12 @@ npm i svelte-swipe
 | `transitionDuration` | `Number` | staying duration of per slide/swipe item | No | `200` *ms |
 | `delay` | `Number` | transition delay | No | `1000` *ms |
 
+## NPM Statistics
+
+Download stats for this NPM package
+
+[![NPM](https://nodei.co/npm/svelte-swipe.png)](https://nodei.co/npm/svelte-swipe/)
+
 ### Scan qr code to see url in your device
 
 ![demo-url](https://github.com/SharifClick/svelte-swipe/blob/master/docs/images/url-code.png)
