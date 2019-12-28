@@ -178,7 +178,7 @@
 
 .swipe-panel {
   position: relative;
-  height: var(--sv-swipe-panel-height, inherit);
+  height: var(--sv-swipe-panel-height, 100%);
   width: var(--sv-swipe-panel-width, inherit);
 }
 .swipe-item-wrapper{
