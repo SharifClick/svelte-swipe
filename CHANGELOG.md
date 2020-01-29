@@ -39,3 +39,7 @@
 ## 1.3.2
 
 * fix issue #6
+
+## 1.4.0
+
+* add feat of issue #7
