@@ -4,6 +4,7 @@
   let delay = 2000;
   let showIndicators = false;
   let transitionDuration = 200;
+  let defaultIndex = 0;
   
   function toggle(){
     autoplay = !autoplay;
@@ -33,6 +34,10 @@
 
   .desc-holder h1{
     font-size: 3vh;
+  }
+  .option-holder input{
+    padding: 10px 10px;
+    margin: 10px;
   }
 
   button{
@@ -64,7 +69,7 @@
     <h1>Swipable items wrapper component for Svelte</h1>
   </div>
   <div class="swipe-holder">
-    <Swipe {showIndicators} {autoplay} {delay} {transitionDuration}>
+    <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex}>
       <SwipeItem>
         <img src="./images/1.jpg" alt="">
       </SwipeItem>
@@ -82,9 +87,9 @@
       </SwipeItem>
     </Swipe>
   </div>
-  <div class="desc-holder">
-    <button on:click={toggle} >{autoplay ? 'Stop': 'Play'}</button><br>
-    Show Indicators : <input type="checkbox" bind:checked={showIndicators}>
+  <div class="option-holder">
+    <input type="button" on:click={toggle} value={autoplay ? 'Stop': 'Play'}>
+    Show Indicators:<input type="checkbox" bind:checked={showIndicators}> 
   </div>
 
   <hr>
