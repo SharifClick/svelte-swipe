@@ -40,7 +40,7 @@
 
 
 
-  let played = 0;
+  let played = defaultIndex || 0;
   let run_interval = false;
 
   $: indicators = Array(items);
