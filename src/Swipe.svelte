@@ -64,6 +64,9 @@
       elems[i].style.transform = 'translate3d(' + (availableWidth * i) + 'px, 0, 0)';
     }
     diff = 0;
+    if(defaultIndex){
+      changeItem(defaultIndex);
+    }
   }
 
   function init(){
