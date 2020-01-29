@@ -24,6 +24,7 @@ npm i svelte-swipe
   let delay = 2000; //ms
   let showIndicators = true;
   let transitionDuration = 1000; //ms
+  let defaultIndex = 0; //start from 0
 
 </script>
 
@@ -39,7 +40,7 @@ npm i svelte-swipe
 </style>
 
 <div class="swipe-holder">
-  <Swipe {showIndicators} {autoplay} {delay} {transitionDuration}>
+  <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex}>
     <SwipeItem>
       <img src="./images/1.jpg" alt="">
     </SwipeItem>
@@ -105,6 +106,7 @@ npm i svelte-swipe
 | `showIndicators` | `Boolean` | appears clickable circle indicators bottom center of item | No | `false` |
 | `transitionDuration` | `Number` | staying duration of per slide/swipe item | No | `200` *ms |
 | `delay` | `Number` | transition delay | No | `1000` *ms |
+| `defaultIndex` | `Number` | initial item index | No |`0` |
 
 ## NPM Statistics
 
