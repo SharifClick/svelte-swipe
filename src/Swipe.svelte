@@ -7,7 +7,7 @@
   export let showIndicators = false;
   export let autoplay = false;
   export let delay = 1000;
-
+  export let defaultIndex = 0;
 
 
   let activeIndicator = 0;
