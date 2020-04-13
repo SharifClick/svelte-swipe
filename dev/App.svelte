@@ -4,7 +4,9 @@
   let delay = 2000;
   let showIndicators = false;
   let transitionDuration = 200;
-  let defaultIndex = 0;
+  let defaultIndex = 2;
+
+  let SwipeComp;
   
   function toggle(){
     autoplay = !autoplay;
@@ -12,6 +14,10 @@
 
   function sayHi(){
     alert('Hi')
+  }
+
+  function test(){
+    console.log(SwipeComp)
   }
 
 </script>
@@ -69,7 +75,7 @@
     <h1>Swipable items wrapper component for Svelte</h1>
   </div>
   <div class="swipe-holder">
-    <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex}>
+    <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} bind:defaultIndex bind:this={SwipeComp}>
       <SwipeItem>
         <img src="./images/1.jpg" alt="">
       </SwipeItem>
@@ -91,6 +97,9 @@
     <input type="button" on:click={toggle} value={autoplay ? 'Stop': 'Play'}>
     Show Indicators:<input type="checkbox" bind:checked={showIndicators}> 
   </div>
+  <input type="text" bind:value={defaultIndex}>
+  <button on:click={test}>Next</button>
+
 
   <hr>
 
