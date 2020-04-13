@@ -86,25 +86,25 @@ npm i svelte-swipe
 ```
 
 
-### programmatically change slides 
+### Programmatically change slides 
 
 ```html
 
 <script>
-
+  let SwipeComp;
+  
   function nextSlide(){
    SwipeComp.goTo(+1)
   }
 
   function prevSlide(){
-  SwipeComp.goTo(-1)
+    SwipeComp.goTo(-1)
   }
 
 </script>
 <div class="swipe-holder">
-  <Swipe>
-    <SwipeItem bind:this={SwipeComp}>
-    </SwipeItem>
+  <Swipe bind:this={SwipeComp}>
+    <SwipeItem>....</SwipeItem>
     ...
   </Swipe>
 </div>
