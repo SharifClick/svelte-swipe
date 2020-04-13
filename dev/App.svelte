@@ -77,41 +77,52 @@
 <div class="container" >
 
   <div class="row" style="margin-top:20px">
-    <h1 class="display-4">Swipable items wrapper component for Svelte</h1>
+    <div class="col">
+      <h1 class="display-4">Swipable items wrapper component for Svelte</h1>
+    </div>
   </div>
 
   <div class="row">
-    <div class="swipe-holder">
-      <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex} bind:this={SwipeComp}>
-        <SwipeItem>
-          <img class="img-fluid" src="./images/1.jpg" alt="">
-        </SwipeItem>
+    <div class="col">
+      <div class="swipe-holder">
+        <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex} bind:this={SwipeComp}>
+          <SwipeItem>
+            <img class="img-fluid" src="./images/1.jpg" alt="">
+          </SwipeItem>
 
-        <SwipeItem>
-          <img class="img-fluid" src="./images/2.jpg" alt="">
-        </SwipeItem>
+          <SwipeItem>
+            <img class="img-fluid" src="./images/2.jpg" alt="">
+          </SwipeItem>
 
-        <SwipeItem>
-          <img class="img-fluid" src="./images/3.jpg" alt="">
-        </SwipeItem>
+          <SwipeItem>
+            <img class="img-fluid" src="./images/3.jpg" alt="">
+          </SwipeItem>
 
-        <SwipeItem>
-          <img class="img-fluid" src="./images/4.jpg" alt="">
-        </SwipeItem>
-      </Swipe>
+          <SwipeItem>
+            <img class="img-fluid" src="./images/4.jpg" alt="">
+          </SwipeItem>
+        </Swipe>
+      </div>
     </div>
   </div>
-  <div class="row d-flex flex-row-reverse" style="margin-top:10px">
-    <div class="btn-group">
-      <button type="button" class="btn btn-secondary" on:click={prevSlide}>Prev</button>
-      <button type="button" class="btn btn-secondary" on:click={nextSlide}>Next</button>
+  <div class="row" style="margin-top:10px">
+    <div class="col">
+      <input class="btn btn-info " type="button" on:click={toggle} value={autoplay ? 'Stop': 'Play'}>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox"  bind:checked={showIndicators} id='si'>
+        <label class="form-check-label" for="si">
+          Show Indicators
+        </label>
+      </div>
     </div>
+    <div class="col">
+      <div class="btn-group float-right">
+        <button type="button" class="btn btn-secondary " on:click={prevSlide}>Prev</button>
+        <button type="button" class="btn btn-secondary" on:click={nextSlide}>Next</button>
+      </div>
+    </div>
+    
   </div>
-  <div class="option-holder">
-    <input type="button" on:click={toggle} value={autoplay ? 'Stop': 'Play'}>
-    Show Indicators:<input type="checkbox" bind:checked={showIndicators}> 
-  </div>
-  <input type="text" bind:value={defaultIndex}>
   
 
 
