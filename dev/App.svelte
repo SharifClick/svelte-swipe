@@ -4,7 +4,7 @@
   let delay = 2000;
   let showIndicators = false;
   let transitionDuration = 200;
-  let defaultIndex = 2;
+  let defaultIndex = 0;
 
   let SwipeComp;
   
@@ -16,8 +16,12 @@
     alert('Hi')
   }
 
-  function test(){
-    console.log(SwipeComp)
+  function nextSlide(){
+   SwipeComp.goTo(+1)
+  }
+
+  function prevSlide(){
+    SwipeComp.goTo(-1)
   }
 
 </script>
@@ -26,7 +30,7 @@
   :root{
     --sv-swipe-indicator-active-color:white;
   }
-  .container, .is-stack{
+  .is-stack{
     height: 100%;
     width: 100%;
   }
@@ -46,7 +50,7 @@
     margin: 10px;
   }
 
-  button{
+  .custom-button{
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -71,34 +75,44 @@
 </style>
 
 <div class="container" >
-  <div class="desc-holder">
-    <h1>Swipable items wrapper component for Svelte</h1>
+
+  <div class="row" style="margin-top:20px">
+    <h1 class="display-4">Swipable items wrapper component for Svelte</h1>
   </div>
-  <div class="swipe-holder">
-    <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} bind:defaultIndex bind:this={SwipeComp}>
-      <SwipeItem>
-        <img src="./images/1.jpg" alt="">
-      </SwipeItem>
 
-      <SwipeItem>
-        <img src="./images/2.jpg" alt="">
-      </SwipeItem>
+  <div class="row">
+    <div class="swipe-holder">
+      <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex} bind:this={SwipeComp}>
+        <SwipeItem>
+          <img class="img-fluid" src="./images/1.jpg" alt="">
+        </SwipeItem>
 
-      <SwipeItem>
-        <img src="./images/3.jpg" alt="">
-      </SwipeItem>
+        <SwipeItem>
+          <img class="img-fluid" src="./images/2.jpg" alt="">
+        </SwipeItem>
 
-      <SwipeItem>
-        <img src="./images/4.jpg" alt="">
-      </SwipeItem>
-    </Swipe>
+        <SwipeItem>
+          <img class="img-fluid" src="./images/3.jpg" alt="">
+        </SwipeItem>
+
+        <SwipeItem>
+          <img class="img-fluid" src="./images/4.jpg" alt="">
+        </SwipeItem>
+      </Swipe>
+    </div>
+  </div>
+  <div class="row d-flex flex-row-reverse" style="margin-top:10px">
+    <div class="btn-group">
+      <button type="button" class="btn btn-secondary" on:click={prevSlide}>Prev</button>
+      <button type="button" class="btn btn-secondary" on:click={nextSlide}>Next</button>
+    </div>
   </div>
   <div class="option-holder">
     <input type="button" on:click={toggle} value={autoplay ? 'Stop': 'Play'}>
     Show Indicators:<input type="checkbox" bind:checked={showIndicators}> 
   </div>
   <input type="text" bind:value={defaultIndex}>
-  <button on:click={test}>Next</button>
+  
 
 
   <hr>
@@ -107,25 +121,25 @@
     <Swipe>
       <SwipeItem>
         <div class="is-stack is-center" style="background:teal">
-          <button class="has-pointer-event" on:click={sayHi}>Say Hi</button>
+          <button class="custom-button has-pointer-event" on:click={sayHi}>Say Hi</button>
         </div>
       </SwipeItem>
 
       <SwipeItem>
         <div class="is-stack is-center" style="background:yellowgreen">
-          <button class="has-pointer-event" on:click={sayHi}>Say Hi</button>
+          <button class="custom-button has-pointer-event" on:click={sayHi}>Say Hi</button>
         </div>
       </SwipeItem>
 
       <SwipeItem>
         <div class="is-stack is-center" style="background:aqua">
-          <button class="has-pointer-event" on:click={sayHi}>Say Hi</button>
+          <button class="custom-button has-pointer-event" on:click={sayHi}>Say Hi</button>
         </div>
       </SwipeItem>
 
       <SwipeItem>
         <div class="is-stack is-center" style="background:lightcoral">
-          <button class="has-pointer-event" on:click={sayHi}>Say Hi</button>
+          <button class="custom-button has-pointer-event" on:click={sayHi}>Say Hi</button>
         </div>
       </SwipeItem>
     </Swipe>
