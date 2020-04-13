@@ -175,6 +175,12 @@
     played = played < (items - 1) ? ++played : 0;
   }
 
+  export let goTo = (step) => {
+    let item = Math.max(0, Math.min(activeIndicator + step, indicators.length - 1));
+    changeItem(item)
+    console.log(item)
+  }
+
 </script>
 
 <style>
@@ -233,7 +239,7 @@
 }
 
 </style>
-
+<svelte:options accessors={true}/>
 <div class="swipe-panel">
   <div class="swipe-item-wrapper" bind:this={swipeWrapper}>
     <div class="swipeable-items">
