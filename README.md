@@ -85,6 +85,36 @@ npm i svelte-swipe
 
 ```
 
+
+### programmatically change slides 
+
+```html
+
+<script>
+
+  function nextSlide(){
+   SwipeComp.goTo(+1)
+  }
+
+  function prevSlide(){
+  SwipeComp.goTo(-1)
+  }
+
+</script>
+<div class="swipe-holder">
+  <Swipe>
+    <SwipeItem bind:this={SwipeComp}>
+    </SwipeItem>
+    ...
+  </Swipe>
+</div>
+<div class="buttons-holder">
+  <button type="button" on:click={prevSlide}>Prev</button>
+  <button type="button" on:click={nextSlide}>Next</button>
+</div>
+   
+
+
 ## Default css custom properties
 
 ```css
