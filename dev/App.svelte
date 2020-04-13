@@ -38,17 +38,6 @@
     height: 30vh;
     width: 100%;
   }
-  .desc-holder{
-    padding: 20px 20px;
-  }
-
-  .desc-holder h1{
-    font-size: 3vh;
-  }
-  .option-holder input{
-    padding: 10px 10px;
-    margin: 10px;
-  }
 
   .custom-button{
     background-color: #4CAF50;
@@ -72,6 +61,12 @@
   .has-pointer-event{
     pointer-events:fill;
   }
+
+  @media (max-width: 764px) {
+    .display-4{
+      font-size: 16px;
+    }
+  }   
 </style>
 
 <div class="container" >
