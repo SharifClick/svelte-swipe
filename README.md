@@ -92,7 +92,7 @@ npm i svelte-swipe
 
 <script>
   let SwipeComp;
-  
+
   function nextSlide(){
    SwipeComp.goTo(+1)
   }
@@ -112,7 +112,7 @@ npm i svelte-swipe
   <button type="button" on:click={prevSlide}>Prev</button>
   <button type="button" on:click={nextSlide}>Next</button>
 </div>
-   
+```
 
 
 ## Default css custom properties
