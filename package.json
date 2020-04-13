@@ -1,6 +1,6 @@
 {
   "name": "svelte-swipe",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "svelte": "src/index.js",
   "module": "dist/index.mjs",
   "main": "dist/index.js",

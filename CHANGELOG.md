@@ -43,3 +43,9 @@
 ## 1.4.0
 
 * add feat of issue #7
+
+## 1.5.0
+
+* add feat of issue #8
+* bug fixes
+* exposed `goTo` method from root component
