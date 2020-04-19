@@ -7,6 +7,7 @@
   let transitionDuration = 200;
   let defaultIndex = 0;
 
+  let active_item = 0; //readonly
 
 
   let customThumbnail = false;
@@ -111,7 +112,7 @@
   <div class="row">
     <div class="col">
       <div class="swipe-holder">
-        <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex} bind:this={SwipeComp}>
+        <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex} bind:active_item bind:this={SwipeComp}>
           {#each images as image}
             <SwipeItem>
               <img class="img-fluid" src={image} alt="">
@@ -129,7 +130,7 @@
       <div class="col">
         <div class="is-center">
           {#each images as image, i}
-            <img class="img-fluid img-thumbnail" on:click={() => changeSlide(i)} style="height:30px; width:30px; cursor:pointer" src={image} alt="">
+            <img class="img-fluid {active_item == i ? 'rounded' : 'img-thumbnail'}" on:click={() => changeSlide(i)} style="height:30px; width:30px; cursor:pointer" src={image} alt="">
           {/each}
         </div>
       </div>
