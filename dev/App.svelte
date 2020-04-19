@@ -88,7 +88,16 @@
       <h1 class="display-4">Swipable items wrapper component for Svelte</h1>
     </div>
   </div>
-
+  <div class="row">
+    <div class="col">
+      <div class="form-check form-check-inline float-right">
+        <input class="form-check-input" type="checkbox"  style="margin-bottom:0" bind:checked={showIndicators}>
+        <label class="form-check-label">
+          Show Indicators
+        </label>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col">
       <div class="swipe-holder">
@@ -105,18 +114,12 @@
   <div class="row" style="margin-top:10px">
     <div class="col">
       <input class="btn btn-info " type="button" on:click={toggle} value={autoplay ? 'Stop': 'Play'}>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox"  bind:checked={showIndicators} id='si'>
-        <label class="form-check-label" for="si">
-          Show Indicators
-        </label>
-      </div>
     </div>
     <div class="col">
       <div class="is-center">
-          {#each images as image, i}
-            <img class="img-fluid img-thumbnail" on:click={() => changeSlide(i)} style="height:30px; width:30px; cursor:pointer" src={image} alt="">
-          {/each}
+        {#each images as image, i}
+          <img class="img-fluid img-thumbnail" on:click={() => changeSlide(i)} style="height:30px; width:30px; cursor:pointer" src={image} alt="">
+        {/each}
       </div>
     </div>
     <div class="col">
