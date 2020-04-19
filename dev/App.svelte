@@ -1,5 +1,6 @@
 <script>
   import { Swipe, SwipeItem } from "../src/index.js";
+
   let autoplay = false;
   let delay = 2000;
   let showIndicators = false;
@@ -17,12 +18,23 @@
   }
 
   function nextSlide(){
-   SwipeComp.goTo(+1)
+   SwipeComp.nextItem()
   }
 
   function prevSlide(){
-    SwipeComp.goTo(-1)
+    SwipeComp.prevItem()
   }
+
+   function changeSlide(i){
+    SwipeComp.goTo(i)
+  }
+
+  let images = [
+    "./images/1.jpg",
+    "./images/2.jpg",
+    "./images/3.jpg",
+    "./images/4.jpg"
+  ];
 
 </script>
 
@@ -81,21 +93,11 @@
     <div class="col">
       <div class="swipe-holder">
         <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex} bind:this={SwipeComp}>
-          <SwipeItem>
-            <img class="img-fluid" src="./images/1.jpg" alt="">
-          </SwipeItem>
-
-          <SwipeItem>
-            <img class="img-fluid" src="./images/2.jpg" alt="">
-          </SwipeItem>
-
-          <SwipeItem>
-            <img class="img-fluid" src="./images/3.jpg" alt="">
-          </SwipeItem>
-
-          <SwipeItem>
-            <img class="img-fluid" src="./images/4.jpg" alt="">
-          </SwipeItem>
+          {#each images as image}
+            <SwipeItem>
+              <img class="img-fluid" src={image} alt="">
+            </SwipeItem>
+          {/each}
         </Swipe>
       </div>
     </div>
@@ -111,6 +113,13 @@
       </div>
     </div>
     <div class="col">
+      <div class="is-center">
+          {#each images as image, i}
+            <img class="img-fluid img-thumbnail" on:click={() => changeSlide(i)} style="height:30px; width:30px; cursor:pointer" src={image} alt="">
+          {/each}
+      </div>
+    </div>
+    <div class="col">
       <div class="btn-group float-right">
         <button type="button" class="btn btn-secondary " on:click={prevSlide}>Prev</button>
         <button type="button" class="btn btn-secondary" on:click={nextSlide}>Next</button>
@@ -119,8 +128,6 @@
     
   </div>
   
-
-
   <hr>
 
   <div class="swipe-holder">
