@@ -94,11 +94,11 @@ npm i svelte-swipe
   let SwipeComp;
 
   function nextSlide(){
-   SwipeComp.goTo(+1)
+   SwipeComp.nextItem()
   }
 
   function prevSlide(){
-    SwipeComp.goTo(-1)
+    SwipeComp.prevItem()
   }
 
 </script>
