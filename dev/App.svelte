@@ -7,6 +7,10 @@
   let transitionDuration = 200;
   let defaultIndex = 0;
 
+
+
+  let customThumbnail = false;
+
   let SwipeComp;
   
   function toggle(){
@@ -76,7 +80,7 @@
 
   @media (max-width: 764px) {
     .display-4{
-      font-size: 16px;
+      font-size: 2rem;
     }
   }   
 </style>
@@ -90,12 +94,18 @@
   </div>
   <div class="row">
     <div class="col">
-      <div class="form-check form-check-inline float-right">
-        <input class="form-check-input" type="checkbox"  style="margin-bottom:0" bind:checked={showIndicators}>
-        <label class="form-check-label">
-          Show Indicators
-        </label>
-      </div>
+    <div class="form-check form-check-inline float-right">
+      <input class="form-check-input" type="checkbox"  bind:checked={showIndicators}>
+      <label class="text-muted">
+        Built-in Indicators
+      </label>
+    </div>
+    <div class="form-check form-check-inline float-right">
+      <input class="form-check-input" type="checkbox"  bind:checked={customThumbnail}>
+      <label class="text-muted">
+        Custom Thumbnail
+      </label>
+    </div>
     </div>
   </div>
   <div class="row">
@@ -115,13 +125,15 @@
     <div class="col">
       <input class="btn btn-info btn-sm" type="button" on:click={toggle} value={autoplay ? 'Stop': 'Play'}>
     </div>
-    <div class="col">
-      <div class="is-center">
-        {#each images as image, i}
-          <img class="img-fluid img-thumbnail" on:click={() => changeSlide(i)} style="height:30px; width:30px; cursor:pointer" src={image} alt="">
-        {/each}
+    {#if customThumbnail}
+      <div class="col">
+        <div class="is-center">
+          {#each images as image, i}
+            <img class="img-fluid img-thumbnail" on:click={() => changeSlide(i)} style="height:30px; width:30px; cursor:pointer" src={image} alt="">
+          {/each}
+        </div>
       </div>
-    </div>
+    {/if}
     <div class="col">
       <div class="btn-group float-right">
         <button type="button" class="btn btn-secondary btn-sm" on:click={prevSlide}>Prev</button>
