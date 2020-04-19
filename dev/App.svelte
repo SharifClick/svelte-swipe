@@ -113,7 +113,7 @@
   </div>
   <div class="row" style="margin-top:10px">
     <div class="col">
-      <input class="btn btn-info " type="button" on:click={toggle} value={autoplay ? 'Stop': 'Play'}>
+      <input class="btn btn-info btn-sm" type="button" on:click={toggle} value={autoplay ? 'Stop': 'Play'}>
     </div>
     <div class="col">
       <div class="is-center">
@@ -124,8 +124,8 @@
     </div>
     <div class="col">
       <div class="btn-group float-right">
-        <button type="button" class="btn btn-secondary " on:click={prevSlide}>Prev</button>
-        <button type="button" class="btn btn-secondary" on:click={nextSlide}>Next</button>
+        <button type="button" class="btn btn-secondary btn-sm" on:click={prevSlide}>Prev</button>
+        <button type="button" class="btn btn-secondary btn-sm" on:click={nextSlide}>Next</button>
       </div>
     </div>
     
