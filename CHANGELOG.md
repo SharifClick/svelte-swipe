@@ -49,3 +49,11 @@
 * add feat of issue #8
 * bug fixes
 * exposed `goTo` method from root component
+
+## 1.6.0
+
+* fix `goTo` logic to navigate slide by given slide index
+* exposed `nextItem`, `prevItem` method to move slide prev/next from outside
+* new readonly prop `active_item` for tracking active slide index
+* bug fixes
+* doc fixes
