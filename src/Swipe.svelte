@@ -9,6 +9,7 @@
   export let delay = 1000;
   export let defaultIndex = 0;
 
+  export let active_item = 0; //readonly
 
   let activeIndicator = 0;
   let indicators;
@@ -141,7 +142,7 @@
       let _value = (max * i) - posX;
       elems[i].style.cssText = non_touchingTpl.replace(template, _value).replace(template, _value);
     }
-
+    active_item = activeIndicator;
     window.removeEventListener('mousemove', moveHandler);
     window.removeEventListener('mouseup', endHandler);
     window.removeEventListener('touchmove', moveHandler);
