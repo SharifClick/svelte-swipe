@@ -13,7 +13,7 @@
   let customThumbnail = false;
 
   let SwipeComp;
-  
+
   function toggle(){
     autoplay = !autoplay;
   }
@@ -78,19 +78,14 @@
   .has-pointer-event{
     pointer-events:fill;
   }
-
-  @media (max-width: 764px) {
-    .display-4{
-      font-size: 2rem;
-    }
-  }   
 </style>
 
 <div class="container" >
 
   <div class="row" style="margin-top:20px">
     <div class="col">
-      <h1 class="display-4">Swipable items wrapper component for Svelte</h1>
+      <h1 class="text-muted">Svelte Swipe</h1>
+      <p class="text-muted">Swipable items wrapper component for Svelte</p>
     </div>
   </div>
   <div class="row">
@@ -141,11 +136,11 @@
         <button type="button" class="btn btn-secondary btn-sm" on:click={nextSlide}>Next</button>
       </div>
     </div>
-    
-  </div>
-  
-  <hr>
 
+  </div>
+
+  <hr>
+  <p class="text-muted">Also allow pointer events inside Swipe Item</p>
   <div class="swipe-holder">
     <Swipe>
       <SwipeItem>

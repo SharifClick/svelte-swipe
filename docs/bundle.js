@@ -341,7 +341,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (260:3) {#if showIndicators}
+    // (268:3) {#if showIndicators}
     function create_if_block(ctx) {
     	var div;
 
@@ -361,7 +361,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
     			attr(div, "class", "swipe-indicator swipe-indicator-inside svelte-ch1qj4");
-    			add_location(div, file, 260, 5, 6228);
+    			add_location(div, file, 268, 5, 6444);
     		},
 
     		m: function mount(target, anchor) {
@@ -405,7 +405,7 @@ var app = (function () {
     	};
     }
 
-    // (262:8) {#each indicators as x, i }
+    // (270:8) {#each indicators as x, i }
     function create_each_block(ctx) {
     	var span, span_class_value, dispose;
 
@@ -417,7 +417,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			attr(span, "class", span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-ch1qj4");
-    			add_location(span, file, 262, 10, 6329);
+    			add_location(span, file, 270, 10, 6545);
     			dispose = listen(span, "click", click_handler);
     		},
 
@@ -464,15 +464,15 @@ var app = (function () {
     			if (if_block) if_block.c();
 
     			attr(div0, "class", "swipeable-slot-wrapper svelte-ch1qj4");
-    			add_location(div0, file, 253, 6, 5993);
+    			add_location(div0, file, 261, 6, 6209);
     			attr(div1, "class", "swipeable-items svelte-ch1qj4");
-    			add_location(div1, file, 252, 4, 5956);
+    			add_location(div1, file, 260, 4, 6172);
     			attr(div2, "class", "swipe-item-wrapper svelte-ch1qj4");
-    			add_location(div2, file, 251, 2, 5893);
+    			add_location(div2, file, 259, 2, 6109);
     			attr(div3, "class", "swipe-handler svelte-ch1qj4");
-    			add_location(div3, file, 258, 2, 6087);
+    			add_location(div3, file, 266, 2, 6303);
     			attr(div4, "class", "swipe-panel svelte-ch1qj4");
-    			add_location(div4, file, 250, 0, 5864);
+    			add_location(div4, file, 258, 0, 6080);
 
     			dispose = [
     				listen(div3, "touchstart", ctx.moveStart),
@@ -607,13 +607,17 @@ var app = (function () {
 
       onMount(() => {
         init();
-        window.addEventListener('resize', update);
+        if (typeof window !== 'undefined') {
+          window.addEventListener('resize', update);
+        }
       });
 
 
 
       onDestroy(()=>{
-        window.removeEventListener('resize', update);
+        if (typeof window !== 'undefined') {
+          window.removeEventListener('resize', update);
+        }
       });
 
       function moveHandler(e){
@@ -670,10 +674,12 @@ var app = (function () {
           let _value = (max * i) - posX;
           elems[i].style.cssText = non_touchingTpl.replace(template, _value).replace(template, _value);    }
         $$invalidate('active_item', active_item = activeIndicator);
-        window.removeEventListener('mousemove', moveHandler);
-        window.removeEventListener('mouseup', endHandler);
-        window.removeEventListener('touchmove', moveHandler);
-        window.removeEventListener('touchend', endHandler);
+        if (typeof window !== 'undefined') {
+          window.removeEventListener('mousemove', moveHandler);
+          window.removeEventListener('mouseup', endHandler);
+          window.removeEventListener('touchmove', moveHandler);
+          window.removeEventListener('touchend', endHandler);
+        }
       }
 
       function moveStart(e){
@@ -683,10 +689,12 @@ var app = (function () {
 
         touching = true;
         x = e.touches ? e.touches[0].pageX : e.pageX;
-        window.addEventListener('mousemove', moveHandler);
-        window.addEventListener('mouseup', endHandler);
-        window.addEventListener('touchmove', moveHandler);
-        window.addEventListener('touchend', endHandler);
+        if (typeof window !== 'undefined') {
+          window.addEventListener('mousemove', moveHandler);
+          window.addEventListener('mouseup', endHandler);
+          window.addEventListener('touchmove', moveHandler);
+          window.addEventListener('touchend', endHandler);
+        }
       }
 
       function changeItem(item) {
@@ -993,7 +1001,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (117:12) <SwipeItem>
+    // (112:12) <SwipeItem>
     function create_default_slot_6(ctx) {
     	var img, img_src_value, t;
 
@@ -1001,10 +1009,10 @@ var app = (function () {
     		c: function create() {
     			img = element("img");
     			t = space();
-    			attr(img, "class", "img-fluid svelte-r89ix1");
+    			attr(img, "class", "img-fluid svelte-7d0la1");
     			attr(img, "src", img_src_value = ctx.image);
     			attr(img, "alt", "");
-    			add_location(img, file$2, 117, 14, 2435);
+    			add_location(img, file$2, 112, 14, 2391);
     		},
 
     		m: function mount(target, anchor) {
@@ -1023,7 +1031,7 @@ var app = (function () {
     	};
     }
 
-    // (116:10) {#each images as image}
+    // (111:10) {#each images as image}
     function create_each_block_1(ctx) {
     	var current;
 
@@ -1069,7 +1077,7 @@ var app = (function () {
     	};
     }
 
-    // (115:8) <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex} bind:active_item bind:this={SwipeComp}>
+    // (110:8) <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex} bind:active_item bind:this={SwipeComp}>
     function create_default_slot_5(ctx) {
     	var each_1_anchor, current;
 
@@ -1151,7 +1159,7 @@ var app = (function () {
     	};
     }
 
-    // (129:4) {#if customThumbnail}
+    // (124:4) {#if customThumbnail}
     function create_if_block$1(ctx) {
     	var div1, div0;
 
@@ -1171,10 +1179,10 @@ var app = (function () {
     			for (var i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
-    			attr(div0, "class", "is-center svelte-r89ix1");
-    			add_location(div0, file$2, 130, 8, 2827);
-    			attr(div1, "class", "col svelte-r89ix1");
-    			add_location(div1, file$2, 129, 6, 2800);
+    			attr(div0, "class", "is-center svelte-7d0la1");
+    			add_location(div0, file$2, 125, 8, 2783);
+    			attr(div1, "class", "col svelte-7d0la1");
+    			add_location(div1, file$2, 124, 6, 2756);
     		},
 
     		m: function mount(target, anchor) {
@@ -1219,7 +1227,7 @@ var app = (function () {
     	};
     }
 
-    // (132:10) {#each images as image, i}
+    // (127:10) {#each images as image, i}
     function create_each_block$1(ctx) {
     	var img, img_class_value, img_src_value, dispose;
 
@@ -1230,13 +1238,13 @@ var app = (function () {
     	return {
     		c: function create() {
     			img = element("img");
-    			attr(img, "class", img_class_value = "img-fluid " + (ctx.active_item == ctx.i ? 'rounded' : 'img-thumbnail') + " svelte-r89ix1");
+    			attr(img, "class", img_class_value = "img-fluid " + (ctx.active_item == ctx.i ? 'rounded' : 'img-thumbnail') + " svelte-7d0la1");
     			set_style(img, "height", "30px");
     			set_style(img, "width", "30px");
     			set_style(img, "cursor", "pointer");
     			attr(img, "src", img_src_value = ctx.image);
     			attr(img, "alt", "");
-    			add_location(img, file$2, 132, 12, 2902);
+    			add_location(img, file$2, 127, 12, 2858);
     			dispose = listen(img, "click", click_handler);
     		},
 
@@ -1246,7 +1254,7 @@ var app = (function () {
 
     		p: function update(changed, new_ctx) {
     			ctx = new_ctx;
-    			if ((changed.active_item) && img_class_value !== (img_class_value = "img-fluid " + (ctx.active_item == ctx.i ? 'rounded' : 'img-thumbnail') + " svelte-r89ix1")) {
+    			if ((changed.active_item) && img_class_value !== (img_class_value = "img-fluid " + (ctx.active_item == ctx.i ? 'rounded' : 'img-thumbnail') + " svelte-7d0la1")) {
     				attr(img, "class", img_class_value);
     			}
     		},
@@ -1261,7 +1269,7 @@ var app = (function () {
     	};
     }
 
-    // (151:6) <SwipeItem>
+    // (146:6) <SwipeItem>
     function create_default_slot_4(ctx) {
     	var div, button, dispose;
 
@@ -1270,11 +1278,11 @@ var app = (function () {
     			div = element("div");
     			button = element("button");
     			button.textContent = "Say Hi";
-    			attr(button, "class", "custom-button has-pointer-event svelte-r89ix1");
-    			add_location(button, file$2, 152, 10, 3593);
-    			attr(div, "class", "is-stack is-center svelte-r89ix1");
+    			attr(button, "class", "custom-button has-pointer-event svelte-7d0la1");
+    			add_location(button, file$2, 147, 10, 3614);
+    			attr(div, "class", "is-stack is-center svelte-7d0la1");
     			set_style(div, "background", "teal");
-    			add_location(div, file$2, 151, 8, 3525);
+    			add_location(div, file$2, 146, 8, 3546);
     			dispose = listen(button, "click", sayHi);
     		},
 
@@ -1295,7 +1303,7 @@ var app = (function () {
     	};
     }
 
-    // (157:6) <SwipeItem>
+    // (152:6) <SwipeItem>
     function create_default_slot_3(ctx) {
     	var div, button, dispose;
 
@@ -1304,11 +1312,11 @@ var app = (function () {
     			div = element("div");
     			button = element("button");
     			button.textContent = "Say Hi";
-    			attr(button, "class", "custom-button has-pointer-event svelte-r89ix1");
-    			add_location(button, file$2, 158, 10, 3815);
-    			attr(div, "class", "is-stack is-center svelte-r89ix1");
+    			attr(button, "class", "custom-button has-pointer-event svelte-7d0la1");
+    			add_location(button, file$2, 153, 10, 3836);
+    			attr(div, "class", "is-stack is-center svelte-7d0la1");
     			set_style(div, "background", "yellowgreen");
-    			add_location(div, file$2, 157, 8, 3740);
+    			add_location(div, file$2, 152, 8, 3761);
     			dispose = listen(button, "click", sayHi);
     		},
 
@@ -1329,7 +1337,7 @@ var app = (function () {
     	};
     }
 
-    // (163:6) <SwipeItem>
+    // (158:6) <SwipeItem>
     function create_default_slot_2(ctx) {
     	var div, button, dispose;
 
@@ -1338,11 +1346,11 @@ var app = (function () {
     			div = element("div");
     			button = element("button");
     			button.textContent = "Say Hi";
-    			attr(button, "class", "custom-button has-pointer-event svelte-r89ix1");
-    			add_location(button, file$2, 164, 10, 4030);
-    			attr(div, "class", "is-stack is-center svelte-r89ix1");
+    			attr(button, "class", "custom-button has-pointer-event svelte-7d0la1");
+    			add_location(button, file$2, 159, 10, 4051);
+    			attr(div, "class", "is-stack is-center svelte-7d0la1");
     			set_style(div, "background", "aqua");
-    			add_location(div, file$2, 163, 8, 3962);
+    			add_location(div, file$2, 158, 8, 3983);
     			dispose = listen(button, "click", sayHi);
     		},
 
@@ -1363,7 +1371,7 @@ var app = (function () {
     	};
     }
 
-    // (169:6) <SwipeItem>
+    // (164:6) <SwipeItem>
     function create_default_slot_1(ctx) {
     	var div, button, dispose;
 
@@ -1372,11 +1380,11 @@ var app = (function () {
     			div = element("div");
     			button = element("button");
     			button.textContent = "Say Hi";
-    			attr(button, "class", "custom-button has-pointer-event svelte-r89ix1");
-    			add_location(button, file$2, 170, 10, 4251);
-    			attr(div, "class", "is-stack is-center svelte-r89ix1");
+    			attr(button, "class", "custom-button has-pointer-event svelte-7d0la1");
+    			add_location(button, file$2, 165, 10, 4272);
+    			attr(div, "class", "is-stack is-center svelte-7d0la1");
     			set_style(div, "background", "lightcoral");
-    			add_location(div, file$2, 169, 8, 4177);
+    			add_location(div, file$2, 164, 8, 4198);
     			dispose = listen(button, "click", sayHi);
     		},
 
@@ -1397,7 +1405,7 @@ var app = (function () {
     	};
     }
 
-    // (150:4) <Swipe>
+    // (145:4) <Swipe>
     function create_default_slot(ctx) {
     	var t0, t1, t2, current;
 
@@ -1519,7 +1527,7 @@ var app = (function () {
     }
 
     function create_fragment$2(ctx) {
-    	var div14, div1, div0, h1, t1, div5, div4, div2, input0, t2, label0, t4, div3, input1, t5, label1, t7, div8, div7, div6, updating_active_item, t8, div12, div9, input2, input2_value_value, t9, t10, div11, div10, button0, t12, button1, t14, hr, t15, div13, current, dispose;
+    	var div14, div1, div0, h1, t1, p0, t3, div5, div4, div2, input0, t4, label0, t6, div3, input1, t7, label1, t9, div8, div7, div6, updating_active_item, t10, div12, div9, input2, input2_value_value, t11, t12, div11, div10, button0, t14, button1, t16, hr, t17, p1, t19, div13, current, dispose;
 
     	function swipe0_active_item_binding(value) {
     		ctx.swipe0_active_item_binding.call(null, value);
@@ -1560,101 +1568,111 @@ var app = (function () {
     			div1 = element("div");
     			div0 = element("div");
     			h1 = element("h1");
-    			h1.textContent = "Swipable items wrapper component for Svelte";
+    			h1.textContent = "Svelte Swipe";
     			t1 = space();
+    			p0 = element("p");
+    			p0.textContent = "Swipable items wrapper component for Svelte";
+    			t3 = space();
     			div5 = element("div");
     			div4 = element("div");
     			div2 = element("div");
     			input0 = element("input");
-    			t2 = space();
+    			t4 = space();
     			label0 = element("label");
     			label0.textContent = "Built-in Indicators";
-    			t4 = space();
+    			t6 = space();
     			div3 = element("div");
     			input1 = element("input");
-    			t5 = space();
+    			t7 = space();
     			label1 = element("label");
     			label1.textContent = "Custom Thumbnail";
-    			t7 = space();
+    			t9 = space();
     			div8 = element("div");
     			div7 = element("div");
     			div6 = element("div");
     			swipe0.$$.fragment.c();
-    			t8 = space();
+    			t10 = space();
     			div12 = element("div");
     			div9 = element("div");
     			input2 = element("input");
-    			t9 = space();
+    			t11 = space();
     			if (if_block) if_block.c();
-    			t10 = space();
+    			t12 = space();
     			div11 = element("div");
     			div10 = element("div");
     			button0 = element("button");
     			button0.textContent = "Prev";
-    			t12 = space();
+    			t14 = space();
     			button1 = element("button");
     			button1.textContent = "Next";
-    			t14 = space();
+    			t16 = space();
     			hr = element("hr");
-    			t15 = space();
+    			t17 = space();
+    			p1 = element("p");
+    			p1.textContent = "Also allow pointer events inside Swipe Item";
+    			t19 = space();
     			div13 = element("div");
     			swipe1.$$.fragment.c();
-    			attr(h1, "class", "display-4 svelte-r89ix1");
-    			add_location(h1, file$2, 92, 6, 1521);
-    			attr(div0, "class", "col svelte-r89ix1");
-    			add_location(div0, file$2, 91, 4, 1496);
-    			attr(div1, "class", "row svelte-r89ix1");
+    			attr(h1, "class", "text-muted svelte-7d0la1");
+    			add_location(h1, file$2, 86, 6, 1430);
+    			attr(p0, "class", "text-muted svelte-7d0la1");
+    			add_location(p0, file$2, 87, 6, 1478);
+    			attr(div0, "class", "col svelte-7d0la1");
+    			add_location(div0, file$2, 85, 4, 1405);
+    			attr(div1, "class", "row svelte-7d0la1");
     			set_style(div1, "margin-top", "20px");
-    			add_location(div1, file$2, 90, 2, 1449);
-    			attr(input0, "class", "form-check-input svelte-r89ix1");
+    			add_location(div1, file$2, 84, 2, 1358);
+    			attr(input0, "class", "form-check-input svelte-7d0la1");
     			attr(input0, "type", "checkbox");
-    			add_location(input0, file$2, 98, 6, 1725);
-    			attr(label0, "class", "text-muted svelte-r89ix1");
-    			add_location(label0, file$2, 99, 6, 1812);
-    			attr(div2, "class", "form-check form-check-inline float-right svelte-r89ix1");
-    			add_location(div2, file$2, 97, 4, 1663);
-    			attr(input1, "class", "form-check-input svelte-r89ix1");
+    			add_location(input0, file$2, 93, 6, 1681);
+    			attr(label0, "class", "text-muted svelte-7d0la1");
+    			add_location(label0, file$2, 94, 6, 1768);
+    			attr(div2, "class", "form-check form-check-inline float-right svelte-7d0la1");
+    			add_location(div2, file$2, 92, 4, 1619);
+    			attr(input1, "class", "form-check-input svelte-7d0la1");
     			attr(input1, "type", "checkbox");
-    			add_location(input1, file$2, 104, 6, 1963);
-    			attr(label1, "class", "text-muted svelte-r89ix1");
-    			add_location(label1, file$2, 105, 6, 2051);
-    			attr(div3, "class", "form-check form-check-inline float-right svelte-r89ix1");
-    			add_location(div3, file$2, 103, 4, 1901);
-    			attr(div4, "class", "col svelte-r89ix1");
-    			add_location(div4, file$2, 96, 4, 1640);
-    			attr(div5, "class", "row svelte-r89ix1");
-    			add_location(div5, file$2, 95, 2, 1617);
-    			attr(div6, "class", "swipe-holder svelte-r89ix1");
-    			add_location(div6, file$2, 113, 6, 2205);
-    			attr(div7, "class", "col svelte-r89ix1");
-    			add_location(div7, file$2, 112, 4, 2180);
-    			attr(div8, "class", "row svelte-r89ix1");
-    			add_location(div8, file$2, 111, 2, 2157);
-    			attr(input2, "class", "btn btn-info btn-sm svelte-r89ix1");
+    			add_location(input1, file$2, 99, 6, 1919);
+    			attr(label1, "class", "text-muted svelte-7d0la1");
+    			add_location(label1, file$2, 100, 6, 2007);
+    			attr(div3, "class", "form-check form-check-inline float-right svelte-7d0la1");
+    			add_location(div3, file$2, 98, 4, 1857);
+    			attr(div4, "class", "col svelte-7d0la1");
+    			add_location(div4, file$2, 91, 4, 1596);
+    			attr(div5, "class", "row svelte-7d0la1");
+    			add_location(div5, file$2, 90, 2, 1573);
+    			attr(div6, "class", "swipe-holder svelte-7d0la1");
+    			add_location(div6, file$2, 108, 6, 2161);
+    			attr(div7, "class", "col svelte-7d0la1");
+    			add_location(div7, file$2, 107, 4, 2136);
+    			attr(div8, "class", "row svelte-7d0la1");
+    			add_location(div8, file$2, 106, 2, 2113);
+    			attr(input2, "class", "btn btn-info btn-sm svelte-7d0la1");
     			attr(input2, "type", "button");
     			input2.value = input2_value_value = ctx.autoplay ? 'Stop': 'Play';
-    			add_location(input2, file$2, 126, 6, 2652);
-    			attr(div9, "class", "col svelte-r89ix1");
-    			add_location(div9, file$2, 125, 4, 2627);
+    			add_location(input2, file$2, 121, 6, 2608);
+    			attr(div9, "class", "col svelte-7d0la1");
+    			add_location(div9, file$2, 120, 4, 2583);
     			attr(button0, "type", "button");
-    			attr(button0, "class", "btn btn-secondary btn-sm svelte-r89ix1");
-    			add_location(button0, file$2, 139, 8, 3209);
+    			attr(button0, "class", "btn btn-secondary btn-sm svelte-7d0la1");
+    			add_location(button0, file$2, 134, 8, 3165);
     			attr(button1, "type", "button");
-    			attr(button1, "class", "btn btn-secondary btn-sm svelte-r89ix1");
-    			add_location(button1, file$2, 140, 8, 3308);
-    			attr(div10, "class", "btn-group float-right svelte-r89ix1");
-    			add_location(div10, file$2, 138, 6, 3164);
-    			attr(div11, "class", "col svelte-r89ix1");
-    			add_location(div11, file$2, 137, 4, 3139);
-    			attr(div12, "class", "row svelte-r89ix1");
+    			attr(button1, "class", "btn btn-secondary btn-sm svelte-7d0la1");
+    			add_location(button1, file$2, 135, 8, 3264);
+    			attr(div10, "class", "btn-group float-right svelte-7d0la1");
+    			add_location(div10, file$2, 133, 6, 3120);
+    			attr(div11, "class", "col svelte-7d0la1");
+    			add_location(div11, file$2, 132, 4, 3095);
+    			attr(div12, "class", "row svelte-7d0la1");
     			set_style(div12, "margin-top", "10px");
-    			add_location(div12, file$2, 124, 2, 2580);
-    			attr(hr, "class", "svelte-r89ix1");
-    			add_location(hr, file$2, 146, 2, 3447);
-    			attr(div13, "class", "swipe-holder svelte-r89ix1");
-    			add_location(div13, file$2, 148, 2, 3457);
-    			attr(div14, "class", "container svelte-r89ix1");
-    			add_location(div14, file$2, 88, 0, 1419);
+    			add_location(div12, file$2, 119, 2, 2536);
+    			attr(hr, "class", "svelte-7d0la1");
+    			add_location(hr, file$2, 141, 2, 3397);
+    			attr(p1, "class", "text-muted svelte-7d0la1");
+    			add_location(p1, file$2, 142, 2, 3405);
+    			attr(div13, "class", "swipe-holder svelte-7d0la1");
+    			add_location(div13, file$2, 143, 2, 3478);
+    			attr(div14, "class", "container svelte-7d0la1");
+    			add_location(div14, file$2, 82, 0, 1328);
 
     			dispose = [
     				listen(input0, "change", ctx.input0_change_handler),
@@ -1674,7 +1692,9 @@ var app = (function () {
     			append(div14, div1);
     			append(div1, div0);
     			append(div0, h1);
-    			append(div14, t1);
+    			append(div0, t1);
+    			append(div0, p0);
+    			append(div14, t3);
     			append(div14, div5);
     			append(div5, div4);
     			append(div4, div2);
@@ -1682,36 +1702,38 @@ var app = (function () {
 
     			input0.checked = ctx.showIndicators;
 
-    			append(div2, t2);
+    			append(div2, t4);
     			append(div2, label0);
-    			append(div4, t4);
+    			append(div4, t6);
     			append(div4, div3);
     			append(div3, input1);
 
     			input1.checked = ctx.customThumbnail;
 
-    			append(div3, t5);
+    			append(div3, t7);
     			append(div3, label1);
-    			append(div14, t7);
+    			append(div14, t9);
     			append(div14, div8);
     			append(div8, div7);
     			append(div7, div6);
     			mount_component(swipe0, div6, null);
-    			append(div14, t8);
+    			append(div14, t10);
     			append(div14, div12);
     			append(div12, div9);
     			append(div9, input2);
-    			append(div12, t9);
+    			append(div12, t11);
     			if (if_block) if_block.m(div12, null);
-    			append(div12, t10);
+    			append(div12, t12);
     			append(div12, div11);
     			append(div11, div10);
     			append(div10, button0);
-    			append(div10, t12);
+    			append(div10, t14);
     			append(div10, button1);
-    			append(div14, t14);
+    			append(div14, t16);
     			append(div14, hr);
-    			append(div14, t15);
+    			append(div14, t17);
+    			append(div14, p1);
+    			append(div14, t19);
     			append(div14, div13);
     			mount_component(swipe1, div13, null);
     			current = true;
@@ -1743,7 +1765,7 @@ var app = (function () {
     				} else {
     					if_block = create_if_block$1(ctx);
     					if_block.c();
-    					if_block.m(div12, t10);
+    					if_block.m(div12, t12);
     				}
     			} else if (if_block) {
     				if_block.d(1);
@@ -1808,7 +1830,7 @@ var app = (function () {
       let customThumbnail = false;
 
       let SwipeComp;
-      
+
       function toggle(){
         $$invalidate('autoplay', autoplay = !autoplay);
       }
