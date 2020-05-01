@@ -78,13 +78,17 @@
 
   onMount(() => {
     init();
-    window.addEventListener('resize', update);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', update);
+    }
   });
 
 
 
   onDestroy(()=>{
-    window.removeEventListener('resize', update);
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', update);
+    }
   })
 
   function moveHandler(e){
@@ -143,10 +147,12 @@
       elems[i].style.cssText = non_touchingTpl.replace(template, _value).replace(template, _value);
     }
     active_item = activeIndicator;
-    window.removeEventListener('mousemove', moveHandler);
-    window.removeEventListener('mouseup', endHandler);
-    window.removeEventListener('touchmove', moveHandler);
-    window.removeEventListener('touchend', endHandler);
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('mousemove', moveHandler);
+      window.removeEventListener('mouseup', endHandler);
+      window.removeEventListener('touchmove', moveHandler);
+      window.removeEventListener('touchend', endHandler);
+    }
   }
 
   function moveStart(e){
@@ -158,10 +164,12 @@
 
     touching = true;
     x = e.touches ? e.touches[0].pageX : e.pageX;
-    window.addEventListener('mousemove', moveHandler);
-    window.addEventListener('mouseup', endHandler);
-    window.addEventListener('touchmove', moveHandler);
-    window.addEventListener('touchend', endHandler);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('mousemove', moveHandler);
+      window.addEventListener('mouseup', endHandler);
+      window.addEventListener('touchmove', moveHandler);
+      window.addEventListener('touchend', endHandler);
+    }
   }
 
   function changeItem(item) {

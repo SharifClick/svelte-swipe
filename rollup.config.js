@@ -15,9 +15,9 @@ export default [
 		plugins: [
 			svelte(),
 			commonjs(),
-      resolve(),
-      terser(),
-      bundleSize()
+			resolve(),
+			terser(),
+			bundleSize()
 		]
 	}
 ];
