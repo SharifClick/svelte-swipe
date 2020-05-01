@@ -57,3 +57,9 @@
 * new readonly prop `active_item` for tracking active slide index
 * bug fixes
 * doc fixes
+
+## 1.6.1
+
+* merge PR #14
+* closed issue #10, #14
+* doc fixes
