@@ -4,8 +4,7 @@
 
 Swipable items wrapper component for Svelte :fire: :boom: (zero dependencies - 3.37 KB gzipped)
 
-
-[View the demo.](https://sharifclick.github.io/svelte-swipe/)
+## 🚀[See it in Action](https://sharifclick.github.io/svelte-swipe/)
 
 ## Installation
 
