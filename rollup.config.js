@@ -7,7 +7,7 @@ import pkg from './package.json';
 
 export default [
 	{
-		input: 'src/Swipe.svelte',
+		input: 'src/index.js',
 		output: [
 			{ file: pkg.module, 'format': 'es' },
 			{ file: pkg.main, 'format': 'umd', name: 'Swipe' }
