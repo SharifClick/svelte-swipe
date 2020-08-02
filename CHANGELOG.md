@@ -63,3 +63,8 @@
 * merge PR #14
 * closed issue #10, #14
 * doc fixes
+
+## 1.7.0
+
+* feature request issue #18 (added vertical swipe support)
+* doc fixes

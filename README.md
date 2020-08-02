@@ -59,6 +59,19 @@ npm i svelte-swipe
 </div>
 
 ```
+### Vertical Swipe 🔥
+
+```html
+
+<div class="swipe-holder">
+  <Swipe is_vertical={true}>
+    <SwipeItem>
+      ...
+    </SwipeItem>
+    ...
+  </Swipe>
+</div>
+
 
 ### Pointer event inside Swipe Item
 
@@ -85,7 +98,7 @@ npm i svelte-swipe
 ```
 
 
-### Programmatically change slides 
+### Programmatically change slides
 
 ```html
 
