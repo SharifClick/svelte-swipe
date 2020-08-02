@@ -10,34 +10,37 @@
   export let defaultIndex = 0;
 
   export let active_item = 0; //readonly
+  export let is_vertical = true;
 
-  let activeIndicator = 0;
-  let indicators;
-  let items = 0;
-  let availableWidth = 0;
-  let topClearence = 0;
+  let activeIndicator = 0,
+    indicators,
+    items = 0,
+    availableWidth = 0,
+    topClearence = 0,
+    elems,
+    diff = 0,
+    swipeWrapper,
+    swipeHandler,
 
-  let elems;
-  let diff = 0;
+    min = 0,
+    transformString = is_vertical ? 'translate3d(0, -{{val}}px, 0)' : 'translate3d(-{{val}}px, 0, 0)',
 
-  let swipeWrapper;
-  let swipeHandler;
-
-  let min = 0;
-  let touchingTpl = `
+    touchingTpl = `
     -webkit-transition-duration: 0s;
     transition-duration: 0s;
-    -webkit-transform: translate3d(-{{val}}px, 0, 0);
-    -ms-transform: translate3d(-{{val}}px, 0, 0);`;
-  let non_touchingTpl = `
+    -webkit-transform: ${transformString};
+    -ms-transform: ${transformString};`,
+
+    non_touchingTpl = `
     -webkit-transition-duration: ${transitionDuration}ms;
     transition-duration: ${transitionDuration}ms;
-    -webkit-transform: translate3d(-{{val}}px, 0, 0);
-    -ms-transform: translate3d(-{{val}}px, 0, 0);`;
-  let touching = false;
-  let posX = 0;
-  let dir = 0;
-  let x;
+    -webkit-transform: ${transformString};
+    -ms-transform: ${transformString};`,
+
+    touching = false,
+    posX = 0,
+    dir = 0,
+    x;
 
 
 
