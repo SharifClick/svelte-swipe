@@ -144,6 +144,7 @@ npm i svelte-swipe
 
 | Name | Type | Description | Required | Default |
 | --- | --- | --- | --- | --- |
+| `is_vertical` | `Boolean` | Set swipe direction to vertical (up/down) | No |`false` |
 | `autoplay` | `Boolean` | Play items as slide | No | `false` |
 | `showIndicators` | `Boolean` | appears clickable circle indicators bottom center of item | No | `false` |
 | `transitionDuration` | `Number` | staying duration of per slide/swipe item | No | `200` *ms |
