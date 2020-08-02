@@ -15,7 +15,7 @@
   let activeIndicator = 0,
     indicators,
     items = 0,
-    availableWidth = 0,
+    availableSpace = 0,
     topClearence = 0,
     elems,
     diff = 0,
@@ -63,9 +63,12 @@
 
   function update(){
     swipeHandler.style.top = topClearence + 'px';
-    availableWidth = swipeWrapper.querySelector('.swipeable-items').offsetWidth;
+    let {offsetWidth, offsetHeight} = swipeWrapper.querySelector('.swipeable-items');
+    availableSpace = is_vertical ? offsetHeight : offsetWidth;
     for (let i = 0; i < items; i++) {
-      elems[i].style.transform = 'translate3d(' + (availableWidth * i) + 'px, 0, 0)';
+      let _transformValue = (availableSpace * i)+'px';
+      let _transformString = is_vertical ? `translate3d(0, ${_transformValue}, 0)` :`translate3d(${_transformValue}, 0, 0)`;
+      elems[i].style.transform = _transformString;
     }
     diff = 0;
     if(defaultIndex){
@@ -100,7 +103,7 @@
       e.stopPropagation();
 
 
-      let max = availableWidth;
+      let max = availableSpace;
 
       let _x = e.touches ? e.touches[0].pageX : e.pageX;
       let _diff = (x - _x) + posX;
@@ -125,7 +128,7 @@
     e && e.stopPropagation();
     e && e.preventDefault();
 
-    let max = availableWidth;
+    let max = availableSpace;
 
     touching = false;
     x = null;
@@ -163,7 +166,7 @@
     e.stopPropagation();
     e.preventDefault();
 
-    let max = availableWidth;
+    let max = availableSpace;
 
     touching = true;
     x = e.touches ? e.touches[0].pageX : e.pageX;
@@ -176,7 +179,7 @@
   }
 
   function changeItem(item) {
-    let max = availableWidth;
+    let max = availableSpace;
     diff = max * item;
     activeIndicator = item;
     endHandler();
