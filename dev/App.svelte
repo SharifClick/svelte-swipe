@@ -138,6 +138,21 @@
     </div>
 
   </div>
+    <hr>
+  <p class="text-muted">Vertical Swipe 🔥</p>
+  <div class="row">
+    <div class="col">
+      <div class="swipe-holder">
+        <Swipe is_vertical={true} >
+          {#each images as image}
+            <SwipeItem>
+              <img class="img-fluid" src={image} alt="">
+            </SwipeItem>
+          {/each}
+        </Swipe>
+      </div>
+    </div>
+  </div>
 
   <hr>
   <p class="text-muted">Also allow pointer events inside Swipe Item</p>

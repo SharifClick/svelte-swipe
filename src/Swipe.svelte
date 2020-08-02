@@ -10,34 +10,38 @@
   export let defaultIndex = 0;
 
   export let active_item = 0; //readonly
+  export let is_vertical = false;
 
-  let activeIndicator = 0;
-  let indicators;
-  let items = 0;
-  let availableWidth = 0;
-  let topClearence = 0;
+  let activeIndicator = 0,
+    indicators,
+    items = 0,
+    availableSpace = 0,
+    topClearence = 0,
+    elems,
+    diff = 0,
+    swipeWrapper,
+    swipeHandler,
 
-  let elems;
-  let diff = 0;
+    min = 0,
+    transformString = is_vertical ? 'translate3d(0, -{{val}}px, 0)' : 'translate3d(-{{val}}px, 0, 0)',
 
-  let swipeWrapper;
-  let swipeHandler;
-
-  let min = 0;
-  let touchingTpl = `
+    touchingTpl = `
     -webkit-transition-duration: 0s;
     transition-duration: 0s;
-    -webkit-transform: translate3d(-{{val}}px, 0, 0);
-    -ms-transform: translate3d(-{{val}}px, 0, 0);`;
-  let non_touchingTpl = `
+    -webkit-transform: ${transformString};
+    -ms-transform: ${transformString};`,
+
+    non_touchingTpl = `
     -webkit-transition-duration: ${transitionDuration}ms;
     transition-duration: ${transitionDuration}ms;
-    -webkit-transform: translate3d(-{{val}}px, 0, 0);
-    -ms-transform: translate3d(-{{val}}px, 0, 0);`;
-  let touching = false;
-  let posX = 0;
-  let dir = 0;
-  let x;
+    -webkit-transform: ${transformString};
+    -ms-transform: ${transformString};`,
+
+    touching = false,
+    pos_axis = 0,
+    page_axis = is_vertical ? 'pageY' : 'pageX',
+    dir = 0,
+    axis;
 
 
 
@@ -60,9 +64,12 @@
 
   function update(){
     swipeHandler.style.top = topClearence + 'px';
-    availableWidth = swipeWrapper.querySelector('.swipeable-items').offsetWidth;
+    let {offsetWidth, offsetHeight} = swipeWrapper.querySelector('.swipeable-items');
+    availableSpace = is_vertical ? offsetHeight : offsetWidth;
     for (let i = 0; i < items; i++) {
-      elems[i].style.transform = 'translate3d(' + (availableWidth * i) + 'px, 0, 0)';
+      let _transformValue = (availableSpace * i)+'px';
+      let _transformString = is_vertical ? `translate3d(0, ${_transformValue}, 0)` :`translate3d(${_transformValue}, 0, 0)`;
+      elems[i].style.transform = _transformString;
     }
     diff = 0;
     if(defaultIndex){
@@ -97,12 +104,12 @@
       e.stopPropagation();
 
 
-      let max = availableWidth;
+      let max = availableSpace;
 
-      let _x = e.touches ? e.touches[0].pageX : e.pageX;
-      let _diff = (x - _x) + posX;
-      let dir = _x > x ? 0 : 1;
-      if (!dir) { _diff = posX - (_x - x) }
+      let _axis = e.touches ? e.touches[0][page_axis] : e[page_axis];
+      let _diff = (axis - _axis) + pos_axis;
+      let dir = _axis > axis ? 0 : 1;
+      if (!dir) { _diff = pos_axis - (_axis - axis) }
       if (_diff <= (max * (items - 1)) && _diff >= min) {
 
         for (let i = 0; i < items; i++) {
@@ -122,10 +129,10 @@
     e && e.stopPropagation();
     e && e.preventDefault();
 
-    let max = availableWidth;
+    let max = availableSpace;
 
     touching = false;
-    x = null;
+    axis = null;
 
 
 
@@ -139,11 +146,11 @@
       diff = (dir ? (_target - 1) : (_target + 1)) * max;
     }
 
-    posX = diff;
+    pos_axis = diff;
     activeIndicator = (diff / max);
     for (let i = 0; i < items; i++) {
       let template = i < 0 ? '{{val}}' : '-{{val}}';
-      let _value = (max * i) - posX;
+      let _value = (max * i) - pos_axis;
       elems[i].style.cssText = non_touchingTpl.replace(template, _value).replace(template, _value);
     }
     active_item = activeIndicator;
@@ -160,10 +167,10 @@
     e.stopPropagation();
     e.preventDefault();
 
-    let max = availableWidth;
+    let max = availableSpace;
 
     touching = true;
-    x = e.touches ? e.touches[0].pageX : e.pageX;
+    axis = e.touches ? e.touches[0][page_axis] : e[page_axis];
     if (typeof window !== 'undefined') {
       window.addEventListener('mousemove', moveHandler);
       window.addEventListener('mouseup', endHandler);
@@ -173,7 +180,7 @@
   }
 
   function changeItem(item) {
-    let max = availableWidth;
+    let max = availableSpace;
     diff = max * item;
     activeIndicator = item;
     endHandler();
