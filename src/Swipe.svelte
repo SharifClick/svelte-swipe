@@ -38,9 +38,10 @@
     -ms-transform: ${transformString};`,
 
     touching = false,
-    posX = 0,
+    pos_axis = 0,
+    page_axis = is_vertical ? 'pageY' : 'pageX',
     dir = 0,
-    x;
+    axis;
 
 
 
@@ -105,10 +106,10 @@
 
       let max = availableSpace;
 
-      let _x = e.touches ? e.touches[0].pageX : e.pageX;
-      let _diff = (x - _x) + posX;
-      let dir = _x > x ? 0 : 1;
-      if (!dir) { _diff = posX - (_x - x) }
+      let _axis = e.touches ? e.touches[0][page_axis] : e[page_axis];
+      let _diff = (axis - _axis) + pos_axis;
+      let dir = _axis > axis ? 0 : 1;
+      if (!dir) { _diff = pos_axis - (_axis - axis) }
       if (_diff <= (max * (items - 1)) && _diff >= min) {
 
         for (let i = 0; i < items; i++) {
@@ -131,7 +132,7 @@
     let max = availableSpace;
 
     touching = false;
-    x = null;
+    axis = null;
 
 
 
@@ -145,11 +146,11 @@
       diff = (dir ? (_target - 1) : (_target + 1)) * max;
     }
 
-    posX = diff;
+    pos_axis = diff;
     activeIndicator = (diff / max);
     for (let i = 0; i < items; i++) {
       let template = i < 0 ? '{{val}}' : '-{{val}}';
-      let _value = (max * i) - posX;
+      let _value = (max * i) - pos_axis;
       elems[i].style.cssText = non_touchingTpl.replace(template, _value).replace(template, _value);
     }
     active_item = activeIndicator;
@@ -169,7 +170,7 @@
     let max = availableSpace;
 
     touching = true;
-    x = e.touches ? e.touches[0].pageX : e.pageX;
+    axis = e.touches ? e.touches[0][page_axis] : e[page_axis];
     if (typeof window !== 'undefined') {
       window.addEventListener('mousemove', moveHandler);
       window.addEventListener('mouseup', endHandler);
