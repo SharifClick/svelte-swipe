@@ -10,7 +10,7 @@
   export let defaultIndex = 0;
 
   export let active_item = 0; //readonly
-  export let is_vertical = true;
+  export let is_vertical = false;
 
   let activeIndicator = 0,
     indicators,
