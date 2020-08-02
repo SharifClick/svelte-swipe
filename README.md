@@ -71,7 +71,7 @@ npm i svelte-swipe
     ...
   </Swipe>
 </div>
-
+```
 
 ### Pointer event inside Swipe Item
 
