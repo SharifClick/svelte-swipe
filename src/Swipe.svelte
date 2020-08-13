@@ -10,7 +10,7 @@
   export let defaultIndex = 0;
 
   export let active_item = 0; //readonly
-  export let is_vertical = false;
+  export let vertical = false;
 
   let activeIndicator = 0,
     indicators,
@@ -23,7 +23,7 @@
     swipeHandler,
 
     min = 0,
-    transformString = is_vertical ? 'translate3d(0, -{{val}}px, 0)' : 'translate3d(-{{val}}px, 0, 0)',
+    transformString = vertical ? 'translate3d(0, -{{val}}px, 0)' : 'translate3d(-{{val}}px, 0, 0)',
 
     touchingTpl = `
     -webkit-transition-duration: 0s;
@@ -39,7 +39,7 @@
 
     touching = false,
     pos_axis = 0,
-    page_axis = is_vertical ? 'pageY' : 'pageX',
+    page_axis = vertical ? 'pageY' : 'pageX',
     dir = 0,
     axis;
 
@@ -65,10 +65,10 @@
   function update(){
     swipeHandler.style.top = topClearence + 'px';
     let {offsetWidth, offsetHeight} = swipeWrapper.querySelector('.swipeable-items');
-    availableSpace = is_vertical ? offsetHeight : offsetWidth;
+    availableSpace = vertical ? offsetHeight : offsetWidth;
     for (let i = 0; i < items; i++) {
       let _transformValue = (availableSpace * i)+'px';
-      let _transformString = is_vertical ? `translate3d(0, ${_transformValue}, 0)` :`translate3d(${_transformValue}, 0, 0)`;
+      let _transformString = vertical ? `translate3d(0, ${_transformValue}, 0)` :`translate3d(${_transformValue}, 0, 0)`;
       elems[i].style.transform = _transformString;
     }
     diff = 0;
