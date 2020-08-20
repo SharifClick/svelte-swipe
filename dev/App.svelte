@@ -1,11 +1,12 @@
 <script>
   import { Swipe, SwipeItem } from "../src/index.js";
 
-  let autoplay = false;
-  let delay = 2000;
-  let showIndicators = false;
-  let transitionDuration = 200;
-  let defaultIndex = 0;
+  const swipeConfig = {
+    autoplay: false,
+    showIndicators: false,
+    transitionDuration: 200,
+    defaultIndex: 0,
+  };
 
   let active_item = 0; //readonly
 
@@ -107,7 +108,7 @@
   <div class="row">
     <div class="col">
       <div class="swipe-holder">
-        <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex} bind:active_item bind:this={SwipeComp}>
+        <Swipe {...swipeConfig} bind:active_item bind:this={SwipeComp}>
           {#each images as image}
             <SwipeItem>
               <img class="img-fluid" src={image} alt="">
@@ -119,7 +120,11 @@
   </div>
   <div class="row" style="margin-top:10px">
     <div class="col">
-      <input class="btn btn-info btn-sm" type="button" on:click={toggle} value={autoplay ? 'Stop': 'Play'}>
+      <input
+        class="btn btn-info btn-sm"
+        type="button"
+        on:click={toggle}
+        value={swipeConfig.autoplay ? 'Stop' : 'Play'} />
     </div>
     {#if customThumbnail}
       <div class="col">
@@ -182,6 +187,10 @@
         </div>
       </SwipeItem>
     </Swipe>
+  </div>
+
+  <div class="row mt-3">
+    
   </div>
 </div>
 
