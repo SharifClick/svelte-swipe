@@ -16,7 +16,7 @@
   let SwipeComp;
 
   function toggle(){
-    autoplay = !autoplay;
+    swipeConfig.autoplay = !swipeConfig.autoplay;
   }
 
   function sayHi(){
@@ -92,7 +92,7 @@
   <div class="row">
     <div class="col">
     <div class="form-check form-check-inline float-right">
-      <input class="form-check-input" type="checkbox"  bind:checked={showIndicators}>
+      <input class="form-check-input" type="checkbox"  bind:checked={swipeConfig.showIndicators}>
       <label class="text-muted">
         Built-in Indicators
       </label>
@@ -190,7 +190,7 @@
   </div>
 
   <div class="row mt-3">
-    
+
   </div>
 </div>
 
