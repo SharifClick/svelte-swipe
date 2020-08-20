@@ -19,12 +19,13 @@ npm i svelte-swipe
 
   import { Swipe, SwipeItem } from "svelte-swipe"; // gzipped 3.37 KB
 
-  let autoplay = false;
-  let delay = 2000; //ms
-  let showIndicators = true;
-  let transitionDuration = 1000; //ms
-  let defaultIndex = 0; //start from 0
-
+  const swipeConfig = {
+    autoplay: false,
+    delay: 2000,
+    showIndicators: true,
+    transitionDuration: 1000,
+    defaultIndex: 0,
+  };
 </script>
 
 <style>
@@ -39,7 +40,7 @@ npm i svelte-swipe
 </style>
 
 <div class="swipe-holder">
-  <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex}>
+  <Swipe {...swipeConfig}>
     <SwipeItem>
       <img src="./images/1.jpg" alt="">
     </SwipeItem>
@@ -140,7 +141,7 @@ npm i svelte-swipe
 
 ```
 
-## Props
+## Config Props
 
 | Name | Type | Description | Required | Default |
 | --- | --- | --- | --- | --- |

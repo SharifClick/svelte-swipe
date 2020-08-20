@@ -228,6 +228,43 @@ var app = (function () {
         }
     }
 
+    function get_spread_update(levels, updates) {
+        const update = {};
+        const to_null_out = {};
+        const accounted_for = { $$scope: 1 };
+        let i = levels.length;
+        while (i--) {
+            const o = levels[i];
+            const n = updates[i];
+            if (n) {
+                for (const key in o) {
+                    if (!(key in n))
+                        to_null_out[key] = 1;
+                }
+                for (const key in n) {
+                    if (!accounted_for[key]) {
+                        update[key] = n[key];
+                        accounted_for[key] = 1;
+                    }
+                }
+                levels[i] = n;
+            }
+            else {
+                for (const key in o) {
+                    accounted_for[key] = 1;
+                }
+            }
+        }
+        for (const key in to_null_out) {
+            if (!(key in update))
+                update[key] = undefined;
+        }
+        return update;
+    }
+    function get_spread_object(spread_props) {
+        return typeof spread_props === 'object' && spread_props !== null ? spread_props : {};
+    }
+
     function bind(component, name, callback) {
         const index = component.$$.props[name];
         if (index !== undefined) {
@@ -1277,24 +1314,24 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[18] = list[i];
+    	child_ctx[13] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[18] = list[i];
-    	child_ctx[22] = i;
+    	child_ctx[13] = list[i];
+    	child_ctx[17] = i;
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[18] = list[i];
+    	child_ctx[13] = list[i];
     	return child_ctx;
     }
 
-    // (112:12) <SwipeItem>
+    // (113:12) <SwipeItem>
     function create_default_slot_8(ctx) {
     	let img;
     	let img_src_value;
@@ -1304,10 +1341,10 @@ var app = (function () {
     		c: function create() {
     			img = element("img");
     			t = space();
-    			attr_dev(img, "class", "img-fluid svelte-vzf4ra");
-    			if (img.src !== (img_src_value = /*image*/ ctx[18])) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "class", "img-fluid svelte-k019lg");
+    			if (img.src !== (img_src_value = /*image*/ ctx[13])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			add_location(img, file$2, 112, 14, 2279);
+    			add_location(img, file$2, 113, 14, 2295);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -1324,14 +1361,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_8.name,
     		type: "slot",
-    		source: "(112:12) <SwipeItem>",
+    		source: "(113:12) <SwipeItem>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (111:10) {#each images as image}
+    // (112:10) {#each images as image}
     function create_each_block_2(ctx) {
     	let current;
 
@@ -1354,7 +1391,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const swipeitem_changes = {};
 
-    			if (dirty & /*$$scope*/ 33554432) {
+    			if (dirty & /*$$scope*/ 1048576) {
     				swipeitem_changes.$$scope = { dirty, ctx };
     			}
 
@@ -1378,18 +1415,18 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(111:10) {#each images as image}",
+    		source: "(112:10) {#each images as image}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (110:8) <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex} bind:active_item bind:this={SwipeComp}>
+    // (111:8) <Swipe {...swipeConfig} bind:active_item bind:this={SwipeComp}>
     function create_default_slot_7(ctx) {
     	let each_1_anchor;
     	let current;
-    	let each_value_2 = /*images*/ ctx[12];
+    	let each_value_2 = /*images*/ ctx[7];
     	validate_each_argument(each_value_2);
     	let each_blocks = [];
 
@@ -1418,8 +1455,8 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*images*/ 4096) {
-    				each_value_2 = /*images*/ ctx[12];
+    			if (dirty & /*images*/ 128) {
+    				each_value_2 = /*images*/ ctx[7];
     				validate_each_argument(each_value_2);
     				let i;
 
@@ -1474,18 +1511,18 @@ var app = (function () {
     		block,
     		id: create_default_slot_7.name,
     		type: "slot",
-    		source: "(110:8) <Swipe {showIndicators} {autoplay} {delay} {transitionDuration} {defaultIndex} bind:active_item bind:this={SwipeComp}>",
+    		source: "(111:8) <Swipe {...swipeConfig} bind:active_item bind:this={SwipeComp}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (124:4) {#if customThumbnail}
+    // (129:4) {#if customThumbnail}
     function create_if_block$1(ctx) {
     	let div1;
     	let div0;
-    	let each_value_1 = /*images*/ ctx[12];
+    	let each_value_1 = /*images*/ ctx[7];
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -1502,10 +1539,10 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div0, "class", "is-center svelte-vzf4ra");
-    			add_location(div0, file$2, 125, 8, 2658);
-    			attr_dev(div1, "class", "col svelte-vzf4ra");
-    			add_location(div1, file$2, 124, 6, 2632);
+    			attr_dev(div0, "class", "is-center svelte-k019lg");
+    			add_location(div0, file$2, 130, 8, 2723);
+    			attr_dev(div1, "class", "col svelte-k019lg");
+    			add_location(div1, file$2, 129, 6, 2697);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -1516,8 +1553,8 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*active_item, images, changeSlide*/ 6148) {
-    				each_value_1 = /*images*/ ctx[12];
+    			if (dirty & /*active_item, images, changeSlide*/ 194) {
+    				each_value_1 = /*images*/ ctx[7];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -1550,14 +1587,14 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(124:4) {#if customThumbnail}",
+    		source: "(129:4) {#if customThumbnail}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (127:10) {#each images as image, i}
+    // (132:10) {#each images as image, i}
     function create_each_block_1(ctx) {
     	let img;
     	let img_class_value;
@@ -1565,23 +1602,23 @@ var app = (function () {
     	let dispose;
 
     	function click_handler(...args) {
-    		return /*click_handler*/ ctx[17](/*i*/ ctx[22], ...args);
+    		return /*click_handler*/ ctx[12](/*i*/ ctx[17], ...args);
     	}
 
     	const block = {
     		c: function create() {
     			img = element("img");
 
-    			attr_dev(img, "class", img_class_value = "img-fluid " + (/*active_item*/ ctx[2] == /*i*/ ctx[22]
+    			attr_dev(img, "class", img_class_value = "img-fluid " + (/*active_item*/ ctx[1] == /*i*/ ctx[17]
     			? "rounded"
-    			: "img-thumbnail") + " svelte-vzf4ra");
+    			: "img-thumbnail") + " svelte-k019lg");
 
     			set_style(img, "height", "30px");
     			set_style(img, "width", "30px");
     			set_style(img, "cursor", "pointer");
-    			if (img.src !== (img_src_value = /*image*/ ctx[18])) attr_dev(img, "src", img_src_value);
+    			if (img.src !== (img_src_value = /*image*/ ctx[13])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			add_location(img, file$2, 127, 12, 2731);
+    			add_location(img, file$2, 132, 12, 2796);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, img, anchor);
@@ -1591,9 +1628,9 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty & /*active_item*/ 4 && img_class_value !== (img_class_value = "img-fluid " + (/*active_item*/ ctx[2] == /*i*/ ctx[22]
+    			if (dirty & /*active_item*/ 2 && img_class_value !== (img_class_value = "img-fluid " + (/*active_item*/ ctx[1] == /*i*/ ctx[17]
     			? "rounded"
-    			: "img-thumbnail") + " svelte-vzf4ra")) {
+    			: "img-thumbnail") + " svelte-k019lg")) {
     				attr_dev(img, "class", img_class_value);
     			}
     		},
@@ -1607,14 +1644,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(127:10) {#each images as image, i}",
+    		source: "(132:10) {#each images as image, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (148:12) <SwipeItem>
+    // (168:12) <SwipeItem>
     function create_default_slot_6(ctx) {
     	let img;
     	let img_src_value;
@@ -1624,10 +1661,10 @@ var app = (function () {
     		c: function create() {
     			img = element("img");
     			t = space();
-    			attr_dev(img, "class", "img-fluid svelte-vzf4ra");
-    			if (img.src !== (img_src_value = /*image*/ ctx[18])) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "class", "img-fluid svelte-k019lg");
+    			if (img.src !== (img_src_value = /*image*/ ctx[13])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			add_location(img, file$2, 148, 14, 3491);
+    			add_location(img, file$2, 168, 14, 3727);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -1644,14 +1681,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_6.name,
     		type: "slot",
-    		source: "(148:12) <SwipeItem>",
+    		source: "(168:12) <SwipeItem>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (147:10) {#each images as image}
+    // (167:10) {#each images as image}
     function create_each_block$1(ctx) {
     	let current;
 
@@ -1674,7 +1711,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const swipeitem_changes = {};
 
-    			if (dirty & /*$$scope*/ 33554432) {
+    			if (dirty & /*$$scope*/ 1048576) {
     				swipeitem_changes.$$scope = { dirty, ctx };
     			}
 
@@ -1698,18 +1735,18 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(147:10) {#each images as image}",
+    		source: "(167:10) {#each images as image}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (146:8) <Swipe is_vertical={true} >
+    // (166:8) <Swipe is_vertical={true}>
     function create_default_slot_5(ctx) {
     	let each_1_anchor;
     	let current;
-    	let each_value = /*images*/ ctx[12];
+    	let each_value = /*images*/ ctx[7];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -1738,8 +1775,8 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*images*/ 4096) {
-    				each_value = /*images*/ ctx[12];
+    			if (dirty & /*images*/ 128) {
+    				each_value = /*images*/ ctx[7];
     				validate_each_argument(each_value);
     				let i;
 
@@ -1794,14 +1831,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_5.name,
     		type: "slot",
-    		source: "(146:8) <Swipe is_vertical={true} >",
+    		source: "(166:8) <Swipe is_vertical={true}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (161:6) <SwipeItem>
+    // (181:6) <SwipeItem>
     function create_default_slot_4(ctx) {
     	let div;
     	let button;
@@ -1812,11 +1849,11 @@ var app = (function () {
     			div = element("div");
     			button = element("button");
     			button.textContent = "Say Hi";
-    			attr_dev(button, "class", "custom-button has-pointer-event svelte-vzf4ra");
-    			add_location(button, file$2, 162, 10, 3841);
-    			attr_dev(div, "class", "is-stack is-center svelte-vzf4ra");
+    			attr_dev(button, "class", "custom-button has-pointer-event svelte-k019lg");
+    			add_location(button, file$2, 182, 10, 4081);
+    			attr_dev(div, "class", "is-stack is-center svelte-k019lg");
     			set_style(div, "background", "teal");
-    			add_location(div, file$2, 161, 8, 3774);
+    			add_location(div, file$2, 181, 8, 4014);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -1835,14 +1872,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_4.name,
     		type: "slot",
-    		source: "(161:6) <SwipeItem>",
+    		source: "(181:6) <SwipeItem>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (167:6) <SwipeItem>
+    // (189:6) <SwipeItem>
     function create_default_slot_3(ctx) {
     	let div;
     	let button;
@@ -1853,11 +1890,11 @@ var app = (function () {
     			div = element("div");
     			button = element("button");
     			button.textContent = "Say Hi";
-    			attr_dev(button, "class", "custom-button has-pointer-event svelte-vzf4ra");
-    			add_location(button, file$2, 168, 10, 4057);
-    			attr_dev(div, "class", "is-stack is-center svelte-vzf4ra");
+    			attr_dev(button, "class", "custom-button has-pointer-event svelte-k019lg");
+    			add_location(button, file$2, 190, 10, 4321);
+    			attr_dev(div, "class", "is-stack is-center svelte-k019lg");
     			set_style(div, "background", "yellowgreen");
-    			add_location(div, file$2, 167, 8, 3983);
+    			add_location(div, file$2, 189, 8, 4247);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -1876,14 +1913,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_3.name,
     		type: "slot",
-    		source: "(167:6) <SwipeItem>",
+    		source: "(189:6) <SwipeItem>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (173:6) <SwipeItem>
+    // (197:6) <SwipeItem>
     function create_default_slot_2(ctx) {
     	let div;
     	let button;
@@ -1894,11 +1931,11 @@ var app = (function () {
     			div = element("div");
     			button = element("button");
     			button.textContent = "Say Hi";
-    			attr_dev(button, "class", "custom-button has-pointer-event svelte-vzf4ra");
-    			add_location(button, file$2, 174, 10, 4266);
-    			attr_dev(div, "class", "is-stack is-center svelte-vzf4ra");
+    			attr_dev(button, "class", "custom-button has-pointer-event svelte-k019lg");
+    			add_location(button, file$2, 198, 10, 4554);
+    			attr_dev(div, "class", "is-stack is-center svelte-k019lg");
     			set_style(div, "background", "aqua");
-    			add_location(div, file$2, 173, 8, 4199);
+    			add_location(div, file$2, 197, 8, 4487);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -1917,14 +1954,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2.name,
     		type: "slot",
-    		source: "(173:6) <SwipeItem>",
+    		source: "(197:6) <SwipeItem>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (179:6) <SwipeItem>
+    // (205:6) <SwipeItem>
     function create_default_slot_1(ctx) {
     	let div;
     	let button;
@@ -1935,11 +1972,11 @@ var app = (function () {
     			div = element("div");
     			button = element("button");
     			button.textContent = "Say Hi";
-    			attr_dev(button, "class", "custom-button has-pointer-event svelte-vzf4ra");
-    			add_location(button, file$2, 180, 10, 4481);
-    			attr_dev(div, "class", "is-stack is-center svelte-vzf4ra");
+    			attr_dev(button, "class", "custom-button has-pointer-event svelte-k019lg");
+    			add_location(button, file$2, 206, 10, 4793);
+    			attr_dev(div, "class", "is-stack is-center svelte-k019lg");
     			set_style(div, "background", "lightcoral");
-    			add_location(div, file$2, 179, 8, 4408);
+    			add_location(div, file$2, 205, 8, 4720);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -1958,14 +1995,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1.name,
     		type: "slot",
-    		source: "(179:6) <SwipeItem>",
+    		source: "(205:6) <SwipeItem>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (160:4) <Swipe>
+    // (180:4) <Swipe>
     function create_default_slot(ctx) {
     	let t0;
     	let t1;
@@ -2027,28 +2064,28 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const swipeitem0_changes = {};
 
-    			if (dirty & /*$$scope*/ 33554432) {
+    			if (dirty & /*$$scope*/ 1048576) {
     				swipeitem0_changes.$$scope = { dirty, ctx };
     			}
 
     			swipeitem0.$set(swipeitem0_changes);
     			const swipeitem1_changes = {};
 
-    			if (dirty & /*$$scope*/ 33554432) {
+    			if (dirty & /*$$scope*/ 1048576) {
     				swipeitem1_changes.$$scope = { dirty, ctx };
     			}
 
     			swipeitem1.$set(swipeitem1_changes);
     			const swipeitem2_changes = {};
 
-    			if (dirty & /*$$scope*/ 33554432) {
+    			if (dirty & /*$$scope*/ 1048576) {
     				swipeitem2_changes.$$scope = { dirty, ctx };
     			}
 
     			swipeitem2.$set(swipeitem2_changes);
     			const swipeitem3_changes = {};
 
-    			if (dirty & /*$$scope*/ 33554432) {
+    			if (dirty & /*$$scope*/ 1048576) {
     				swipeitem3_changes.$$scope = { dirty, ctx };
     			}
 
@@ -2084,7 +2121,7 @@ var app = (function () {
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(160:4) <Swipe>",
+    		source: "(180:4) <Swipe>",
     		ctx
     	});
 
@@ -2145,29 +2182,29 @@ var app = (function () {
     	let div17;
     	let current;
     	let dispose;
+    	const swipe0_spread_levels = [/*swipeConfig*/ ctx[0]];
 
     	function swipe0_active_item_binding(value) {
-    		/*swipe0_active_item_binding*/ ctx[15].call(null, value);
+    		/*swipe0_active_item_binding*/ ctx[10].call(null, value);
     	}
 
     	let swipe0_props = {
-    		showIndicators: /*showIndicators*/ ctx[1],
-    		autoplay: /*autoplay*/ ctx[0],
-    		delay: /*delay*/ ctx[5],
-    		transitionDuration: /*transitionDuration*/ ctx[6],
-    		defaultIndex: /*defaultIndex*/ ctx[7],
     		$$slots: { default: [create_default_slot_7] },
     		$$scope: { ctx }
     	};
 
-    	if (/*active_item*/ ctx[2] !== void 0) {
-    		swipe0_props.active_item = /*active_item*/ ctx[2];
+    	for (let i = 0; i < swipe0_spread_levels.length; i += 1) {
+    		swipe0_props = assign(swipe0_props, swipe0_spread_levels[i]);
+    	}
+
+    	if (/*active_item*/ ctx[1] !== void 0) {
+    		swipe0_props.active_item = /*active_item*/ ctx[1];
     	}
 
     	const swipe0 = new Swipe({ props: swipe0_props, $$inline: true });
     	binding_callbacks.push(() => bind(swipe0, "active_item", swipe0_active_item_binding));
-    	/*swipe0_binding*/ ctx[16](swipe0);
-    	let if_block = /*customThumbnail*/ ctx[3] && create_if_block$1(ctx);
+    	/*swipe0_binding*/ ctx[11](swipe0);
+    	let if_block = /*customThumbnail*/ ctx[2] && create_if_block$1(ctx);
 
     	const swipe1 = new Swipe({
     			props: {
@@ -2249,78 +2286,78 @@ var app = (function () {
     			create_component(swipe2.$$.fragment);
     			t24 = space();
     			div17 = element("div");
-    			attr_dev(h1, "class", "text-muted svelte-vzf4ra");
-    			add_location(h1, file$2, 86, 6, 1344);
-    			attr_dev(p0, "class", "text-muted svelte-vzf4ra");
-    			add_location(p0, file$2, 87, 6, 1391);
-    			attr_dev(div0, "class", "col svelte-vzf4ra");
-    			add_location(div0, file$2, 85, 4, 1320);
-    			attr_dev(div1, "class", "row svelte-vzf4ra");
+    			attr_dev(h1, "class", "text-muted svelte-k019lg");
+    			add_location(h1, file$2, 85, 6, 1357);
+    			attr_dev(p0, "class", "text-muted svelte-k019lg");
+    			add_location(p0, file$2, 86, 6, 1404);
+    			attr_dev(div0, "class", "col svelte-k019lg");
+    			add_location(div0, file$2, 84, 4, 1333);
+    			attr_dev(div1, "class", "row svelte-k019lg");
     			set_style(div1, "margin-top", "20px");
-    			add_location(div1, file$2, 84, 2, 1274);
-    			attr_dev(input0, "class", "form-check-input svelte-vzf4ra");
+    			add_location(div1, file$2, 83, 2, 1287);
+    			attr_dev(input0, "class", "form-check-input svelte-k019lg");
     			attr_dev(input0, "type", "checkbox");
-    			add_location(input0, file$2, 93, 6, 1588);
-    			attr_dev(label0, "class", "text-muted svelte-vzf4ra");
-    			add_location(label0, file$2, 94, 6, 1674);
-    			attr_dev(div2, "class", "form-check form-check-inline float-right svelte-vzf4ra");
-    			add_location(div2, file$2, 92, 4, 1527);
-    			attr_dev(input1, "class", "form-check-input svelte-vzf4ra");
+    			add_location(input0, file$2, 92, 8, 1605);
+    			attr_dev(label0, "class", "text-muted svelte-k019lg");
+    			add_location(label0, file$2, 96, 8, 1736);
+    			attr_dev(div2, "class", "form-check form-check-inline float-right svelte-k019lg");
+    			add_location(div2, file$2, 91, 6, 1542);
+    			attr_dev(input1, "class", "form-check-input svelte-k019lg");
     			attr_dev(input1, "type", "checkbox");
-    			add_location(input1, file$2, 99, 6, 1820);
-    			attr_dev(label1, "class", "text-muted svelte-vzf4ra");
-    			add_location(label1, file$2, 100, 6, 1907);
-    			attr_dev(div3, "class", "form-check form-check-inline float-right svelte-vzf4ra");
-    			add_location(div3, file$2, 98, 4, 1759);
-    			attr_dev(div4, "class", "col svelte-vzf4ra");
-    			add_location(div4, file$2, 91, 4, 1505);
-    			attr_dev(div5, "class", "row svelte-vzf4ra");
-    			add_location(div5, file$2, 90, 2, 1483);
-    			attr_dev(div6, "class", "swipe-holder svelte-vzf4ra");
-    			add_location(div6, file$2, 108, 6, 2053);
-    			attr_dev(div7, "class", "col svelte-vzf4ra");
-    			add_location(div7, file$2, 107, 4, 2029);
-    			attr_dev(div8, "class", "row svelte-vzf4ra");
-    			add_location(div8, file$2, 106, 2, 2007);
-    			attr_dev(input2, "class", "btn btn-info btn-sm svelte-vzf4ra");
+    			add_location(input1, file$2, 99, 8, 1872);
+    			attr_dev(label1, "class", "text-muted svelte-k019lg");
+    			add_location(label1, file$2, 103, 8, 1992);
+    			attr_dev(div3, "class", "form-check form-check-inline float-right svelte-k019lg");
+    			add_location(div3, file$2, 98, 6, 1809);
+    			attr_dev(div4, "class", "col svelte-k019lg");
+    			add_location(div4, file$2, 90, 4, 1518);
+    			attr_dev(div5, "class", "row svelte-k019lg");
+    			add_location(div5, file$2, 89, 2, 1496);
+    			attr_dev(div6, "class", "swipe-holder svelte-k019lg");
+    			add_location(div6, file$2, 109, 6, 2124);
+    			attr_dev(div7, "class", "col svelte-k019lg");
+    			add_location(div7, file$2, 108, 4, 2100);
+    			attr_dev(div8, "class", "row svelte-k019lg");
+    			add_location(div8, file$2, 107, 2, 2078);
+    			attr_dev(input2, "class", "btn btn-info btn-sm svelte-k019lg");
     			attr_dev(input2, "type", "button");
-    			input2.value = input2_value_value = /*autoplay*/ ctx[0] ? "Stop" : "Play";
-    			add_location(input2, file$2, 121, 6, 2487);
-    			attr_dev(div9, "class", "col svelte-vzf4ra");
-    			add_location(div9, file$2, 120, 4, 2463);
+    			input2.value = input2_value_value = /*swipeConfig*/ ctx[0].autoplay ? "Stop" : "Play";
+    			add_location(input2, file$2, 122, 6, 2505);
+    			attr_dev(div9, "class", "col svelte-k019lg");
+    			add_location(div9, file$2, 121, 4, 2481);
     			attr_dev(button0, "type", "button");
-    			attr_dev(button0, "class", "btn btn-secondary btn-sm svelte-vzf4ra");
-    			add_location(button0, file$2, 134, 8, 3031);
+    			attr_dev(button0, "class", "btn btn-secondary btn-sm svelte-k019lg");
+    			add_location(button0, file$2, 144, 8, 3168);
     			attr_dev(button1, "type", "button");
-    			attr_dev(button1, "class", "btn btn-secondary btn-sm svelte-vzf4ra");
-    			add_location(button1, file$2, 135, 8, 3129);
-    			attr_dev(div10, "class", "btn-group float-right svelte-vzf4ra");
-    			add_location(div10, file$2, 133, 6, 2987);
-    			attr_dev(div11, "class", "col svelte-vzf4ra");
-    			add_location(div11, file$2, 132, 4, 2963);
-    			attr_dev(div12, "class", "row svelte-vzf4ra");
+    			attr_dev(button1, "class", "btn btn-secondary btn-sm svelte-k019lg");
+    			add_location(button1, file$2, 150, 8, 3316);
+    			attr_dev(div10, "class", "btn-group float-right svelte-k019lg");
+    			add_location(div10, file$2, 143, 6, 3124);
+    			attr_dev(div11, "class", "col svelte-k019lg");
+    			add_location(div11, file$2, 142, 4, 3100);
+    			attr_dev(div12, "class", "row svelte-k019lg");
     			set_style(div12, "margin-top", "10px");
-    			add_location(div12, file$2, 119, 2, 2417);
-    			attr_dev(hr0, "class", "svelte-vzf4ra");
-    			add_location(hr0, file$2, 140, 4, 3257);
-    			attr_dev(p1, "class", "text-muted svelte-vzf4ra");
-    			add_location(p1, file$2, 141, 2, 3264);
-    			attr_dev(div13, "class", "swipe-holder svelte-vzf4ra");
-    			add_location(div13, file$2, 144, 6, 3356);
-    			attr_dev(div14, "class", "col svelte-vzf4ra");
-    			add_location(div14, file$2, 143, 4, 3332);
-    			attr_dev(div15, "class", "row svelte-vzf4ra");
-    			add_location(div15, file$2, 142, 2, 3310);
-    			attr_dev(hr1, "class", "svelte-vzf4ra");
-    			add_location(hr1, file$2, 156, 2, 3630);
-    			attr_dev(p2, "class", "text-muted svelte-vzf4ra");
-    			add_location(p2, file$2, 157, 2, 3637);
-    			attr_dev(div16, "class", "swipe-holder svelte-vzf4ra");
-    			add_location(div16, file$2, 158, 2, 3709);
-    			attr_dev(div17, "class", "row mt-3 svelte-vzf4ra");
-    			add_location(div17, file$2, 186, 2, 4621);
-    			attr_dev(div18, "class", "container svelte-vzf4ra");
-    			add_location(div18, file$2, 82, 0, 1246);
+    			add_location(div12, file$2, 120, 2, 2435);
+    			attr_dev(hr0, "class", "svelte-k019lg");
+    			add_location(hr0, file$2, 160, 2, 3492);
+    			attr_dev(p1, "class", "text-muted svelte-k019lg");
+    			add_location(p1, file$2, 161, 2, 3501);
+    			attr_dev(div13, "class", "swipe-holder svelte-k019lg");
+    			add_location(div13, file$2, 164, 6, 3593);
+    			attr_dev(div14, "class", "col svelte-k019lg");
+    			add_location(div14, file$2, 163, 4, 3569);
+    			attr_dev(div15, "class", "row svelte-k019lg");
+    			add_location(div15, file$2, 162, 2, 3547);
+    			attr_dev(hr1, "class", "svelte-k019lg");
+    			add_location(hr1, file$2, 176, 2, 3868);
+    			attr_dev(p2, "class", "text-muted svelte-k019lg");
+    			add_location(p2, file$2, 177, 2, 3877);
+    			attr_dev(div16, "class", "swipe-holder svelte-k019lg");
+    			add_location(div16, file$2, 178, 2, 3949);
+    			attr_dev(div17, "class", "row mt-3 svelte-k019lg");
+    			add_location(div17, file$2, 214, 2, 4957);
+    			attr_dev(div18, "class", "container svelte-k019lg");
+    			add_location(div18, file$2, 81, 0, 1260);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2337,13 +2374,13 @@ var app = (function () {
     			append_dev(div5, div4);
     			append_dev(div4, div2);
     			append_dev(div2, input0);
-    			input0.checked = /*showIndicators*/ ctx[1];
+    			input0.checked = /*swipeConfig*/ ctx[0].showIndicators;
     			append_dev(div2, t4);
     			append_dev(div2, label0);
     			append_dev(div4, t6);
     			append_dev(div4, div3);
     			append_dev(div3, input1);
-    			input1.checked = /*customThumbnail*/ ctx[3];
+    			input1.checked = /*customThumbnail*/ ctx[2];
     			append_dev(div3, t7);
     			append_dev(div3, label1);
     			append_dev(div18, t9);
@@ -2385,43 +2422,43 @@ var app = (function () {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(input0, "change", /*input0_change_handler*/ ctx[13]),
-    				listen_dev(input1, "change", /*input1_change_handler*/ ctx[14]),
-    				listen_dev(input2, "click", /*toggle*/ ctx[8], false, false, false),
-    				listen_dev(button0, "click", /*prevSlide*/ ctx[10], false, false, false),
-    				listen_dev(button1, "click", /*nextSlide*/ ctx[9], false, false, false)
+    				listen_dev(input0, "change", /*input0_change_handler*/ ctx[8]),
+    				listen_dev(input1, "change", /*input1_change_handler*/ ctx[9]),
+    				listen_dev(input2, "click", toggle, false, false, false),
+    				listen_dev(button0, "click", /*prevSlide*/ ctx[5], false, false, false),
+    				listen_dev(button1, "click", /*nextSlide*/ ctx[4], false, false, false)
     			];
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*showIndicators*/ 2) {
-    				input0.checked = /*showIndicators*/ ctx[1];
+    			if (dirty & /*swipeConfig*/ 1) {
+    				input0.checked = /*swipeConfig*/ ctx[0].showIndicators;
     			}
 
-    			if (dirty & /*customThumbnail*/ 8) {
-    				input1.checked = /*customThumbnail*/ ctx[3];
+    			if (dirty & /*customThumbnail*/ 4) {
+    				input1.checked = /*customThumbnail*/ ctx[2];
     			}
 
-    			const swipe0_changes = {};
-    			if (dirty & /*showIndicators*/ 2) swipe0_changes.showIndicators = /*showIndicators*/ ctx[1];
-    			if (dirty & /*autoplay*/ 1) swipe0_changes.autoplay = /*autoplay*/ ctx[0];
+    			const swipe0_changes = (dirty & /*swipeConfig*/ 1)
+    			? get_spread_update(swipe0_spread_levels, [get_spread_object(/*swipeConfig*/ ctx[0])])
+    			: {};
 
-    			if (dirty & /*$$scope*/ 33554432) {
+    			if (dirty & /*$$scope*/ 1048576) {
     				swipe0_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_active_item && dirty & /*active_item*/ 4) {
+    			if (!updating_active_item && dirty & /*active_item*/ 2) {
     				updating_active_item = true;
-    				swipe0_changes.active_item = /*active_item*/ ctx[2];
+    				swipe0_changes.active_item = /*active_item*/ ctx[1];
     				add_flush_callback(() => updating_active_item = false);
     			}
 
     			swipe0.$set(swipe0_changes);
 
-    			if (!current || dirty & /*autoplay*/ 1 && input2_value_value !== (input2_value_value = /*autoplay*/ ctx[0] ? "Stop" : "Play")) {
+    			if (!current || dirty & /*swipeConfig*/ 1 && input2_value_value !== (input2_value_value = /*swipeConfig*/ ctx[0].autoplay ? "Stop" : "Play")) {
     				prop_dev(input2, "value", input2_value_value);
     			}
 
-    			if (/*customThumbnail*/ ctx[3]) {
+    			if (/*customThumbnail*/ ctx[2]) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
@@ -2436,14 +2473,14 @@ var app = (function () {
 
     			const swipe1_changes = {};
 
-    			if (dirty & /*$$scope*/ 33554432) {
+    			if (dirty & /*$$scope*/ 1048576) {
     				swipe1_changes.$$scope = { dirty, ctx };
     			}
 
     			swipe1.$set(swipe1_changes);
     			const swipe2_changes = {};
 
-    			if (dirty & /*$$scope*/ 33554432) {
+    			if (dirty & /*$$scope*/ 1048576) {
     				swipe2_changes.$$scope = { dirty, ctx };
     			}
 
@@ -2464,7 +2501,7 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div18);
-    			/*swipe0_binding*/ ctx[16](null);
+    			/*swipe0_binding*/ ctx[11](null);
     			destroy_component(swipe0);
     			if (if_block) if_block.d();
     			destroy_component(swipe1);
@@ -2484,23 +2521,25 @@ var app = (function () {
     	return block;
     }
 
+    function toggle() {
+    	autoplay = !autoplay;
+    }
+
     function sayHi() {
     	alert("Hi");
     }
 
     function instance$2($$self, $$props, $$invalidate) {
-    	let autoplay = false;
-    	let delay = 2000;
-    	let showIndicators = false;
-    	let transitionDuration = 200;
-    	let defaultIndex = 0;
+    	const swipeConfig = {
+    		autoplay: false,
+    		showIndicators: false,
+    		transitionDuration: 200,
+    		defaultIndex: 0
+    	};
+
     	let active_item = 0; //readonly
     	let customThumbnail = false;
     	let SwipeComp;
-
-    	function toggle() {
-    		$$invalidate(0, autoplay = !autoplay);
-    	}
 
     	function nextSlide() {
     		SwipeComp.nextItem();
@@ -2525,23 +2564,23 @@ var app = (function () {
     	validate_slots("App", $$slots, []);
 
     	function input0_change_handler() {
-    		showIndicators = this.checked;
-    		$$invalidate(1, showIndicators);
+    		swipeConfig.showIndicators = this.checked;
+    		$$invalidate(0, swipeConfig);
     	}
 
     	function input1_change_handler() {
     		customThumbnail = this.checked;
-    		$$invalidate(3, customThumbnail);
+    		$$invalidate(2, customThumbnail);
     	}
 
     	function swipe0_active_item_binding(value) {
     		active_item = value;
-    		$$invalidate(2, active_item);
+    		$$invalidate(1, active_item);
     	}
 
     	function swipe0_binding($$value) {
     		binding_callbacks[$$value ? "unshift" : "push"](() => {
-    			$$invalidate(4, SwipeComp = $$value);
+    			$$invalidate(3, SwipeComp = $$value);
     		});
     	}
 
@@ -2550,11 +2589,7 @@ var app = (function () {
     	$$self.$capture_state = () => ({
     		Swipe,
     		SwipeItem,
-    		autoplay,
-    		delay,
-    		showIndicators,
-    		transitionDuration,
-    		defaultIndex,
+    		swipeConfig,
     		active_item,
     		customThumbnail,
     		SwipeComp,
@@ -2567,15 +2602,10 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("autoplay" in $$props) $$invalidate(0, autoplay = $$props.autoplay);
-    		if ("delay" in $$props) $$invalidate(5, delay = $$props.delay);
-    		if ("showIndicators" in $$props) $$invalidate(1, showIndicators = $$props.showIndicators);
-    		if ("transitionDuration" in $$props) $$invalidate(6, transitionDuration = $$props.transitionDuration);
-    		if ("defaultIndex" in $$props) $$invalidate(7, defaultIndex = $$props.defaultIndex);
-    		if ("active_item" in $$props) $$invalidate(2, active_item = $$props.active_item);
-    		if ("customThumbnail" in $$props) $$invalidate(3, customThumbnail = $$props.customThumbnail);
-    		if ("SwipeComp" in $$props) $$invalidate(4, SwipeComp = $$props.SwipeComp);
-    		if ("images" in $$props) $$invalidate(12, images = $$props.images);
+    		if ("active_item" in $$props) $$invalidate(1, active_item = $$props.active_item);
+    		if ("customThumbnail" in $$props) $$invalidate(2, customThumbnail = $$props.customThumbnail);
+    		if ("SwipeComp" in $$props) $$invalidate(3, SwipeComp = $$props.SwipeComp);
+    		if ("images" in $$props) $$invalidate(7, images = $$props.images);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -2583,15 +2613,10 @@ var app = (function () {
     	}
 
     	return [
-    		autoplay,
-    		showIndicators,
+    		swipeConfig,
     		active_item,
     		customThumbnail,
     		SwipeComp,
-    		delay,
-    		transitionDuration,
-    		defaultIndex,
-    		toggle,
     		nextSlide,
     		prevSlide,
     		changeSlide,
