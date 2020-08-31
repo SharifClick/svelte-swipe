@@ -47,21 +47,18 @@
   }
 
   // helpers
-  function addWindowEvents() {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('mousemove', onMove);
-      window.addEventListener('mouseup', onEnd);
-      window.addEventListener('touchmove', onMove);
-      window.addEventListener('touchend', onEnd);
-    }
-  }
 
-  function freeWindowEvents() {
+
+  function eventDelegate(type) {
+    let delegationTypes = {
+      add: 'addEventListener',
+      remove: 'removeEventListener'
+    };
     if (typeof window !== 'undefined') {
-      window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mouseup', onEnd);
-      window.removeEventListener('touchmove', onMove);
-      window.removeEventListener('touchend', onEnd);
+      window[delegationTypes[type]]('mousemove', onMove);
+      window[delegationTypes[type]]('mouseup', onEnd);
+      window[delegationTypes[type]]('touchmove', onMove);
+      window[delegationTypes[type]]('touchend', onEnd);
     }
   }
 
@@ -131,7 +128,7 @@
     if (touch_active) {
       normalizeEventBehavior(e)
 
-
+      console.log('moving')
       let max = availableSpace;
 
       let _axis = getTouchingPos(e);
@@ -152,11 +149,21 @@
     }
   }
 
+  function onMoveStart(e){
+    normalizeEventBehavior(e);
+
+    let max = availableSpace;
+
+    touch_active = true;
+    axis = getTouchingPos(e);
+    eventDelegate('add');
+  }
+
   function onEnd(e) {
     normalizeEventBehavior(e)
 
     let max = availableSpace;
-
+    console.log('end')
     touch_active = false;
     axis = null;
 
@@ -180,18 +187,9 @@
       swipableItems[i].style.cssText = touchend_css.replace(template, _value).replace(template, _value);
     }
     active_item = activeIndicator;
-    free_window_events();
+    eventDelegate('remove');
   }
 
-  function onMoveStart(e){
-    normalizeEventBehavior(e);
-
-    let max = availableSpace;
-
-    touch_active = true;
-    axis = het;
-    add_window_events();
-  }
 
   function changeItem(item) {
     let max = availableSpace;
