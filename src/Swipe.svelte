@@ -21,8 +21,6 @@
     availableDifference = 0,
     swipeWrapper,
     swipeHandler,
-
-    min = 0,
     pos_axis = 0,
     page_axis = is_vertical ? 'pageY' : 'pageX',
     dir = 0,
@@ -72,8 +70,12 @@
    return  e.touches ? e.touches[0][page_axis] : e[page_axis]
   }
 
+  function generateTranslateValue(value){
+    return  is_vertical ? `translate3d(0, ${value}px, 0)` : `translate3d(${value}px, 0, 0)`;
+  }
+
   function generateTouchPosCss(value, touch_end = false){
-    let transformString = is_vertical ? `translate3d(0, ${value}px, 0)` : `translate3d(${value}px, 0, 0)`;
+    let transformString = generateTranslateValue(value);
     let _css = `
       -webkit-transition-duration: ${touch_end ? transitionDuration : '0'}ms;
       transition-duration: ${touch_end ? transitionDuration : '0'}ms;
@@ -82,16 +84,15 @@
     return _css;
   }
 
+
   function update(){
     swipeHandler.style.top = topClearence + 'px';
     let {offsetWidth, offsetHeight} = swipeWrapper.querySelector('.swipeable-items');
     availableSpace = is_vertical ? offsetHeight : offsetWidth;
-    for (let i = 0; i < items; i++) {
-      let _transformValue = (availableSpace * i)+'px';
-      let _transformString = is_vertical ? `translate3d(0, ${_transformValue}, 0)` :`translate3d(${_transformValue}, 0, 0)`;
-      swipableItems[i].style.transform = _transformString;
-    }
-   availableDifference = 0;
+     [...swipableItems].forEach((element, i) => {
+      element.style.transform = generateTranslateValue(availableSpace * i);
+    });
+    availableDifference = 0;
     if(defaultIndex){
       changeItem(defaultIndex);
     }
@@ -133,7 +134,7 @@
       let _diff = (axis - _axis) + pos_axis;
       let dir = _axis > axis ? 0 : 1;
       if (!dir) { _diff = pos_axis - (_axis - axis) }
-      if (_diff <= (max * (items - 1)) && _diff >= min) {
+      if (_diff <= (max * (items - 1)) && _diff >= 0) {
 
       [...swipableItems].forEach((element, i) => {
         element.style.cssText = generateTouchPosCss((max * i) - _diff);
