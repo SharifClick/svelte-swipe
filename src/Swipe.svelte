@@ -99,10 +99,9 @@
 
   touch_active = false;
 
-  function moveHandler(e){
+  function onMove(e){
     if (touch_active) {
-      e.stopImmediatePropagation();
-      e.stopPropagation();
+      normalizeEventBehavior(e)
 
 
       let max = availableSpace;
@@ -125,10 +124,8 @@
     }
   }
 
-  function endHandler(e) {
-    e && e.stopImmediatePropagation();
-    e && e.stopPropagation();
-    e && e.preventDefault();
+  function onEnd(e) {
+    normalizeEventBehavior(e)
 
     let max = availableSpace;
 
@@ -158,10 +155,8 @@
     free_window_events();
   }
 
-  function moveStart(e){
-    e.stopImmediatePropagation();
-    e.stopPropagation();
-    e.preventDefault();
+  function onMoveStart(e){
+    normalizeEventBehavior(e);
 
     let max = availableSpace;
 
@@ -174,7 +169,7 @@
     let max = availableSpace;
     diff = max * item;
     activeIndicator = item;
-    endHandler();
+    onEnd();
   }
 
   function changeView() {
@@ -196,22 +191,28 @@
     goTo(step)
   }
 
-  export function add_window_events() {
+  export function addWindowEvents() {
     if (typeof window !== 'undefined') {
-      window.addEventListener('mousemove', moveHandler);
-      window.addEventListener('mouseup', endHandler);
-      window.addEventListener('touchmove', moveHandler);
-      window.addEventListener('touchend', endHandler);
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onEnd);
+      window.addEventListener('touchmove', onMove);
+      window.addEventListener('touchend', onEnd);
     }
   }
 
-  export function free_window_events() {
+  export function freeWindowEvents() {
     if (typeof window !== 'undefined') {
-      window.removeEventListener('mousemove', moveHandler);
-      window.removeEventListener('mouseup', endHandler);
-      window.removeEventListener('touchmove', moveHandler);
-      window.removeEventListener('touchend', endHandler);
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onEnd);
+      window.removeEventListener('touchmove', onMove);
+      window.removeEventListener('touchend', onEnd);
     }
+  }
+
+   export function normalizeEventBehavior(e) {
+    e && e.stopImmediatePropagation();
+    e && e.stopPropagation();
+    e && e.preventDefault();
   }
 </script>
 
@@ -279,7 +280,7 @@
       </div>
     </div>
   </div>
-  <div class="swipe-handler" bind:this={swipeHandler} on:touchstart={moveStart} on:mousedown={moveStart}></div>
+  <div class="swipe-handler" bind:this={swipeHandler} on:touchstart={onMoveStart} on:mousedown={onMoveStart}></div>
    {#if showIndicators}
      <div class="swipe-indicator swipe-indicator-inside">
         {#each indicators as x, i }
