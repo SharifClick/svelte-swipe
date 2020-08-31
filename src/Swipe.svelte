@@ -17,27 +17,12 @@
     items = 0,
     availableSpace = 0,
     topClearence = 0,
-    elems,
+    swipableItems,
     diff = 0,
     swipeWrapper,
     swipeHandler,
 
     min = 0,
-    transformString = is_vertical ? 'translate3d(0, -{{val}}px, 0)' : 'translate3d(-{{val}}px, 0, 0)',
-
-    touchingTpl = `
-    -webkit-transition-duration: 0s;
-    transition-duration: 0s;
-    -webkit-transform: ${transformString};
-    -ms-transform: ${transformString};`,
-
-    non_touchingTpl = `
-    -webkit-transition-duration: ${transitionDuration}ms;
-    transition-duration: ${transitionDuration}ms;
-    -webkit-transform: ${transformString};
-    -ms-transform: ${transformString};`,
-
-    touching = false,
     pos_axis = 0,
     page_axis = is_vertical ? 'pageY' : 'pageX',
     dir = 0,
@@ -69,7 +54,7 @@
     for (let i = 0; i < items; i++) {
       let _transformValue = (availableSpace * i)+'px';
       let _transformString = is_vertical ? `translate3d(0, ${_transformValue}, 0)` :`translate3d(${_transformValue}, 0, 0)`;
-      elems[i].style.transform = _transformString;
+      swipableItems[i].style.transform = _transformString;
     }
     diff = 0;
     if(defaultIndex){
@@ -78,8 +63,8 @@
   }
 
   function init(){
-    elems = swipeWrapper.querySelectorAll('.swipeable-item');
-    items = elems.length;
+    swipableItems = swipeWrapper.querySelectorAll('.swipeable-item');
+    items = swipableItems.length;
     update();
   }
 
@@ -98,8 +83,24 @@
     }
   })
 
+  let transformString = is_vertical ? 'translate3d(0, -{{val}}px, 0)' : 'translate3d(-{{val}}px, 0, 0)',
+
+  touchmove_css = `
+  -webkit-transition-duration: 0s;
+  transition-duration: 0s;
+  -webkit-transform: ${transformString};
+  -ms-transform: ${transformString};`,
+
+  touchend_css = `
+  -webkit-transition-duration: ${transitionDuration}ms;
+  transition-duration: ${transitionDuration}ms;
+  -webkit-transform: ${transformString};
+  -ms-transform: ${transformString};`,
+
+  touch_active = false;
+
   function moveHandler(e){
-    if (touching) {
+    if (touch_active) {
       e.stopImmediatePropagation();
       e.stopPropagation();
 
@@ -115,7 +116,7 @@
         for (let i = 0; i < items; i++) {
           let template = i < 0 ? '{{val}}' : '-{{val}}';
           let _value = (max * i) - _diff;
-          elems[i].style.cssText = touchingTpl.replace(template, _value).replace(template, _value);
+          swipableItems[i].style.cssText = touchmove_css.replace(template, _value).replace(template, _value);
         }
 
         diff = _diff;
@@ -131,7 +132,7 @@
 
     let max = availableSpace;
 
-    touching = false;
+    touch_active = false;
     axis = null;
 
 
@@ -151,7 +152,7 @@
     for (let i = 0; i < items; i++) {
       let template = i < 0 ? '{{val}}' : '-{{val}}';
       let _value = (max * i) - pos_axis;
-      elems[i].style.cssText = non_touchingTpl.replace(template, _value).replace(template, _value);
+      swipableItems[i].style.cssText = touchend_css.replace(template, _value).replace(template, _value);
     }
     active_item = activeIndicator;
     if (typeof window !== 'undefined') {
@@ -169,7 +170,7 @@
 
     let max = availableSpace;
 
-    touching = true;
+    touch_active = true;
     axis = e.touches ? e.touches[0][page_axis] : e[page_axis];
     if (typeof window !== 'undefined') {
       window.addEventListener('mousemove', moveHandler);
