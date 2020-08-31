@@ -14,11 +14,12 @@
 
   let activeIndicator = 0,
     indicators,
-    items = 0,
+    total_elements = 0,
     availableSpace = 0,
+    availableWidth = 0,
     topClearence = 0,
-    swipableItems,
-    availableDifference = 0,
+    swipeElements,
+    availableDistance = 0,
     swipeWrapper,
     swipeHandler,
     pos_axis = 0,
@@ -31,7 +32,28 @@
   let played = defaultIndex || 0;
   let run_interval = false;
 
-  $: indicators = Array(items);
+  function init(){
+    swipeElements = swipeWrapper.querySelectorAll('.swipeable-item');
+    total_elements = swipeElements.length;
+    update();
+  }
+
+  function update(){
+    swipeHandler.style.top = topClearence + 'px';
+    let {offsetWidth, offsetHeight} = swipeWrapper.querySelector('.swipeable-total_elements');
+    availableSpace = is_vertical ? offsetHeight : offsetWidth;
+     [...swipeElements].forEach((element, i) => {
+      element.style.transform = generateTranslateValue(availableSpace * i);
+    });
+    availableDistance = 0;
+    availableWidth = availableSpace * (total_elements - 1)
+    if(defaultIndex){
+      changeItem(defaultIndex);
+    }
+  }
+
+
+  $: indicators = Array(total_elements);
 
   $: {
     if(autoplay && !run_interval){
@@ -45,8 +67,6 @@
   }
 
   // helpers
-
-
   function eventDelegate(type) {
     let delegationTypes = {
       add: 'addEventListener',
@@ -85,25 +105,6 @@
   }
 
 
-  function update(){
-    swipeHandler.style.top = topClearence + 'px';
-    let {offsetWidth, offsetHeight} = swipeWrapper.querySelector('.swipeable-items');
-    availableSpace = is_vertical ? offsetHeight : offsetWidth;
-     [...swipableItems].forEach((element, i) => {
-      element.style.transform = generateTranslateValue(availableSpace * i);
-    });
-    availableDifference = 0;
-    if(defaultIndex){
-      changeItem(defaultIndex);
-    }
-  }
-
-  function init(){
-    swipableItems = swipeWrapper.querySelectorAll('.swipeable-item');
-    items = swipableItems.length;
-    update();
-  }
-
   onMount(() => {
     init();
     if (typeof window !== 'undefined') {
@@ -121,36 +122,27 @@
 
 
 
-  let  touch_active = false;
+  let touch_active = false;
 
   function onMove(e){
     if (touch_active) {
       normalizeEventBehavior(e)
 
       console.log('moving')
-      let max = availableSpace;
+      let _axis = getTouchingPos(e),
+        distance = (axis - _axis) + pos_axis;
 
-      let _axis = getTouchingPos(e);
-      let _diff = (axis - _axis) + pos_axis;
-      let dir = _axis > axis ? 0 : 1;
-      if (!dir) { _diff = pos_axis - (_axis - axis) }
-      if (_diff <= (max * (items - 1)) && _diff >= 0) {
-
-      [...swipableItems].forEach((element, i) => {
-        element.style.cssText = generateTouchPosCss((max * i) - _diff);
-      });
-
-       availableDifference = _diff;
+      if (distance <= availableWidth && distance >= 0) {
+        [...swipeElements].forEach((element, i) => {
+          element.style.cssText = generateTouchPosCss((availableSpace * i) - distance);
+        });
+        availableDistance = distance;
       }
-
     }
   }
 
   function onMoveStart(e){
     normalizeEventBehavior(e);
-
-    let max = availableSpace;
-
     touch_active = true;
     axis = getTouchingPos(e);
     eventDelegate('add');
@@ -167,19 +159,19 @@
 
 
     let swipe_threshold = 0.85;
-    let d_max = (availableDifference / max);
+    let d_max = (availableDistance / max);
     let _target = Math.round(d_max);
 
     if(Math.abs(_target - d_max) < swipe_threshold ){
-     availableDifference = _target * max;
+     availableDistance = _target * max;
     }else{
-     availableDifference = (dir ? (_target - 1) : (_target + 1)) * max;
+     availableDistance = (dir ? (_target - 1) : (_target + 1)) * max;
     }
 
-    pos_axis = availableDifference;
-    activeIndicator = (availableDifference / max);
+    pos_axis = availableDistance;
+    activeIndicator = (availableDistance / max);
 
-    [...swipableItems].forEach((element, i) => {
+    [...swipeElements].forEach((element, i) => {
       element.style.cssText = generateTouchPosCss((max * i) - pos_axis, true);
     });
 
@@ -190,14 +182,14 @@
 
   function changeItem(item) {
     let max = availableSpace;
-    availableDifference = max * item;
+    availableDistance = max * item;
     activeIndicator = item;
     onEnd();
   }
 
   function changeView() {
     changeItem(played);
-    played = played < (items - 1) ? ++played : 0;
+    played = played < (total_elements - 1) ? ++played : 0;
   }
 
   export function goTo(step) {
@@ -230,7 +222,7 @@
   pointer-events: none;
 }
 
-.swipeable-items,
+.swipeable-total_elements,
 .swipeable-slot-wrapper {
   position: relative;
   width: inherit;
@@ -273,7 +265,7 @@
 </style>
 <div class="swipe-panel">
   <div class="swipe-item-wrapper" bind:this={swipeWrapper}>
-    <div class="swipeable-items">
+    <div class="swipeable-total_elements">
       <div class="swipeable-slot-wrapper">
         <slot />
       </div>
