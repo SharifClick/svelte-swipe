@@ -18,7 +18,7 @@
     availableSpace = 0,
     topClearence = 0,
     swipableItems,
-    diff = 0,
+    availableDifference = 0,
     swipeWrapper,
     swipeHandler,
 
@@ -46,6 +46,34 @@
     }
   }
 
+  // helpers
+  function addWindowEvents() {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onEnd);
+      window.addEventListener('touchmove', onMove);
+      window.addEventListener('touchend', onEnd);
+    }
+  }
+
+  function freeWindowEvents() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onEnd);
+      window.removeEventListener('touchmove', onMove);
+      window.removeEventListener('touchend', onEnd);
+    }
+  }
+
+  function normalizeEventBehavior(e) {
+    e && e.stopImmediatePropagation();
+    e && e.stopPropagation();
+    e && e.preventDefault();
+  }
+
+  function getTouchingPos(e){
+   return  e.touches ? e.touches[0][page_axis] : e[page_axis]
+  }
 
   function update(){
     swipeHandler.style.top = topClearence + 'px';
@@ -56,7 +84,7 @@
       let _transformString = is_vertical ? `translate3d(0, ${_transformValue}, 0)` :`translate3d(${_transformValue}, 0, 0)`;
       swipableItems[i].style.transform = _transformString;
     }
-    diff = 0;
+   availableDifference = 0;
     if(defaultIndex){
       changeItem(defaultIndex);
     }
@@ -86,16 +114,16 @@
   let transformString = is_vertical ? 'translate3d(0, -{{val}}px, 0)' : 'translate3d(-{{val}}px, 0, 0)',
 
   touchmove_css = `
-  -webkit-transition-duration: 0s;
-  transition-duration: 0s;
-  -webkit-transform: ${transformString};
-  -ms-transform: ${transformString};`,
+    -webkit-transition-duration: 0s;
+    transition-duration: 0s;
+    -webkit-transform: ${transformString};
+    -ms-transform: ${transformString};`,
 
   touchend_css = `
-  -webkit-transition-duration: ${transitionDuration}ms;
-  transition-duration: ${transitionDuration}ms;
-  -webkit-transform: ${transformString};
-  -ms-transform: ${transformString};`,
+    -webkit-transition-duration: ${transitionDuration}ms;
+    transition-duration: ${transitionDuration}ms;
+    -webkit-transform: ${transformString};
+    -ms-transform: ${transformString};`,
 
   touch_active = false;
 
@@ -106,7 +134,7 @@
 
       let max = availableSpace;
 
-      let _axis = e.touches ? e.touches[0][page_axis] : e[page_axis];
+      let _axis = getTouchingPos(e);
       let _diff = (axis - _axis) + pos_axis;
       let dir = _axis > axis ? 0 : 1;
       if (!dir) { _diff = pos_axis - (_axis - axis) }
@@ -118,7 +146,7 @@
           swipableItems[i].style.cssText = touchmove_css.replace(template, _value).replace(template, _value);
         }
 
-        diff = _diff;
+       availableDifference = _diff;
       }
 
     }
@@ -135,17 +163,17 @@
 
 
     let swipe_threshold = 0.85;
-    let d_max = (diff / max);
+    let d_max = (availableDifference / max);
     let _target = Math.round(d_max);
 
     if(Math.abs(_target - d_max) < swipe_threshold ){
-      diff = _target * max;
+     availableDifference = _target * max;
     }else{
-      diff = (dir ? (_target - 1) : (_target + 1)) * max;
+     availableDifference = (dir ? (_target - 1) : (_target + 1)) * max;
     }
 
-    pos_axis = diff;
-    activeIndicator = (diff / max);
+    pos_axis = availableDifference;
+    activeIndicator = (availableDifference / max);
     for (let i = 0; i < items; i++) {
       let template = i < 0 ? '{{val}}' : '-{{val}}';
       let _value = (max * i) - pos_axis;
@@ -161,13 +189,13 @@
     let max = availableSpace;
 
     touch_active = true;
-    axis = e.touches ? e.touches[0][page_axis] : e[page_axis];
+    axis = het;
     add_window_events();
   }
 
   function changeItem(item) {
     let max = availableSpace;
-    diff = max * item;
+    availableDifference = max * item;
     activeIndicator = item;
     onEnd();
   }
@@ -189,30 +217,6 @@
   export function nextItem() {
     let step = activeIndicator + 1;
     goTo(step)
-  }
-
-  export function addWindowEvents() {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('mousemove', onMove);
-      window.addEventListener('mouseup', onEnd);
-      window.addEventListener('touchmove', onMove);
-      window.addEventListener('touchend', onEnd);
-    }
-  }
-
-  export function freeWindowEvents() {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mouseup', onEnd);
-      window.removeEventListener('touchmove', onMove);
-      window.removeEventListener('touchend', onEnd);
-    }
-  }
-
-   export function normalizeEventBehavior(e) {
-    e && e.stopImmediatePropagation();
-    e && e.stopPropagation();
-    e && e.preventDefault();
   }
 </script>
 
