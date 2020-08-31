@@ -72,6 +72,16 @@
    return  e.touches ? e.touches[0][page_axis] : e[page_axis]
   }
 
+  function generateTouchPosCss(value, touch_end = false){
+    let transformString = is_vertical ? `translate3d(0, ${value}px, 0)` : `translate3d(${value}px, 0, 0)`;
+    let _css = `
+      -webkit-transition-duration: ${touch_end ? transitionDuration : '0'}ms;
+      transition-duration: ${touch_end ? transitionDuration : '0'}ms;
+      -webkit-transform: ${transformString};
+      -ms-transform: ${transformString};`;
+    return _css;
+  }
+
   function update(){
     swipeHandler.style.top = topClearence + 'px';
     let {offsetWidth, offsetHeight} = swipeWrapper.querySelector('.swipeable-items');
@@ -108,21 +118,9 @@
     }
   })
 
-  let transformString = is_vertical ? 'translate3d(0, -{{val}}px, 0)' : 'translate3d(-{{val}}px, 0, 0)',
 
-  touchmove_css = `
-    -webkit-transition-duration: 0s;
-    transition-duration: 0s;
-    -webkit-transform: ${transformString};
-    -ms-transform: ${transformString};`,
 
-  touchend_css = `
-    -webkit-transition-duration: ${transitionDuration}ms;
-    transition-duration: ${transitionDuration}ms;
-    -webkit-transform: ${transformString};
-    -ms-transform: ${transformString};`,
-
-  touch_active = false;
+  let  touch_active = false;
 
   function onMove(e){
     if (touch_active) {
@@ -137,11 +135,9 @@
       if (!dir) { _diff = pos_axis - (_axis - axis) }
       if (_diff <= (max * (items - 1)) && _diff >= min) {
 
-        for (let i = 0; i < items; i++) {
-          let template = i < 0 ? '{{val}}' : '-{{val}}';
-          let _value = (max * i) - _diff;
-          swipableItems[i].style.cssText = touchmove_css.replace(template, _value).replace(template, _value);
-        }
+      [...swipableItems].forEach((element, i) => {
+        element.style.cssText = generateTouchPosCss((max * i) - _diff);
+      });
 
        availableDifference = _diff;
       }
@@ -181,11 +177,11 @@
 
     pos_axis = availableDifference;
     activeIndicator = (availableDifference / max);
-    for (let i = 0; i < items; i++) {
-      let template = i < 0 ? '{{val}}' : '-{{val}}';
-      let _value = (max * i) - pos_axis;
-      swipableItems[i].style.cssText = touchend_css.replace(template, _value).replace(template, _value);
-    }
+
+    [...swipableItems].forEach((element, i) => {
+      element.style.cssText = generateTouchPosCss((max * i) - pos_axis, true);
+    });
+
     active_item = activeIndicator;
     eventDelegate('remove');
   }
