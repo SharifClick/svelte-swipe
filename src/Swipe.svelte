@@ -155,12 +155,7 @@
       swipableItems[i].style.cssText = touchend_css.replace(template, _value).replace(template, _value);
     }
     active_item = activeIndicator;
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('mousemove', moveHandler);
-      window.removeEventListener('mouseup', endHandler);
-      window.removeEventListener('touchmove', moveHandler);
-      window.removeEventListener('touchend', endHandler);
-    }
+    free_window_events();
   }
 
   function moveStart(e){
@@ -172,12 +167,7 @@
 
     touch_active = true;
     axis = e.touches ? e.touches[0][page_axis] : e[page_axis];
-    if (typeof window !== 'undefined') {
-      window.addEventListener('mousemove', moveHandler);
-      window.addEventListener('mouseup', endHandler);
-      window.addEventListener('touchmove', moveHandler);
-      window.addEventListener('touchend', endHandler);
-    }
+    add_window_events();
   }
 
   function changeItem(item) {
@@ -206,6 +196,23 @@
     goTo(step)
   }
 
+  export function add_window_events() {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('mousemove', moveHandler);
+      window.addEventListener('mouseup', endHandler);
+      window.addEventListener('touchmove', moveHandler);
+      window.addEventListener('touchend', endHandler);
+    }
+  }
+
+  export function free_window_events() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('mousemove', moveHandler);
+      window.removeEventListener('mouseup', endHandler);
+      window.removeEventListener('touchmove', moveHandler);
+      window.removeEventListener('touchend', endHandler);
+    }
+  }
 </script>
 
 <style>
