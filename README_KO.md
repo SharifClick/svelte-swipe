@@ -127,6 +127,7 @@ npm i svelte-swipe
   --sv-swipe-panel-width: inherit;
   --sv-swipe-panel-wrapper-index: 2;
   --sv-swipe-indicator-active-color: grey;
+  --sv-swipe-handler-top: 0px;
 }
 ```
 
