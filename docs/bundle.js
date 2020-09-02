@@ -381,7 +381,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (275:3) {#if showIndicators}
+    // (262:3) {#if showIndicators}
     function create_if_block(ctx) {
     	var div;
 
@@ -401,7 +401,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
     			attr(div, "class", "swipe-indicator swipe-indicator-inside svelte-1ms7z1q");
-    			add_location(div, file, 275, 5, 6675);
+    			add_location(div, file, 262, 5, 6432);
     		},
 
     		m: function mount(target, anchor) {
@@ -445,7 +445,7 @@ var app = (function () {
     	};
     }
 
-    // (277:8) {#each indicators as x, i }
+    // (264:8) {#each indicators as x, i }
     function create_each_block(ctx) {
     	var span, span_class_value, dispose;
 
@@ -457,7 +457,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			attr(span, "class", span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-1ms7z1q");
-    			add_location(span, file, 277, 10, 6776);
+    			add_location(span, file, 264, 10, 6533);
     			dispose = listen(span, "click", click_handler);
     		},
 
@@ -504,15 +504,15 @@ var app = (function () {
     			if (if_block) if_block.c();
 
     			attr(div0, "class", "swipeable-slot-wrapper svelte-1ms7z1q");
-    			add_location(div0, file, 268, 6, 6436);
+    			add_location(div0, file, 255, 6, 6193);
     			attr(div1, "class", "swipeable-total_elements svelte-1ms7z1q");
-    			add_location(div1, file, 267, 4, 6390);
+    			add_location(div1, file, 254, 4, 6147);
     			attr(div2, "class", "swipe-item-wrapper svelte-1ms7z1q");
-    			add_location(div2, file, 266, 2, 6327);
+    			add_location(div2, file, 253, 2, 6084);
     			attr(div3, "class", "swipe-handler svelte-1ms7z1q");
-    			add_location(div3, file, 273, 2, 6530);
+    			add_location(div3, file, 260, 2, 6287);
     			attr(div4, "class", "swipe-panel svelte-1ms7z1q");
-    			add_location(div4, file, 265, 0, 6298);
+    			add_location(div4, file, 252, 0, 6055);
 
     			dispose = [
     				listen(div3, "touchstart", ctx.onMoveStart),
@@ -717,35 +717,22 @@ var app = (function () {
 
       function onEnd(e) {
         normalizeEventBehavior(e);
-
-        let max = availableSpace;
         console.log('end');
         touch_active = false;
         axis = null;
-
-
-
-        let swipe_threshold = 0.85;
-        let d_max = (availableDistance / max);
-        let _target = Math.round(d_max);
-
-        if(Math.abs(_target - d_max) < swipe_threshold ){
-         availableDistance = _target * max;
-        }else{
-         availableDistance = ( (_target + 1)) * max;
-        }
+        let _as = availableSpace;
+        availableDistance = Math.round((availableDistance / _as)) * _as;
 
         pos_axis = availableDistance;
-        $$invalidate('activeIndicator', activeIndicator = (availableDistance / max));
+        $$invalidate('activeIndicator', activeIndicator = (availableDistance / _as));
 
         [...swipeElements].forEach((element, i) => {
-          element.style.cssText = generateTouchPosCss((max * i) - pos_axis, true);
+          element.style.cssText = generateTouchPosCss((_as * i) - pos_axis, true);
         });
 
         $$invalidate('active_item', active_item = activeIndicator);
         eventDelegate('remove');
       }
-
 
       function changeItem(item) {
         let max = availableSpace;

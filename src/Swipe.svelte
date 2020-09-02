@@ -150,35 +150,22 @@
 
   function onEnd(e) {
     normalizeEventBehavior(e)
-
-    let max = availableSpace;
     console.log('end')
     touch_active = false;
     axis = null;
-
-
-
-    let swipe_threshold = 0.85;
-    let d_max = (availableDistance / max);
-    let _target = Math.round(d_max);
-
-    if(Math.abs(_target - d_max) < swipe_threshold ){
-     availableDistance = _target * max;
-    }else{
-     availableDistance = (dir ? (_target - 1) : (_target + 1)) * max;
-    }
+    let _as = availableSpace;
+    availableDistance = Math.round((availableDistance / _as)) * _as;
 
     pos_axis = availableDistance;
-    activeIndicator = (availableDistance / max);
+    activeIndicator = (availableDistance / _as);
 
     [...swipeElements].forEach((element, i) => {
-      element.style.cssText = generateTouchPosCss((max * i) - pos_axis, true);
+      element.style.cssText = generateTouchPosCss((_as * i) - pos_axis, true);
     });
 
     active_item = activeIndicator;
     eventDelegate('remove');
   }
-
 
   function changeItem(item) {
     let max = availableSpace;
