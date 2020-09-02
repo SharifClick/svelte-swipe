@@ -17,7 +17,6 @@
     total_elements = 0,
     availableSpace = 0,
     availableWidth = 0,
-    topClearence = 0,
     swipeElements,
     availableDistance = 0,
     swipeWrapper,
@@ -39,7 +38,6 @@
   }
 
   function update(){
-    swipeHandler.style.top = topClearence + 'px';
     let {offsetWidth, offsetHeight} = swipeWrapper.querySelector('.swipeable-total_elements');
     availableSpace = is_vertical ? offsetHeight : offsetWidth;
      [...swipeElements].forEach((element, i) => {
@@ -219,7 +217,7 @@
 .swipe-handler {
   width: 100%;
   position: absolute;
-  top: 40px;
+  top: var(--sv-swipe-handler-top, 0px);
   bottom: 0px;
   left: 0;
   right: 0;

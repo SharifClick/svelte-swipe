@@ -381,7 +381,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (262:3) {#if showIndicators}
+    // (260:3) {#if showIndicators}
     function create_if_block(ctx) {
     	var div;
 
@@ -400,8 +400,8 @@ var app = (function () {
     			for (var i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
-    			attr(div, "class", "swipe-indicator swipe-indicator-inside svelte-1ms7z1q");
-    			add_location(div, file, 262, 5, 6432);
+    			attr(div, "class", "swipe-indicator swipe-indicator-inside svelte-pbdz13");
+    			add_location(div, file, 260, 5, 6386);
     		},
 
     		m: function mount(target, anchor) {
@@ -445,7 +445,7 @@ var app = (function () {
     	};
     }
 
-    // (264:8) {#each indicators as x, i }
+    // (262:8) {#each indicators as x, i }
     function create_each_block(ctx) {
     	var span, span_class_value, dispose;
 
@@ -456,8 +456,8 @@ var app = (function () {
     	return {
     		c: function create() {
     			span = element("span");
-    			attr(span, "class", span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-1ms7z1q");
-    			add_location(span, file, 264, 10, 6533);
+    			attr(span, "class", span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-pbdz13");
+    			add_location(span, file, 262, 10, 6487);
     			dispose = listen(span, "click", click_handler);
     		},
 
@@ -467,7 +467,7 @@ var app = (function () {
 
     		p: function update_1(changed, new_ctx) {
     			ctx = new_ctx;
-    			if ((changed.activeIndicator) && span_class_value !== (span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-1ms7z1q")) {
+    			if ((changed.activeIndicator) && span_class_value !== (span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-pbdz13")) {
     				attr(span, "class", span_class_value);
     			}
     		},
@@ -503,16 +503,16 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
 
-    			attr(div0, "class", "swipeable-slot-wrapper svelte-1ms7z1q");
-    			add_location(div0, file, 255, 6, 6193);
-    			attr(div1, "class", "swipeable-total_elements svelte-1ms7z1q");
-    			add_location(div1, file, 254, 4, 6147);
-    			attr(div2, "class", "swipe-item-wrapper svelte-1ms7z1q");
-    			add_location(div2, file, 253, 2, 6084);
-    			attr(div3, "class", "swipe-handler svelte-1ms7z1q");
-    			add_location(div3, file, 260, 2, 6287);
-    			attr(div4, "class", "swipe-panel svelte-1ms7z1q");
-    			add_location(div4, file, 252, 0, 6055);
+    			attr(div0, "class", "swipeable-slot-wrapper svelte-pbdz13");
+    			add_location(div0, file, 253, 6, 6147);
+    			attr(div1, "class", "swipeable-total_elements svelte-pbdz13");
+    			add_location(div1, file, 252, 4, 6101);
+    			attr(div2, "class", "swipe-item-wrapper svelte-pbdz13");
+    			add_location(div2, file, 251, 2, 6038);
+    			attr(div3, "class", "swipe-handler svelte-pbdz13");
+    			add_location(div3, file, 258, 2, 6241);
+    			attr(div4, "class", "swipe-panel svelte-pbdz13");
+    			add_location(div4, file, 250, 0, 6009);
 
     			dispose = [
     				listen(div3, "touchstart", ctx.onMoveStart),
@@ -605,7 +605,6 @@ var app = (function () {
         total_elements = 0,
         availableSpace = 0,
         availableWidth = 0,
-        topClearence = 0,
         swipeElements,
         availableDistance = 0,
         swipeWrapper,
@@ -626,7 +625,6 @@ var app = (function () {
       }
 
       function update(){
-        swipeHandler.style.top = topClearence + 'px'; $$invalidate('swipeHandler', swipeHandler);
         let {offsetWidth, offsetHeight} = swipeWrapper.querySelector('.swipeable-total_elements');
         availableSpace = is_vertical ? offsetHeight : offsetWidth;
          [...swipeElements].forEach((element, i) => {
