@@ -23,8 +23,8 @@
     swipeHandler,
     pos_axis = 0,
     page_axis = is_vertical ? 'pageY' : 'pageX',
-    dir = 0,
-    axis;
+    axis,
+    longTouch;
 
 
 
@@ -129,7 +129,6 @@
       console.log('moving')
       let _axis = getTouchingPos(e),
         distance = (axis - _axis) + pos_axis;
-
       if (distance <= availableWidth && distance >= 0) {
         [...swipeElements].forEach((element, i) => {
           element.style.cssText = generateTouchPosCss((availableSpace * i) - distance);
@@ -142,17 +141,26 @@
   function onMoveStart(e){
     normalizeEventBehavior(e);
     touch_active = true;
+    longTouch = false;
+    setTimeout(function() {
+      longTouch = true;
+    }, 250);
     axis = getTouchingPos(e);
     eventDelegate('add');
   }
 
   function onEnd(e) {
     normalizeEventBehavior(e)
-    console.log('end')
+    let last_axis_pos =  e && getTouchingPos(e);
+    let direction = axis < last_axis_pos;
     touch_active = false;
     axis = null;
     let _as = availableSpace;
-    availableDistance = Math.round((availableDistance / _as)) * _as;
+    if(longTouch){
+      availableDistance = Math.round((availableDistance / _as)) * _as;
+    }else{
+      availableDistance = direction ? Math.floor((availableDistance / _as))  * _as : Math.ceil((availableDistance / _as))  * _as
+    }
 
     pos_axis = availableDistance;
     activeIndicator = (availableDistance / _as);
