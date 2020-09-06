@@ -85,7 +85,6 @@
   }
 
   function getTouchingPos(e){
-    console.log(e)
    return  e.touches ? e.touches[0][page_axis] : e[page_axis]
   }
 
@@ -126,8 +125,6 @@
   function onMove(e){
     if (touch_active) {
       normalizeEventBehavior(e)
-
-      console.log('moving')
       let _axis = getTouchingPos(e),
         distance = (axis - _axis) + pos_axis;
       if (distance <= availableWidth && distance >= 0) {
@@ -156,7 +153,7 @@
     let direction = axis < last_axis_pos;
     touch_active = false;
     let _as = availableSpace;
-    let accidental_touch = 11 > Math.abs(axis - last_axis_pos);
+    let accidental_touch = Math.round(availableSpace / 50) > Math.abs(axis - last_axis_pos);
     if(longTouch || accidental_touch){
       availableDistance = Math.round((availableDistance / _as)) * _as;
     }else{
@@ -164,6 +161,7 @@
     }
 
     axis = null;
+    last_axis_pos = null;
     pos_axis = availableDistance;
     activeIndicator = (availableDistance / _as);
 
