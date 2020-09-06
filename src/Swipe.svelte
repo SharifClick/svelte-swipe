@@ -24,7 +24,8 @@
     pos_axis = 0,
     page_axis = is_vertical ? 'pageY' : 'pageX',
     axis,
-    longTouch;
+    longTouch,
+    last_axis_pos;
 
 
 
@@ -81,10 +82,10 @@
   function normalizeEventBehavior(e) {
     e && e.stopImmediatePropagation();
     e && e.stopPropagation();
-    e && e.preventDefault();
   }
 
   function getTouchingPos(e){
+    console.log(e)
    return  e.touches ? e.touches[0][page_axis] : e[page_axis]
   }
 
@@ -134,6 +135,7 @@
           element.style.cssText = generateTouchPosCss((availableSpace * i) - distance);
         });
         availableDistance = distance;
+        last_axis_pos = _axis;
       }
     }
   }
@@ -151,17 +153,17 @@
 
   function onEnd(e) {
     normalizeEventBehavior(e)
-    let last_axis_pos =  e && getTouchingPos(e);
     let direction = axis < last_axis_pos;
     touch_active = false;
-    axis = null;
     let _as = availableSpace;
-    if(longTouch){
+    let accidental_touch = 11 > Math.abs(axis - last_axis_pos);
+    if(longTouch || accidental_touch){
       availableDistance = Math.round((availableDistance / _as)) * _as;
     }else{
       availableDistance = direction ? Math.floor((availableDistance / _as))  * _as : Math.ceil((availableDistance / _as))  * _as
     }
 
+    axis = null;
     pos_axis = availableDistance;
     activeIndicator = (availableDistance / _as);
 
