@@ -381,7 +381,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (260:3) {#if showIndicators}
+    // (268:3) {#if showIndicators}
     function create_if_block(ctx) {
     	var div;
 
@@ -401,7 +401,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
     			attr(div, "class", "swipe-indicator swipe-indicator-inside svelte-pbdz13");
-    			add_location(div, file, 260, 5, 6386);
+    			add_location(div, file, 268, 5, 6718);
     		},
 
     		m: function mount(target, anchor) {
@@ -445,7 +445,7 @@ var app = (function () {
     	};
     }
 
-    // (262:8) {#each indicators as x, i }
+    // (270:8) {#each indicators as x, i }
     function create_each_block(ctx) {
     	var span, span_class_value, dispose;
 
@@ -457,7 +457,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			attr(span, "class", span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-pbdz13");
-    			add_location(span, file, 262, 10, 6487);
+    			add_location(span, file, 270, 10, 6819);
     			dispose = listen(span, "click", click_handler);
     		},
 
@@ -504,15 +504,15 @@ var app = (function () {
     			if (if_block) if_block.c();
 
     			attr(div0, "class", "swipeable-slot-wrapper svelte-pbdz13");
-    			add_location(div0, file, 253, 6, 6147);
+    			add_location(div0, file, 261, 6, 6479);
     			attr(div1, "class", "swipeable-total_elements svelte-pbdz13");
-    			add_location(div1, file, 252, 4, 6101);
+    			add_location(div1, file, 260, 4, 6433);
     			attr(div2, "class", "swipe-item-wrapper svelte-pbdz13");
-    			add_location(div2, file, 251, 2, 6038);
+    			add_location(div2, file, 259, 2, 6370);
     			attr(div3, "class", "swipe-handler svelte-pbdz13");
-    			add_location(div3, file, 258, 2, 6241);
+    			add_location(div3, file, 266, 2, 6573);
     			attr(div4, "class", "swipe-panel svelte-pbdz13");
-    			add_location(div4, file, 250, 0, 6009);
+    			add_location(div4, file, 258, 0, 6341);
 
     			dispose = [
     				listen(div3, "touchstart", ctx.onMoveStart),
@@ -611,7 +611,8 @@ var app = (function () {
         swipeHandler,
         pos_axis = 0,
         page_axis = is_vertical ? 'pageY' : 'pageX',
-        axis;
+        axis,
+        longTouch;
 
 
 
@@ -696,7 +697,6 @@ var app = (function () {
           console.log('moving');
           let _axis = getTouchingPos(e),
             distance = (axis - _axis) + pos_axis;
-
           if (distance <= availableWidth && distance >= 0) {
             [...swipeElements].forEach((element, i) => {
               element.style.cssText = generateTouchPosCss((availableSpace * i) - distance);
@@ -709,17 +709,26 @@ var app = (function () {
       function onMoveStart(e){
         normalizeEventBehavior(e);
         touch_active = true;
+        longTouch = false;
+        setTimeout(function() {
+          longTouch = true;
+        }, 250);
         axis = getTouchingPos(e);
         eventDelegate('add');
       }
 
       function onEnd(e) {
         normalizeEventBehavior(e);
-        console.log('end');
+        let last_axis_pos =  e && getTouchingPos(e);
+        let direction = axis < last_axis_pos;
         touch_active = false;
         axis = null;
         let _as = availableSpace;
-        availableDistance = Math.round((availableDistance / _as)) * _as;
+        if(longTouch){
+          availableDistance = Math.round((availableDistance / _as)) * _as;
+        }else{
+          availableDistance = direction ? Math.floor((availableDistance / _as))  * _as : Math.ceil((availableDistance / _as))  * _as;
+        }
 
         pos_axis = availableDistance;
         $$invalidate('activeIndicator', activeIndicator = (availableDistance / _as));
