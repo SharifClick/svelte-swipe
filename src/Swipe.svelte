@@ -84,10 +84,6 @@
     e && e.stopPropagation();
   }
 
-  function getTouchingPos(e){
-   return  e.touches ? e.touches[0][page_axis] : e[page_axis]
-  }
-
   function generateTranslateValue(value){
     return  is_vertical ? `translate3d(0, ${value}px, 0)` : `translate3d(${value}px, 0, 0)`;
   }
@@ -125,7 +121,7 @@
   function onMove(e){
     if (touch_active) {
       normalizeEventBehavior(e)
-      let _axis = getTouchingPos(e),
+      let _axis = e.touches ? e.touches[0][page_axis] : e[page_axis],
         distance = (axis - _axis) + pos_axis;
       if (distance <= availableWidth && distance >= 0) {
         [...swipeElements].forEach((element, i) => {
@@ -144,7 +140,7 @@
     setTimeout(function() {
       longTouch = true;
     }, 250);
-    axis = getTouchingPos(e);
+    axis = e.touches ? e.touches[0][page_axis] : e[page_axis];
     eventDelegate('add');
   }
 
