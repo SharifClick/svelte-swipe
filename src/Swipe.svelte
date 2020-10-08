@@ -166,6 +166,7 @@
     });
 
     active_item = activeIndicator;
+    defaultIndex = active_item;
     eventDelegate('remove');
   }
 
