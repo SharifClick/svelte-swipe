@@ -68,3 +68,8 @@
 
 * feature request issue #18 (added vertical swipe support)
 * doc fixes
+
+## 1.7.1
+
+* merged pr #26
+* fixed issue #25
