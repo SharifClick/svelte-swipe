@@ -378,7 +378,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (264:3) {#if showIndicators}
+    // (265:3) {#if showIndicators}
     function create_if_block(ctx) {
     	var div;
 
@@ -398,7 +398,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
     			attr(div, "class", "swipe-indicator swipe-indicator-inside svelte-pbdz13");
-    			add_location(div, file, 264, 5, 6765);
+    			add_location(div, file, 265, 5, 6798);
     		},
 
     		m: function mount(target, anchor) {
@@ -442,7 +442,7 @@ var app = (function () {
     	};
     }
 
-    // (266:8) {#each indicators as x, i }
+    // (267:8) {#each indicators as x, i }
     function create_each_block(ctx) {
     	var span, span_class_value, dispose;
 
@@ -454,7 +454,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			attr(span, "class", span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-pbdz13");
-    			add_location(span, file, 266, 10, 6866);
+    			add_location(span, file, 267, 10, 6899);
     			dispose = listen(span, "click", click_handler);
     		},
 
@@ -501,15 +501,15 @@ var app = (function () {
     			if (if_block) if_block.c();
 
     			attr(div0, "class", "swipeable-slot-wrapper svelte-pbdz13");
-    			add_location(div0, file, 257, 6, 6526);
+    			add_location(div0, file, 258, 6, 6559);
     			attr(div1, "class", "swipeable-total_elements svelte-pbdz13");
-    			add_location(div1, file, 256, 4, 6480);
+    			add_location(div1, file, 257, 4, 6513);
     			attr(div2, "class", "swipe-item-wrapper svelte-pbdz13");
-    			add_location(div2, file, 255, 2, 6417);
+    			add_location(div2, file, 256, 2, 6450);
     			attr(div3, "class", "swipe-handler svelte-pbdz13");
-    			add_location(div3, file, 262, 2, 6620);
+    			add_location(div3, file, 263, 2, 6653);
     			attr(div4, "class", "swipe-panel svelte-pbdz13");
-    			add_location(div4, file, 254, 0, 6388);
+    			add_location(div4, file, 255, 0, 6421);
 
     			dispose = [
     				listen(div3, "touchstart", ctx.onMoveStart),
@@ -731,6 +731,7 @@ var app = (function () {
         });
 
         $$invalidate('active_item', active_item = activeIndicator);
+        $$invalidate('defaultIndex', defaultIndex = active_item);
         eventDelegate('remove');
       }
 
