@@ -1,6 +1,18 @@
 # Svelte Swipe
+<p>
+  <a href="https://www.npmjs.com/package/svelte-swipe"><img  src="https://img.shields.io/npm/v/svelte-swipe?style=for-the-badge"/></a>
+  <a href="https://www.npmjs.com/package/svelte-swipe">
+    <img src="https://img.shields.io/npm/dm/svelte-swipe?style=for-the-badge"/>
+  </a>
+  <a href="https://bundlephobia.com/result?p=svelte-swipe">
+    <img src="https://img.shields.io/bundlephobia/min/svelte-swipe?style=for-the-badge"/>
+  </a>
 
-[![NPM version](https://img.shields.io/npm/v/svelte-swipe.svg?style=flat)](https://www.npmjs.com/package/svelte-swipe) [![NPM downloads](https://img.shields.io/npm/dm/svelte-swipe.svg?style=flat)](https://www.npmjs.com/package/svelte-swipe) [![Svelte v3](https://img.shields.io/badge/svelte-v3-blueviolet.svg)](https://svelte.dev)
+  <a href="https://bundlephobia.com/result?p=svelte-swipe">
+    <img src="https://img.shields.io/bundlephobia/minzip/svelte-swipe?style=for-the-badge"/>
+  </a>
+  <a href="https://svelte.dev"><img  src="https://img.shields.io/badge/svelte-v3-blueviolet?style=for-the-badge"/></a>
+</p>
 
 [English](README.md) / [Korean](README_KO.md)
 
