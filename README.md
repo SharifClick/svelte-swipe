@@ -20,6 +20,7 @@ Swipable items wrapper component for Svelte :fire: :boom: (zero dependencies - 3
 
 ## 🚀[See it in Action](https://sharifclick.github.io/svelte-swipe/)
 
+
 ## Installation
 
 ```bash
@@ -113,7 +114,7 @@ npm i svelte-swipe
 ```
 
 
-### Programmatically change slides
+### Programmatically change slides 
 
 ```html
 
@@ -141,6 +142,26 @@ npm i svelte-swipe
 </div>
 ```
 
+### Supports custom thumbnail
+## 🚀[See example with custom thumbnail](https://svelte.dev/repl/be477862ac8b4dfea4c8e454e556ef2c?version=3.20.1)
+```html
+
+<script>
+  let SwipeComp;
+
+  function changeSlide(i){
+    SwipeComp.goTo(i)
+  }
+
+</script>
+<div class="swipe-holder">
+  <Swipe bind:this={SwipeComp}>
+    <SwipeItem>....</SwipeItem>
+    ...
+  </Swipe>
+</div>
+
+```
 
 ## Default css custom properties
 
