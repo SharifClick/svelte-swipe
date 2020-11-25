@@ -1,5 +1,5 @@
 <script>
-	import { onMount, onDestroy } from "svelte";
+	import { onMount, onDestroy, createEventDispatcher } from "svelte";
 
 	export let transitionDuration = 200;
 	export let showIndicators = false;
