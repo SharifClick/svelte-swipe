@@ -19,7 +19,6 @@
 		swipeElements,
 		availableDistance = 0,
 		swipeWrapper,
-		swipeHandler,
 		pos_axis = 0,
 		page_axis = is_vertical ? "pageY" : "pageX",
 		axis,
@@ -230,7 +229,6 @@
 		position: relative;
 		height: inherit;
 		z-index: var(--sv-swipe-panel-wrapper-index, 2);
-		pointer-events: none;
 	}
 
 	.swipeable-total_elements,
@@ -240,15 +238,6 @@
 		height: inherit;
 	}
 
-	.swipe-handler {
-		width: 100%;
-		position: absolute;
-		top: var(--sv-swipe-handler-top, 0px);
-		bottom: 0px;
-		left: 0;
-		right: 0;
-		background: rgba(0, 0, 0, 0);
-	}
 	.swipe-indicator {
 		position: relative;
 		bottom: 1.5rem;
@@ -274,6 +263,8 @@
 	}
 </style>
 
+<svelte:window on:touchstart={onMoveStart} on:mousedown={onMoveStart} />
+
 <div class="swipe-panel">
 	<div class="swipe-item-wrapper" bind:this={swipeWrapper}>
 		<div class="swipeable-total_elements">
@@ -282,11 +273,6 @@
 			</div>
 		</div>
 	</div>
-	<div
-		class="swipe-handler"
-		bind:this={swipeHandler}
-		on:touchstart={onMoveStart}
-		on:mousedown={onMoveStart} />
 	{#if showIndicators}
 		<div class="swipe-indicator swipe-indicator-inside">
 			{#each indicators as x, i}
