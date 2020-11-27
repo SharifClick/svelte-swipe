@@ -55,6 +55,7 @@
 				availableSpace * i
 			);
 			element.style.zIndex = 1;
+			element.style.opacity = 1;
 		});
 		availableDistance = 0;
 		availableWidth = availableSpace * (total_elements - 1);
@@ -108,7 +109,8 @@
       transition-duration: ${touch_end ? transitionDuration : "0"}ms;
       -webkit-transform: ${transformString};
       -ms-transform: ${transformString};
-      z-index: 1;`;
+	  z-index: 1;
+	  opacity: 1;`;
 		return _css;
 	}
 

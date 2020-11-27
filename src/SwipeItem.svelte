@@ -1,5 +1,6 @@
 <script>
   export let classes = '';
+  export let shouldLoadVideo;
 </script>
 
 <style>
@@ -14,5 +15,9 @@
 </style>
 
 <div class="swipeable-item {classes}">
-    <slot />
+  {#if shouldLoadVideo}
+    <slot name="video" />
+  {:else}
+    <slot name="poster" />
+  {/if}
 </div>
