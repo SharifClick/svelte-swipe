@@ -73,3 +73,8 @@
 
 * merged pr #26
 * fixed issue #25
+
+## 1.7.2
+
+* merged pr #31
+* fixed page scroll on swipe issue
