@@ -74,8 +74,8 @@
     if (typeof window !== 'undefined') {
       window[delegationTypes[type]]('mousemove', onMove);
       window[delegationTypes[type]]('mouseup', onEnd);
-      window[delegationTypes[type]]('touchmove', onMove);
-      window[delegationTypes[type]]('touchend', onEnd);
+      window[delegationTypes[type]]('touchmove', onMove, {passive:false});
+      window[delegationTypes[type]]('touchend', onEnd, {passive:false});
     }
   }
 
