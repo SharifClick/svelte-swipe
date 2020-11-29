@@ -378,7 +378,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (265:3) {#if showIndicators}
+    // (266:3) {#if showIndicators}
     function create_if_block(ctx) {
     	var div;
 
@@ -398,7 +398,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
     			attr(div, "class", "swipe-indicator swipe-indicator-inside svelte-pbdz13");
-    			add_location(div, file, 265, 5, 6798);
+    			add_location(div, file, 266, 5, 6862);
     		},
 
     		m: function mount(target, anchor) {
@@ -442,7 +442,7 @@ var app = (function () {
     	};
     }
 
-    // (267:8) {#each indicators as x, i }
+    // (268:8) {#each indicators as x, i }
     function create_each_block(ctx) {
     	var span, span_class_value, dispose;
 
@@ -454,7 +454,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			attr(span, "class", span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-pbdz13");
-    			add_location(span, file, 267, 10, 6899);
+    			add_location(span, file, 268, 10, 6963);
     			dispose = listen(span, "click", click_handler);
     		},
 
@@ -501,15 +501,15 @@ var app = (function () {
     			if (if_block) if_block.c();
 
     			attr(div0, "class", "swipeable-slot-wrapper svelte-pbdz13");
-    			add_location(div0, file, 258, 6, 6559);
+    			add_location(div0, file, 259, 6, 6623);
     			attr(div1, "class", "swipeable-total_elements svelte-pbdz13");
-    			add_location(div1, file, 257, 4, 6513);
+    			add_location(div1, file, 258, 4, 6577);
     			attr(div2, "class", "swipe-item-wrapper svelte-pbdz13");
-    			add_location(div2, file, 256, 2, 6450);
+    			add_location(div2, file, 257, 2, 6514);
     			attr(div3, "class", "swipe-handler svelte-pbdz13");
-    			add_location(div3, file, 263, 2, 6653);
+    			add_location(div3, file, 264, 2, 6717);
     			attr(div4, "class", "swipe-panel svelte-pbdz13");
-    			add_location(div4, file, 255, 0, 6421);
+    			add_location(div4, file, 256, 0, 6485);
 
     			dispose = [
     				listen(div3, "touchstart", ctx.onMoveStart),
@@ -589,6 +589,7 @@ var app = (function () {
     }
 
     function normalizeEventBehavior(e) {
+      e && e.preventDefault();
       e && e.stopImmediatePropagation();
       e && e.stopPropagation();
     }
@@ -644,8 +645,8 @@ var app = (function () {
         if (typeof window !== 'undefined') {
           window[delegationTypes[type]]('mousemove', onMove);
           window[delegationTypes[type]]('mouseup', onEnd);
-          window[delegationTypes[type]]('touchmove', onMove);
-          window[delegationTypes[type]]('touchend', onEnd);
+          window[delegationTypes[type]]('touchmove', onMove, {passive:false});
+          window[delegationTypes[type]]('touchend', onEnd, {passive:false});
         }
       }
 
