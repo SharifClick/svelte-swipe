@@ -80,6 +80,7 @@
   }
 
   function normalizeEventBehavior(e) {
+    e && e.preventDefault();
     e && e.stopImmediatePropagation();
     e && e.stopPropagation();
   }
