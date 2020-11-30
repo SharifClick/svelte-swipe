@@ -32,7 +32,7 @@ npm i svelte-swipe
 ```html
 <script>
 
-  import { Swipe, SwipeItem } from "svelte-swipe"; // gzipped 3.37 KB
+  import { Swipe, SwipeItem } from "svelte-swipe";
 
   const swipeConfig = {
     autoplay: false,
