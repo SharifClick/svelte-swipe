@@ -24,7 +24,7 @@ Swipable items wrapper component for Svelte :fire: :boom: (zero dependencies - 3
 ## Installation
 
 ```bash
-npm install -D svelte-swipe
+npm i -D svelte-swipe
 ```
 
 ## Usage
