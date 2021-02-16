@@ -1,15 +1,28 @@
 # Svelte Swipe
 
-[![NPM version](https://img.shields.io/npm/v/svelte-swipe.svg?style=flat)](https://www.npmjs.com/package/svelte-swipe) [![NPM downloads](https://img.shields.io/npm/dm/svelte-swipe.svg?style=flat)](https://www.npmjs.com/package/svelte-swipe) [![Svelte v3](https://img.shields.io/badge/svelte-v3-blueviolet.svg)](https://svelte.dev)
+<p>
+  <a href="https://www.npmjs.com/package/svelte-swipe"><img  src="https://img.shields.io/npm/v/svelte-swipe?style=for-the-badge"/></a>
+  <a href="https://www.npmjs.com/package/svelte-swipe">
+    <img src="https://img.shields.io/npm/dm/svelte-swipe?style=for-the-badge"/>
+  </a>
+  <a href="https://bundlephobia.com/result?p=svelte-swipe">
+    <img src="https://img.shields.io/bundlephobia/min/svelte-swipe?style=for-the-badge"/>
+  </a>
 
-Svelte의 스와이프 가능한 wrapper 컴포넌트 :fire: :boom: (의존성 없음 - 3.37 KB gzipped)
+  <a href="https://bundlephobia.com/result?p=svelte-swipe">
+    <img src="https://img.shields.io/bundlephobia/minzip/svelte-swipe?style=for-the-badge"/>
+  </a>
+  <a href="https://svelte.dev"><img  src="https://img.shields.io/badge/svelte-v3-blueviolet?style=for-the-badge"/></a>
+</p>
+
+Svelte의 스와이프 가능한 wrapper 컴포넌트 :fire: :boom:
 
 ## 🚀[동작 예시 보기](https://sharifclick.github.io/svelte-swipe/)
 
 ## 설치
 
 ```bash
-npm i svelte-swipe
+npm i -D svelte-swipe
 ```
 
 ## 사용
