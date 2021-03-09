@@ -183,8 +183,8 @@ npm i -D svelte-swipe
 | `is_vertical` | `Boolean` | 允许轮播图垂直滑动 | No | `false` |
 | `autoplay` | `Boolean` | 允许轮播图自动滚动 | No | `false` |
 | `showIndicators` | `Boolean` | 在轮播图下方显示默认轮播指示器 | No | `false` |
-| `transitionDuration` | `Number` | 轮播图动画过渡时间 | No | `200` *ms |
-| `delay` | `Number` | 轮播图自动滚动等待时间 | No | `1000` *ms |
+| `transitionDuration` | `Number` | 轮播图动画过渡时间 | No | `200` 毫秒 |
+| `delay` | `Number` | 轮播图自动滚动等待时间 | No | `1000` 毫秒 |
 | `defaultIndex` | `Number` | 轮播图初始位置索引 | No |`0` |
 
 ## NPM 统计
