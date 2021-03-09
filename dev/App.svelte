@@ -40,6 +40,18 @@
     "./images/3.jpg",
     "./images/4.jpg"
   ];
+
+  let tabs = [
+    {name:'Deafult', value:'default'},
+    {name:'Vertical', value:'vertical'},
+    {name:'Allow Pointer', value:'allow-pointer'},
+    {name:'Dynamic Height', value:'dynamic-height'},
+  ];
+  let active_tab = 'default';
+
+  function changeTab(tab) {
+    active_tab = tab.value
+  }
 </script>
 
 <style>
@@ -146,128 +158,146 @@
   </div>
   <div class="row">
     <div class="col">
-      <div class="form-check form-check-inline float-right">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          bind:checked={swipeConfig.showIndicators} />
-        <label class="text-muted">Built-in Indicators</label>
+      <ul class="nav nav-tabs">
+      {#each tabs as tab}
+        <li class="nav-item" on:click={() => changeTab(tab)}>
+          <button class="nav-link {tab.value == active_tab ? 'active' : ''}"  type="button" >{tab.name}</button>
+        </li>
+      {/each}
+     </ul>
+
+     <div class="tab-content">
+    <div class="tab-pane fade {active_tab == 'default' ? 'show active' : ''}">
+      <div class="row">
+        <div class="col">
+          <div class="form-check form-check-inline float-right">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              bind:checked={swipeConfig.showIndicators} />
+            <label class="text-muted">Built-in Indicators</label>
+          </div>
+          <div class="form-check form-check-inline float-right">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              bind:checked={customThumbnail} />
+            <label class="text-muted">Custom Thumbnail</label>
+          </div>
+        </div>
       </div>
-      <div class="form-check form-check-inline float-right">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          bind:checked={customThumbnail} />
-        <label class="text-muted">Custom Thumbnail</label>
+      <div class="row">
+        <div class="col">
+          <div class="swipe-holder">
+            <Swipe {...swipeConfig} bind:active_item bind:this={SwipeComp}>
+              {#each images as image}
+                <SwipeItem>
+                  <img class="img-fluid" src={image} alt="" />
+                </SwipeItem>
+              {/each}
+            </Swipe>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div class="col">
+          <input
+            class="btn btn-info btn-sm"
+            type="button"
+            on:click={toggle}
+            value={swipeConfig.autoplay ? 'Stop' : 'Play'} />
+        </div>
+        {#if customThumbnail}
+          <div class="col">
+            <div class="is-center">
+              {#each images as image, i}
+                <img
+                  class="img-fluid {active_item == i ? 'rounded' : 'img-thumbnail'}"
+                  on:click={() => changeSlide(i)}
+                  style="height:30px; width:30px; cursor:pointer"
+                  src={image}
+                  alt="">
+              {/each}
+            </div>
+          </div>
+        {/if}
+        <div class="col">
+          <div class="btn-group float-right">
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              on:click={prevSlide}>
+              Prev
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              on:click={nextSlide}>
+              Next
+            </button>
+          </div>
+        </div>
+
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <div class="swipe-holder">
-        <Swipe {...swipeConfig} bind:active_item bind:this={SwipeComp}>
-          {#each images as image}
-            <SwipeItem>
-              <img class="img-fluid" src={image} alt="" />
-            </SwipeItem>
-          {/each}
-        </Swipe>
-      </div>
-    </div>
-  </div>
-  <div class="row" style="margin-top:10px">
-    <div class="col">
-      <input
-        class="btn btn-info btn-sm"
-        type="button"
-        on:click={toggle}
-        value={swipeConfig.autoplay ? 'Stop' : 'Play'} />
-    </div>
-    {#if customThumbnail}
+  <div class="tab-pane fade {active_tab == 'vertical' ? 'show active' : ''}">
+    <p class="text-muted">Vertical Swipe 🔥</p>
+    <div class="row">
       <div class="col">
-        <div class="is-center">
-          {#each images as image, i}
-            <img
-              class="img-fluid {active_item == i ? 'rounded' : 'img-thumbnail'}"
-              on:click={() => changeSlide(i)}
-              style="height:30px; width:30px; cursor:pointer"
-              src={image}
-              alt="">
-          {/each}
+        <div class="swipe-holder">
+          <Swipe is_vertical={true}>
+            {#each images as image}
+              <SwipeItem>
+                <img class="img-fluid" src={image} alt="" >
+              </SwipeItem>
+            {/each}
+          </Swipe>
         </div>
-      </div>
-    {/if}
-    <div class="col">
-      <div class="btn-group float-right">
-        <button
-          type="button"
-          class="btn btn-secondary btn-sm"
-          on:click={prevSlide}>
-          Prev
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary btn-sm"
-          on:click={nextSlide}>
-          Next
-        </button>
-      </div>
-    </div>
-
-  </div>
-  <hr />
-  <p class="text-muted">Vertical Swipe 🔥</p>
-  <div class="row">
-    <div class="col">
-      <div class="swipe-holder">
-        <Swipe is_vertical={true}>
-          {#each images as image}
-            <SwipeItem>
-              <img class="img-fluid" src={image} alt="" >
-            </SwipeItem>
-          {/each}
-        </Swipe>
       </div>
     </div>
   </div>
+  <div class="tab-pane fade {active_tab == 'allow-pointer' ? 'show active' : ''}">
+    <p class="text-muted">Also allow pointer events inside Swipe Item</p>
+    <div class="swipe-holder">
+      <Swipe>
+        <SwipeItem>
+          <div class="is-stack is-center" style="background:teal">
+            <button class="custom-button has-pointer-event" on:click={sayHi}>
+              Say Hi
+            </button>
+          </div>
+        </SwipeItem>
 
-  <hr />
-  <p class="text-muted">Also allow pointer events inside Swipe Item</p>
-  <div class="swipe-holder">
-    <Swipe>
-      <SwipeItem>
-        <div class="is-stack is-center" style="background:teal">
-          <button class="custom-button has-pointer-event" on:click={sayHi}>
-            Say Hi
-          </button>
-        </div>
-      </SwipeItem>
+        <SwipeItem>
+          <div class="is-stack is-center" style="background:yellowgreen">
+            <button class="custom-button has-pointer-event" on:click={sayHi}>
+              Say Hi
+            </button>
+          </div>
+        </SwipeItem>
 
-      <SwipeItem>
-        <div class="is-stack is-center" style="background:yellowgreen">
-          <button class="custom-button has-pointer-event" on:click={sayHi}>
-            Say Hi
-          </button>
-        </div>
-      </SwipeItem>
+        <SwipeItem>
+          <div class="is-stack is-center" style="background:aqua">
+            <button class="custom-button has-pointer-event" on:click={sayHi}>
+              Say Hi
+            </button>
+          </div>
+        </SwipeItem>
 
-      <SwipeItem>
-        <div class="is-stack is-center" style="background:aqua">
-          <button class="custom-button has-pointer-event" on:click={sayHi}>
-            Say Hi
-          </button>
-        </div>
-      </SwipeItem>
-
-      <SwipeItem>
-        <div class="is-stack is-center" style="background:lightcoral">
-          <button class="custom-button has-pointer-event" on:click={sayHi}>
-            Say Hi
-          </button>
-        </div>
-      </SwipeItem>
-    </Swipe>
+        <SwipeItem>
+          <div class="is-stack is-center" style="background:lightcoral">
+            <button class="custom-button has-pointer-event" on:click={sayHi}>
+              Say Hi
+            </button>
+          </div>
+        </SwipeItem>
+      </Swipe>
+    </div>
   </div>
-
-  <div class="row mt-3" />
+  <div class="tab-pane fade {active_tab == 'dynamic-height' ? 'show active' : ''}">
+    <p class="text-muted">Dynamic height with children</p>
+  </div>
+</div>
+    </div>
+  </div>
 </div>
