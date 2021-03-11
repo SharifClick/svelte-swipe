@@ -5,7 +5,8 @@
     autoplay: false,
     showIndicators: false,
     transitionDuration: 200,
-    defaultIndex: 0
+    defaultIndex: 0,
+    direction_reverse: false
   };
 
   let active_item = 0; //readonly
@@ -160,6 +161,13 @@
           bind:checked={customThumbnail} />
         <label class="text-muted">Custom Thumbnail</label>
       </div>
+      <div class="form-check form-check-inline float-right">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          bind:checked={swipeConfig.direction_reverse} />
+        <label class="text-muted">Direaction Reverse</label>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -185,7 +193,7 @@
     </div>
     {#if customThumbnail}
       <div class="col">
-        <div class="is-center">
+        <div class="is-center" style={swipeConfig.direction_reverse ? "direction:rtl" : "direction:ltr"}>
           {#each images as image, i}
             <img
               class="img-fluid {active_item == i ? 'rounded' : 'img-thumbnail'}"
