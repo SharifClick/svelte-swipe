@@ -11,6 +11,7 @@
 
   export let active_item = 0; //readonly
   export let is_vertical = false;
+  export let direction_reverse = false;
 
   let activeIndicator = 0,
     indicators,
@@ -86,7 +87,7 @@
   }
 
   function generateTranslateValue(value){
-    return  is_vertical ? `translate3d(0, ${value}px, 0)` : `translate3d(${value}px, 0, 0)`;
+    return  is_vertical ? `translate3d(0, ${value}px, 0)` : `translate3d(${direction_reverse ? -value : value}px, 0, 0)`;
   }
 
   function generateTouchPosCss(value, touch_end = false){
@@ -123,7 +124,7 @@
     if (touch_active) {
       normalizeEventBehavior(e)
       let _axis = e.touches ? e.touches[0][page_axis] : e[page_axis],
-        distance = (axis - _axis) + pos_axis;
+        distance = direction_reverse && !is_vertical ? (_axis - axis) + pos_axis : (axis - _axis) + pos_axis;
       if (distance <= availableWidth && distance >= 0) {
         [...swipeElements].forEach((element, i) => {
           element.style.cssText = generateTouchPosCss((availableSpace * i) - distance);
@@ -147,7 +148,7 @@
 
   function onEnd(e) {
     normalizeEventBehavior(e)
-    let direction = axis < last_axis_pos;
+    let direction = direction_reverse ? axis > last_axis_pos : axis < last_axis_pos;
     touch_active = false;
     let _as = availableSpace;
     let accidental_touch = Math.round(availableSpace / 50) > Math.abs(axis - last_axis_pos);
@@ -156,12 +157,10 @@
     }else{
       availableDistance = direction ? Math.floor((availableDistance / _as))  * _as : Math.ceil((availableDistance / _as))  * _as
     }
-
     axis = null;
     last_axis_pos = null;
     pos_axis = availableDistance;
     activeIndicator = (availableDistance / _as);
-
     [...swipeElements].forEach((element, i) => {
       element.style.cssText = generateTouchPosCss((_as * i) - pos_axis, true);
     });
@@ -252,6 +251,9 @@
 .swipe-indicator .is-active {
   background-color: var(--sv-swipe-indicator-active-color, grey);
 }
+.reverse{
+  direction: rtl;
+}
 
 </style>
 <div class="swipe-panel">
@@ -264,7 +266,7 @@
   </div>
   <div class="swipe-handler" bind:this={swipeHandler} on:touchstart={onMoveStart} on:mousedown={onMoveStart}></div>
    {#if showIndicators}
-     <div class="swipe-indicator swipe-indicator-inside">
+     <div class="swipe-indicator swipe-indicator-inside" class:reverse={direction_reverse}>
         {#each indicators as x, i }
           <span class="dot {activeIndicator == i ? 'is-active' : ''}" on:click={() => {changeItem(i)}}></span>
         {/each}
