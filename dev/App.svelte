@@ -115,6 +115,9 @@
       animation: octocat-wave 560ms ease-in-out;
     }
   }
+  .top-buffer {
+    margin-top:20px;
+  }
 </style>
 
 <a
@@ -167,7 +170,7 @@
      </ul>
     </div>
   </div>
-  <div class="row">
+  <div class="row top-buffer">
     <div class="col">
         <div class="tab-content">
           <div class="tab-pane fade {active_tab == 'default' ? 'show active' : ''}">
@@ -301,9 +304,11 @@
             </div>
           </div>
         {/if}
-        <div class="tab-pane fade {active_tab == 'dynamic-height' ? 'show active' : ''}">
-          <p class="lead">Dynamic height with children</p>
-        </div>
+        {#if active_tab == 'dynamic-height'}
+          <div class="tab-pane fade show active">
+            <p class="lead">Dynamic height with children</p>
+          </div>
+        {/if}
       </div>
     </div>
   </div>
