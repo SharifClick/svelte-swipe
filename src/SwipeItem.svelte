@@ -11,18 +11,18 @@
 
 
     function firehHeightChange(){
-        let sc_height = swipeItemInner.scrollHeight,
-        cl_height = swipeItemInner.clientHeight;
-        dispatch('swipe_item_height_change', {height: Math.max(sc_height, cl_height)});
-    }
-    function init(){
-        firehHeightChange();
+      if(swipeItemInner){
+        let {scrollHeight, clientHeight} = swipeItemInner;
+        dispatch('swipe_item_height_change', {height: Math.max(scrollHeight, clientHeight)});
+      }
     }
 
     $: active, (allow_dynamic_height && active && _height && requestAnimationFrame(firehHeightChange))
 
     onMount(() => {
-     allow_dynamic_height && firehHeightChange()
+     setTimeout(() => {
+      allow_dynamic_height && firehHeightChange()
+     }, 100);
     });
 </script>
 

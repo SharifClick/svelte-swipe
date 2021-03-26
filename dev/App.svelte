@@ -42,6 +42,14 @@
     "./images/4.jpg"
   ];
 
+  let dy_images = [
+    "./images/dy-1.jpg",
+    "./images/dy-2.jpg",
+    "./images/dy-3.jpg",
+    "./images/dy-4.jpg",
+    "./images/dy-5.jpg",
+  ];
+
   let tabs = [
     {name:'Deafult', value:'default'},
     {name:'Vertical', value:'vertical'},
@@ -316,7 +324,7 @@
             <p class="lead">Dynamic height with children</p>
             <div class="swipe-holder" style="height:{swipe_holder_height}px">
               <Swipe bind:active_item={_active_item}>
-                {#each images as image, i}
+                {#each dy_images as image, i}
                   <SwipeItem active={_active_item == i} allow_dynamic_height={true} on:swipe_item_height_change={heightChanged}>
                     <img class="img-fluid" src={image} alt="" >
                   </SwipeItem>
