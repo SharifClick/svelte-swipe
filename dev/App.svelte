@@ -329,7 +329,9 @@
               <Swipe bind:active_item={_active_item}>
                 {#each dy_images as image, i}
                   <SwipeItem active={_active_item == i} allow_dynamic_height={true} on:swipe_item_height_change={heightChanged}>
+                  <div class="text-center" style="background-color:lightgrey">
                     <img class="img-fluid" src={image} alt="" >
+                  </div>
                   </SwipeItem>
                 {/each}
               </Swipe>

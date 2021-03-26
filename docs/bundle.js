@@ -2178,20 +2178,25 @@ var app = (function () {
 
     // (331:18) <SwipeItem active={_active_item == i} allow_dynamic_height={true} on:swipe_item_height_change={heightChanged}>
     function create_default_slot_1(ctx) {
-    	var img, img_src_value, t;
+    	var div, img, img_src_value, t;
 
     	return {
     		c: function create() {
+    			div = element("div");
     			img = element("img");
     			t = space();
     			attr(img, "class", "img-fluid svelte-1ge0mia");
     			attr(img, "src", img_src_value = ctx.image);
     			attr(img, "alt", "");
-    			add_location(img, file$2, 331, 20, 10391);
+    			add_location(img, file$2, 332, 20, 10471);
+    			attr(div, "class", "text-center svelte-1ge0mia");
+    			set_style(div, "background-color", "lightgrey");
+    			add_location(div, file$2, 331, 18, 10389);
     		},
 
     		m: function mount(target, anchor) {
-    			insert(target, img, anchor);
+    			insert(target, div, anchor);
+    			append(div, img);
     			insert(target, t, anchor);
     		},
 
@@ -2199,7 +2204,7 @@ var app = (function () {
 
     		d: function destroy(detaching) {
     			if (detaching) {
-    				detach(img);
+    				detach(div);
     				detach(t);
     			}
     		}
