@@ -1001,11 +1001,11 @@ var app = (function () {
     			if (default_slot) default_slot.c();
 
     			attr(div0, "class", "swipeable-item-inner svelte-exn8e7");
-    			add_location(div0, file$1, 41, 2, 1078);
+    			add_location(div0, file$1, 41, 2, 1099);
     			add_render_callback(() => ctx.div1_resize_handler.call(div1));
     			attr(div1, "class", div1_class_value = "swipeable-item " + ctx.classes + " " + (ctx.active ? 'is-active' : '') + " " + " svelte-exn8e7");
     			attr(div1, "style", ctx.style);
-    			add_location(div1, file$1, 40, 0, 963);
+    			add_location(div1, file$1, 40, 0, 984);
     		},
 
     		l: function claim(nodes) {
@@ -1083,7 +1083,7 @@ var app = (function () {
 
         onMount(() => {
          setTimeout(() => {
-          allow_dynamic_height && firehHeightChange();
+          allow_dynamic_height && requestAnimationFrame(firehHeightChange);
          }, 100);
         });
 

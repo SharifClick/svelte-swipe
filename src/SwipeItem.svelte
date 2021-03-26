@@ -21,7 +21,7 @@
 
     onMount(() => {
      setTimeout(() => {
-      allow_dynamic_height && firehHeightChange()
+      allow_dynamic_height && requestAnimationFrame(firehHeightChange)
      }, 100);
     });
 </script>
