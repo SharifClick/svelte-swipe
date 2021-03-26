@@ -42,13 +42,8 @@
         fireSizeChange();
     }
 
+    $: active, (active && _height && requestAnimationFrame(fireSizeChange))
 
-    afterUpdate(() => {
-      console.log({active, _height})
-      if(_height){
-        requestAnimationFrame(fireSizeChange)
-      }
-    });
 
     onMount(() => {
       setTimeout(() => {

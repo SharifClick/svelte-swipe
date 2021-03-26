@@ -9,6 +9,7 @@
   };
 
   let active_item = 0; //readonly
+  let _active_item = 0; // used in dynamic height swipe items
 
   let customThumbnail = false;
 
@@ -47,10 +48,16 @@
     {name:'Allow Pointer', value:'allow-pointer'},
     {name:'Dynamic Height', value:'dynamic-height'},
   ];
-  let active_tab = 'default';
+  let active_tab = 'dynamic-height';
 
   function changeTab(tab) {
     active_tab = tab.value
+  }
+
+  let swipe_holder_height = 500;
+  function heightChanged({detail}) {
+    console.log(detail.height)
+    swipe_holder_height = detail.height;
   }
 </script>
 
@@ -307,6 +314,41 @@
         {#if active_tab == 'dynamic-height'}
           <div class="tab-pane fade show active">
             <p class="lead">Dynamic height with children</p>
+            <div class="swipe-holder" style="height:{swipe_holder_height}px">
+              <Swipe bind:active_item={_active_item}>
+                <SwipeItem  active={_active_item == 0} on:heightChange={heightChanged}>
+                  <div class="is-stack is-center" style="background:teal; height:400px">
+                    <button class="custom-button has-pointer-event" on:click={sayHi}>
+                      Say Hi
+                    </button>
+                  </div>
+                </SwipeItem>
+
+                <SwipeItem active={_active_item == 1} on:heightChange={heightChanged}>
+                  <div class="is-stack is-center" style="background:yellowgreen; height:500px">
+                    <button class="custom-button has-pointer-event" on:click={sayHi}>
+                      Say Hi
+                    </button>
+                  </div>
+                </SwipeItem>
+
+                <SwipeItem active={_active_item == 2} on:heightChange={heightChanged}>
+                  <div class="is-stack is-center" style="background:aqua; height:600px">
+                    <button class="custom-button has-pointer-event" on:click={sayHi}>
+                      Say Hi
+                    </button>
+                  </div>
+                </SwipeItem>
+
+                <SwipeItem active={_active_item == 3} on:heightChange={heightChanged}>
+                  <div class="is-stack is-center" style="background:lightcoral; height:200px">
+                    <button class="custom-button has-pointer-event" on:click={sayHi}>
+                      Say Hi
+                    </button>
+                  </div>
+                </SwipeItem>
+              </Swipe>
+            </div>
           </div>
         {/if}
       </div>
