@@ -78,3 +78,9 @@
 
 * merged pr #31
 * fixed page scroll on swipe issue
+
+## 1.8.0
+
+* merged pr #42
+* Fixed issue #27
+* Allow Swipe height automatically follow the SwipeItem children
