@@ -75,6 +75,34 @@ npm i -D svelte-swipe
 </div>
 
 ```
+
+### Supports Dynamic height (from child) 🔥
+
+```html
+
+<script>
+  let swipe_holder_height = 0;
+
+  function heightChanged({detail}) {
+    swipe_holder_height = detail.height;
+  }
+
+</script>
+
+<div class="swipe-holder" style="height:{swipe_holder_height}px">
+  <Swipe bind:active_item>
+    {#each items as item, i}
+      <SwipeItem
+        active={active_item == i}
+        allow_dynamic_height={true}
+        on:swipe_item_height_change={heightChanged}>
+        ....
+      </SwipeItem>
+    {/each}
+  </Swipe>
+</div>
+
+```
 ### Vertical Swipe 🔥
 
 ```html
@@ -114,7 +142,7 @@ npm i -D svelte-swipe
 ```
 
 
-### Programmatically change slides 
+### Programmatically change slides
 
 ```html
 
