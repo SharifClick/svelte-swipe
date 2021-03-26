@@ -1,5 +1,5 @@
 <script>
-  import { Swipe, SwipeItem, DynamicSwipeItem } from "../src/index.js";
+  import { Swipe, SwipeItem } from "../src/index.js";
 
   const swipeConfig = {
     autoplay: false,
@@ -316,37 +316,11 @@
             <p class="lead">Dynamic height with children</p>
             <div class="swipe-holder" style="height:{swipe_holder_height}px">
               <Swipe bind:active_item={_active_item}>
-                <DynamicSwipeItem  active={_active_item == 0} on:heightChange={heightChanged}>
-                  <div class="is-stack is-center" style="background:teal; height:400px">
-                    <button class="custom-button has-pointer-event" on:click={sayHi}>
-                      Say Hi
-                    </button>
-                  </div>
-                </DynamicSwipeItem>
-
-                <DynamicSwipeItem active={_active_item == 1} on:heightChange={heightChanged}>
-                  <div class="is-stack is-center" style="background:yellowgreen; height:500px">
-                    <button class="custom-button has-pointer-event" on:click={sayHi}>
-                      Say Hi
-                    </button>
-                  </div>
-                </DynamicSwipeItem>
-
-                <DynamicSwipeItem active={_active_item == 2} on:heightChange={heightChanged}>
-                  <div class="is-stack is-center" style="background:aqua; height:600px">
-                    <button class="custom-button has-pointer-event" on:click={sayHi}>
-                      Say Hi
-                    </button>
-                  </div>
-                </DynamicSwipeItem>
-
-                <DynamicSwipeItem active={_active_item == 3} on:heightChange={heightChanged}>
-                  <div class="is-stack is-center" style="background:lightcoral; height:200px">
-                    <button class="custom-button has-pointer-event" on:click={sayHi}>
-                      Say Hi
-                    </button>
-                  </div>
-                </DynamicSwipeItem>
+                {#each images as image, i}
+                  <SwipeItem active={_active_item == i} allow_dynamic_height={true} on:heightChange={heightChanged}>
+                    <img class="img-fluid" src={image} alt="" >
+                  </SwipeItem>
+                {/each}
               </Swipe>
             </div>
           </div>
