@@ -215,6 +215,8 @@ npm i -D svelte-swipe
 | `transitionDuration` | `Number` | staying duration of per slide/swipe item | No | `200` *ms |
 | `delay` | `Number` | transition delay | No | `1000` *ms |
 | `defaultIndex` | `Number` | initial item index | No |`0` |
+| `allow_dynamic_height` | `Boolean` | allow firing height change event | No |`false` |
+| `active` | `Boolean` | fire height change event | No |`false` |
 
 ## NPM Statistics
 
