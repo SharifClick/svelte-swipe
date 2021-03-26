@@ -321,7 +321,10 @@
         {/if}
         {#if active_tab == 'dynamic-height'}
           <div class="tab-pane fade show active">
-            <p class="lead">Dynamic height with children</p>
+            <div class="row">
+              <div class="col-md-6"> <p class="lead">Dynamic height with children</p> </div>
+              <div class="col-md-6 text-right"><p class="lead">Item Height: {swipe_holder_height}</p></div>
+            </div>
             <div class="swipe-holder" style="height:{swipe_holder_height}px">
               <Swipe bind:active_item={_active_item}>
                 {#each dy_images as image, i}
