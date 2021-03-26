@@ -56,7 +56,7 @@
     {name:'Allow Pointer', value:'allow-pointer'},
     {name:'Dynamic Height', value:'dynamic-height'},
   ];
-  let active_tab = 'dynamic-height';
+  let active_tab = 'default';
 
   function changeTab(tab) {
     active_tab = tab.value
@@ -74,7 +74,7 @@
     --sv-swipe-indicator-active-color: white;
   }
   .is-stack {
-    height: 100%;
+    height: 300px;
     width: 100%;
   }
   .swipe-holder {
