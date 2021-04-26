@@ -1,4 +1,5 @@
 # Svelte Swipe
+
 <p>
   <a href="https://www.npmjs.com/package/svelte-swipe"><img  src="https://img.shields.io/npm/v/svelte-swipe?style=for-the-badge"/></a>
   <a href="https://www.npmjs.com/package/svelte-swipe">
@@ -14,20 +15,18 @@
   <a href="https://svelte.dev"><img  src="https://img.shields.io/badge/svelte-v3-blueviolet?style=for-the-badge"/></a>
 </p>
 
-[English](README.md) / [Korean](README_KO.md) / [简体中文](README_CN.md)
+Svelte 轮播组件 :fire: :boom: (无依赖文件 - 压缩后仅 3.37 KB )
 
-Swipable items wrapper component for Svelte :fire: :boom: (zero dependencies - 3.37 KB gzipped)
-
-## 🚀[See it in Action](https://sharifclick.github.io/svelte-swipe/)
+## 🚀[查看示例](https://sharifclick.github.io/svelte-swipe/)
 
 
-## Installation
+## 如何安装
 
 ```bash
 npm i -D svelte-swipe
 ```
 
-## Usage
+## 使用方法
 
 ```html
 <script>
@@ -75,35 +74,7 @@ npm i -D svelte-swipe
 </div>
 
 ```
-
-### Supports Dynamic height (from child) 🔥
-
-```html
-
-<script>
-  let swipe_holder_height = 0;
-
-  function heightChanged({detail}) {
-    swipe_holder_height = detail.height;
-  }
-
-</script>
-
-<div class="swipe-holder" style="height:{swipe_holder_height}px">
-  <Swipe bind:active_item>
-    {#each items as item, i}
-      <SwipeItem
-        active={active_item == i}
-        allow_dynamic_height={true}
-        on:swipe_item_height_change={heightChanged}>
-        ....
-      </SwipeItem>
-    {/each}
-  </Swipe>
-</div>
-
-```
-### Vertical Swipe 🔥
+### 垂直轮播 🔥
 
 ```html
 
@@ -117,7 +88,7 @@ npm i -D svelte-swipe
 </div>
 ```
 
-### Pointer event inside Swipe Item
+### 轮播项的点击事件
 
 ```html
 <style>
@@ -142,7 +113,7 @@ npm i -D svelte-swipe
 ```
 
 
-### Programmatically change slides
+### 自定义的轮播方式 
 
 ```html
 
@@ -170,8 +141,8 @@ npm i -D svelte-swipe
 </div>
 ```
 
-### Supports custom thumbnail
-## 🚀[See example with custom thumbnail](https://svelte.dev/repl/be477862ac8b4dfea4c8e454e556ef2c?version=3.20.1)
+### 支持自定义轮播缩略图
+## 🚀[查看带有自定义轮播图的示例](https://svelte.dev/repl/be477862ac8b4dfea4c8e454e556ef2c?version=3.20.1)
 ```html
 
 <script>
@@ -191,7 +162,7 @@ npm i -D svelte-swipe
 
 ```
 
-## Default css custom properties
+## 默认的css自定义属性
 
 ```css
 
@@ -205,25 +176,23 @@ npm i -D svelte-swipe
 
 ```
 
-## Config Props
+## 配置项
 
-| Name | Type | Description | Required | Default |
+| 名称 | 类型 | 描述 | 必填 | 默认值 |
 | --- | --- | --- | --- | --- |
-| `is_vertical` | `Boolean` | allow swipe items vertically | No | `false` |
-| `autoplay` | `Boolean` | Play items as slide | No | `false` |
-| `showIndicators` | `Boolean` | appears clickable circle indicators bottom center of item | No | `false` |
-| `transitionDuration` | `Number` | staying duration of per slide/swipe item | No | `200` *ms |
-| `delay` | `Number` | transition delay | No | `1000` *ms |
-| `defaultIndex` | `Number` | initial item index | No |`0` |
-| `allow_dynamic_height` | `Boolean` | allow firing height change event | No |`false` |
-| `active` | `Boolean` | fire height change event | No |`false` |
+| `is_vertical` | `Boolean` | 允许轮播图垂直滑动 | No | `false` |
+| `autoplay` | `Boolean` | 允许轮播图自动滚动 | No | `false` |
+| `showIndicators` | `Boolean` | 在轮播图下方显示默认轮播指示器 | No | `false` |
+| `transitionDuration` | `Number` | 轮播图动画过渡时间 | No | `200` 毫秒 |
+| `delay` | `Number` | 轮播图自动滚动等待时间 | No | `1000` 毫秒 |
+| `defaultIndex` | `Number` | 轮播图初始位置索引 | No |`0` |
 
-## NPM Statistics
+## NPM 统计
 
-Download stats for this NPM package
+此 NPM 包的统计信息
 
 [![NPM](https://nodei.co/npm/svelte-swipe.png)](https://nodei.co/npm/svelte-swipe/)
 
-### Scan qr code to see url in your device
+### 扫描二维码在手机端查看示例效果
 
 ![demo-url](https://github.com/SharifClick/svelte-swipe/blob/master/docs/images/url-code.png)
