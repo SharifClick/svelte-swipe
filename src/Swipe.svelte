@@ -79,12 +79,6 @@
     }
   }
 
-  function normalizeEventBehavior(e) {
-    e && e.preventDefault();
-    e && e.stopImmediatePropagation();
-    e && e.stopPropagation();
-  }
-
   function generateTranslateValue(value){
     return  is_vertical ? `translate3d(0, ${value}px, 0)` : `translate3d(${value}px, 0, 0)`;
   }
