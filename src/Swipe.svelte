@@ -16,7 +16,7 @@
     indicators,
     total_elements = 0,
     availableSpace = 0,
-    availableWidth = 0,
+    availableMeasure = 0,
     swipeElements,
     availableDistance = 0,
     swipeWrapper,
@@ -45,7 +45,7 @@
       element.style.transform = generateTranslateValue(availableSpace * i);
     });
     availableDistance = 0;
-    availableWidth = availableSpace * (total_elements - 1)
+    availableMeasure = availableSpace * (total_elements - 1)
     if(defaultIndex){
       changeItem(defaultIndex);
     }
