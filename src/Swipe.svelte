@@ -121,10 +121,18 @@
 
   function onMove(e){
     if (touch_active) {
-      normalizeEventBehavior(e)
+      e.stopImmediatePropagation();
+      e.stopPropagation();
+      let prevent_default_event = true;
       let _axis = e.touches ? e.touches[0][page_axis] : e[page_axis],
-        distance = (axis - _axis) + pos_axis;
-      if (distance <= availableWidth && distance >= 0) {
+      distance = (axis - _axis) + pos_axis;
+      if((pos_axis == 0 && (axis < _axis)) || (pos_axis == availableMeasure && (axis > _axis))){
+        prevent_default_event = false;
+      }
+      if(prevent_default_event){
+        e.preventDefault();
+      }
+      if (distance <= availableMeasure && distance >= 0) {
         [...swipeElements].forEach((element, i) => {
           element.style.cssText = generateTouchPosCss((availableSpace * i) - distance);
         });
