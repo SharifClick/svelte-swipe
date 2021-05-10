@@ -135,7 +135,9 @@
   }
 
   function onMoveStart(e){
-    normalizeEventBehavior(e);
+    // e.preventDefault();
+    e.stopImmediatePropagation();
+    e.stopPropagation();
     touch_active = true;
     longTouch = false;
     setTimeout(function() {
