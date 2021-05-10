@@ -156,7 +156,12 @@
   }
 
   function onEnd(e) {
-    normalizeEventBehavior(e)
+    if(e.cancelable) {
+      e.preventDefault();
+    }
+    e.stopImmediatePropagation();
+    e.stopPropagation();
+     console.log(axis)
     let direction = axis < last_axis_pos;
     touch_active = false;
     let _as = availableSpace;
