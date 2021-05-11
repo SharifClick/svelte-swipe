@@ -84,3 +84,9 @@
 * merged pr #42
 * Fixed issue #27
 * Allow Swipe height automatically follow the SwipeItem children
+
+## 1.8.1
+
+* merged pr #44
+* Fixed issue #43
+* Allow default scroll on touch (for mobile)
