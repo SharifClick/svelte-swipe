@@ -16,7 +16,7 @@
     indicators,
     total_elements = 0,
     availableSpace = 0,
-    availableWidth = 0,
+    availableMeasure = 0,
     swipeElements,
     availableDistance = 0,
     swipeWrapper,
@@ -45,7 +45,7 @@
       element.style.transform = generateTranslateValue(availableSpace * i);
     });
     availableDistance = 0;
-    availableWidth = availableSpace * (total_elements - 1)
+    availableMeasure = availableSpace * (total_elements - 1)
     if(defaultIndex){
       changeItem(defaultIndex);
     }
@@ -77,12 +77,6 @@
       window[delegationTypes[type]]('touchmove', onMove, {passive:false});
       window[delegationTypes[type]]('touchend', onEnd, {passive:false});
     }
-  }
-
-  function normalizeEventBehavior(e) {
-    e && e.preventDefault();
-    e && e.stopImmediatePropagation();
-    e && e.stopPropagation();
   }
 
   function generateTranslateValue(value){
@@ -121,10 +115,16 @@
 
   function onMove(e){
     if (touch_active) {
-      normalizeEventBehavior(e)
+      e.stopImmediatePropagation();
+      e.stopPropagation();
       let _axis = e.touches ? e.touches[0][page_axis] : e[page_axis],
-        distance = (axis - _axis) + pos_axis;
-      if (distance <= availableWidth && distance >= 0) {
+      distance = (axis - _axis) + pos_axis;
+      if(((pos_axis == 0 && (axis < _axis)) || (pos_axis == availableMeasure && (axis > _axis)))){
+        return;
+      }
+      e.preventDefault();
+
+      if (distance <= availableMeasure && distance >= 0) {
         [...swipeElements].forEach((element, i) => {
           element.style.cssText = generateTouchPosCss((availableSpace * i) - distance);
         });
@@ -135,7 +135,9 @@
   }
 
   function onMoveStart(e){
-    normalizeEventBehavior(e);
+    // e.preventDefault();
+    e.stopImmediatePropagation();
+    e.stopPropagation();
     touch_active = true;
     longTouch = false;
     setTimeout(function() {
@@ -146,7 +148,11 @@
   }
 
   function onEnd(e) {
-    normalizeEventBehavior(e)
+    if(e && e.cancelable) {
+      e.preventDefault();
+    }
+    e && e.stopImmediatePropagation();
+    e && e.stopPropagation();
     let direction = axis < last_axis_pos;
     touch_active = false;
     let _as = availableSpace;

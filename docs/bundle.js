@@ -430,7 +430,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (266:3) {#if showIndicators}
+    // (272:3) {#if showIndicators}
     function create_if_block(ctx) {
     	var div;
 
@@ -450,7 +450,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
     			attr(div, "class", "swipe-indicator swipe-indicator-inside svelte-pbdz13");
-    			add_location(div, file, 266, 5, 6862);
+    			add_location(div, file, 272, 5, 7065);
     		},
 
     		m: function mount(target, anchor) {
@@ -494,7 +494,7 @@ var app = (function () {
     	};
     }
 
-    // (268:8) {#each indicators as x, i }
+    // (274:8) {#each indicators as x, i }
     function create_each_block(ctx) {
     	var span, span_class_value, dispose;
 
@@ -506,7 +506,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			attr(span, "class", span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-pbdz13");
-    			add_location(span, file, 268, 10, 6963);
+    			add_location(span, file, 274, 10, 7166);
     			dispose = listen(span, "click", click_handler);
     		},
 
@@ -553,15 +553,15 @@ var app = (function () {
     			if (if_block) if_block.c();
 
     			attr(div0, "class", "swipeable-slot-wrapper svelte-pbdz13");
-    			add_location(div0, file, 259, 6, 6623);
+    			add_location(div0, file, 265, 6, 6826);
     			attr(div1, "class", "swipeable-total_elements svelte-pbdz13");
-    			add_location(div1, file, 258, 4, 6577);
+    			add_location(div1, file, 264, 4, 6780);
     			attr(div2, "class", "swipe-item-wrapper svelte-pbdz13");
-    			add_location(div2, file, 257, 2, 6514);
+    			add_location(div2, file, 263, 2, 6717);
     			attr(div3, "class", "swipe-handler svelte-pbdz13");
-    			add_location(div3, file, 264, 2, 6717);
+    			add_location(div3, file, 270, 2, 6920);
     			attr(div4, "class", "swipe-panel svelte-pbdz13");
-    			add_location(div4, file, 256, 0, 6485);
+    			add_location(div4, file, 262, 0, 6688);
 
     			dispose = [
     				listen(div3, "touchstart", ctx.onMoveStart),
@@ -640,12 +640,6 @@ var app = (function () {
     	};
     }
 
-    function normalizeEventBehavior(e) {
-      e && e.preventDefault();
-      e && e.stopImmediatePropagation();
-      e && e.stopPropagation();
-    }
-
     function instance($$self, $$props, $$invalidate) {
     	let { transitionDuration = 200, showIndicators = false, autoplay = false, delay = 1000, defaultIndex = 0, active_item = 0, is_vertical = false } = $$props;
 
@@ -653,7 +647,7 @@ var app = (function () {
         indicators,
         total_elements = 0,
         availableSpace = 0,
-        availableWidth = 0,
+        availableMeasure = 0,
         swipeElements,
         availableDistance = 0,
         swipeWrapper,
@@ -682,7 +676,7 @@ var app = (function () {
           element.style.transform = generateTranslateValue(availableSpace * i);
         });
         availableDistance = 0;
-        availableWidth = availableSpace * (total_elements - 1);
+        availableMeasure = availableSpace * (total_elements - 1);
         if(defaultIndex){
           changeItem(defaultIndex);
         }
@@ -738,10 +732,16 @@ var app = (function () {
 
       function onMove(e){
         if (touch_active) {
-          normalizeEventBehavior(e);
+          e.stopImmediatePropagation();
+          e.stopPropagation();
           let _axis = e.touches ? e.touches[0][page_axis] : e[page_axis],
-            distance = (axis - _axis) + pos_axis;
-          if (distance <= availableWidth && distance >= 0) {
+          distance = (axis - _axis) + pos_axis;
+          if(((pos_axis == 0 && (axis < _axis)) || (pos_axis == availableMeasure && (axis > _axis)))){
+            return;
+          }
+          e.preventDefault();
+
+          if (distance <= availableMeasure && distance >= 0) {
             [...swipeElements].forEach((element, i) => {
               element.style.cssText = generateTouchPosCss((availableSpace * i) - distance);
             });
@@ -752,7 +752,9 @@ var app = (function () {
       }
 
       function onMoveStart(e){
-        normalizeEventBehavior(e);
+        // e.preventDefault();
+        e.stopImmediatePropagation();
+        e.stopPropagation();
         touch_active = true;
         longTouch = false;
         setTimeout(function() {
@@ -763,7 +765,11 @@ var app = (function () {
       }
 
       function onEnd(e) {
-        normalizeEventBehavior(e);
+        if(e && e.cancelable) {
+          e.preventDefault();
+        }
+        e && e.stopImmediatePropagation();
+        e && e.stopPropagation();
         let direction = axis < last_axis_pos;
         touch_active = false;
         let _as = availableSpace;
