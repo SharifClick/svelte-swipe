@@ -90,3 +90,6 @@
 * merged pr #44
 * Fixed issue #43
 * Allow default scroll on touch (for mobile)
+
+## 1.8.2
+* Fixed issue #51
