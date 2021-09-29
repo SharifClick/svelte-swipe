@@ -1,6 +1,6 @@
 <script>
 
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount, onDestroy, createEventDispatcher } from 'svelte';
 
 
   export let transitionDuration = 200;
@@ -31,6 +31,8 @@
 
   let played = defaultIndex || 0;
   let run_interval = false;
+
+  let fire = createEventDispatcher();
 
   function init(){
     swipeElements = swipeWrapper.querySelectorAll('.swipeable-item');
@@ -162,7 +164,6 @@
     }else{
       availableDistance = direction ? Math.floor((availableDistance / _as))  * _as : Math.ceil((availableDistance / _as))  * _as
     }
-
     axis = null;
     last_axis_pos = null;
     pos_axis = availableDistance;
@@ -175,6 +176,9 @@
     active_item = activeIndicator;
     defaultIndex = active_item;
     eventDelegate('remove');
+
+    let swipe_direction = direction ? 'right' : 'left';
+    fire('change', {active_item, swipe_direction, active_element:swipeElements[active_item]})
   }
 
   function changeItem(item) {
