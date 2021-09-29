@@ -430,7 +430,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (272:3) {#if showIndicators}
+    // (276:3) {#if showIndicators}
     function create_if_block(ctx) {
     	var div;
 
@@ -450,7 +450,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
     			attr(div, "class", "swipe-indicator swipe-indicator-inside svelte-pbdz13");
-    			add_location(div, file, 272, 5, 7065);
+    			add_location(div, file, 276, 5, 7281);
     		},
 
     		m: function mount(target, anchor) {
@@ -494,7 +494,7 @@ var app = (function () {
     	};
     }
 
-    // (274:8) {#each indicators as x, i }
+    // (278:8) {#each indicators as x, i }
     function create_each_block(ctx) {
     	var span, span_class_value, dispose;
 
@@ -506,7 +506,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			attr(span, "class", span_class_value = "dot " + (ctx.activeIndicator == ctx.i ? 'is-active' : '') + " svelte-pbdz13");
-    			add_location(span, file, 274, 10, 7166);
+    			add_location(span, file, 278, 10, 7382);
     			dispose = listen(span, "click", click_handler);
     		},
 
@@ -553,15 +553,15 @@ var app = (function () {
     			if (if_block) if_block.c();
 
     			attr(div0, "class", "swipeable-slot-wrapper svelte-pbdz13");
-    			add_location(div0, file, 265, 6, 6826);
+    			add_location(div0, file, 269, 6, 7042);
     			attr(div1, "class", "swipeable-total_elements svelte-pbdz13");
-    			add_location(div1, file, 264, 4, 6780);
+    			add_location(div1, file, 268, 4, 6996);
     			attr(div2, "class", "swipe-item-wrapper svelte-pbdz13");
-    			add_location(div2, file, 263, 2, 6717);
+    			add_location(div2, file, 267, 2, 6933);
     			attr(div3, "class", "swipe-handler svelte-pbdz13");
-    			add_location(div3, file, 270, 2, 6920);
+    			add_location(div3, file, 274, 2, 7136);
     			attr(div4, "class", "swipe-panel svelte-pbdz13");
-    			add_location(div4, file, 262, 0, 6688);
+    			add_location(div4, file, 266, 0, 6904);
 
     			dispose = [
     				listen(div3, "touchstart", ctx.onMoveStart),
@@ -662,6 +662,8 @@ var app = (function () {
 
       let played = defaultIndex || 0;
       let run_interval = false;
+
+      let fire = createEventDispatcher();
 
       function init(){
         swipeElements = swipeWrapper.querySelectorAll('.swipeable-item');
@@ -779,7 +781,6 @@ var app = (function () {
         }else{
           availableDistance = direction ? Math.floor((availableDistance / _as))  * _as : Math.ceil((availableDistance / _as))  * _as;
         }
-
         axis = null;
         last_axis_pos = null;
         pos_axis = availableDistance;
@@ -792,6 +793,9 @@ var app = (function () {
         $$invalidate('active_item', active_item = activeIndicator);
         $$invalidate('defaultIndex', defaultIndex = active_item);
         eventDelegate('remove');
+
+        let swipe_direction = direction ? 'right' : 'left';
+        fire('change', {active_item, swipe_direction, active_element:swipeElements[active_item]});
       }
 
       function changeItem(item) {
@@ -1007,11 +1011,11 @@ var app = (function () {
     			if (default_slot) default_slot.c();
 
     			attr(div0, "class", "swipeable-item-inner svelte-exn8e7");
-    			add_location(div0, file$1, 41, 2, 1099);
+    			add_location(div0, file$1, 41, 2, 1091);
     			add_render_callback(() => ctx.div1_resize_handler.call(div1));
     			attr(div1, "class", div1_class_value = "swipeable-item " + ctx.classes + " " + (ctx.active ? 'is-active' : '') + " " + " svelte-exn8e7");
     			attr(div1, "style", ctx.style);
-    			add_location(div1, file$1, 40, 0, 984);
+    			add_location(div1, file$1, 40, 0, 976);
     		},
 
     		l: function claim(nodes) {
@@ -1077,13 +1081,13 @@ var app = (function () {
 
         let swipeItemInner = null;
         let _height = 0;
-        const dispatch = createEventDispatcher();
+        const fire = createEventDispatcher();
 
 
         function firehHeightChange(){
           if(swipeItemInner){
             let {scrollHeight, clientHeight} = swipeItemInner;
-            dispatch('swipe_item_height_change', {height: Math.max(scrollHeight, clientHeight)});
+            fire('swipe_item_height_change', {height: Math.max(scrollHeight, clientHeight)});
           }
         }
 
@@ -1212,7 +1216,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (180:6) {#each tabs as tab}
+    // (184:6) {#each tabs as tab}
     function create_each_block_4(ctx) {
     	var li, button, t0_value = ctx.tab.name + "", t0, button_class_value, t1, dispose;
 
@@ -1228,9 +1232,9 @@ var app = (function () {
     			t1 = space();
     			attr(button, "class", button_class_value = "nav-link " + (ctx.tab.value == ctx.active_tab ? 'active' : '') + " svelte-1ge0mia");
     			attr(button, "type", "button");
-    			add_location(button, file$2, 181, 10, 4377);
+    			add_location(button, file$2, 185, 10, 4468);
     			attr(li, "class", "nav-item svelte-1ge0mia");
-    			add_location(li, file$2, 180, 8, 4312);
+    			add_location(li, file$2, 184, 8, 4403);
     			dispose = listen(li, "click", click_handler);
     		},
 
@@ -1258,7 +1262,7 @@ var app = (function () {
     	};
     }
 
-    // (215:22) <SwipeItem>
+    // (219:22) <SwipeItem>
     function create_default_slot_10(ctx) {
     	var img, img_src_value, t;
 
@@ -1269,7 +1273,7 @@ var app = (function () {
     			attr(img, "class", "img-fluid svelte-1ge0mia");
     			attr(img, "src", img_src_value = ctx.image);
     			attr(img, "alt", "");
-    			add_location(img, file$2, 215, 24, 5796);
+    			add_location(img, file$2, 219, 24, 5911);
     		},
 
     		m: function mount(target, anchor) {
@@ -1288,7 +1292,7 @@ var app = (function () {
     	};
     }
 
-    // (214:20) {#each images as image}
+    // (218:20) {#each images as image}
     function create_each_block_3(ctx) {
     	var current;
 
@@ -1334,7 +1338,7 @@ var app = (function () {
     	};
     }
 
-    // (213:18) <Swipe {...swipeConfig} bind:active_item bind:this={SwipeComp}>
+    // (217:18) <Swipe {...swipeConfig} bind:active_item bind:this={SwipeComp} on:change={itemChanged}>
     function create_default_slot_9(ctx) {
     	var each_1_anchor, current;
 
@@ -1416,7 +1420,7 @@ var app = (function () {
     	};
     }
 
-    // (231:14) {#if customThumbnail}
+    // (235:14) {#if customThumbnail}
     function create_if_block_3(ctx) {
     	var div1, div0;
 
@@ -1437,9 +1441,9 @@ var app = (function () {
     				each_blocks[i].c();
     			}
     			attr(div0, "class", "is-center svelte-1ge0mia");
-    			add_location(div0, file$2, 232, 18, 6411);
+    			add_location(div0, file$2, 236, 18, 6526);
     			attr(div1, "class", "col svelte-1ge0mia");
-    			add_location(div1, file$2, 231, 16, 6374);
+    			add_location(div1, file$2, 235, 16, 6489);
     		},
 
     		m: function mount(target, anchor) {
@@ -1484,7 +1488,7 @@ var app = (function () {
     	};
     }
 
-    // (234:20) {#each images as image, i}
+    // (238:20) {#each images as image, i}
     function create_each_block_2(ctx) {
     	var img, img_class_value, img_src_value, dispose;
 
@@ -1501,7 +1505,7 @@ var app = (function () {
     			set_style(img, "cursor", "pointer");
     			attr(img, "src", img_src_value = ctx.image);
     			attr(img, "alt", "");
-    			add_location(img, file$2, 234, 22, 6506);
+    			add_location(img, file$2, 238, 22, 6621);
     			dispose = listen(img, "click", click_handler_1);
     		},
 
@@ -1526,7 +1530,7 @@ var app = (function () {
     	};
     }
 
-    // (264:8) {#if active_tab == 'vertical'}
+    // (268:8) {#if active_tab == 'vertical'}
     function create_if_block_2(ctx) {
     	var div3, p, t_1, div2, div1, div0, current;
 
@@ -1550,15 +1554,15 @@ var app = (function () {
     			div0 = element("div");
     			swipe.$$.fragment.c();
     			attr(p, "class", "lead svelte-1ge0mia");
-    			add_location(p, file$2, 265, 12, 7607);
+    			add_location(p, file$2, 269, 12, 7722);
     			attr(div0, "class", "swipe-holder svelte-1ge0mia");
-    			add_location(div0, file$2, 268, 16, 7726);
+    			add_location(div0, file$2, 272, 16, 7841);
     			attr(div1, "class", "col svelte-1ge0mia");
-    			add_location(div1, file$2, 267, 14, 7691);
+    			add_location(div1, file$2, 271, 14, 7806);
     			attr(div2, "class", "row svelte-1ge0mia");
-    			add_location(div2, file$2, 266, 12, 7658);
+    			add_location(div2, file$2, 270, 12, 7773);
     			attr(div3, "class", "tab-pane fade show active svelte-1ge0mia");
-    			add_location(div3, file$2, 264, 10, 7554);
+    			add_location(div3, file$2, 268, 10, 7669);
     		},
 
     		m: function mount(target, anchor) {
@@ -1600,7 +1604,7 @@ var app = (function () {
     	};
     }
 
-    // (272:22) <SwipeItem>
+    // (276:22) <SwipeItem>
     function create_default_slot_8(ctx) {
     	var img, img_src_value, t;
 
@@ -1611,7 +1615,7 @@ var app = (function () {
     			attr(img, "class", "img-fluid svelte-1ge0mia");
     			attr(img, "src", img_src_value = ctx.image);
     			attr(img, "alt", "");
-    			add_location(img, file$2, 272, 24, 7904);
+    			add_location(img, file$2, 276, 24, 8019);
     		},
 
     		m: function mount(target, anchor) {
@@ -1630,7 +1634,7 @@ var app = (function () {
     	};
     }
 
-    // (271:20) {#each images as image}
+    // (275:20) {#each images as image}
     function create_each_block_1(ctx) {
     	var current;
 
@@ -1676,7 +1680,7 @@ var app = (function () {
     	};
     }
 
-    // (270:18) <Swipe is_vertical={true}>
+    // (274:18) <Swipe is_vertical={true}>
     function create_default_slot_7(ctx) {
     	var each_1_anchor, current;
 
@@ -1758,7 +1762,7 @@ var app = (function () {
     	};
     }
 
-    // (282:8) {#if active_tab == 'allow-pointer'}
+    // (286:8) {#if active_tab == 'allow-pointer'}
     function create_if_block_1(ctx) {
     	var div1, p, t_1, div0, current;
 
@@ -1779,11 +1783,11 @@ var app = (function () {
     			div0 = element("div");
     			swipe.$$.fragment.c();
     			attr(p, "class", "lead svelte-1ge0mia");
-    			add_location(p, file$2, 283, 12, 8249);
+    			add_location(p, file$2, 287, 12, 8364);
     			attr(div0, "class", "swipe-holder svelte-1ge0mia");
-    			add_location(div0, file$2, 284, 12, 8326);
+    			add_location(div0, file$2, 288, 12, 8441);
     			attr(div1, "class", "tab-pane fade show active svelte-1ge0mia");
-    			add_location(div1, file$2, 282, 10, 8196);
+    			add_location(div1, file$2, 286, 10, 8311);
     		},
 
     		m: function mount(target, anchor) {
@@ -1817,7 +1821,7 @@ var app = (function () {
     	};
     }
 
-    // (287:16) <SwipeItem>
+    // (291:16) <SwipeItem>
     function create_default_slot_6(ctx) {
     	var div, button, dispose;
 
@@ -1827,10 +1831,10 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Say Hi";
     			attr(button, "class", "custom-button has-pointer-event svelte-1ge0mia");
-    			add_location(button, file$2, 288, 20, 8502);
+    			add_location(button, file$2, 292, 20, 8617);
     			attr(div, "class", "is-stack is-center svelte-1ge0mia");
     			set_style(div, "background", "teal");
-    			add_location(div, file$2, 287, 18, 8424);
+    			add_location(div, file$2, 291, 18, 8539);
     			dispose = listen(button, "click", sayHi);
     		},
 
@@ -1851,7 +1855,7 @@ var app = (function () {
     	};
     }
 
-    // (295:16) <SwipeItem>
+    // (299:16) <SwipeItem>
     function create_default_slot_5(ctx) {
     	var div, button, dispose;
 
@@ -1861,10 +1865,10 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Say Hi";
     			attr(button, "class", "custom-button has-pointer-event svelte-1ge0mia");
-    			add_location(button, file$2, 296, 20, 8820);
+    			add_location(button, file$2, 300, 20, 8935);
     			attr(div, "class", "is-stack is-center svelte-1ge0mia");
     			set_style(div, "background", "yellowgreen");
-    			add_location(div, file$2, 295, 18, 8735);
+    			add_location(div, file$2, 299, 18, 8850);
     			dispose = listen(button, "click", sayHi);
     		},
 
@@ -1885,7 +1889,7 @@ var app = (function () {
     	};
     }
 
-    // (303:16) <SwipeItem>
+    // (307:16) <SwipeItem>
     function create_default_slot_4(ctx) {
     	var div, button, dispose;
 
@@ -1895,10 +1899,10 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Say Hi";
     			attr(button, "class", "custom-button has-pointer-event svelte-1ge0mia");
-    			add_location(button, file$2, 304, 20, 9131);
+    			add_location(button, file$2, 308, 20, 9246);
     			attr(div, "class", "is-stack is-center svelte-1ge0mia");
     			set_style(div, "background", "aqua");
-    			add_location(div, file$2, 303, 18, 9053);
+    			add_location(div, file$2, 307, 18, 9168);
     			dispose = listen(button, "click", sayHi);
     		},
 
@@ -1919,7 +1923,7 @@ var app = (function () {
     	};
     }
 
-    // (311:16) <SwipeItem>
+    // (315:16) <SwipeItem>
     function create_default_slot_3(ctx) {
     	var div, button, dispose;
 
@@ -1929,10 +1933,10 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Say Hi";
     			attr(button, "class", "custom-button has-pointer-event svelte-1ge0mia");
-    			add_location(button, file$2, 312, 20, 9448);
+    			add_location(button, file$2, 316, 20, 9563);
     			attr(div, "class", "is-stack is-center svelte-1ge0mia");
     			set_style(div, "background", "lightcoral");
-    			add_location(div, file$2, 311, 18, 9364);
+    			add_location(div, file$2, 315, 18, 9479);
     			dispose = listen(button, "click", sayHi);
     		},
 
@@ -1953,7 +1957,7 @@ var app = (function () {
     	};
     }
 
-    // (286:14) <Swipe>
+    // (290:14) <Swipe>
     function create_default_slot_2(ctx) {
     	var t0, t1, t2, current;
 
@@ -2074,7 +2078,7 @@ var app = (function () {
     	};
     }
 
-    // (322:8) {#if active_tab == 'dynamic-height'}
+    // (326:8) {#if active_tab == 'dynamic-height'}
     function create_if_block$1(ctx) {
     	var div4, div2, div0, p0, t1, div1, p1, t2, t3, t4, div3, updating_active_item, current;
 
@@ -2111,20 +2115,20 @@ var app = (function () {
     			div3 = element("div");
     			swipe.$$.fragment.c();
     			attr(p0, "class", "lead svelte-1ge0mia");
-    			add_location(p0, file$2, 324, 37, 9874);
+    			add_location(p0, file$2, 328, 37, 9989);
     			attr(div0, "class", "col-md-6 svelte-1ge0mia");
-    			add_location(div0, file$2, 324, 14, 9851);
+    			add_location(div0, file$2, 328, 14, 9966);
     			attr(p1, "class", "lead svelte-1ge0mia");
-    			add_location(p1, file$2, 325, 47, 9978);
+    			add_location(p1, file$2, 329, 47, 10093);
     			attr(div1, "class", "col-md-6 text-right svelte-1ge0mia");
-    			add_location(div1, file$2, 325, 14, 9945);
+    			add_location(div1, file$2, 329, 14, 10060);
     			attr(div2, "class", "row svelte-1ge0mia");
-    			add_location(div2, file$2, 323, 12, 9818);
+    			add_location(div2, file$2, 327, 12, 9933);
     			attr(div3, "class", "swipe-holder svelte-1ge0mia");
     			set_style(div3, "height", "" + ctx.swipe_holder_height + "px");
-    			add_location(div3, file$2, 327, 12, 10072);
+    			add_location(div3, file$2, 331, 12, 10187);
     			attr(div4, "class", "tab-pane fade show active svelte-1ge0mia");
-    			add_location(div4, file$2, 322, 10, 9765);
+    			add_location(div4, file$2, 326, 10, 9880);
     		},
 
     		m: function mount(target, anchor) {
@@ -2182,7 +2186,7 @@ var app = (function () {
     	};
     }
 
-    // (331:18) <SwipeItem active={_active_item == i} allow_dynamic_height={true} on:swipe_item_height_change={heightChanged}>
+    // (335:18) <SwipeItem active={_active_item == i} allow_dynamic_height={true} on:swipe_item_height_change={heightChanged}>
     function create_default_slot_1(ctx) {
     	var div, img, img_src_value, t;
 
@@ -2194,10 +2198,10 @@ var app = (function () {
     			attr(img, "class", "img-fluid svelte-1ge0mia");
     			attr(img, "src", img_src_value = ctx.image);
     			attr(img, "alt", "");
-    			add_location(img, file$2, 332, 20, 10471);
+    			add_location(img, file$2, 336, 20, 10586);
     			attr(div, "class", "text-center svelte-1ge0mia");
     			set_style(div, "background-color", "lightgrey");
-    			add_location(div, file$2, 331, 18, 10389);
+    			add_location(div, file$2, 335, 18, 10504);
     		},
 
     		m: function mount(target, anchor) {
@@ -2217,7 +2221,7 @@ var app = (function () {
     	};
     }
 
-    // (330:16) {#each dy_images as image, i}
+    // (334:16) {#each dy_images as image, i}
     function create_each_block$1(ctx) {
     	var current;
 
@@ -2267,7 +2271,7 @@ var app = (function () {
     	};
     }
 
-    // (329:14) <Swipe bind:active_item={_active_item}>
+    // (333:14) <Swipe bind:active_item={_active_item}>
     function create_default_slot(ctx) {
     	var each_1_anchor, current;
 
@@ -2384,6 +2388,7 @@ var app = (function () {
 
     	binding_callbacks.push(() => bind(swipe, 'active_item', swipe_active_item_binding));
     	ctx.swipe_binding(swipe);
+    	swipe.$on("change", itemChanged);
 
     	var if_block0 = (ctx.customThumbnail) && create_if_block_3(ctx);
 
@@ -2463,16 +2468,16 @@ var app = (function () {
     			if (if_block3) if_block3.c();
     			attr(path0, "d", "M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z");
     			attr(path0, "class", "svelte-1ge0mia");
-    			add_location(path0, file$2, 148, 4, 2901);
+    			add_location(path0, file$2, 152, 4, 2992);
     			attr(path1, "d", "M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6\r\n      120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3\r\n      125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2");
     			attr(path1, "fill", "currentColor");
     			set_style(path1, "transform-origin", "130px 106px");
     			attr(path1, "class", "octo-arm svelte-1ge0mia");
-    			add_location(path1, file$2, 149, 4, 2969);
+    			add_location(path1, file$2, 153, 4, 3060);
     			attr(path2, "d", "M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6\r\n      C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0\r\n      C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1\r\n      C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4\r\n      C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9\r\n      C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5\r\n      C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9\r\n      L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z");
     			attr(path2, "fill", "currentColor");
     			attr(path2, "class", "octo-body svelte-1ge0mia");
-    			add_location(path2, file$2, 156, 4, 3290);
+    			add_location(path2, file$2, 160, 4, 3381);
     			attr(svg, "width", "80");
     			attr(svg, "height", "80");
     			attr(svg, "viewBox", "0 0 250 250");
@@ -2484,79 +2489,79 @@ var app = (function () {
     			set_style(svg, "right", "0");
     			attr(svg, "aria-hidden", "true");
     			attr(svg, "class", "svelte-1ge0mia");
-    			add_location(svg, file$2, 141, 2, 2713);
+    			add_location(svg, file$2, 145, 2, 2804);
     			attr(a, "href", "https://github.com/SharifClick/svelte-swipe");
     			attr(a, "class", "github-corner svelte-1ge0mia");
     			attr(a, "aria-label", "View source on GitHub");
-    			add_location(a, file$2, 137, 0, 2589);
+    			add_location(a, file$2, 141, 0, 2680);
     			attr(h1, "class", "text-muted svelte-1ge0mia");
-    			add_location(h1, file$2, 172, 6, 4059);
+    			add_location(h1, file$2, 176, 6, 4150);
     			attr(p, "class", "text-muted svelte-1ge0mia");
-    			add_location(p, file$2, 173, 6, 4107);
+    			add_location(p, file$2, 177, 6, 4198);
     			attr(div0, "class", "col svelte-1ge0mia");
-    			add_location(div0, file$2, 171, 4, 4034);
+    			add_location(div0, file$2, 175, 4, 4125);
     			attr(div1, "class", "row svelte-1ge0mia");
     			set_style(div1, "margin-top", "20px");
-    			add_location(div1, file$2, 170, 2, 3987);
+    			add_location(div1, file$2, 174, 2, 4078);
     			attr(ul, "class", "nav nav-tabs svelte-1ge0mia");
-    			add_location(ul, file$2, 178, 6, 4250);
+    			add_location(ul, file$2, 182, 6, 4341);
     			attr(div2, "class", "col svelte-1ge0mia");
-    			add_location(div2, file$2, 177, 4, 4225);
+    			add_location(div2, file$2, 181, 4, 4316);
     			attr(div3, "class", "row svelte-1ge0mia");
-    			add_location(div3, file$2, 176, 2, 4202);
+    			add_location(div3, file$2, 180, 2, 4293);
     			attr(input0, "class", "form-check-input svelte-1ge0mia");
     			attr(input0, "type", "checkbox");
-    			add_location(input0, file$2, 194, 18, 4875);
+    			add_location(input0, file$2, 198, 18, 4966);
     			attr(label0, "class", "text-muted svelte-1ge0mia");
-    			add_location(label0, file$2, 198, 18, 5050);
+    			add_location(label0, file$2, 202, 18, 5141);
     			attr(div4, "class", "form-check form-check-inline float-right svelte-1ge0mia");
-    			add_location(div4, file$2, 193, 16, 4801);
+    			add_location(div4, file$2, 197, 16, 4892);
     			attr(input1, "class", "form-check-input svelte-1ge0mia");
     			attr(input1, "type", "checkbox");
-    			add_location(input1, file$2, 201, 18, 5219);
+    			add_location(input1, file$2, 205, 18, 5310);
     			attr(label1, "class", "text-muted svelte-1ge0mia");
-    			add_location(label1, file$2, 205, 18, 5383);
+    			add_location(label1, file$2, 209, 18, 5474);
     			attr(div5, "class", "form-check form-check-inline float-right svelte-1ge0mia");
-    			add_location(div5, file$2, 200, 16, 5145);
+    			add_location(div5, file$2, 204, 16, 5236);
     			attr(div6, "class", "col svelte-1ge0mia");
-    			add_location(div6, file$2, 192, 14, 4766);
+    			add_location(div6, file$2, 196, 14, 4857);
     			attr(div7, "class", "row svelte-1ge0mia");
-    			add_location(div7, file$2, 191, 12, 4733);
+    			add_location(div7, file$2, 195, 12, 4824);
     			attr(div8, "class", "swipe-holder svelte-1ge0mia");
-    			add_location(div8, file$2, 211, 16, 5581);
+    			add_location(div8, file$2, 215, 16, 5672);
     			attr(div9, "class", "col svelte-1ge0mia");
-    			add_location(div9, file$2, 210, 14, 5546);
+    			add_location(div9, file$2, 214, 14, 5637);
     			attr(div10, "class", "row svelte-1ge0mia");
-    			add_location(div10, file$2, 209, 12, 5513);
+    			add_location(div10, file$2, 213, 12, 5604);
     			attr(input2, "class", "btn btn-info btn-sm svelte-1ge0mia");
     			attr(input2, "type", "button");
     			input2.value = input2_value_value = ctx.swipeConfig.autoplay ? 'Stop' : 'Play';
-    			add_location(input2, file$2, 224, 16, 6105);
+    			add_location(input2, file$2, 228, 16, 6220);
     			attr(div11, "class", "col svelte-1ge0mia");
-    			add_location(div11, file$2, 223, 14, 6070);
+    			add_location(div11, file$2, 227, 14, 6185);
     			attr(button0, "type", "button");
     			attr(button0, "class", "btn btn-secondary btn-sm svelte-1ge0mia");
-    			add_location(button0, file$2, 246, 18, 7008);
+    			add_location(button0, file$2, 250, 18, 7123);
     			attr(button1, "type", "button");
     			attr(button1, "class", "btn btn-secondary btn-sm svelte-1ge0mia");
-    			add_location(button1, file$2, 252, 18, 7222);
+    			add_location(button1, file$2, 256, 18, 7337);
     			attr(div12, "class", "btn-group float-right svelte-1ge0mia");
-    			add_location(div12, file$2, 245, 16, 6953);
+    			add_location(div12, file$2, 249, 16, 7068);
     			attr(div13, "class", "col svelte-1ge0mia");
-    			add_location(div13, file$2, 244, 14, 6918);
+    			add_location(div13, file$2, 248, 14, 7033);
     			attr(div14, "class", "row svelte-1ge0mia");
     			set_style(div14, "margin-top", "10px");
-    			add_location(div14, file$2, 222, 12, 6013);
+    			add_location(div14, file$2, 226, 12, 6128);
     			attr(div15, "class", div15_class_value = "tab-pane fade " + (ctx.active_tab == 'default' ? 'show active' : '') + " svelte-1ge0mia");
-    			add_location(div15, file$2, 190, 10, 4645);
+    			add_location(div15, file$2, 194, 10, 4736);
     			attr(div16, "class", "tab-content svelte-1ge0mia");
-    			add_location(div16, file$2, 189, 8, 4608);
+    			add_location(div16, file$2, 193, 8, 4699);
     			attr(div17, "class", "col svelte-1ge0mia");
-    			add_location(div17, file$2, 188, 4, 4581);
+    			add_location(div17, file$2, 192, 4, 4672);
     			attr(div18, "class", "row top-buffer svelte-1ge0mia");
-    			add_location(div18, file$2, 187, 2, 4547);
+    			add_location(div18, file$2, 191, 2, 4638);
     			attr(div19, "class", "container svelte-1ge0mia");
-    			add_location(div19, file$2, 169, 0, 3960);
+    			add_location(div19, file$2, 173, 0, 4051);
 
     			dispose = [
     				listen(input0, "change", ctx.input0_change_handler),
@@ -2794,6 +2799,10 @@ var app = (function () {
       alert("Hi");
     }
 
+    function itemChanged({detail}) {
+      console.log(detail);
+    }
+
     function instance$2($$self, $$props, $$invalidate) {
     	const swipeConfig = {
         autoplay: false,
@@ -2854,7 +2863,7 @@ var app = (function () {
 
       let swipe_holder_height = 500;
       function heightChanged({detail}) {
-        console.log(detail.height);
+        console.log('Swipe Holder Height '+detail.height);
         $$invalidate('swipe_holder_height', swipe_holder_height = detail.height);
       }
 
