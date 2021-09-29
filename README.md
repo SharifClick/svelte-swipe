@@ -205,7 +205,7 @@ npm i -D svelte-swipe
 
 ```
 
-## Config Props
+## Props
 
 | Name | Type | Description | Required | Default |
 | --- | --- | --- | --- | --- |
@@ -215,8 +215,16 @@ npm i -D svelte-swipe
 | `transitionDuration` | `Number` | staying duration of per slide/swipe item | No | `200` *ms |
 | `delay` | `Number` | transition delay | No | `1000` *ms |
 | `defaultIndex` | `Number` | initial item index | No |`0` |
-| `allow_dynamic_height` | `Boolean` | allow firing height change event | No |`false` |
+| `allow_dynamic_height` | `Boolean` | allow firing height change event `on:swipe_item_height_change` | No |`false` |
 | `active` | `Boolean` | fire height change event | No |`false` |
+
+## Events
+
+| Name | Description | Component |
+| --- | --- | --- |
+| `on:change` | fires on swipe-end with with holding detail `active_item`, `swipe_direction` and `active_element` | `Swipe` |
+| `on:swipe_item_height_change` | fires on swipe-end with holding child's current height detail | `SwipeItem` |
+
 
 ## NPM Statistics
 

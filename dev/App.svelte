@@ -64,8 +64,12 @@
 
   let swipe_holder_height = 500;
   function heightChanged({detail}) {
-    console.log(detail.height)
+    console.log('Swipe Holder Height '+detail.height)
     swipe_holder_height = detail.height;
+  }
+
+  function itemChanged({detail}) {
+    console.log(detail)
   }
 </script>
 
@@ -210,7 +214,7 @@
             <div class="row">
               <div class="col">
                 <div class="swipe-holder">
-                  <Swipe {...swipeConfig} bind:active_item bind:this={SwipeComp}>
+                  <Swipe {...swipeConfig} bind:active_item bind:this={SwipeComp} on:change={itemChanged}>
                     {#each images as image}
                       <SwipeItem>
                         <img class="img-fluid" src={image} alt="" />
