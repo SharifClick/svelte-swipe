@@ -35,46 +35,14 @@
 
 	let fire = createEventDispatcher();
 
-	function setElementTransformation({
-		elems = [],
-		availableSpace = 0,
-		pos_axis = 0,
-		has_infinite_loop = false,
-		distance = 0,
-		moving = false,
-		init = false,
-		end = false,
-		reset_end = false
-	}) {
-		elems.forEach((element, i) => {
-			let idx = has_infinite_loop ? i - 1 : i;
-			if (init) {
-				element.style.transform = generateTranslateValue(availableSpace * idx);
-			}
-			if (moving) {
-				element.style.cssText = generateTouchPosCss(availableSpace * idx - distance);
-			}
-			if (end) {
-				element.style.cssText = generateTouchPosCss(availableSpace * idx - pos_axis, true);
-			}
-			if (reset_end) {
-				element.style.cssText = generateTouchPosCss(availableSpace * idx - pos_axis);
-			}
-		});
-	}
-
 	function init() {
 		swipeItemsWrapper = swipeWrapper.querySelector('.swipeable-slot-wrapper');
 		swipeElements = swipeItemsWrapper.querySelectorAll('.swipeable-item');
 		total_elements = swipeElements.length;
 
 		if (allow_infinite_swipe) {
-			let first_element_cloned = swipeElements[total_elements - 1].cloneNode(true);
-			let last_element_cloned = swipeElements[0].cloneNode(true);
-			first_element_cloned.classList.add('first-element-cloned');
-			last_element_cloned.classList.add('last-element-cloned');
-			swipeItemsWrapper.prepend(first_element_cloned);
-			swipeItemsWrapper.append(last_element_cloned);
+			swipeItemsWrapper.prepend(swipeElements[total_elements - 1].cloneNode(true));
+			swipeItemsWrapper.append(swipeElements[0].cloneNode(true));
 			swipeElements = swipeItemsWrapper.querySelectorAll('.swipeable-item');
 		}
 
@@ -113,6 +81,35 @@
 	}
 
 	// helpers
+
+	function setElementTransformation({
+		elems = [],
+		availableSpace = 0,
+		pos_axis = 0,
+		has_infinite_loop = false,
+		distance = 0,
+		moving = false,
+		init = false,
+		end = false,
+		reset = false
+	}) {
+		elems.forEach((element, i) => {
+			let idx = has_infinite_loop ? i - 1 : i;
+			if (init) {
+				element.style.transform = generateTranslateValue(availableSpace * idx);
+			}
+			if (moving) {
+				element.style.cssText = generateTouchPosCss(availableSpace * idx - distance);
+			}
+			if (end) {
+				element.style.cssText = generateTouchPosCss(availableSpace * idx - pos_axis, true);
+			}
+			if (reset) {
+				element.style.cssText = generateTouchPosCss(availableSpace * idx - pos_axis);
+			}
+		});
+	}
+
 	function eventDelegate(type) {
 		let delegationTypes = {
 			add: 'addEventListener',
@@ -235,7 +232,7 @@
 		eventDelegate('remove');
 
 		console.log({ pos_axis: pos_axis, _as: _as, availableDistance: availableDistance });
-		if (active_item === -1) {
+		if (active_item === -1 || active_item === total_elements) {
 			console.log(_as * (total_elements - 1));
 			console.log(pos_axis);
 			console.log('shout out');
@@ -243,7 +240,24 @@
 			activeIndicator = pos_axis / _as;
 			setTimeout(() => {
 				setElementTransformation({
-					reset_end: true,
+					reset: true,
+					elems: [...swipeElements],
+					availableSpace: _as,
+					pos_axis,
+					has_infinite_loop: allow_infinite_swipe
+				});
+			}, 1000);
+		}
+
+		if (active_item === total_elements) {
+			console.log(_as * (total_elements - 1));
+			console.log(pos_axis);
+			console.log('shout out');
+			pos_axis = 0;
+			activeIndicator = pos_axis / _as;
+			setTimeout(() => {
+				setElementTransformation({
+					reset: true,
 					elems: [...swipeElements],
 					availableSpace: _as,
 					pos_axis,
