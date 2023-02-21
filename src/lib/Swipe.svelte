@@ -213,15 +213,14 @@
 		pos_axis = availableDistance;
 		activeIndicator = availableDistance / _as;
 
-		[...swipeElements].forEach((element, i) => {
-			element.style.cssText = generateTouchPosCss(_as * i - pos_axis, true);
-		});
+		// [...swipeElements].forEach((element, i) => {
+		// 	element.style.cssText = generateTouchPosCss(_as * i - pos_axis, true);
+		// });
 
 		setElementTransformation({
 			end: true,
 			elems: [...swipeElements],
-			availableSpace,
-			distance,
+			availableSpace: _as,
 			pos_axis,
 			has_infinite_loop: allow_infinite_swipe
 		});
