@@ -11,6 +11,7 @@
 
 	export let active_item = 0; //readonly
 	export let is_vertical = false;
+	export let allow_infinite_swipe = true;
 
 	let activeIndicator = 0,
 		indicators,
@@ -19,6 +20,7 @@
 		availableMeasure = 0,
 		swipeElements,
 		availableDistance = 0,
+		swipeItemsWrapper,
 		swipeWrapper,
 		swipeHandler,
 		pos_axis = 0,
@@ -32,18 +34,59 @@
 
 	let fire = createEventDispatcher();
 
+	function setElementTransformation({
+		elems = [],
+		availableSpace = 0,
+		pos_axis = 0,
+		has_infinite_loop = false,
+		distance = 0,
+		moving = false,
+		init = false,
+		end = false
+	}) {
+		elems.forEach((element, i) => {
+			let idx = has_infinite_loop ? i - 1 : i;
+			if (init) {
+				element.style.transform = generateTranslateValue(availableSpace * idx);
+			}
+			if (moving) {
+				element.style.cssText = generateTouchPosCss(availableSpace * idx - distance);
+			}
+			if (end) {
+				element.style.cssText = generateTouchPosCss(availableSpace * idx - pos_axis, true);
+			}
+		});
+	}
+
 	function init() {
-		swipeElements = swipeWrapper.querySelectorAll('.swipeable-item');
+		swipeItemsWrapper = swipeWrapper.querySelector('.swipeable-slot-wrapper');
+		swipeElements = swipeItemsWrapper.querySelectorAll('.swipeable-item');
 		total_elements = swipeElements.length;
+
+		if (allow_infinite_swipe) {
+			let first_element_cloned = swipeElements[total_elements - 1].cloneNode(true);
+			let last_element_cloned = swipeElements[0].cloneNode(true);
+			first_element_cloned.classList.add('first-element-cloned');
+			last_element_cloned.classList.add('last-element-cloned');
+			swipeItemsWrapper.prepend(first_element_cloned);
+			swipeItemsWrapper.append(last_element_cloned);
+			swipeElements = swipeItemsWrapper.querySelectorAll('.swipeable-item');
+		}
+
 		update();
 	}
 
 	function update() {
 		let { offsetWidth, offsetHeight } = swipeWrapper.querySelector('.swipeable-total_elements');
 		availableSpace = is_vertical ? offsetHeight : offsetWidth;
-		[...swipeElements].forEach((element, i) => {
-			element.style.transform = generateTranslateValue(availableSpace * i);
+
+		setElementTransformation({
+			init: true,
+			elems: [...swipeElements],
+			availableSpace,
+			has_infinite_loop: allow_infinite_swipe
 		});
+
 		availableDistance = 0;
 		availableMeasure = availableSpace * (total_elements - 1);
 		if (defaultIndex) {
@@ -113,18 +156,25 @@
 			e.stopPropagation();
 			let _axis = e.touches ? e.touches[0][page_axis] : e[page_axis],
 				distance = axis - _axis + pos_axis;
-			if ((pos_axis == 0 && axis < _axis) || (pos_axis == availableMeasure && axis > _axis)) {
-				return;
-			}
+			// if ((pos_axis == 0 && axis < _axis) || (pos_axis == availableMeasure && axis > _axis)) {
+			// 	return;
+			// }
 			e.preventDefault();
 
 			if (distance <= availableMeasure && distance >= 0) {
-				[...swipeElements].forEach((element, i) => {
-					element.style.cssText = generateTouchPosCss(availableSpace * i - distance);
-				});
-				availableDistance = distance;
-				last_axis_pos = _axis;
 			}
+			setElementTransformation({
+				moving: true,
+				elems: [...swipeElements],
+				availableSpace,
+				distance,
+				has_infinite_loop: allow_infinite_swipe
+			});
+			// [...swipeElements].forEach((element, i) => {
+			// 	element.style.cssText = generateTouchPosCss(availableSpace * i - distance);
+			// });
+			availableDistance = distance;
+			last_axis_pos = _axis;
 		}
 	}
 
@@ -165,6 +215,15 @@
 
 		[...swipeElements].forEach((element, i) => {
 			element.style.cssText = generateTouchPosCss(_as * i - pos_axis, true);
+		});
+
+		setElementTransformation({
+			end: true,
+			elems: [...swipeElements],
+			availableSpace,
+			distance,
+			pos_axis,
+			has_infinite_loop: allow_infinite_swipe
 		});
 
 		active_item = activeIndicator;
