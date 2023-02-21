@@ -22,6 +22,7 @@
 		availableDistance = 0,
 		swipeItemsWrapper,
 		swipeWrapper,
+		itemsActualLength,
 		swipeHandler,
 		pos_axis = 0,
 		page_axis = is_vertical ? 'pageY' : 'pageX',
@@ -42,7 +43,8 @@
 		distance = 0,
 		moving = false,
 		init = false,
-		end = false
+		end = false,
+		reset_end = false
 	}) {
 		elems.forEach((element, i) => {
 			let idx = has_infinite_loop ? i - 1 : i;
@@ -54,6 +56,9 @@
 			}
 			if (end) {
 				element.style.cssText = generateTouchPosCss(availableSpace * idx - pos_axis, true);
+			}
+			if (reset_end) {
+				element.style.cssText = generateTouchPosCss(availableSpace * idx - pos_axis);
 			}
 		});
 	}
@@ -228,6 +233,24 @@
 		active_item = activeIndicator;
 		defaultIndex = active_item;
 		eventDelegate('remove');
+
+		console.log({ pos_axis: pos_axis, _as: _as, availableDistance: availableDistance });
+		if (active_item === -1) {
+			console.log(_as * (total_elements - 1));
+			console.log(pos_axis);
+			console.log('shout out');
+			pos_axis = _as * (total_elements - 1);
+			activeIndicator = pos_axis / _as;
+			setTimeout(() => {
+				setElementTransformation({
+					reset_end: true,
+					elems: [...swipeElements],
+					availableSpace: _as,
+					pos_axis,
+					has_infinite_loop: allow_infinite_swipe
+				});
+			}, 1000);
+		}
 
 		let swipe_direction = direction ? 'right' : 'left';
 		fire('change', { active_item, swipe_direction, active_element: swipeElements[active_item] });
