@@ -234,4 +234,4 @@ Download stats for this NPM package
 
 ### Scan qr code to see url in your device
 
-![demo-url](https://github.com/SharifClick/svelte-swipe/blob/master/docs/images/url-code.png)
+![demo-url](https://github.com/SharifClick/svelte-swipe/blob/master/static/images/url-code.png)
