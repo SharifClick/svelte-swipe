@@ -24,14 +24,15 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite dev --force",
-    "build": "svelte-kit sync && svelte-package",
+    "build": "svelte-kit sync && vite build",
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
-    "format": "prettier --plugin-search-dir . --write ."
+    "format": "prettier --plugin-search-dir . --write .",
+    "page-build": "vite build && npx gh-pages -d build"
   },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "^2.0.0",
+    "@sveltejs/adapter-static": "^2.0.1",
     "@sveltejs/kit": "^1.5.6",
     "@sveltejs/package": "^2.0.1",
     "eslint": "^8.16.0",
