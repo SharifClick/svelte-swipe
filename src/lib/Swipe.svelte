@@ -261,8 +261,10 @@ transition-duration: ${touch_end ? transitionDuration : '0'}ms;
     played = played < total_elements - 1 ? ++played : 0;
   }
 
+  const mod = (n, m) => ((n % m) + m) % m;
+
   export function goTo(step) {
-    let item = Math.max(0, Math.min(step, indicators.length - 1));
+    let item = allow_infinite_swipe ? step : Math.max(0, Math.min(step, indicators.length - 1));
     changeItem(item);
   }
   export function prevItem() {
