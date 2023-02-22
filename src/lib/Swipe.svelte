@@ -22,8 +22,6 @@
 		availableDistance = 0,
 		swipeItemsWrapper,
 		swipeWrapper,
-		itemsActualLength,
-		swipeHandler,
 		pos_axis = 0,
 		page_axis = is_vertical ? 'pageY' : 'pageX',
 		axis,
@@ -130,10 +128,10 @@
 	function generateTouchPosCss(value, touch_end = false) {
 		let transformString = generateTranslateValue(value);
 		let _css = `
-      -webkit-transition-duration: ${touch_end ? transitionDuration : '0'}ms;
-      transition-duration: ${touch_end ? transitionDuration : '0'}ms;
-      -webkit-transform: ${transformString};
-      -ms-transform: ${transformString};`;
+-webkit-transition-duration: ${touch_end ? transitionDuration : '0'}ms;
+transition-duration: ${touch_end ? transitionDuration : '0'}ms;
+-webkit-transform: ${transformString};
+-ms-transform: ${transformString};`;
 		return _css;
 	}
 
@@ -172,9 +170,6 @@
 				distance,
 				has_infinite_loop: allow_infinite_swipe
 			});
-			// [...swipeElements].forEach((element, i) => {
-			// 	element.style.cssText = generateTouchPosCss(availableSpace * i - distance);
-			// });
 			availableDistance = distance;
 			last_axis_pos = _axis;
 		}
@@ -214,10 +209,8 @@
 		last_axis_pos = null;
 		pos_axis = availableDistance;
 		activeIndicator = availableDistance / _as;
-
-		// [...swipeElements].forEach((element, i) => {
-		// 	element.style.cssText = generateTouchPosCss(_as * i - pos_axis, true);
-		// });
+		active_item = activeIndicator;
+		defaultIndex = active_item;
 
 		setElementTransformation({
 			end: true,
@@ -227,45 +220,29 @@
 			has_infinite_loop: allow_infinite_swipe
 		});
 
-		active_item = activeIndicator;
-		defaultIndex = active_item;
+		if (allow_infinite_swipe) {
+			if (active_item === -1) {
+				pos_axis = _as * (total_elements - 1);
+			}
+			if (active_item === total_elements) {
+				pos_axis = 0;
+			}
+			activeIndicator = pos_axis / _as;
+			active_item = activeIndicator;
+			defaultIndex = active_item;
+
+			setTimeout(() => {
+				setElementTransformation({
+					reset: true,
+					elems: [...swipeElements],
+					availableSpace: _as,
+					pos_axis,
+					has_infinite_loop: allow_infinite_swipe
+				});
+			}, transitionDuration);
+		}
+
 		eventDelegate('remove');
-
-		console.log({ pos_axis: pos_axis, _as: _as, availableDistance: availableDistance });
-		if (active_item === -1 || active_item === total_elements) {
-			console.log(_as * (total_elements - 1));
-			console.log(pos_axis);
-			console.log('shout out');
-			pos_axis = _as * (total_elements - 1);
-			activeIndicator = pos_axis / _as;
-			setTimeout(() => {
-				setElementTransformation({
-					reset: true,
-					elems: [...swipeElements],
-					availableSpace: _as,
-					pos_axis,
-					has_infinite_loop: allow_infinite_swipe
-				});
-			}, 1000);
-		}
-
-		if (active_item === total_elements) {
-			console.log(_as * (total_elements - 1));
-			console.log(pos_axis);
-			console.log('shout out');
-			pos_axis = 0;
-			activeIndicator = pos_axis / _as;
-			setTimeout(() => {
-				setElementTransformation({
-					reset: true,
-					elems: [...swipeElements],
-					availableSpace: _as,
-					pos_axis,
-					has_infinite_loop: allow_infinite_swipe
-				});
-			}, 1000);
-		}
-
 		let swipe_direction = direction ? 'right' : 'left';
 		fire('change', { active_item, swipe_direction, active_element: swipeElements[active_item] });
 	}
@@ -305,12 +282,7 @@
 			</div>
 		</div>
 	</div>
-	<div
-		class="swipe-handler"
-		bind:this={swipeHandler}
-		on:touchstart={onMoveStart}
-		on:mousedown={onMoveStart}
-	/>
+	<div class="swipe-handler" on:touchstart={onMoveStart} on:mousedown={onMoveStart} />
 	{#if showIndicators}
 		<div class="swipe-indicator swipe-indicator-inside">
 			{#each indicators as x, i}
