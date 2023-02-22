@@ -11,7 +11,7 @@
 
   export let active_item = 0; //readonly
   export let is_vertical = false;
-  export let allow_infinite_swipe = true;
+  export let allow_infinite_swipe = false;
 
   let activeIndicator = 0,
     indicators,
@@ -156,9 +156,11 @@ transition-duration: ${touch_end ? transitionDuration : '0'}ms;
       e.stopPropagation();
       let _axis = e.touches ? e.touches[0][page_axis] : e[page_axis],
         distance = axis - _axis + pos_axis;
-      // if ((pos_axis == 0 && axis < _axis) || (pos_axis == availableMeasure && axis > _axis)) {
-      // 	return;
-      // }
+      if (!allow_infinite_swipe) {
+        if ((pos_axis == 0 && axis < _axis) || (pos_axis == availableMeasure && axis > _axis)) {
+          return;
+        }
+      }
       e.preventDefault();
 
       if (distance <= availableMeasure && distance >= 0) {
