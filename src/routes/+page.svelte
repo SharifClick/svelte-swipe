@@ -1,5 +1,6 @@
 <script>
   import { Swipe, SwipeItem } from '../lib';
+  import { base } from '$app/paths';
 
   const swipeConfig = {
     autoplay: false,
@@ -156,7 +157,7 @@
                 >
                   {#each images as image}
                     <SwipeItem>
-                      <img class="img-fluid" src={image} alt="" />
+                      <img class="img-fluid" src={base + '/' + image} alt="" />
                     </SwipeItem>
                   {/each}
                 </Swipe>
@@ -180,7 +181,7 @@
                       class="img-fluid {active_item == i ? 'rounded' : 'img-thumbnail'}"
                       on:click={() => changeSlide(i)}
                       style="height:30px; width:30px; cursor:pointer"
-                      src={image}
+                      src={base + '/' + image}
                       alt=""
                     />
                   {/each}
@@ -208,7 +209,7 @@
                   <Swipe is_vertical={true}>
                     {#each images as image}
                       <SwipeItem>
-                        <img class="img-fluid" src={image} alt="" />
+                        <img class="img-fluid" src={base + '/' + image} alt="" />
                       </SwipeItem>
                     {/each}
                   </Swipe>
@@ -274,7 +275,7 @@
                     on:swipe_item_height_change={heightChanged}
                   >
                     <div class="text-center" style="background-color:lightgrey">
-                      <img class="img-fluid" src={image} alt="" />
+                      <img class="img-fluid" src={base + '/' + image} alt="" />
                     </div>
                   </SwipeItem>
                 {/each}
@@ -312,7 +313,7 @@
                   >
                     {#each images as image}
                       <SwipeItem>
-                        <img class="img-fluid" src={image} alt="" />
+                        <img class="img-fluid" src={base + '/' + image} alt="" />
                       </SwipeItem>
                     {/each}
                   </Swipe>
@@ -336,7 +337,7 @@
                         class="img-fluid {active_item == i ? 'rounded' : 'img-thumbnail'}"
                         on:click={() => changeSlide(i)}
                         style="height:30px; width:30px; cursor:pointer"
-                        src={image}
+                        src={base + '/' + image}
                         alt=""
                       />
                     {/each}
