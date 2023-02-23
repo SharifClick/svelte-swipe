@@ -103,6 +103,24 @@ npm i -D svelte-swipe
 </div>
 
 ```
+### Supports Infinite swipe 🔥
+
+```html
+
+
+<div class="swipe-holder" style="height:{swipe_holder_height}px">
+  <Swipe bind:active_item>
+    {#each items as item, i}
+      <SwipeItem
+        active={active_item == i}
+        allow_infinite_swipe={true}>
+        ....
+      </SwipeItem>
+    {/each}
+  </Swipe>
+</div>
+
+```
 ### Vertical Swipe 🔥
 
 ```html
@@ -215,7 +233,8 @@ npm i -D svelte-swipe
 | `transitionDuration` | `Number` | staying duration of per slide/swipe item | No | `200` *ms |
 | `delay` | `Number` | transition delay | No | `1000` *ms |
 | `defaultIndex` | `Number` | initial item index | No |`0` |
-| `allow_dynamic_height` | `Boolean` | allow firing height change event `on:swipe_item_height_change` | No |`false` |
+| `allow_dynamic_height` | `Boolean` | allow firing height change event  `on:swipe_item_height_change` | No |`false` |
+| `allow_infinite_swipe` | `Boolean` | allow swipe items infinitely | No |`false` |
 | `active` | `Boolean` | fire height change event | No |`false` |
 
 ## Events
