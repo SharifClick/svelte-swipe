@@ -93,3 +93,13 @@
 
 ## 1.8.2
 * Fixed issue #51
+
+
+## 1.9.0
+* issue #34 resolved
+* Sveltekit featuring dev environment
+* Publish gh-pages
+* bugfixes
+
+## 1.9.1
+* Fix module import path
