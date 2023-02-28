@@ -113,250 +113,225 @@
       <p class="text-muted">Swipable items wrapper component for Svelte</p>
     </div>
   </div>
+
   <div class="row">
     <div class="col">
-      <ul class="nav nav-tabs">
-        {#each tabs as tab}
-          <li class="nav-item" on:click={() => changeTab(tab)}>
-            <button class="nav-link {tab.value == active_tab ? 'active' : ''}" type="button"
-              >{tab.name}</button
-            >
-          </li>
-        {/each}
-      </ul>
-    </div>
-  </div>
-  <div class="row top-buffer">
-    <div class="col">
-      <div class="tab-content">
-        <div class="tab-pane fade {active_tab == 'default' ? 'show active' : ''}">
-          <div class="row">
-            <div class="col">
-              <div class="form-check form-check-inline float-right">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  bind:checked={swipeConfig.showIndicators}
-                />
-                <label class="text-muted">Built-in Indicators</label>
-              </div>
-              <div class="form-check form-check-inline float-right">
-                <input class="form-check-input" type="checkbox" bind:checked={customThumbnail} />
-                <label class="text-muted">Custom Thumbnail</label>
-              </div>
-            </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-check form-check-inline float-right">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              bind:checked={swipeConfig.showIndicators}
+            />
+            <label class="text-muted">Built-in Indicators</label>
           </div>
-          <div class="row">
-            <div class="col">
-              <div class="swipe-holder">
-                <Swipe
-                  {...swipeConfig}
-                  bind:active_item
-                  bind:this={SwipeComp}
-                  on:change={itemChanged}
-                >
-                  {#each images as image}
-                    <SwipeItem>
-                      <img class="img-fluid" src={base + '/' + image} alt="" />
-                    </SwipeItem>
-                  {/each}
-                </Swipe>
-              </div>
-            </div>
-          </div>
-          <div class="row" style="margin-top:10px">
-            <div class="col">
-              <input
-                class="btn btn-info btn-sm"
-                type="button"
-                on:click={toggle}
-                value={swipeConfig.autoplay ? 'Stop' : 'Play'}
-              />
-            </div>
-            {#if customThumbnail}
-              <div class="col">
-                <div class="is-center">
-                  {#each images as image, i}
-                    <img
-                      class="img-fluid {active_item == i ? 'rounded' : 'img-thumbnail'}"
-                      on:click={() => changeSlide(i)}
-                      style="height:30px; width:30px; cursor:pointer"
-                      src={base + '/' + image}
-                      alt=""
-                    />
-                  {/each}
-                </div>
-              </div>
-            {/if}
-            <div class="col">
-              <div class="btn-group float-right">
-                <button type="button" class="btn btn-secondary btn-sm" on:click={prevSlide}>
-                  Prev
-                </button>
-                <button type="button" class="btn btn-secondary btn-sm" on:click={nextSlide}>
-                  Next
-                </button>
-              </div>
-            </div>
+          <div class="form-check form-check-inline float-right">
+            <input class="form-check-input" type="checkbox" bind:checked={customThumbnail} />
+            <label class="text-muted">Custom Thumbnail</label>
           </div>
         </div>
-        {#if active_tab == 'vertical'}
-          <div class="tab-pane fade show active">
-            <p class="lead">Vertical Swipe 🔥</p>
-            <div class="row">
-              <div class="col">
-                <div class="swipe-holder">
-                  <Swipe is_vertical={true}>
-                    {#each images as image}
-                      <SwipeItem>
-                        <img class="img-fluid" src={base + '/' + image} alt="" />
-                      </SwipeItem>
-                    {/each}
-                  </Swipe>
-                </div>
-              </div>
-            </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="swipe-holder">
+            <Swipe {...swipeConfig} bind:active_item bind:this={SwipeComp} on:change={itemChanged}>
+              {#each images as image}
+                <SwipeItem>
+                  <img class="img-fluid" src={base + '/' + image} alt="" />
+                </SwipeItem>
+              {/each}
+            </Swipe>
           </div>
-        {/if}
-        {#if active_tab == 'allow-pointer'}
-          <div class="tab-pane fade show active">
-            <p class="lead">Also allow pointer events inside Swipe Item</p>
-            <div class="swipe-holder">
-              <Swipe>
-                <SwipeItem>
-                  <div class="is-stack is-center" style="background:teal">
-                    <button class="custom-button has-pointer-event" on:click={sayHi}>
-                      Say Hi
-                    </button>
-                  </div>
-                </SwipeItem>
-
-                <SwipeItem>
-                  <div class="is-stack is-center" style="background:yellowgreen">
-                    <button class="custom-button has-pointer-event" on:click={sayHi}>
-                      Say Hi
-                    </button>
-                  </div>
-                </SwipeItem>
-
-                <SwipeItem>
-                  <div class="is-stack is-center" style="background:aqua">
-                    <button class="custom-button has-pointer-event" on:click={sayHi}>
-                      Say Hi
-                    </button>
-                  </div>
-                </SwipeItem>
-
-                <SwipeItem>
-                  <div class="is-stack is-center" style="background:lightcoral">
-                    <button class="custom-button has-pointer-event" on:click={sayHi}>
-                      Say Hi
-                    </button>
-                  </div>
-                </SwipeItem>
-              </Swipe>
-            </div>
-          </div>
-        {/if}
-        {#if active_tab == 'dynamic-height'}
-          <div class="tab-pane fade show active">
-            <div class="row">
-              <div class="col-md-6"><p class="lead">Dynamic height with children</p></div>
-              <div class="col-md-6 text-right">
-                <p class="lead">Item Height: {swipe_holder_height}</p>
-              </div>
-            </div>
-            <div class="swipe-holder" style="height:{swipe_holder_height}px">
-              <Swipe bind:active_item={_active_item}>
-                {#each dy_images as image, i}
-                  <SwipeItem
-                    active={_active_item == i}
-                    allow_dynamic_height={true}
-                    on:swipe_item_height_change={heightChanged}
-                  >
-                    <div class="text-center" style="background-color:lightgrey">
-                      <img class="img-fluid" src={base + '/' + image} alt="" />
-                    </div>
-                  </SwipeItem>
-                {/each}
-              </Swipe>
-            </div>
-          </div>
-        {/if}
-        {#if active_tab == 'infinite-swipe'}
-          <div class="tab-pane fade show active">
-            <div class="row">
-              <div class="col">
-                <div class="form-check form-check-inline float-right">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    bind:checked={swipeConfig.showIndicators}
-                  />
-                  <label class="text-muted">Built-in Indicators</label>
-                </div>
-                <div class="form-check form-check-inline float-right">
-                  <input class="form-check-input" type="checkbox" bind:checked={customThumbnail} />
-                  <label class="text-muted">Custom Thumbnail</label>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <div class="swipe-holder">
-                  <Swipe
-                    {...swipeConfig}
-                    allow_infinite_swipe={true}
-                    bind:active_item
-                    bind:this={SwipeComp}
-                    on:change={itemChanged}
-                  >
-                    {#each images as image}
-                      <SwipeItem>
-                        <img class="img-fluid" src={base + '/' + image} alt="" />
-                      </SwipeItem>
-                    {/each}
-                  </Swipe>
-                </div>
-              </div>
-            </div>
-            <div class="row" style="margin-top:10px">
-              <div class="col">
-                <input
-                  class="btn btn-info btn-sm"
-                  type="button"
-                  on:click={toggle}
-                  value={swipeConfig.autoplay ? 'Stop' : 'Play'}
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div class="col">
+          <input
+            class="btn btn-info btn-sm"
+            type="button"
+            on:click={toggle}
+            value={swipeConfig.autoplay ? 'Stop' : 'Play'}
+          />
+        </div>
+        {#if customThumbnail}
+          <div class="col">
+            <div class="is-center">
+              {#each images as image, i}
+                <img
+                  class="img-fluid {active_item == i ? 'rounded' : 'img-thumbnail'}"
+                  on:click={() => changeSlide(i)}
+                  style="height:30px; width:30px; cursor:pointer"
+                  src={base + '/' + image}
+                  alt=""
                 />
-              </div>
-              {#if customThumbnail}
-                <div class="col">
-                  <div class="is-center">
-                    {#each images as image, i}
-                      <img
-                        class="img-fluid {active_item == i ? 'rounded' : 'img-thumbnail'}"
-                        on:click={() => changeSlide(i)}
-                        style="height:30px; width:30px; cursor:pointer"
-                        src={base + '/' + image}
-                        alt=""
-                      />
-                    {/each}
-                  </div>
-                </div>
-              {/if}
-              <div class="col">
-                <div class="btn-group float-right">
-                  <button type="button" class="btn btn-secondary btn-sm" on:click={prevSlide}>
-                    Prev
-                  </button>
-                  <button type="button" class="btn btn-secondary btn-sm" on:click={nextSlide}>
-                    Next
-                  </button>
-                </div>
-              </div>
+              {/each}
             </div>
           </div>
         {/if}
+        <div class="col">
+          <div class="btn-group float-right">
+            <button type="button" class="btn btn-secondary btn-sm" on:click={prevSlide}>
+              Prev
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" on:click={nextSlide}>
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+  <div class="row">
+    <div class="col">
+      <h4 class="text-muted">Allow pointer events inside Swipe Item</h4>
+      <div class="swipe-holder">
+        <Swipe>
+          <SwipeItem>
+            <div class="is-stack is-center" style="background:teal">
+              <button class="custom-button has-pointer-event" on:click={sayHi}> Say Hi </button>
+            </div>
+          </SwipeItem>
+
+          <SwipeItem>
+            <div class="is-stack is-center" style="background:yellowgreen">
+              <button class="custom-button has-pointer-event" on:click={sayHi}> Say Hi </button>
+            </div>
+          </SwipeItem>
+
+          <SwipeItem>
+            <div class="is-stack is-center" style="background:aqua">
+              <button class="custom-button has-pointer-event" on:click={sayHi}> Say Hi </button>
+            </div>
+          </SwipeItem>
+
+          <SwipeItem>
+            <div class="is-stack is-center" style="background:lightcoral">
+              <button class="custom-button has-pointer-event" on:click={sayHi}> Say Hi </button>
+            </div>
+          </SwipeItem>
+        </Swipe>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+  <div class="row">
+    <div class="col">
+      <h4 class="text-muted">Dynamic Height</h4>
+      <div class="row">
+        <div class="col-md-6"><p class="lead">Dynamic height with children</p></div>
+        <div class="col-md-6 text-right">
+          <p class="lead">Item Height: {swipe_holder_height}</p>
+        </div>
+      </div>
+      <div class="swipe-holder" style="height:{swipe_holder_height}px">
+        <Swipe bind:active_item={_active_item}>
+          {#each dy_images as image, i}
+            <SwipeItem
+              active={_active_item == i}
+              allow_dynamic_height={true}
+              on:swipe_item_height_change={heightChanged}
+            >
+              <div class="text-center" style="background-color:lightgrey">
+                <img class="img-fluid" src={base + '/' + image} alt="" />
+              </div>
+            </SwipeItem>
+          {/each}
+        </Swipe>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col">
+      <h4 class="text-muted">Infinite swipe</h4>
+      <div class="row">
+        <div class="col">
+          <div class="form-check form-check-inline float-right">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              bind:checked={swipeConfig.showIndicators}
+            />
+            <label class="text-muted">Built-in Indicators</label>
+          </div>
+          <div class="form-check form-check-inline float-right">
+            <input class="form-check-input" type="checkbox" bind:checked={customThumbnail} />
+            <label class="text-muted">Custom Thumbnail</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="swipe-holder">
+            <Swipe
+              {...swipeConfig}
+              allow_infinite_swipe={true}
+              bind:active_item
+              bind:this={SwipeComp}
+              on:change={itemChanged}
+            >
+              {#each images as image}
+                <SwipeItem>
+                  <img class="img-fluid" src={base + '/' + image} alt="" />
+                </SwipeItem>
+              {/each}
+            </Swipe>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div class="col">
+          <input
+            class="btn btn-info btn-sm"
+            type="button"
+            on:click={toggle}
+            value={swipeConfig.autoplay ? 'Stop' : 'Play'}
+          />
+        </div>
+        {#if customThumbnail}
+          <div class="col">
+            <div class="is-center">
+              {#each images as image, i}
+                <img
+                  class="img-fluid {active_item == i ? 'rounded' : 'img-thumbnail'}"
+                  on:click={() => changeSlide(i)}
+                  style="height:30px; width:30px; cursor:pointer"
+                  src={base + '/' + image}
+                  alt=""
+                />
+              {/each}
+            </div>
+          </div>
+        {/if}
+        <div class="col">
+          <div class="btn-group float-right">
+            <button type="button" class="btn btn-secondary btn-sm" on:click={prevSlide}>
+              Prev
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" on:click={nextSlide}>
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col">
+      <h4 class="text-muted">Vertical Swipe 🔥</h4>
+      <div class="swipe-holder">
+        <Swipe is_vertical={true}>
+          {#each images as image}
+            <SwipeItem>
+              <img class="img-fluid" src={base + '/' + image} alt="" />
+            </SwipeItem>
+          {/each}
+        </Swipe>
       </div>
     </div>
   </div>
