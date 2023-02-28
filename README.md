@@ -16,7 +16,7 @@
 
 [English](README.md) / [Korean](README_KO.md) / [简体中文](README_CN.md)
 
-Swipable items wrapper component for Svelte :fire: :boom: (zero dependencies - <5KB gzipped)
+Swipable items wrapper component for Svelte :fire: :boom: (zero dependencies)
 
 ## 🚀[See it in Action](https://sharifclick.github.io/svelte-swipe/)
 
