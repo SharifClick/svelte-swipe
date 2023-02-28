@@ -1,7 +1,7 @@
 {
   "name": "svelte-swipe",
-  "version": "1.9.0",
-  "svelte": "src/index.js",
+  "version": "1.9.1",
+  "svelte": "src/lib/index.js",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "description": "A Svelte component to swipe elements just like a snap",
@@ -25,11 +25,12 @@
   "scripts": {
     "dev": "vite dev --force",
     "build": "vite build",
+    "build:pkg": "svelte-kit sync && svelte-package",
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
     "format": "prettier --plugin-search-dir . --write .",
-    "deploy": "npm run build && && touch build/.nojekyll && gh-pages -d build -t true"
+    "deploy": "npm run build && touch build/.nojekyll && gh-pages -d build -t true"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^2.0.1",
