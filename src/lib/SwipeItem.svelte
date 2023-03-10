@@ -38,6 +38,9 @@
 </div>
 
 <style>
+  /* :global(.swipeable-item:not(.is-active)) {
+    transform: translate3d(100vw, 0, 0);
+  } */
   .swipeable-item {
     position: absolute;
     top: 0;

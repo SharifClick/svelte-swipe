@@ -15,6 +15,7 @@
   let customThumbnail = false;
 
   let SwipeComp;
+  let SwipeCompAlt;
 
   function toggle() {
     swipeConfig.autoplay = !swipeConfig.autoplay;
@@ -34,6 +35,18 @@
 
   function changeSlide(i) {
     SwipeComp.goTo(i);
+  }
+
+  function nextSlideAlt() {
+    SwipeCompAlt.nextItem();
+  }
+
+  function prevSlideAlt() {
+    SwipeCompAlt.prevItem();
+  }
+
+  function changeSlideAlt(i) {
+    SwipeCompAlt.goTo(i);
   }
 
   let images = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg'];
@@ -271,7 +284,7 @@
               {...swipeConfig}
               allow_infinite_swipe={true}
               bind:active_item
-              bind:this={SwipeComp}
+              bind:this={SwipeCompAlt}
               on:change={itemChanged}
             >
               {#each images as image}
@@ -298,7 +311,7 @@
               {#each images as image, i}
                 <img
                   class="img-fluid {active_item == i ? 'rounded' : 'img-thumbnail'}"
-                  on:click={() => changeSlide(i)}
+                  on:click={() => changeSlideAlt(i)}
                   style="height:30px; width:30px; cursor:pointer"
                   src={base + '/' + image}
                   alt=""
@@ -309,10 +322,10 @@
         {/if}
         <div class="col">
           <div class="btn-group float-right">
-            <button type="button" class="btn btn-secondary btn-sm" on:click={prevSlide}>
+            <button type="button" class="btn btn-secondary btn-sm" on:click={prevSlideAlt}>
               Prev
             </button>
-            <button type="button" class="btn btn-secondary btn-sm" on:click={nextSlide}>
+            <button type="button" class="btn btn-secondary btn-sm" on:click={nextSlideAlt}>
               Next
             </button>
           </div>
