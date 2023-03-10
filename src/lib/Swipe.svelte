@@ -28,7 +28,7 @@
     longTouch,
     last_axis_pos;
 
-  let played = defaultIndex || 0;
+  let played;
   let run_interval = false;
 
   let fire = createEventDispatcher();
@@ -69,6 +69,7 @@
 
   $: {
     if (autoplay && !run_interval) {
+      played = defaultIndex || active_item;
       run_interval = setInterval(changeView, delay);
     }
 
