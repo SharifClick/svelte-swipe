@@ -103,3 +103,6 @@
 
 ## 1.9.1
 * Fix module import path
+
+## 1.9.1
+* Fix exports path on package file
