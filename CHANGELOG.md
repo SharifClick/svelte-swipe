@@ -104,5 +104,8 @@
 ## 1.9.1
 * Fix module import path
 
-## 1.9.1
+## 1.9.2
+* Issue #55 - fix initial item shift issue (Thanks to @gnuletik)
+* Fix infinite play
 * Fix exports path on package file
+* Demo fix
