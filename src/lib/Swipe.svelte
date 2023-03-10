@@ -259,7 +259,7 @@ transition-duration: ${touch_end ? transitionDuration : '0'}ms;
 
   function changeView() {
     changeItem(played);
-    played = played < total_elements - 1 ? ++played : 0;
+    played = played < total_elements - 1 + allow_infinite_swipe ? ++played : 0;
   }
 
   const mod = (n, m) => ((n % m) + m) % m;
