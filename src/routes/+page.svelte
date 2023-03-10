@@ -79,7 +79,7 @@
   }
 
   function itemChanged({ detail }) {
-    console.log(detail);
+    console.log('change event', detail);
   }
 </script>
 
