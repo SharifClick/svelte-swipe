@@ -149,8 +149,8 @@
         <div class="col">
           <div class="swipe-holder">
             <Swipe {...swipeConfig} bind:active_item bind:this={SwipeComp} on:change={itemChanged}>
-              {#each images as image}
-                <SwipeItem>
+              {#each images as image, i}
+                <SwipeItem active={active_item === i}>
                   <img class="img-fluid" src={base + '/' + image} alt="" />
                 </SwipeItem>
               {/each}
