@@ -150,6 +150,7 @@ transition-duration: ${touch_end ? transitionDuration : '0'}ms;
   });
 
   let touch_active = false;
+  let ts = 0;
 
   function onMove(e) {
     if (touch_active) {
@@ -159,6 +160,12 @@ transition-duration: ${touch_end ? transitionDuration : '0'}ms;
         distance = axis - _axis + pos_axis;
       if (!allow_infinite_swipe) {
         if ((pos_axis == 0 && axis < _axis) || (pos_axis == availableMeasure && axis > _axis)) {
+          return;
+        }
+        const te = e.touches ? e.touches[0].clientX : e.clientX;
+        const isVerticalScroll = Math.abs(ts - te) < 5;
+        if (!is_vertical && isVerticalScroll) {
+          // prevent blocked scroll when user attempts vertical scrolling
           return;
         }
       }
@@ -184,6 +191,7 @@ transition-duration: ${touch_end ? transitionDuration : '0'}ms;
     e.stopPropagation();
     touch_active = true;
     longTouch = false;
+    ts = e.touches ? e.touches[0].clientX : e.clientX;
     setTimeout(function () {
       longTouch = true;
     }, 250);
