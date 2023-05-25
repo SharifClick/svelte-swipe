@@ -23,6 +23,9 @@ class SwipeSnap {
     if (options.allow_infinite_swipe) {
       this.setInfiniteSwipe();
     }
+
+    this.SWIPE = this.swipe.bind(this);
+    this.SWIPE_END = this.swipeEnd.bind(this);
   }
 
   update() {
@@ -92,7 +95,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
   }
 
   swipeStart(event) {
-    // e.preventDefault();
+    event.preventDefault();
     event.stopImmediatePropagation();
     event.stopPropagation();
     this.touch_active = true;
@@ -101,9 +104,10 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
       this.long_touch = true;
     }, 250);
     this.axis = event.touches ? event.touches[0][this.page_axis] : event[this.page_axis];
+    this.eventDelegate('add');
   }
 
-  swiping(event) {
+  swipe(event) {
     if (this.touch_active) {
       event.stopImmediatePropagation();
       event.stopPropagation();
@@ -189,11 +193,25 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
       }, this.transition_duration);
     }
     let swipe_direction = direction ? 'right' : 'left';
+    this.eventDelegate('remove');
     return {
       active_item: this.active_item,
       swipe_direction,
       active_element: this.elements[this.active_item]
     };
+  }
+
+  eventDelegate(type) {
+    let delegationTypes = {
+      add: 'addEventListener',
+      remove: 'removeEventListener'
+    };
+    if (typeof window !== 'undefined') {
+      window[delegationTypes[type]]('mousemove', this.SWIPE);
+      window[delegationTypes[type]]('mouseup', this.SWIPE_END);
+      window[delegationTypes[type]]('touchmove', this.SWIPE, { passive: false });
+      window[delegationTypes[type]]('touchend', this.SWIPE_END, { passive: false });
+    }
   }
 }
 

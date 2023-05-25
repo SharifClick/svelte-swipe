@@ -118,18 +118,18 @@
   //   });
   // }
 
-  function eventDelegate(type) {
-    let delegationTypes = {
-      add: 'addEventListener',
-      remove: 'removeEventListener'
-    };
-    if (typeof window !== 'undefined') {
-      window[delegationTypes[type]]('mousemove', onMove);
-      window[delegationTypes[type]]('mouseup', onEnd);
-      window[delegationTypes[type]]('touchmove', onMove, { passive: false });
-      window[delegationTypes[type]]('touchend', onEnd, { passive: false });
-    }
-  }
+  // function eventDelegate(type) {
+  //   let delegationTypes = {
+  //     add: 'addEventListener',
+  //     remove: 'removeEventListener'
+  //   };
+  //   if (typeof window !== 'undefined') {
+  //     window[delegationTypes[type]]('mousemove', onMove);
+  //     window[delegationTypes[type]]('mouseup', onEnd);
+  //     window[delegationTypes[type]]('touchmove', onMove, { passive: false });
+  //     window[delegationTypes[type]]('touchend', onEnd, { passive: false });
+  //   }
+  // }
 
   //   function generateTranslateValue(value) {
   //     return is_vertical ? `translate3d(0, ${value}px, 0)` : `translate3d(${value}px, 0, 0)`;
@@ -161,7 +161,7 @@
   let touch_active = false;
 
   function onMove(e) {
-    Swiper.swiping(e);
+    Swiper.swipe(e);
     // if (touch_active) {
     //   e.stopImmediatePropagation();
     //   e.stopPropagation();
@@ -199,7 +199,6 @@
     // }, 250);
     // axis = e.touches ? e.touches[0][page_axis] : e[page_axis];
     Swiper.swipeStart(e);
-    eventDelegate('add');
   }
 
   function onEnd(e) {
@@ -256,7 +255,7 @@
     //   }, transitionDuration);
     // }
     let props = Swiper.swipeEnd(e);
-    eventDelegate('remove');
+    // eventDelegate('remove');
     // let swipe_direction = direction ? 'right' : 'left';
     fire('change', props);
   }
