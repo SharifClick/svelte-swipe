@@ -214,6 +214,31 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
       window[delegationTypes[type]]('touchend', this.SWIPE_END, { passive: false });
     }
   }
+
+  changeItem(item) {
+    console.log(item);
+    let max = this.available_space;
+    this.available_distance = max * item;
+    this.active_indicator = item;
+    this.swipeEnd();
+  }
+
+  goTo(step) {
+    let item = this.allow_infinite_swipe
+      ? step
+      : Math.max(0, Math.min(step, this.elements_count - 1));
+    this.changeItem(item);
+  }
+
+  prevItem() {
+    let step = this.active_indicator - 1;
+    this.goTo(step);
+  }
+
+  nextItem() {
+    let step = this.active_indicator + 1;
+    this.goTo(step);
+  }
 }
 
 export default SwipeSnap;

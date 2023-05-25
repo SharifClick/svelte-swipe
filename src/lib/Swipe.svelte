@@ -260,12 +260,12 @@
     fire('change', props);
   }
 
-  function changeItem(item) {
-    // let max = availableSpace;
-    // availableDistance = max * item;
-    // activeIndicator = item;
-    // onEnd();
-  }
+  // function changeItem(item) {
+  //   let max = availableSpace;
+  //   availableDistance = max * item;
+  //   activeIndicator = item;
+  //   onEnd();
+  // }
 
   function changeView() {
     // changeItem(played);
@@ -275,17 +275,20 @@
   const mod = (n, m) => ((n % m) + m) % m;
 
   export function goTo(step) {
+    Swiper.goTo(step);
     // let item = allow_infinite_swipe ? step : Math.max(0, Math.min(step, indicators.length - 1));
     // changeItem(item);
   }
   export function prevItem() {
     // let step = activeIndicator - 1;
     // goTo(step);
+    Swiper.prevItem();
   }
 
   export function nextItem() {
     // let step = activeIndicator + 1;
     // goTo(step);
+    Swiper.nextItem();
   }
 </script>
 
