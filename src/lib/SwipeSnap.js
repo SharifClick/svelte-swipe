@@ -219,7 +219,6 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
   }
 
   changeItem(item) {
-    console.log(item);
     let max = this.available_space;
     this.available_distance = max * item;
     this.active_indicator = item;
