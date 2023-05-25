@@ -143,6 +143,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
   }
 
   swipeEnd(event) {
+    console.log('swipeEnd', event);
     this.prevent(event);
     let direction = this.axis < this.last_axis_pos;
     this.touch_active = false;
@@ -163,6 +164,8 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
     this.active_indicator = this.available_distance / available_space;
     this.active_item = this.active_indicator;
     this.default_index = this.active_item;
+
+    console.log(this.active_indicator);
 
     this.setElementsPosition({
       end: true,
