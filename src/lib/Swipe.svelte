@@ -45,6 +45,9 @@
 
     Swiper.update();
 
+    let props = Swiper.getProps();
+    total_elements = props.elements_count;
+
     // swipeItemsWrapper = swipeWrapper.querySelector('.swipeable-slot-wrapper');
     // swipeElements = swipeItemsWrapper.querySelectorAll('.swipeable-item');
     // total_elements = swipeElements.length;
@@ -76,7 +79,7 @@
   //   }
   // }
 
-  // $: indicators = Array(total_elements);
+  $: indicators = Array(total_elements);
 
   // $: {
   //   if (autoplay && !run_interval) {
@@ -261,12 +264,11 @@
     // fire('change', props);
   }
 
-  // function changeItem(item) {
-  //   let max = availableSpace;
-  //   availableDistance = max * item;
-  //   activeIndicator = item;
-  //   onEnd();
-  // }
+  function changeItem(step) {
+    Swiper.goTo(step);
+    let props = Swiper.getProps();
+    activeIndicator = props.active_item;
+  }
 
   function changeView() {
     // changeItem(played);
@@ -277,6 +279,7 @@
 
   export function goTo(step) {
     Swiper.goTo(step);
+
     // let item = allow_infinite_swipe ? step : Math.max(0, Math.min(step, indicators.length - 1));
     // changeItem(item);
   }
@@ -284,12 +287,16 @@
     // let step = activeIndicator - 1;
     // goTo(step);
     Swiper.prevItem();
+    let props = Swiper.getProps();
+    activeIndicator = props.active_item;
   }
 
   export function nextItem() {
     // let step = activeIndicator + 1;
     // goTo(step);
     Swiper.nextItem();
+    let props = Swiper.getProps();
+    activeIndicator = props.active_item;
   }
 </script>
 

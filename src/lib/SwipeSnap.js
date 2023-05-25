@@ -243,6 +243,14 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
     let step = this.active_indicator + 1;
     this.goTo(step);
   }
+
+  getProps() {
+    return {
+      elements_count: this.elements_count,
+      active_item: this.active_item,
+      active_element: this.active_element
+    };
+  }
 }
 
 export default SwipeSnap;
