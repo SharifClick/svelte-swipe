@@ -12,6 +12,7 @@
   };
 
   let active_item = 0; //readonly
+  let active_item_inf = 0;
   let _active_item = 0; // used in dynamic height swipe items
 
   let customThumbnail = false;
@@ -36,7 +37,7 @@
   }
 
   function changeSlide(i) {
-    SwipeCompInf.goTo(i);
+    SwipeComp.goTo(i);
   }
 
   function nextSlideInf() {
@@ -81,6 +82,10 @@
   }
 
   function itemChanged({ detail }) {
+    active_item = detail.active_item;
+  }
+  function itemChangedInf({ detail }) {
+    active_item_inf = detail.active_item;
     console.log(detail);
   }
 </script>
@@ -150,7 +155,7 @@
       <div class="row">
         <div class="col">
           <div class="swipe-holder">
-            <Swipe {...swipeConfig} bind:active_item bind:this={SwipeComp} on:change={itemChanged}>
+            <Swipe {...swipeConfig} bind:this={SwipeComp} on:change={itemChanged}>
               {#each images as image}
                 <SwipeItem>
                   <img class="img-fluid" src={base + '/' + image} alt="" />
@@ -285,9 +290,9 @@
             <Swipe
               {...swipeConfig}
               allow_infinite_swipe={true}
-              bind:active_item
+              bind:active_item={active_item_inf}
               bind:this={SwipeCompInf}
-              on:change={itemChanged}
+              on:change={itemChangedInf}
             >
               {#each images as image}
                 <SwipeItem>
@@ -312,7 +317,7 @@
             <div class="is-center">
               {#each images as image, i}
                 <img
-                  class="img-fluid {active_item == i ? 'rounded' : 'img-thumbnail'}"
+                  class="img-fluid {active_item_inf == i ? 'rounded' : 'img-thumbnail'}"
                   on:click={() => changeSlideInf(i)}
                   style="height:30px; width:30px; cursor:pointer"
                   src={base + '/' + image}

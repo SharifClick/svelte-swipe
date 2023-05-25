@@ -9,6 +9,7 @@ class SwipeSnap {
     this.is_vertical = options.is_vertical;
     this.transition_duration = options.transition_duration;
     this.allow_infinite_swipe = options.allow_infinite_swipe;
+    this.fire = options.fire;
 
     this.pos_axis = 0;
     this.page_axis = options.is_vertical ? 'pageY' : 'pageX';
@@ -198,11 +199,12 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
     }
     let swipe_direction = direction ? 'right' : 'left';
     this.eventDelegate('remove');
-    return {
+
+    this.fire('change', {
       active_item: this.active_item,
       swipe_direction,
       active_element: this.elements[this.active_item]
-    };
+    });
   }
 
   eventDelegate(type) {

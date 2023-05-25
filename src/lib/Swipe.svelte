@@ -39,7 +39,8 @@
       element: swipeWrapper,
       is_vertical: is_vertical,
       transition_duration: transitionDuration,
-      allow_infinite_swipe: allow_infinite_swipe
+      allow_infinite_swipe: allow_infinite_swipe,
+      fire: fire
     });
 
     Swiper.update();
@@ -254,10 +255,10 @@
     //     });
     //   }, transitionDuration);
     // }
-    let props = Swiper.swipeEnd(e);
+    Swiper.swipeEnd(e);
     // eventDelegate('remove');
     // let swipe_direction = direction ? 'right' : 'left';
-    fire('change', props);
+    // fire('change', props);
   }
 
   // function changeItem(item) {
