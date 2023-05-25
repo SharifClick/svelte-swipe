@@ -28,6 +28,14 @@ class SwipeSnap {
     this.SWIPE_END = this.swipeEnd.bind(this);
   }
 
+  prevent(event) {
+    if (event && event.cancelable) {
+      event.preventDefault();
+    }
+    event && event.stopImmediatePropagation();
+    event && event.stopPropagation();
+  }
+
   update() {
     let { offsetWidth, offsetHeight } = this.wrapper;
     this.available_space = this.is_vertical ? offsetHeight : offsetWidth;
@@ -95,9 +103,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
   }
 
   swipeStart(event) {
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    event.stopPropagation();
+    this.prevent(event);
     this.touch_active = true;
     this.long_touch = false;
     setTimeout(() => {
@@ -109,8 +115,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
 
   swipe(event) {
     if (this.touch_active) {
-      event.stopImmediatePropagation();
-      event.stopPropagation();
+      this.prevent(event);
       let axis = event.touches ? event.touches[0][this.page_axis] : event[this.page_axis];
       let distance = this.axis - axis + this.pos_axis;
       if (!this.allow_infinite_swipe) {
@@ -138,11 +143,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
   }
 
   swipeEnd(event) {
-    if (event && event.cancelable) {
-      event.preventDefault();
-    }
-    event && event.stopImmediatePropagation();
-    event && event.stopPropagation();
+    this.prevent(event);
     let direction = this.axis < this.last_axis_pos;
     this.touch_active = false;
     let available_space = this.available_space;
