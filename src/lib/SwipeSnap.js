@@ -76,6 +76,7 @@ class SwipeSnap {
       let idx = has_infinite_loop ? i - 1 : i;
       if (init) {
         element.style.transform = this.generateTranslateValue(available_space * idx);
+        element.classList.remove('is-item-hidden');
       }
       if (moving) {
         element.style.cssText = this.generateTouchPosCss(available_space * idx - distance);
