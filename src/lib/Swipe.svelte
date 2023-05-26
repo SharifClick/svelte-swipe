@@ -81,16 +81,16 @@
 
   $: indicators = Array(total_elements);
 
-  // $: {
-  //   if (autoplay && !run_interval) {
-  //     run_interval = setInterval(changeView, delay);
-  //   }
+  $: {
+    if (autoplay && !run_interval) {
+      run_interval = setInterval(changeView, delay);
+    }
 
-  //   if (!autoplay && run_interval) {
-  //     clearInterval(run_interval);
-  //     run_interval = false;
-  //   }
-  // }
+    if (!autoplay && run_interval) {
+      clearInterval(run_interval);
+      run_interval = false;
+    }
+  }
 
   // helpers
 
@@ -271,8 +271,8 @@
   }
 
   function changeView() {
-    // changeItem(played);
-    // played = played < total_elements - 1 ? ++played : 0;
+    changeItem(played);
+    played = played < total_elements - 1 ? ++played : 0;
   }
 
   const mod = (n, m) => ((n % m) + m) % m;
