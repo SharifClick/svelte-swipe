@@ -67,6 +67,13 @@
     'images/dy-5.jpg'
   ];
 
+  let up_images = [
+    'https://source.unsplash.com/random/1920x1080/?apple',
+    'https://source.unsplash.com/random/1920x1080/?orange',
+    'https://source.unsplash.com/random/1920x1080/?mango',
+    'https://source.unsplash.com/random/1920x1080/?grape'
+  ];
+
   let tabs = [
     { name: 'Deafult', value: 'default' },
     { name: 'Vertical', value: 'vertical' },
@@ -86,6 +93,12 @@
     swipe_holder_height = detail.height;
   }
 
+  let swipe_holder_height_unplash = 500;
+  function heightChangedUp({ detail }) {
+    console.log('Swipe Holder Height ' + detail.height);
+    swipe_holder_height_unplash = detail.height;
+  }
+
   function itemChanged({ detail }) {
     active_item = detail.active_item;
   }
@@ -93,6 +106,14 @@
     active_item_inf = detail.active_item;
     console.log(detail);
   }
+
+  function getUnsplashImageLink() {
+    fetch('https://source.unsplash.com/random/1920x1080/?wallpaper,landscape').then((data) => {
+      console.log(data.url);
+    });
+  }
+
+  getUnsplashImageLink();
 </script>
 
 <a
@@ -343,6 +364,29 @@
             </button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col">
+      <h4 class="text-muted">Unsplash Images</h4>
+      <div class="row">
+        <div class="col-md-6"><p class="lead">Unsplash Images</p></div>
+        <div class="col-md-6 text-right">
+          <p class="lead">Item Height: {swipe_holder_height_unplash}</p>
+        </div>
+      </div>
+      <div class="swipe-holder" style="height:{swipe_holder_height_unplash}px">
+        <Swipe bind:active_item={_active_item}>
+          {#each up_images as image, i}
+            <SwipeItem on:swipe_item_height_change={heightChangedUp}>
+              <div class="text-center" style="background-color:lightgrey">
+                <img class="img-fluid" src={image} alt="" />
+              </div>
+            </SwipeItem>
+          {/each}
+        </Swipe>
       </div>
     </div>
   </div>
