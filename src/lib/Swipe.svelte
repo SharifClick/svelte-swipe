@@ -83,7 +83,7 @@
 
   $: {
     if (autoplay && !run_interval) {
-      run_interval = setInterval(changeView, delay);
+      run_interval = setInterval(playSlide, delay);
     }
 
     if (!autoplay && run_interval) {
@@ -270,9 +270,13 @@
     activeIndicator = props.active_item;
   }
 
-  function changeView() {
-    changeItem(played);
-    played = played < total_elements - 1 ? ++played : 0;
+  function playSlide() {
+    if (allow_infinite_swipe) {
+      nextItem();
+    } else {
+      changeItem(played);
+      played = played < total_elements - 1 ? ++played : 0;
+    }
   }
 
   const mod = (n, m) => ((n % m) + m) % m;
