@@ -5,7 +5,6 @@
   import { base } from '$app/paths';
 
   const swipeConfig = {
-    autoplay: false,
     showIndicators: false,
     transitionDuration: 200,
     defaultIndex: 0
@@ -17,11 +16,17 @@
 
   let customThumbnail = false;
 
+  let autoplay = false;
+  let autoplay_inf = false;
+
   let SwipeComp;
   let SwipeCompInf;
 
   function toggle() {
-    swipeConfig.autoplay = !swipeConfig.autoplay;
+    autoplay = !autoplay;
+  }
+  function toggleInf() {
+    autoplay_inf = !autoplay_inf;
   }
 
   function sayHi() {
@@ -155,7 +160,7 @@
       <div class="row">
         <div class="col">
           <div class="swipe-holder">
-            <Swipe {...swipeConfig} bind:this={SwipeComp} on:change={itemChanged}>
+            <Swipe {...swipeConfig} bind:this={SwipeComp} on:change={itemChanged} {autoplay}>
               {#each images as image}
                 <SwipeItem>
                   <img class="img-fluid" src={base + '/' + image} alt="" />
@@ -171,7 +176,7 @@
             class="btn btn-info btn-sm"
             type="button"
             on:click={toggle}
-            value={swipeConfig.autoplay ? 'Stop' : 'Play'}
+            value={autoplay ? 'Stop' : 'Play'}
           />
         </div>
         {#if customThumbnail}
@@ -289,6 +294,7 @@
           <div class="swipe-holder">
             <Swipe
               {...swipeConfig}
+              autoplay={autoplay_inf}
               allow_infinite_swipe={true}
               bind:active_item={active_item_inf}
               bind:this={SwipeCompInf}
@@ -308,8 +314,8 @@
           <input
             class="btn btn-info btn-sm"
             type="button"
-            on:click={toggle}
-            value={swipeConfig.autoplay ? 'Stop' : 'Play'}
+            on:click={toggleInf}
+            value={autoplay_inf ? 'Stop' : 'Play'}
           />
         </div>
         {#if customThumbnail}
