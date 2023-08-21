@@ -13,6 +13,9 @@
   export let active_item = 0; //readonly
   export let is_vertical = false;
   export let allow_infinite_swipe = false;
+
+  export let pause_on_hover = false;
+
   let Swiper = null;
   let activeIndicator = 0,
     indicators,
@@ -31,6 +34,7 @@
 
   let played = defaultIndex || 0;
   let run_interval = false;
+  let autoplay_pause = false;
 
   let fire = createEventDispatcher();
 
@@ -205,6 +209,17 @@
     Swiper.swipeStart(e);
   }
 
+  function onMouseOver(e) {
+    if (autoplay) {
+      autoplay_pause = true;
+    }
+  }
+  function onMouseOut(e) {
+    if (autoplay) {
+      autoplay_pause = false;
+    }
+  }
+
   function onEnd(e) {
     // if (e && e.cancelable) {
     //   e.preventDefault();
@@ -271,6 +286,7 @@
   }
 
   function playSlide() {
+    if (autoplay_pause) return;
     if (allow_infinite_swipe) {
       nextItem();
     } else {
@@ -310,7 +326,13 @@
       <slot />
     </div>
   </div>
-  <div class="swipe-handler" on:touchstart={onMoveStart} on:mousedown={onMoveStart} />
+  <div
+    class="swipe-handler"
+    on:touchstart={onMoveStart}
+    on:mousedown={onMoveStart}
+    on:mouseover={onMouseOver}
+    on:mouseout={onMouseOut}
+  />
   {#if showIndicators}
     <div class="swipe-indicator swipe-indicator-inside">
       {#each indicators as x, i}
