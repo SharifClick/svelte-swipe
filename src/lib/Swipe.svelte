@@ -20,17 +20,7 @@
   let activeIndicator = 0,
     indicators,
     total_elements = 0,
-    availableSpace = 0,
-    availableMeasure = 0,
-    swipeElements,
-    availableDistance = 0,
-    swipeItemsWrapper,
-    swipeWrapper,
-    pos_axis = 0,
-    page_axis = is_vertical ? 'pageY' : 'pageX',
-    axis,
-    longTouch,
-    last_axis_pos;
+    swipeWrapper;
 
   let played = defaultIndex || 0;
   let run_interval = false;
@@ -46,42 +36,15 @@
       allow_infinite_swipe: allow_infinite_swipe,
       fire: fire
     });
+    update();
+  }
 
+  function update() {
     Swiper.update();
 
     let props = Swiper.getProps();
     total_elements = props.elements_count;
-
-    // swipeItemsWrapper = swipeWrapper.querySelector('.swipeable-slot-wrapper');
-    // swipeElements = swipeItemsWrapper.querySelectorAll('.swipeable-item');
-    // total_elements = swipeElements.length;
-
-    // if (allow_infinite_swipe) {
-    //   swipeItemsWrapper.prepend(swipeElements[total_elements - 1].cloneNode(true));
-    //   swipeItemsWrapper.append(swipeElements[0].cloneNode(true));
-    //   swipeElements = swipeItemsWrapper.querySelectorAll('.swipeable-item');
-    // }
-
-    // update();
   }
-
-  // function update() {
-  //   let { offsetWidth, offsetHeight } = swipeItemsWrapper;
-  //   availableSpace = is_vertical ? offsetHeight : offsetWidth;
-
-  //   setElementsPosition({
-  //     init: true,
-  //     elems: [...swipeElements],
-  //     availableSpace,
-  //     has_infinite_loop: allow_infinite_swipe
-  //   });
-
-  //   availableDistance = 0;
-  //   availableMeasure = availableSpace * (total_elements - 1);
-  //   if (defaultIndex) {
-  //     changeItem(defaultIndex);
-  //   }
-  // }
 
   $: indicators = Array(total_elements);
 
@@ -96,116 +59,20 @@
     }
   }
 
-  // helpers
-
-  // function setElementsPosition({
-  //   elems = [],
-  //   availableSpace = 0,
-  //   pos_axis = 0,
-  //   has_infinite_loop = false,
-  //   distance = 0,
-  //   moving = false,
-  //   init = false,
-  //   end = false,
-  //   reset = false
-  // }) {
-  //   elems.forEach((element, i) => {
-  //     let idx = has_infinite_loop ? i - 1 : i;
-  //     if (init) {
-  //       element.style.transform = generateTranslateValue(availableSpace * idx);
-  //     }
-  //     if (moving) {
-  //       element.style.cssText = generateTouchPosCss(availableSpace * idx - distance);
-  //     }
-  //     if (end) {
-  //       element.style.cssText = generateTouchPosCss(availableSpace * idx - pos_axis, true);
-  //     }
-  //     if (reset) {
-  //       element.style.cssText = generateTouchPosCss(availableSpace * idx - pos_axis);
-  //     }
-  //   });
-  // }
-
-  // function eventDelegate(type) {
-  //   let delegationTypes = {
-  //     add: 'addEventListener',
-  //     remove: 'removeEventListener'
-  //   };
-  //   if (typeof window !== 'undefined') {
-  //     window[delegationTypes[type]]('mousemove', onMove);
-  //     window[delegationTypes[type]]('mouseup', onEnd);
-  //     window[delegationTypes[type]]('touchmove', onMove, { passive: false });
-  //     window[delegationTypes[type]]('touchend', onEnd, { passive: false });
-  //   }
-  // }
-
-  //   function generateTranslateValue(value) {
-  //     return is_vertical ? `translate3d(0, ${value}px, 0)` : `translate3d(${value}px, 0, 0)`;
-  //   }
-
-  //   function generateTouchPosCss(value, touch_end = false) {
-  //     let transformString = generateTranslateValue(value);
-  //     let _css = `
-  // -webkit-transition-duration: ${touch_end ? transitionDuration : '0'}ms;
-  // transition-duration: ${touch_end ? transitionDuration : '0'}ms;
-  // -webkit-transform: ${transformString};
-  // -ms-transform: ${transformString};`;
-  //     return _css;
-  //   }
-
   onMount(() => {
     init();
-    // if (typeof window !== 'undefined') {
-    //   window.addEventListener('resize', update);
-    // }
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', update);
+    }
   });
 
   onDestroy(() => {
-    // if (typeof window !== 'undefined') {
-    //   window.removeEventListener('resize', update);
-    // }
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', update);
+    }
   });
 
-  let touch_active = false;
-
-  function onMove(e) {
-    Swiper.swipe(e);
-    // if (touch_active) {
-    //   e.stopImmediatePropagation();
-    //   e.stopPropagation();
-    //   let _axis = e.touches ? e.touches[0][page_axis] : e[page_axis],
-    //     distance = axis - _axis + pos_axis;
-    //   if (!allow_infinite_swipe) {
-    //     if ((pos_axis == 0 && axis < _axis) || (pos_axis == availableMeasure && axis > _axis)) {
-    //       return;
-    //     }
-    //   }
-    //   e.preventDefault();
-
-    //   if (distance <= availableMeasure && distance >= 0) {
-    //   }
-    //   setElementsPosition({
-    //     moving: true,
-    //     elems: [...swipeElements],
-    //     availableSpace,
-    //     distance,
-    //     has_infinite_loop: allow_infinite_swipe
-    //   });
-    //   availableDistance = distance;
-    //   last_axis_pos = _axis;
-    // }
-  }
-
   function onMoveStart(e) {
-    // e.preventDefault();
-    // e.stopImmediatePropagation();
-    // e.stopPropagation();
-    // touch_active = true;
-    // longTouch = false;
-    // setTimeout(function () {
-    //   longTouch = true;
-    // }, 250);
-    // axis = e.touches ? e.touches[0][page_axis] : e[page_axis];
     Swiper.swipeStart(e);
   }
 
@@ -218,65 +85,6 @@
     if (autoplay) {
       autoplay_pause = false;
     }
-  }
-
-  function onEnd(e) {
-    // if (e && e.cancelable) {
-    //   e.preventDefault();
-    // }
-    // e && e.stopImmediatePropagation();
-    // e && e.stopPropagation();
-    // let direction = axis < last_axis_pos;
-    // touch_active = false;
-    // let _as = availableSpace;
-    // let accidental_touch = Math.round(availableSpace / 50) > Math.abs(axis - last_axis_pos);
-    // if (longTouch || accidental_touch) {
-    //   availableDistance = Math.round(availableDistance / _as) * _as;
-    // } else {
-    //   availableDistance = direction
-    //     ? Math.floor(availableDistance / _as) * _as
-    //     : Math.ceil(availableDistance / _as) * _as;
-    // }
-    // axis = null;
-    // last_axis_pos = null;
-    // pos_axis = availableDistance;
-    // activeIndicator = availableDistance / _as;
-    // active_item = activeIndicator;
-    // defaultIndex = active_item;
-
-    // setElementsPosition({
-    //   end: true,
-    //   elems: [...swipeElements],
-    //   availableSpace: _as,
-    //   pos_axis,
-    //   has_infinite_loop: allow_infinite_swipe
-    // });
-
-    // if (allow_infinite_swipe) {
-    //   if (active_item === -1) {
-    //     pos_axis = _as * (total_elements - 1);
-    //   }
-    //   if (active_item === total_elements) {
-    //     pos_axis = 0;
-    //   }
-    //   activeIndicator = pos_axis / _as;
-    //   active_item = activeIndicator;
-    //   defaultIndex = active_item;
-
-    //   setTimeout(() => {
-    //     setElementsPosition({
-    //       reset: true,
-    //       elems: [...swipeElements],
-    //       availableSpace: _as,
-    //       pos_axis,
-    //       has_infinite_loop: allow_infinite_swipe
-    //     });
-    //   }, transitionDuration);
-    // }
-    Swiper.swipeEnd(e);
-    // eventDelegate('remove');
-    // let swipe_direction = direction ? 'right' : 'left';
-    // fire('change', props);
   }
 
   function changeItem(step) {
@@ -295,17 +103,10 @@
     }
   }
 
-  const mod = (n, m) => ((n % m) + m) % m;
-
   export function goTo(step) {
     Swiper.goTo(step);
-
-    // let item = allow_infinite_swipe ? step : Math.max(0, Math.min(step, indicators.length - 1));
-    // changeItem(item);
   }
   export function prevItem() {
-    // let step = activeIndicator - 1;
-    // goTo(step);
     Swiper.prevItem();
     let props = Swiper.getProps();
     activeIndicator = props.active_item;
@@ -326,6 +127,7 @@
       <slot />
     </div>
   </div>
+  <!-- svelte-ignore a11y-mouse-events-have-key-events -->
   <div
     class="swipe-handler"
     on:touchstart={onMoveStart}
@@ -336,6 +138,7 @@
   {#if showIndicators}
     <div class="swipe-indicator swipe-indicator-inside">
       {#each indicators as x, i}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <span
           class="dot {activeIndicator == i ? 'is-active' : ''}"
           on:click={() => {
