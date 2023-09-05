@@ -51,7 +51,7 @@ class SwipeSnap {
     this.available_distance = 0;
     this.available_measure = this.available_space * (this.elements_count - 1);
     if (this.default_index) {
-      changeItem(this.default_index);
+      this.changeItem(this.default_index);
     }
   }
 
