@@ -2,20 +2,19 @@
 /** @typedef {typeof __propDef.events}  SwipeEvents */
 /** @typedef {typeof __propDef.slots}  SwipeSlots */
 export default class Swipe extends SvelteComponentTyped<{
+    is_vertical?: boolean | undefined;
+    allow_infinite_swipe?: boolean | undefined;
     transitionDuration?: number | undefined;
     showIndicators?: boolean | undefined;
     autoplay?: boolean | undefined;
     delay?: number | undefined;
     defaultIndex?: number | undefined;
     active_item?: number | undefined;
-    is_vertical?: boolean | undefined;
-    allow_infinite_swipe?: boolean | undefined;
+    pause_on_hover?: boolean | undefined;
     goTo?: ((step: any) => void) | undefined;
     prevItem?: (() => void) | undefined;
     nextItem?: (() => void) | undefined;
 }, {
-    change: CustomEvent<any>;
-} & {
     [evt: string]: CustomEvent<any>;
 }, {
     default: {};
@@ -30,21 +29,20 @@ export type SwipeSlots = typeof __propDef.slots;
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
+        is_vertical?: boolean | undefined;
+        allow_infinite_swipe?: boolean | undefined;
         transitionDuration?: number | undefined;
         showIndicators?: boolean | undefined;
         autoplay?: boolean | undefined;
         delay?: number | undefined;
         defaultIndex?: number | undefined;
         active_item?: number | undefined;
-        is_vertical?: boolean | undefined;
-        allow_infinite_swipe?: boolean | undefined;
+        pause_on_hover?: boolean | undefined;
         goTo?: ((step: any) => void) | undefined;
         prevItem?: (() => void) | undefined;
         nextItem?: (() => void) | undefined;
     };
     events: {
-        change: CustomEvent<any>;
-    } & {
         [evt: string]: CustomEvent<any>;
     };
     slots: {

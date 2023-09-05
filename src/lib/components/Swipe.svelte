@@ -1,22 +1,59 @@
 <script>
-  // @ts-nocheck
-
   import { onMount, onDestroy, createEventDispatcher } from 'svelte';
-  import SwipeSnap from './SwipeSnap';
+  import SwipeSnap from '../helpers/SwipeSnap';
 
+  /**
+   * @type {number}
+   */
   export let transitionDuration = 200;
+
+  /**
+   * @type {boolean}
+   */
   export let showIndicators = false;
+
+  /**
+   * @type {boolean}
+   */
   export let autoplay = false;
+
+  /**
+   * @type {number}
+   */
   export let delay = 1000;
+
+  /**
+   * @type {number}
+   */
   export let defaultIndex = 0;
 
-  export let active_item = 0; //readonly
+  /**
+   * @type {number}
+   */
+  export const active_item = 0; //readonly
+
+  /**
+   * @type {boolean}
+   */
   export let is_vertical = false;
+
+  /**
+   * @type {boolean}
+   */
   export let allow_infinite_swipe = false;
 
-  export let pause_on_hover = false;
+  /**
+   * @type {boolean}
+   */
+  export const pause_on_hover = false;
 
+  /**
+   * @type {SwipeSnap | null}
+   */
   let Swiper = null;
+  /**
+   * @type {any[]}
+   */
   let activeIndicator = 0,
     indicators,
     total_elements = 0,
