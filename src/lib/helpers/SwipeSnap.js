@@ -12,13 +12,36 @@ class SwipeSnap {
    * @param {boolean} [options.is_vertical=false] - Whether the carousel is vertical (true) or horizontal (false).
    * @param {number} [options.transition_duration=300] - The duration of the transition animation in milliseconds.
    * @param {boolean} [options.allow_infinite_swipe=false] - Whether to allow infinite looping of carousel items.
-   * @param {function} [options.fire] - A function to trigger events when carousel items change.
+   * @param {function} [options.fire] - A function to trigger events when carousel items change.- A function to trigger events when carousel items change.
    */
 
   constructor(options = {}) {
+    /**
+     * The elements in the carousel as an array of HTMLElements.
+     * @type {HTMLElement | undefined}
+     */
     this.element = options.element;
-    this.wrapper = this.element && this.element.querySelector('.swipeable-slot-wrapper');
-    this.elements = this.wrapper && this.wrapper.querySelectorAll('.swipeable-item');
+    /**
+     * The elements in the carousel as an array of HTMLElements.
+     * @type {?HTMLElement}
+     */
+    this.wrapper =
+      this.element instanceof HTMLElement
+        ? this.element.querySelector('.swipeable-slot-wrapper')
+        : null;
+
+    /**
+     * The elements in the carousel as an array of HTMLElements.
+     * @type {?NodeListOf<HTMLElement>}
+     */
+    this.elements =
+      this.wrapper instanceof HTMLElement ? this.wrapper.querySelectorAll('.swipeable-item') : null;
+
+    /**
+     * The elements in the carousel as an array of HTMLElements.
+     * @type {?number}
+     */
+
     this.elements_count = this.elements && this.elements.length;
 
     this.is_vertical = options.is_vertical;
@@ -28,8 +51,18 @@ class SwipeSnap {
 
     this.pos_axis = 0;
     this.page_axis = options.is_vertical ? 'pageY' : 'pageX';
+
+    /**
+     * The elements in the carousel as an array of HTMLElements.
+     * @type {?number}
+     */
     this.axis = 0;
     this.long_touch = false;
+
+    /**
+     * The elements in the carousel as an array of HTMLElements.
+     * @type {?number}
+     */
     this.last_axis_pos = 0;
     this.default_index = 0;
     this.active_indicator = 0;
@@ -58,27 +91,34 @@ class SwipeSnap {
   }
 
   update() {
-    let { offsetWidth, offsetHeight } = this.wrapper;
-    this.available_space = this.is_vertical ? offsetHeight : offsetWidth;
+    if (this.wrapper instanceof HTMLElement) {
+      let { offsetWidth, offsetHeight } = this.wrapper;
+      this.available_space = this.is_vertical ? offsetHeight : offsetWidth;
+      this.setElementsPosition({
+        init: true,
+        elems: this.elements !== null ? [...Array.from(this.elements)] : [],
+        available_space: this.available_space,
+        has_infinite_loop: this.allow_infinite_swipe
+      });
 
-    this.setElementsPosition({
-      init: true,
-      elems: [...this.elements],
-      available_space: this.available_space,
-      has_infinite_loop: this.allow_infinite_swipe
-    });
-
-    this.available_distance = 0;
-    this.available_measure = this.available_space * (this.elements_count - 1);
-    if (this.default_index) {
-      this.changeItem(this.default_index);
+      this.available_distance = 0;
+      this.available_measure =
+        this.elements_count !== null && this.available_space * (this.elements_count - 1);
+      if (this.default_index) {
+        this.changeItem(this.default_index);
+      }
     }
   }
 
   setInfiniteSwipe() {
-    this.wrapper.prepend(this.elements[this.elements_count - 1].cloneNode(true));
-    this.wrapper.append(this.elements[0].cloneNode(true));
-    this.elements = this.element.querySelectorAll('.swipeable-item');
+    if (this.wrapper instanceof HTMLElement && this.elements instanceof HTMLElement) {
+      if (this.elements_count !== null) {
+        this.wrapper.prepend(this.elements[this.elements_count - 1].cloneNode(true));
+      }
+      this.wrapper.append(this.elements[0].cloneNode(true));
+      this.elements =
+        this.element !== undefined ? this.element.querySelectorAll('.swipeable-item') : null;
+    }
   }
 
   setElementsPosition({
@@ -136,7 +176,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
   }
 
   swipe(event) {
-    if (this.touch_active) {
+    if (this.touch_active && this.axis !== null) {
       this.prevent(event);
       let axis = event.touches ? event.touches[0][this.page_axis] : event[this.page_axis];
       let distance = this.axis - axis + this.pos_axis;
@@ -154,7 +194,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
       // }
       this.setElementsPosition({
         moving: true,
-        elems: [...this.elements],
+        elems: this.elements !== null ? [...Array.from(this.elements)] : [],
         available_space: this.available_space,
         has_infinite_loop: this.allow_infinite_swipe,
         distance
@@ -166,6 +206,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
 
   swipeEnd(event) {
     console.log('swipeEnd', event);
+    if (this.axis === null || this.last_axis_pos === null) return;
     this.prevent(event);
     let direction = this.axis < this.last_axis_pos;
     this.touch_active = false;
@@ -191,7 +232,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
 
     this.setElementsPosition({
       end: true,
-      elems: [...this.elements],
+      elems: this.elements !== null ? [...Array.from(this.elements)] : [],
       available_space: available_space,
       pos_axis: this.pos_axis,
       has_infinite_loop: this.allow_infinite_swipe
@@ -211,7 +252,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
       setTimeout(() => {
         this.setElementsPosition({
           reset: true,
-          elems: [...this.elements],
+          elems: this.elements !== null ? [...Array.from(this.elements)] : [],
           available_space: available_space,
           pos_axis: this.pos_axis,
           has_infinite_loop: this.allow_infinite_swipe
