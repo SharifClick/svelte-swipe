@@ -265,11 +265,19 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
     this.goTo(step);
   }
 
+  /**
+   * Retrieves the current properties of the carousel.
+   * @returns {Object} Carousel properties object.
+   * @property {number} elements_count - The total number of carousel items.
+   * @property {number} active_item - The index of the currently active carousel item.
+   * @property {HTMLElement} active_element - The currently active carousel item element.
+   */
+
   getProps() {
     return {
       elements_count: this.elements_count,
       active_item: this.active_item,
-      active_element: this.active_element
+      active_element: this.elements[this.active_item]
     };
   }
 }
