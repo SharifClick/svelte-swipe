@@ -206,7 +206,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
 
   swipeEnd(event) {
     console.log('swipeEnd', event);
-    if (this.axis === null || this.last_axis_pos === null) return;
+    // if (this.axis === null || this.last_axis_pos === null) return;
     this.prevent(event);
     let direction = this.axis < this.last_axis_pos;
     this.touch_active = false;
@@ -302,6 +302,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
   }
 
   nextItem() {
+    console.log('next item');
     let step = this.active_indicator + 1;
     this.goTo(step);
   }
@@ -318,7 +319,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
     return {
       elements_count: this.elements_count,
       active_item: this.active_item,
-      active_element: this.elements[this.active_item]
+      active_element: this.elements !== null ? this.elements[this.active_item] : null
     };
   }
 }
