@@ -1,5 +1,7 @@
 <script>
-  import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+  // @ts-nocheck
+
+  import { onMount, onDestroy, createEventDispatcher, tick } from 'svelte';
   import SwipeSnap from '../helpers/SwipeSnap';
 
   /**
@@ -57,7 +59,7 @@
   let activeIndicator = 0,
     indicators,
     total_elements = 0,
-    swipeWrapper;
+    SWIPE_PANEL;
 
   let played = defaultIndex || 0;
   let run_interval = false;
@@ -67,13 +69,18 @@
 
   function init() {
     Swiper = new SwipeSnap({
-      element: swipeWrapper,
+      element: SWIPE_PANEL,
       is_vertical: is_vertical,
       transition_duration: transitionDuration,
       allow_infinite_swipe: allow_infinite_swipe,
       fire: fire
     });
     update();
+
+    SWIPE_PANEL.addEventListener('swipe_end', (event) => {
+      fire('change', event.detail);
+      activeIndicator = event.detail.active_item;
+    });
   }
 
   function update() {
@@ -109,16 +116,12 @@
     }
   });
 
-  function onMoveStart(e) {
-    Swiper.swipeStart(e);
-  }
-
-  function onMouseOver(e) {
+  function onMouseOver() {
     if (autoplay) {
       autoplay_pause = true;
     }
   }
-  function onMouseOut(e) {
+  function onMouseOut() {
     if (autoplay) {
       autoplay_pause = false;
     }
@@ -150,36 +153,40 @@
   }
 
   export function nextItem() {
-    // let step = activeIndicator + 1;
-    // goTo(step);
     Swiper.nextItem();
     let props = Swiper.getProps();
     activeIndicator = props.active_item;
   }
 </script>
 
-<div class="swipe-panel">
-  <div class="swipe-item-wrapper" bind:this={swipeWrapper}>
+<div class="swipe-panel" bind:this={SWIPE_PANEL}>
+  <div class="swipe-item-wrapper">
     <div class="swipeable-slot-wrapper">
       <slot />
     </div>
   </div>
   <!-- svelte-ignore a11y-mouse-events-have-key-events -->
   <div
+    role="presentation"
     class="swipe-handler"
-    on:touchstart={onMoveStart}
-    on:mousedown={onMoveStart}
     on:mouseover={onMouseOver}
     on:mouseout={onMouseOut}
   />
   {#if showIndicators}
     <div class="swipe-indicator swipe-indicator-inside">
       {#each indicators as x, i}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <span
-          class="dot {activeIndicator == i ? 'is-active' : ''}"
+          role="radio"
+          tabindex="0"
+          aria-checked={activeIndicator === i}
+          class="dot {activeIndicator === i ? 'is-active' : ''}"
           on:click={() => {
             changeItem(i);
+          }}
+          on:keydown={(event) => {
+            if (event.key === 'Enter') {
+              changeItem(i);
+            }
           }}
         />
       {/each}
@@ -201,13 +208,11 @@
     pointer-events: none;
   }
 
-  .swipeable-total_elements,
   .swipeable-slot-wrapper {
     position: relative;
     width: inherit;
     height: inherit;
   }
-
   .swipe-handler {
     width: 100%;
     position: absolute;

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * A class for creating a swipeable carousel with snapping behavior.
  * @class
@@ -12,19 +13,18 @@ class SwipeSnap {
    * @param {boolean} [options.is_vertical=false] - Whether the carousel is vertical (true) or horizontal (false).
    * @param {number} [options.transition_duration=300] - The duration of the transition animation in milliseconds.
    * @param {boolean} [options.allow_infinite_swipe=false] - Whether to allow infinite looping of carousel items.
-   * @param {function} [options.fire] - A function to trigger events when carousel items change.
    */
 
   constructor(options = {}) {
     this.element = options.element;
-    this.wrapper = this.element && this.element.querySelector('.swipeable-slot-wrapper');
-    this.elements = this.wrapper && this.wrapper.querySelectorAll('.swipeable-item');
-    this.elements_count = this.elements && this.elements.length;
+    this.wrapper = this.element.querySelector('.swipeable-slot-wrapper');
+    this.handler = this.element.querySelector('.swipe-handler');
+    this.elements = this.wrapper.querySelectorAll('.swipeable-item');
+    this.elements_count = this.elements.length;
 
     this.is_vertical = options.is_vertical;
     this.transition_duration = options.transition_duration;
     this.allow_infinite_swipe = options.allow_infinite_swipe;
-    this.fire = options.fire;
 
     this.pos_axis = 0;
     this.page_axis = options.is_vertical ? 'pageY' : 'pageX';
@@ -41,7 +41,11 @@ class SwipeSnap {
     }
 
     this.SWIPE = this.swipe.bind(this);
+    this.SWIPE_START = this.swipeStart.bind(this);
     this.SWIPE_END = this.swipeEnd.bind(this);
+
+    this.handler.addEventListener('touchstart', this.SWIPE_START);
+    this.handler.addEventListener('mousedown', this.SWIPE_START);
   }
 
   /**
@@ -165,7 +169,6 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
   }
 
   swipeEnd(event) {
-    console.log('swipeEnd', event);
     this.prevent(event);
     let direction = this.axis < this.last_axis_pos;
     this.touch_active = false;
@@ -221,11 +224,15 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
     let swipe_direction = direction ? 'right' : 'left';
     this.eventDelegate('remove');
 
-    this.fire('change', {
-      active_item: this.active_item,
-      swipe_direction,
-      active_element: this.elements[this.active_item]
+    const customEvent = new CustomEvent('swipe_end', {
+      detail: {
+        active_item: this.active_item,
+        swipe_direction,
+        active_element: this.elements[this.active_item]
+      }
     });
+
+    this.element.dispatchEvent(customEvent);
   }
 
   eventDelegate(type) {

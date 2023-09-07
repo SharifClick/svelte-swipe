@@ -12,23 +12,21 @@ declare class SwipeSnap {
      * @param {boolean} [options.is_vertical=false] - Whether the carousel is vertical (true) or horizontal (false).
      * @param {number} [options.transition_duration=300] - The duration of the transition animation in milliseconds.
      * @param {boolean} [options.allow_infinite_swipe=false] - Whether to allow infinite looping of carousel items.
-     * @param {function} [options.fire] - A function to trigger events when carousel items change.
      */
     constructor(options?: {
         element?: HTMLElement | undefined;
         is_vertical?: boolean | undefined;
         transition_duration?: number | undefined;
         allow_infinite_swipe?: boolean | undefined;
-        fire?: Function | undefined;
     } | undefined);
     element: HTMLElement | undefined;
-    wrapper: Element | null | undefined;
-    elements: NodeListOf<Element> | null | undefined;
-    elements_count: number | null | undefined;
+    wrapper: Element | null;
+    handler: Element | null;
+    elements: NodeListOf<Element>;
+    elements_count: number;
     is_vertical: boolean | undefined;
     transition_duration: number | undefined;
     allow_infinite_swipe: boolean | undefined;
-    fire: Function | undefined;
     pos_axis: number;
     page_axis: string;
     axis: number;
@@ -39,6 +37,7 @@ declare class SwipeSnap {
     active_item: number;
     touch_active: boolean;
     SWIPE: (event: any) => void;
+    SWIPE_START: (event: any) => void;
     SWIPE_END: (event: any) => void;
     /**
      * Prevents the default behavior of an event.
