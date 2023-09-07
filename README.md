@@ -12,6 +12,7 @@
     <img src="https://img.shields.io/bundlephobia/minzip/svelte-swipe?style=for-the-badge"/>
   </a>
   <a href="https://svelte.dev"><img  src="https://img.shields.io/badge/svelte-v3-blueviolet?style=for-the-badge"/></a>
+  <a href="https://svelte.dev"><img  src="https://img.shields.io/badge/svelte-v4-blue?style=for-the-badge"/></a>
 </p>
 
 [English](README.md) / [Korean](README_KO.md) / [简体中文](README_CN.md)
