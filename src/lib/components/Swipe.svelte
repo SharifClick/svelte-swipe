@@ -1,4 +1,6 @@
 <script>
+  // @ts-nocheck
+
   import { onMount, onDestroy, createEventDispatcher } from 'svelte';
   import SwipeSnap from '../helpers/SwipeSnap';
 
@@ -166,6 +168,7 @@
   </div>
   <!-- svelte-ignore a11y-mouse-events-have-key-events -->
   <div
+    role="presentation"
     class="swipe-handler"
     on:touchstart={onMoveStart}
     on:mousedown={onMoveStart}
@@ -175,11 +178,19 @@
   {#if showIndicators}
     <div class="swipe-indicator swipe-indicator-inside">
       {#each indicators as x, i}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <span
-          class="dot {activeIndicator == i ? 'is-active' : ''}"
+          role="radio"
+          tabindex="0"
+          aria-checked={activeIndicator === i}
+          class="dot {activeIndicator === i ? 'is-active' : ''}"
           on:click={() => {
             changeItem(i);
+          }}
+          on:keydown={(event) => {
+            if (event.key === 'Enter') {
+              console.log('Enter key pressed');
+              changeItem(i);
+            }
           }}
         />
       {/each}
