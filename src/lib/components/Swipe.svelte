@@ -48,24 +48,15 @@
   export const pause_on_hover = false;
 
   /**
-   * @type {SwipeSnap}
+   * @type {SwipeSnap | null}
    */
-  let Swiper;
+  let Swiper = null;
   /**
-   * @type {number}
+   * @type {any[]}
    */
   let activeIndicator = 0,
-    /**
-     * @type {number}
-     */
     indicators,
-    /**
-     * @type {number}
-     */
     total_elements = 0,
-    /**
-     * @type {HTMLElement}
-     */
     swipeWrapper;
 
   let played = defaultIndex || 0;
@@ -89,7 +80,6 @@
     Swiper.update();
 
     let props = Swiper.getProps();
-    console.log(props);
     total_elements = props.elements_count;
   }
 
