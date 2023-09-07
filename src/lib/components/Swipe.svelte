@@ -76,6 +76,11 @@
       fire: fire
     });
     update();
+
+    SWIPE_PANEL.addEventListener('swipe_end', (event) => {
+      fire('change', event.detail);
+      activeIndicator = event.detail.active_item;
+    });
   }
 
   function update() {
