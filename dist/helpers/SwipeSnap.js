@@ -1,10 +1,25 @@
-// @ts-nocheck
+/**
+ * A class for creating a swipeable carousel with snapping behavior.
+ * @class
+ */
+
 class SwipeSnap {
+  /**
+   * Creates an instance of SwipeSnap.
+   * @constructor
+   * @param {Object} [options={}] - Options for configuring the SwipeSnap carousel.
+   * @param {HTMLElement} [options.element] - The HTML element that contains the carousel.
+   * @param {boolean} [options.is_vertical=false] - Whether the carousel is vertical (true) or horizontal (false).
+   * @param {number} [options.transition_duration=300] - The duration of the transition animation in milliseconds.
+   * @param {boolean} [options.allow_infinite_swipe=false] - Whether to allow infinite looping of carousel items.
+   * @param {function} [options.fire] - A function to trigger events when carousel items change.
+   */
+
   constructor(options = {}) {
     this.element = options.element;
-    this.wrapper = this.element.querySelector('.swipeable-slot-wrapper');
-    this.elements = this.wrapper.querySelectorAll('.swipeable-item');
-    this.elements_count = this.elements.length;
+    this.wrapper = this.element && this.element.querySelector('.swipeable-slot-wrapper');
+    this.elements = this.wrapper && this.wrapper.querySelectorAll('.swipeable-item');
+    this.elements_count = this.elements && this.elements.length;
 
     this.is_vertical = options.is_vertical;
     this.transition_duration = options.transition_duration;
@@ -28,6 +43,11 @@ class SwipeSnap {
     this.SWIPE = this.swipe.bind(this);
     this.SWIPE_END = this.swipeEnd.bind(this);
   }
+
+  /**
+   * Prevents the default behavior of an event.
+   * @param {Event} event - The event to prevent.
+   */
 
   prevent(event) {
     if (event && event.cancelable) {
@@ -241,15 +261,24 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
   }
 
   nextItem() {
+    console.log('next item');
     let step = this.active_indicator + 1;
     this.goTo(step);
   }
+
+  /**
+   * Retrieves the current properties of the carousel.
+   * @returns {Object} Carousel properties object.
+   * @property {number} elements_count - The total number of carousel items.
+   * @property {number} active_item - The index of the currently active carousel item.
+   * @property {HTMLElement} active_element - The currently active carousel item element.
+   */
 
   getProps() {
     return {
       elements_count: this.elements_count,
       active_item: this.active_item,
-      active_element: this.active_element
+      active_element: this.elements !== null ? this.elements[this.active_item] : null
     };
   }
 }
