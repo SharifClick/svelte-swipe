@@ -1,7 +1,7 @@
 <script>
   // @ts-nocheck
 
-  import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+  import { onMount, onDestroy, createEventDispatcher, tick } from 'svelte';
   import SwipeSnap from '../helpers/SwipeSnap';
 
   /**
@@ -111,16 +111,21 @@
     }
   });
 
-  function onMoveStart(e) {
+  function onSwipeStart(e) {
     Swiper.swipeStart(e);
   }
+  function onSwipeEnd(e) {
+    Swiper.swipeEnd(e);
+    let props = Swiper.getProps();
+    activeIndicator = props.active_item;
+  }
 
-  function onMouseOver(e) {
+  function onMouseOver() {
     if (autoplay) {
       autoplay_pause = true;
     }
   }
-  function onMouseOut(e) {
+  function onMouseOut() {
     if (autoplay) {
       autoplay_pause = false;
     }
@@ -152,8 +157,6 @@
   }
 
   export function nextItem() {
-    // let step = activeIndicator + 1;
-    // goTo(step);
     Swiper.nextItem();
     let props = Swiper.getProps();
     activeIndicator = props.active_item;
@@ -170,8 +173,10 @@
   <div
     role="presentation"
     class="swipe-handler"
-    on:touchstart={onMoveStart}
-    on:mousedown={onMoveStart}
+    on:touchstart={onSwipeStart}
+    on:touchend={onSwipeEnd}
+    on:mousedown={onSwipeStart}
+    on:mouseup={onSwipeEnd}
     on:mouseover={onMouseOver}
     on:mouseout={onMouseOut}
   />

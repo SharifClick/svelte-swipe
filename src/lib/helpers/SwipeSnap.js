@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * A class for creating a swipeable carousel with snapping behavior.
  * @class
@@ -41,7 +42,6 @@ class SwipeSnap {
     }
 
     this.SWIPE = this.swipe.bind(this);
-    this.SWIPE_END = this.swipeEnd.bind(this);
   }
 
   /**
@@ -165,7 +165,6 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
   }
 
   swipeEnd(event) {
-    console.log('swipeEnd', event);
     this.prevent(event);
     let direction = this.axis < this.last_axis_pos;
     this.touch_active = false;
@@ -235,9 +234,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
     };
     if (typeof window !== 'undefined') {
       window[delegationTypes[type]]('mousemove', this.SWIPE);
-      window[delegationTypes[type]]('mouseup', this.SWIPE_END);
       window[delegationTypes[type]]('touchmove', this.SWIPE, { passive: false });
-      window[delegationTypes[type]]('touchend', this.SWIPE_END, { passive: false });
     }
   }
 
