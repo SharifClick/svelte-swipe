@@ -18,9 +18,10 @@ class SwipeSnap {
 
   constructor(options = {}) {
     this.element = options.element;
-    this.wrapper = this.element && this.element.querySelector('.swipeable-slot-wrapper');
-    this.elements = this.wrapper && this.wrapper.querySelectorAll('.swipeable-item');
-    this.elements_count = this.elements && this.elements.length;
+    this.wrapper = this.element.querySelector('.swipeable-slot-wrapper');
+    this.handler = this.element.querySelector('.swipe-handler');
+    this.elements = this.wrapper.querySelectorAll('.swipeable-item');
+    this.elements_count = this.elements.length;
 
     this.is_vertical = options.is_vertical;
     this.transition_duration = options.transition_duration;
@@ -42,6 +43,11 @@ class SwipeSnap {
     }
 
     this.SWIPE = this.swipe.bind(this);
+    this.SWIPE_START = this.swipeStart.bind(this);
+    this.SWIPE_END = this.swipeEnd.bind(this);
+
+    this.handler.addEventListener('touchstart', this.SWIPE_START);
+    this.handler.addEventListener('mousedown', this.SWIPE_START);
   }
 
   /**
@@ -165,6 +171,7 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
   }
 
   swipeEnd(event) {
+    console.log('swipeEnd', event);
     this.prevent(event);
     let direction = this.axis < this.last_axis_pos;
     this.touch_active = false;
@@ -234,7 +241,9 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
     };
     if (typeof window !== 'undefined') {
       window[delegationTypes[type]]('mousemove', this.SWIPE);
+      window[delegationTypes[type]]('mouseup', this.SWIPE_END);
       window[delegationTypes[type]]('touchmove', this.SWIPE, { passive: false });
+      window[delegationTypes[type]]('touchend', this.SWIPE_END, { passive: false });
     }
   }
 

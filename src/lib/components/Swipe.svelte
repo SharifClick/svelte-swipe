@@ -59,7 +59,7 @@
   let activeIndicator = 0,
     indicators,
     total_elements = 0,
-    swipeWrapper;
+    SWIPE_PANEL;
 
   let played = defaultIndex || 0;
   let run_interval = false;
@@ -69,7 +69,7 @@
 
   function init() {
     Swiper = new SwipeSnap({
-      element: swipeWrapper,
+      element: SWIPE_PANEL,
       is_vertical: is_vertical,
       transition_duration: transitionDuration,
       allow_infinite_swipe: allow_infinite_swipe,
@@ -110,15 +110,6 @@
       window.removeEventListener('resize', update);
     }
   });
-
-  function onSwipeStart(e) {
-    Swiper.swipeStart(e);
-  }
-  function onSwipeEnd(e) {
-    Swiper.swipeEnd(e);
-    let props = Swiper.getProps();
-    activeIndicator = props.active_item;
-  }
 
   function onMouseOver() {
     if (autoplay) {
@@ -163,8 +154,8 @@
   }
 </script>
 
-<div class="swipe-panel">
-  <div class="swipe-item-wrapper" bind:this={swipeWrapper}>
+<div class="swipe-panel" bind:this={SWIPE_PANEL}>
+  <div class="swipe-item-wrapper">
     <div class="swipeable-slot-wrapper">
       <slot />
     </div>
@@ -173,10 +164,6 @@
   <div
     role="presentation"
     class="swipe-handler"
-    on:touchstart={onSwipeStart}
-    on:touchend={onSwipeEnd}
-    on:mousedown={onSwipeStart}
-    on:mouseup={onSwipeEnd}
     on:mouseover={onMouseOver}
     on:mouseout={onMouseOut}
   />
@@ -193,7 +180,6 @@
           }}
           on:keydown={(event) => {
             if (event.key === 'Enter') {
-              console.log('Enter key pressed');
               changeItem(i);
             }
           }}
@@ -217,13 +203,11 @@
     pointer-events: none;
   }
 
-  .swipeable-total_elements,
   .swipeable-slot-wrapper {
     position: relative;
     width: inherit;
     height: inherit;
   }
-
   .swipe-handler {
     width: 100%;
     position: absolute;
