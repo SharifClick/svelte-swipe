@@ -1,24 +1,32 @@
 <script>
+  // @ts-nocheck
+
   import { Swipe, SwipeItem } from '../lib';
   import { base } from '$app/paths';
 
   const swipeConfig = {
-    autoplay: false,
     showIndicators: false,
     transitionDuration: 200,
     defaultIndex: 0
   };
 
   let active_item = 0; //readonly
+  let active_item_inf = 0;
   let _active_item = 0; // used in dynamic height swipe items
 
   let customThumbnail = false;
 
+  let autoplay = false;
+  let autoplay_inf = false;
+
   let SwipeComp;
-  let SwipeCompAlt;
+  let SwipeCompInf;
 
   function toggle() {
-    swipeConfig.autoplay = !swipeConfig.autoplay;
+    autoplay = !autoplay;
+  }
+  function toggleInf() {
+    autoplay_inf = !autoplay_inf;
   }
 
   function sayHi() {
@@ -37,16 +45,16 @@
     SwipeComp.goTo(i);
   }
 
-  function nextSlideAlt() {
-    SwipeCompAlt.nextItem();
+  function nextSlideInf() {
+    SwipeCompInf.nextItem();
   }
 
-  function prevSlideAlt() {
-    SwipeCompAlt.prevItem();
+  function prevSlideInf() {
+    SwipeCompInf.prevItem();
   }
 
-  function changeSlideAlt(i) {
-    SwipeCompAlt.goTo(i);
+  function changeSlideInf(i) {
+    SwipeCompInf.goTo(i);
   }
 
   let images = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg'];
@@ -57,6 +65,13 @@
     'images/dy-3.jpg',
     'images/dy-4.jpg',
     'images/dy-5.jpg'
+  ];
+
+  let up_images = [
+    'https://source.unsplash.com/random/1920x1080/?apple',
+    'https://source.unsplash.com/random/1920x1080/?orange',
+    'https://source.unsplash.com/random/1920x1080/?mango',
+    'https://source.unsplash.com/random/1920x1080/?grape'
   ];
 
   let tabs = [
@@ -78,9 +93,27 @@
     swipe_holder_height = detail.height;
   }
 
-  function itemChanged({ detail }) {
-    console.log('change event', detail);
+  let swipe_holder_height_unplash = 500;
+  function heightChangedUp({ detail }) {
+    console.log('Swipe Holder Height ' + detail.height);
+    swipe_holder_height_unplash = detail.height;
   }
+
+  function itemChanged({ detail }) {
+    active_item = detail.active_item;
+  }
+  function itemChangedInf({ detail }) {
+    active_item_inf = detail.active_item;
+    console.log(detail);
+  }
+
+  function getUnsplashImageLink() {
+    fetch('https://source.unsplash.com/random/1920x1080/?wallpaper,landscape').then((data) => {
+      console.log(data.url);
+    });
+  }
+
+  getUnsplashImageLink();
 </script>
 
 <a
@@ -148,9 +181,9 @@
       <div class="row">
         <div class="col">
           <div class="swipe-holder">
-            <Swipe {...swipeConfig} bind:active_item bind:this={SwipeComp} on:change={itemChanged}>
-              {#each images as image, i}
-                <SwipeItem active={active_item === i}>
+            <Swipe {...swipeConfig} bind:this={SwipeComp} on:change={itemChanged} {autoplay}>
+              {#each images as image}
+                <SwipeItem>
                   <img class="img-fluid" src={base + '/' + image} alt="" />
                 </SwipeItem>
               {/each}
@@ -164,7 +197,7 @@
             class="btn btn-info btn-sm"
             type="button"
             on:click={toggle}
-            value={swipeConfig.autoplay ? 'Stop' : 'Play'}
+            value={autoplay ? 'Stop' : 'Play'}
           />
         </div>
         {#if customThumbnail}
@@ -282,10 +315,11 @@
           <div class="swipe-holder">
             <Swipe
               {...swipeConfig}
+              autoplay={autoplay_inf}
               allow_infinite_swipe={true}
-              bind:active_item
-              bind:this={SwipeCompAlt}
-              on:change={itemChanged}
+              bind:active_item={active_item_inf}
+              bind:this={SwipeCompInf}
+              on:change={itemChangedInf}
             >
               {#each images as image}
                 <SwipeItem>
@@ -301,8 +335,8 @@
           <input
             class="btn btn-info btn-sm"
             type="button"
-            on:click={toggle}
-            value={swipeConfig.autoplay ? 'Stop' : 'Play'}
+            on:click={toggleInf}
+            value={autoplay_inf ? 'Stop' : 'Play'}
           />
         </div>
         {#if customThumbnail}
@@ -310,8 +344,8 @@
             <div class="is-center">
               {#each images as image, i}
                 <img
-                  class="img-fluid {active_item == i ? 'rounded' : 'img-thumbnail'}"
-                  on:click={() => changeSlideAlt(i)}
+                  class="img-fluid {active_item_inf == i ? 'rounded' : 'img-thumbnail'}"
+                  on:click={() => changeSlideInf(i)}
                   style="height:30px; width:30px; cursor:pointer"
                   src={base + '/' + image}
                   alt=""
@@ -322,14 +356,37 @@
         {/if}
         <div class="col">
           <div class="btn-group float-right">
-            <button type="button" class="btn btn-secondary btn-sm" on:click={prevSlideAlt}>
+            <button type="button" class="btn btn-secondary btn-sm" on:click={prevSlideInf}>
               Prev
             </button>
-            <button type="button" class="btn btn-secondary btn-sm" on:click={nextSlideAlt}>
+            <button type="button" class="btn btn-secondary btn-sm" on:click={nextSlideInf}>
               Next
             </button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col">
+      <h4 class="text-muted">Unsplash Images</h4>
+      <div class="row">
+        <div class="col-md-6"><p class="lead">Unsplash Images</p></div>
+        <div class="col-md-6 text-right">
+          <p class="lead">Item Height: {swipe_holder_height_unplash}</p>
+        </div>
+      </div>
+      <div class="swipe-holder" style="height:{swipe_holder_height_unplash}px">
+        <Swipe bind:active_item={_active_item}>
+          {#each up_images as image, i}
+            <SwipeItem on:swipe_item_height_change={heightChangedUp}>
+              <div class="text-center" style="background-color:lightgrey">
+                <img class="img-fluid" src={image} alt="" />
+              </div>
+            </SwipeItem>
+          {/each}
+        </Swipe>
       </div>
     </div>
   </div>

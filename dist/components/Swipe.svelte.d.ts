@@ -2,17 +2,18 @@
 /** @typedef {typeof __propDef.events}  SwipeEvents */
 /** @typedef {typeof __propDef.slots}  SwipeSlots */
 export default class Swipe extends SvelteComponentTyped<{
+    is_vertical?: boolean | undefined;
+    active_item?: number | undefined;
+    allow_infinite_swipe?: boolean | undefined;
+    goTo?: ((step: any) => void) | undefined;
+    nextItem?: (() => void) | undefined;
+    prevItem?: (() => void) | undefined;
     transitionDuration?: number | undefined;
     showIndicators?: boolean | undefined;
     autoplay?: boolean | undefined;
     delay?: number | undefined;
     defaultIndex?: number | undefined;
-    active_item?: number | undefined;
-    is_vertical?: boolean | undefined;
-    allow_infinite_swipe?: boolean | undefined;
-    goTo?: ((step: any) => void) | undefined;
-    prevItem?: (() => void) | undefined;
-    nextItem?: (() => void) | undefined;
+    pause_on_hover?: boolean | undefined;
 }, {
     change: CustomEvent<any>;
 } & {
@@ -20,6 +21,8 @@ export default class Swipe extends SvelteComponentTyped<{
 }, {
     default: {};
 }> {
+    get active_item(): number;
+    get pause_on_hover(): NonNullable<boolean | undefined>;
     get goTo(): (step: any) => void;
     get prevItem(): () => void;
     get nextItem(): () => void;
@@ -30,17 +33,18 @@ export type SwipeSlots = typeof __propDef.slots;
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
+        is_vertical?: boolean | undefined;
+        active_item?: number | undefined;
+        allow_infinite_swipe?: boolean | undefined;
+        goTo?: ((step: any) => void) | undefined;
+        nextItem?: (() => void) | undefined;
+        prevItem?: (() => void) | undefined;
         transitionDuration?: number | undefined;
         showIndicators?: boolean | undefined;
         autoplay?: boolean | undefined;
         delay?: number | undefined;
         defaultIndex?: number | undefined;
-        active_item?: number | undefined;
-        is_vertical?: boolean | undefined;
-        allow_infinite_swipe?: boolean | undefined;
-        goTo?: ((step: any) => void) | undefined;
-        prevItem?: (() => void) | undefined;
-        nextItem?: (() => void) | undefined;
+        pause_on_hover?: boolean | undefined;
     };
     events: {
         change: CustomEvent<any>;

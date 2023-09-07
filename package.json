@@ -1,6 +1,6 @@
 {
   "name": "svelte-swipe",
-  "version": "1.9.2",
+  "version": "2.0.0",
   "description": "A Svelte component to swipe elements just like a snap",
   "homepage": "https://github.com/SharifClick/svelte-swipe",
   "repository": {
@@ -30,22 +30,22 @@
     "deploy": "npm run build && touch build/.nojekyll && gh-pages -d build -t true"
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "^2.0.1",
-    "@sveltejs/kit": "^1.5.6",
-    "@sveltejs/package": "^2.0.1",
-    "gh-pages": "^5.0.0",
-    "eslint": "^8.16.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-svelte3": "^4.0.0",
-    "prettier": "^2.6.2",
-    "prettier-plugin-svelte": "^2.7.0",
-    "svelte": "^3.54.0",
-    "svelte-check": "^2.7.1",
-    "svelte-preprocess": "^4.10.7",
-    "vite": "^4.0.0"
+    "@sveltejs/adapter-static": "^2.0.3",
+    "@sveltejs/kit": "^1.24.1",
+    "@sveltejs/package": "^2.2.2",
+    "gh-pages": "^6.0.0",
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-svelte": "^2.33.0",
+    "prettier": "^3.0.3",
+    "prettier-plugin-svelte": "^3.0.3",
+    "svelte": "^4.2.0",
+    "svelte-check": "^3.5.1",
+    "svelte-preprocess": "^5.0.4",
+    "vite": "^4.4.9"
   },
   "peerDependencies": {
-    "svelte": "^3.54.0"
+    "svelte": "^3.54.0 || ^4.0.0"
   },
   "exports": {
     ".": {

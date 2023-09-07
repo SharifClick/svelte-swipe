@@ -2,9 +2,9 @@
 /** @typedef {typeof __propDef.events}  SwipeItemEvents */
 /** @typedef {typeof __propDef.slots}  SwipeItemSlots */
 export default class SwipeItem extends SvelteComponentTyped<{
+    style?: string | undefined;
     active?: boolean | undefined;
     classes?: string | undefined;
-    style?: string | undefined;
     allow_dynamic_height?: boolean | undefined;
 }, {
     swipe_item_height_change: CustomEvent<any>;
@@ -20,9 +20,9 @@ export type SwipeItemSlots = typeof __propDef.slots;
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
+        style?: string | undefined;
         active?: boolean | undefined;
         classes?: string | undefined;
-        style?: string | undefined;
         allow_dynamic_height?: boolean | undefined;
     };
     events: {

@@ -29,7 +29,7 @@
 
 <div
   bind:clientHeight={_height}
-  class="swipeable-item {classes} {active ? 'is-active' : ''} "
+  class="swipeable-item {classes} {active ? 'is-active' : ''} is-item-hidden"
   {style}
 >
   <div bind:this={swipeItemInner} class="swipeable-item-inner">
@@ -48,5 +48,8 @@
     left: 0;
     right: 0;
     transition-timing-function: ease-out;
+  }
+  .is-item-hidden {
+    visibility: hidden;
   }
 </style>
