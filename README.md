@@ -1,8 +1,7 @@
-
 <div align="center">
-  <img src="https://raw.githubusercontent.com/sharifclick/svelte-swipe/master/svelte-swipe.png" alt="Svelte Swipe" width="150" />
+  <img src="https://raw.githubusercontent.com/sharifclick/svelte-swipe/master/svelte-swipe.png" alt="Svelte Swipe" width="300" />
 </div>
-<p>
+<div align="center">
   <a href="https://www.npmjs.com/package/svelte-swipe"><img  src="https://img.shields.io/npm/v/svelte-swipe?style=for-the-badge"/></a>
   <a href="https://www.npmjs.com/package/svelte-swipe">
     <img src="https://img.shields.io/npm/dm/svelte-swipe?style=for-the-badge"/>
@@ -16,7 +15,9 @@
   </a>
   <a href="https://svelte.dev"><img  src="https://img.shields.io/badge/svelte-v3-blueviolet?style=for-the-badge"/></a>
   <a href="https://svelte.dev"><img  src="https://img.shields.io/badge/svelte-v4-blue?style=for-the-badge"/></a>
-</p>
+</div>
+
+____
 
 [English](README.md) / [Korean](README_KO.md) / [简体中文](README_CN.md)
 
