@@ -1,4 +1,7 @@
-# Svelte Swipe
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/sharifclick/svelte-swipe/master/svelte-swipe.png" alt="Svelte Swipe" width="150" />
+</div>
 <p>
   <a href="https://www.npmjs.com/package/svelte-swipe"><img  src="https://img.shields.io/npm/v/svelte-swipe?style=for-the-badge"/></a>
   <a href="https://www.npmjs.com/package/svelte-swipe">
