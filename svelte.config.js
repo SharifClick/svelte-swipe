@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-auto';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -6,10 +6,7 @@ const config = {
     paths: {
       base: '/svelte-swipe'
     },
-    adapter: adapter({
-      pages: 'build', // path to public directory
-      assets: 'build' // path to public directory
-    })
+    adapter: adapter()
   }
 };
 

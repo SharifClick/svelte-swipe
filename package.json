@@ -1,6 +1,6 @@
 {
   "name": "svelte-swipe",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A Svelte component to swipe elements just like a snap",
   "homepage": "https://github.com/SharifClick/svelte-swipe",
   "repository": {
@@ -30,6 +30,7 @@
     "deploy": "npm run build && touch build/.nojekyll && gh-pages -d build -t true"
   },
   "devDependencies": {
+    "@sveltejs/adapter-auto": "2.1.0",
     "@sveltejs/adapter-static": "^2.0.3",
     "@sveltejs/kit": "^1.24.1",
     "@sveltejs/package": "^2.2.2",
@@ -56,8 +57,6 @@
   "files": [
     "dist"
   ],
-  "svelte": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "type": "module",
   "keywords": [
     "svelte",
