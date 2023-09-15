@@ -1,7 +1,7 @@
 <script>
   // @ts-nocheck
 
-  import { onMount, onDestroy, createEventDispatcher, tick } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import SwipeSnap from '../helpers/SwipeSnap';
 
   /**
@@ -65,15 +65,12 @@
   let run_interval = false;
   let autoplay_pause = false;
 
-  let fire = createEventDispatcher();
-
   function init() {
     Swiper = new SwipeSnap({
       element: SWIPE_PANEL,
       is_vertical: is_vertical,
       transition_duration: transitionDuration,
-      allow_infinite_swipe: allow_infinite_swipe,
-      fire: fire
+      allow_infinite_swipe: allow_infinite_swipe
     });
     update();
 

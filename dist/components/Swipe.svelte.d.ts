@@ -15,8 +15,6 @@ export default class Swipe extends SvelteComponentTyped<{
     defaultIndex?: number | undefined;
     pause_on_hover?: boolean | undefined;
 }, {
-    change: CustomEvent<any>;
-} & {
     [evt: string]: CustomEvent<any>;
 }, {
     default: {};
@@ -47,8 +45,6 @@ declare const __propDef: {
         pause_on_hover?: boolean | undefined;
     };
     events: {
-        change: CustomEvent<any>;
-    } & {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
