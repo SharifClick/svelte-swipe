@@ -1,7 +1,7 @@
 <script>
   // @ts-nocheck
 
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount, onDestroy, createEventDispatcher } from 'svelte';
   import SwipeSnap from '../helpers/SwipeSnap';
 
   /**
@@ -64,6 +64,7 @@
   let played = defaultIndex || 0;
   let run_interval = false;
   let autoplay_pause = false;
+  const fire = createEventDispatcher();
 
   function init() {
     Swiper = new SwipeSnap({
