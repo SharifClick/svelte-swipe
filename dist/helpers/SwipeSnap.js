@@ -190,8 +190,6 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
     this.active_item = this.active_indicator;
     this.default_index = this.active_item;
 
-    console.log(this.active_indicator);
-
     this.setElementsPosition({
       end: true,
       elems: [...this.elements],
@@ -268,7 +266,6 @@ transition-duration: ${touch_end ? this.transition_duration : '0'}ms;
   }
 
   nextItem() {
-    console.log('next item');
     let step = this.active_indicator + 1;
     this.goTo(step);
   }
