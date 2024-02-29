@@ -1,7 +1,7 @@
 <script>
   // @ts-nocheck
 
-  import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onDestroy, onMount } from 'svelte';
   import SwipeSnap from '../helpers/SwipeSnap';
 
   /**
@@ -126,6 +126,9 @@
   }
 
   function changeItem(step) {
+    if (!Swiper) {
+      return;
+    }
     Swiper.goTo(step);
     let props = Swiper.getProps();
     activeIndicator = props.active_item;
@@ -142,15 +145,24 @@
   }
 
   export function goTo(step) {
+    if (!Swiper) {
+      return;
+    }
     Swiper.goTo(step);
   }
   export function prevItem() {
+    if (!Swiper) {
+      return;
+    }
     Swiper.prevItem();
     let props = Swiper.getProps();
     activeIndicator = props.active_item;
   }
 
   export function nextItem() {
+    if (!Swiper) {
+      return;
+    }
     Swiper.nextItem();
     let props = Swiper.getProps();
     activeIndicator = props.active_item;
