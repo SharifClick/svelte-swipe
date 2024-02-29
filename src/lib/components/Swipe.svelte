@@ -1,7 +1,7 @@
 <script>
   // @ts-nocheck
 
-  import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onDestroy, onMount } from 'svelte';
   import SwipeSnap from '../helpers/SwipeSnap';
 
   /**
@@ -112,6 +112,10 @@
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', update);
     }
+
+    // stop memory leak 👇
+    run_interval && clearInterval(run_interval);
+    run_interval = false;
   });
 
   function onMouseOver() {

@@ -1,8 +1,8 @@
 <script>
   // @ts-nocheck
 
-  import { Swipe, SwipeItem } from '../lib';
   import { base } from '$app/paths';
+  import { Swipe, SwipeItem } from '../lib';
 
   const swipeConfig = {
     showIndicators: false,
@@ -157,6 +157,8 @@
     <div class="col">
       <h1 class="text-muted">Svelte Swipe</h1>
       <p class="text-muted">Swipable items wrapper component for Svelte</p>
+
+      <a href="/svelte-swipe/test-page">Test Page</a>
     </div>
   </div>
 
@@ -234,7 +236,7 @@
     <div class="col">
       <h4 class="text-muted">Allow pointer events inside Swipe Item</h4>
       <div class="swipe-holder">
-        <Swipe>
+        <Swipe allow_infinite_swipe autoplay>
           <SwipeItem>
             <div class="is-stack is-center" style="background:teal">
               <button class="custom-button has-pointer-event" on:click={sayHi}> Say Hi </button>
